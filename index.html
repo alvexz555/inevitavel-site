@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
 
-    <title>𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋 | A morte é apenas o começo</title>
-
-    <meta
-        name="description"
-        content="Inevitável é uma experiência de ação, exploração e sobrevivência em um mundo marcado pela morte."
-    >
+    <title>INEVITÁVEL | A morte é apenas o começo</title>
 
     <style>
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -26,6 +16,8 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 75px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -33,207 +25,195 @@
             color: #ffffff;
             font-family: Arial, Helvetica, sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
         }
 
         a {
             color: inherit;
+            text-decoration: none;
         }
 
-
-        /* =====================================================
-           MENU
-        ===================================================== */
+        /* =========================
+           HEADER
+        ========================= */
 
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-
-            padding: 14px;
-
             z-index: 1000;
 
-            background: rgba(5, 5, 5, 0.88);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.92);
+            backdrop-filter: blur(12px);
 
-            border-bottom: 1px solid #1d1d1d;
+            border-bottom: 1px solid #1a1a1a;
         }
 
-        nav {
+        .header-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 12px 16px;
+
             display: flex;
-            justify-content: center;
-            gap: 8px;
-
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
+        .logo {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
 
-            font-size: 11px;
-            letter-spacing: 1px;
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            padding: 8px 10px;
+            width: 42px;
+            height: 38px;
+
+            background: transparent;
+            color: #ffffff;
 
             border: 1px solid #292929;
 
-            transition: 0.3s;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        nav {
+            position: absolute;
+
+            top: 100%;
+            left: 0;
+
+            width: 100%;
+
+            background: rgba(5, 5, 5, 0.98);
+
+            border-bottom: 1px solid #1d1d1d;
+
+            display: none;
+            flex-direction: column;
+        }
+
+        nav.open {
+            display: flex;
+        }
+
+        nav a {
+            padding: 15px 20px;
+
+            font-size: 11px;
+            letter-spacing: 1.5px;
+
+            border-bottom: 1px solid #151515;
+
+            transition: background 0.2s;
         }
 
         nav a:hover {
-            color: #ffffff;
-            background: #ffffff;
-            border-color: #ffffff;
+            background: #111111;
         }
 
-
-        /* =====================================================
+        /* =========================
            HERO
-        ===================================================== */
+        ========================= */
 
         .hero {
-            min-height: 100vh;
+            min-height: 100svh;
 
             display: flex;
             flex-direction: column;
-
             justify-content: center;
             align-items: center;
 
             text-align: center;
 
-            padding: 120px 20px 60px;
+            padding: 120px 20px 70px;
 
             position: relative;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #202020 0%,
-                    #0d0d0d 35%,
-                    #050505 70%
-                );
-        }
-
-        .hero::after {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    transparent 60%,
-                    #050505 100%
-                );
-
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-
-            max-width: 900px;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 15vw, 9rem);
-
-            letter-spacing: 8px;
-
-            margin-bottom: 20px;
-
+            font-size: clamp(3rem, 16vw, 9rem);
             line-height: 0.9;
+
+            font-weight: 900;
+            letter-spacing: 3px;
+
+            overflow-wrap: anywhere;
+
+            margin-bottom: 24px;
         }
 
         .tagline {
-            font-size: clamp(1rem, 3vw, 1.5rem);
+            max-width: 700px;
 
-            letter-spacing: 4px;
+            font-size: clamp(0.8rem, 3vw, 1.3rem);
 
-            color: #ffffff;
-
-            margin-bottom: 25px;
+            letter-spacing: 3px;
+            font-weight: 700;
         }
 
         .hero-description {
-            max-width: 650px;
+            max-width: 600px;
 
-            margin: auto;
+            margin-top: 20px;
 
-            color: #999;
+            color: #a5a5a5;
 
+            font-size: 0.95rem;
             line-height: 1.8;
-
-            margin-bottom: 35px;
         }
-
-
-        /* =====================================================
-           BOTÕES
-        ===================================================== */
 
         .buttons {
             display: flex;
-
-            justify-content: center;
-
-            gap: 12px;
-
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+
+            margin-top: 30px;
         }
 
         .button {
             display: inline-block;
 
-            padding: 14px 24px;
+            padding: 12px 20px;
 
-            border: 1px solid #ffffff;
+            border: 1px solid #333333;
 
-            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
 
-            text-decoration: none;
+            letter-spacing: 1.5px;
 
-            font-size: 13px;
-
-            letter-spacing: 1px;
-
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
         .button:hover {
             background: #ffffff;
             color: #000000;
-
-            transform: translateY(-2px);
         }
 
-        .button.secondary {
-            border-color: #333;
-            color: #aaa;
-        }
-
-        .button.secondary:hover {
-            border-color: #ffffff;
-            color: #000000;
-        }
-
-
-        /* =====================================================
+        /* =========================
            SEÇÕES
-        ===================================================== */
+        ========================= */
 
         section {
-            min-height: 70vh;
+            min-height: auto;
 
-            padding: 100px 20px;
-
-            display: flex;
-            align-items: center;
+            padding: 90px 18px;
 
             border-top: 1px solid #151515;
 
@@ -242,199 +222,152 @@
 
         .content {
             width: 100%;
-            max-width: 950px;
+            max-width: 1000px;
 
             margin: auto;
+
+            min-width: 0;
         }
 
         .section-label {
-            color: #666;
+            margin-bottom: 10px;
 
-            font-size: 12px;
+            color: #666666;
+
+            font-size: 10px;
+            font-weight: 700;
 
             letter-spacing: 3px;
-
-            margin-bottom: 12px;
+            text-transform: uppercase;
         }
 
         h2 {
-            font-size: clamp(2rem, 8vw, 4rem);
+            font-size: clamp(2rem, 9vw, 4rem);
 
-            letter-spacing: 3px;
+            line-height: 1;
 
-            margin-bottom: 30px;
+            letter-spacing: 1px;
+
+            margin-bottom: 22px;
         }
 
         h3 {
-            letter-spacing: 1px;
+            line-height: 1.2;
         }
 
         p {
-            color: #aaa;
+            color: #a5a5a5;
 
+            font-size: 0.95rem;
             line-height: 1.8;
-
-            margin-bottom: 20px;
         }
 
-        .highlight {
-            color: #ffffff;
-        }
-
-
-        /* =====================================================
+        /* =========================
            O JOGO
-        ===================================================== */
-
-        #jogo {
-            background:
-                linear-gradient(
-                    rgba(5, 5, 5, 0.88),
-                    rgba(5, 5, 5, 0.95)
-                ),
-                radial-gradient(
-                    circle at center,
-                    #242424,
-                    #050505 70%
-                );
-        }
+        ========================= */
 
         .game-intro {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-
-            color: #ddd;
-
-            max-width: 750px;
+            max-width: 700px;
         }
 
-        .quote {
-            margin-top: 35px;
-
-            padding-left: 20px;
-
-            border-left: 2px solid #555;
-
-            font-size: 1.1rem;
-
+        .game-intro strong {
             color: #ffffff;
         }
 
-
-        /* =====================================================
+        /* =========================
            MORTE
-        ===================================================== */
+        ========================= */
 
-        #morte {
+        .death-section {
             background:
                 radial-gradient(
                     circle at center,
-                    #1b0909,
-                    #050505 70%
+                    #160707 0%,
+                    #080505 45%,
+                    #050505 75%
                 );
         }
 
         .death-title {
-            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-size: clamp(2.5rem, 11vw, 5rem);
+            font-weight: 900;
+            line-height: 0.95;
 
             margin-bottom: 25px;
         }
 
         .death-grid {
             display: grid;
-
             grid-template-columns: 1fr;
 
-            gap: 15px;
+            gap: 12px;
 
             margin-top: 35px;
         }
 
+        .death-card {
+            padding: 24px;
 
-        /* =====================================================
-           CARDS
-        ===================================================== */
+            border: 1px solid #202020;
 
-        .cards {
-            display: grid;
-
-            grid-template-columns: 1fr;
-
-            gap: 15px;
-
-            margin-top: 35px;
+            background: rgba(255, 255, 255, 0.015);
         }
 
-        .card {
-            padding: 25px;
+        .death-card span {
+            display: block;
 
-            background: #0a0a0a;
+            margin-bottom: 8px;
 
-            border: 1px solid #222;
+            color: #666666;
 
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: #555;
-
-            transform: translateY(-4px);
-        }
-
-        .card-number {
-            color: #555;
-
-            font-size: 12px;
-
+            font-size: 10px;
             letter-spacing: 2px;
-
-            margin-bottom: 15px;
         }
 
-        .card h3 {
-            margin-bottom: 12px;
+        .death-card h3 {
+            margin-bottom: 8px;
+
+            font-size: 1.2rem;
         }
 
-        .card p {
-            font-size: 14px;
-
-            margin: 0;
-        }
-
-
-        /* =====================================================
+        /* =========================
            TRAILER
-        ===================================================== */
-
-        #trailer {
-            background: #030303;
-        }
+        ========================= */
 
         .trailer-box {
-            margin-top: 35px;
-
             width: 100%;
 
             aspect-ratio: 16 / 9;
 
-            background:
-                radial-gradient(
-                    circle,
-                    #1c1c1c,
-                    #080808
-                );
-
-            border: 1px solid #292929;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            color: #666;
+            margin-top: 30px;
 
             overflow: hidden;
+
+            border: 1px solid #222222;
+
+            background: #0b0b0b;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .trailer-placeholder {
+            padding: 20px;
+
+            color: #555555;
+
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .trailer-placeholder small {
+            color: #444444;
+
+            font-size: 10px;
+            letter-spacing: 1px;
         }
 
         .trailer-box video {
@@ -442,314 +375,264 @@
             height: 100%;
 
             object-fit: cover;
-
-            display: block;
         }
 
-        .trailer-placeholder {
-            padding: 20px;
-        }
-
-
-        /* =====================================================
+        /* =========================
            MECÂNICAS
-        ===================================================== */
+        ========================= */
 
-        #mecanicas {
-            background:
-                linear-gradient(
-                    rgba(5, 5, 5, 0.9),
-                    rgba(5, 5, 5, 0.96)
-                ),
-                radial-gradient(
-                    circle at top right,
-                    #242424,
-                    #050505
-                );
-        }
-
-
-        /* =====================================================
-           HISTÓRIA / UNIVERSO
-        ===================================================== */
-
-        #historia {
-            background:
-                linear-gradient(
-                    rgba(5, 5, 5, 0.88),
-                    rgba(5, 5, 5, 0.96)
-                ),
-                radial-gradient(
-                    circle at center,
-                    #202020,
-                    #050505
-                );
-        }
-
-        .story-block {
-            margin-top: 45px;
-
-            padding: 30px;
-
-            border: 1px solid #222;
-
-            background: rgba(10, 10, 10, 0.7);
-        }
-
-        .story-block h3 {
-            font-size: 1.5rem;
-
-            margin-bottom: 15px;
-        }
-
-
-        /* =====================================================
-           PROTAGONISTA
-        ===================================================== */
-
-        #protagonista {
-            background:
-                radial-gradient(
-                    circle at center,
-                    #181818,
-                    #050505 70%
-                );
-        }
-
-        .character-name {
-            font-size: clamp(1.8rem, 6vw, 3rem);
-
-            margin-bottom: 20px;
-        }
-
-        .character-attributes {
+        .cards {
             display: grid;
+            grid-template-columns: 1fr;
 
-            grid-template-columns: 1fr 1fr;
-
-            gap: 10px;
+            gap: 12px;
 
             margin-top: 30px;
         }
 
-        .attribute {
-            border: 1px solid #222;
+        .card {
+            padding: 25px;
 
-            padding: 18px;
+            border: 1px solid #202020;
 
             background: #090909;
         }
 
-        .attribute span {
-            display: block;
-
-            color: #777;
+        .card-number {
+            color: #555555;
 
             font-size: 11px;
+            letter-spacing: 2px;
 
-            letter-spacing: 1px;
-
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
+        .card h3 {
+            font-size: 1.25rem;
 
-        /* =====================================================
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           UNIVERSO
+        ========================= */
+
+        .story-block {
+            padding: 24px;
+
+            margin-top: 15px;
+
+            border-left: 1px solid #333333;
+
+            background: #090909;
+        }
+
+        .story-block h3 {
+            margin-bottom: 10px;
+
+            font-size: 1.3rem;
+        }
+
+        .story-block + .story-block {
+            margin-top: 12px;
+        }
+
+        /* =========================
+           PERSONAGENS
+        ========================= */
+
+        .character-box {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border: 1px solid #202020;
+
+            background: #090909;
+        }
+
+        .character-box h3 {
+            font-size: 1.5rem;
+
+            margin-bottom: 10px;
+        }
+
+        /* =========================
            AMEAÇA
-        ===================================================== */
+        ========================= */
 
-        #ameaca {
+        .threat-box {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border: 1px solid #252525;
+
             background:
-                radial-gradient(
-                    circle at center,
-                    #220808,
-                    #050505 70%
+                linear-gradient(
+                    135deg,
+                    #0c0c0c,
+                    #070707
                 );
         }
 
-        .threat-box {
-            border: 1px solid #321313;
+        .threat-box h3 {
+            font-size: 1.5rem;
 
-            padding: 30px;
-
-            background: rgba(20, 5, 5, 0.6);
+            margin-bottom: 10px;
         }
 
-
-        /* =====================================================
+        /* =========================
            DESENVOLVIMENTO
-        ===================================================== */
+        ========================= */
 
-        #desenvolvimento {
-            background: #050505;
+        .development {
+            max-width: 700px;
         }
 
-        .timeline {
-            margin-top: 40px;
-
-            border-left: 1px solid #333;
-
-            padding-left: 25px;
+        .development strong {
+            color: #ffffff;
         }
 
-        .timeline-item {
-            margin-bottom: 30px;
-
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: "";
-
-            position: absolute;
-
-            width: 8px;
-            height: 8px;
-
-            border: 1px solid #ffffff;
-
-            background: #050505;
-
-            border-radius: 50%;
-
-            left: -30px;
-
-            top: 5px;
-        }
-
-        .timeline-item h3 {
-            margin-bottom: 8px;
-        }
-
-        .timeline-item p {
-            font-size: 14px;
-
-            margin: 0;
-        }
-
-
-        /* =====================================================
+        /* =========================
            GALERIA
-        ===================================================== */
-
-        #galeria {
-            background: #030303;
-        }
+        ========================= */
 
         .gallery {
             display: grid;
-
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
 
             gap: 10px;
 
-            margin-top: 35px;
+            margin-top: 30px;
         }
 
         .gallery-item {
             aspect-ratio: 16 / 10;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #171717,
-                    #080808
-                );
+            border: 1px solid #202020;
 
-            border: 1px solid #222;
+            background: #0a0a0a;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
-            color: #555;
+            color: #444444;
 
-            font-size: 12px;
+            font-size: 10px;
+            letter-spacing: 2px;
 
-            text-align: center;
+            overflow: hidden;
         }
 
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
 
-        /* =====================================================
+            object-fit: cover;
+        }
+
+        /* =========================
            REDES
-        ===================================================== */
+        ========================= */
 
         #redes {
-            min-height: 50vh;
-
             text-align: center;
-
-            background:
-                radial-gradient(
-                    circle,
-                    #161616,
-                    #050505 70%
-                );
         }
 
-        .social-links {
+        .social-buttons {
             display: flex;
 
             justify-content: center;
-
-            gap: 12px;
-
             flex-wrap: wrap;
 
-            margin-top: 30px;
+            gap: 10px;
+
+            margin-top: 25px;
         }
 
-
-        /* =====================================================
-           RODAPÉ
-        ===================================================== */
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
-            padding: 50px 20px;
+            padding: 40px 20px;
+
+            border-top: 1px solid #151515;
 
             text-align: center;
+        }
 
-            border-top: 1px solid #171717;
+        footer strong {
+            display: block;
 
-            color: #555;
+            margin-bottom: 8px;
 
             font-size: 13px;
+            letter-spacing: 3px;
         }
 
         footer p {
-            margin-bottom: 8px;
+            color: #444444;
+
+            font-size: 11px;
         }
 
-
-        /* =====================================================
+        /* =========================
            DESKTOP
-        ===================================================== */
+        ========================= */
 
         @media (min-width: 700px) {
 
-            header {
-                padding: 16px 30px;
+            .header-inner {
+                padding: 15px 30px;
+            }
+
+            .menu-button {
+                display: none;
             }
 
             nav {
-                justify-content: flex-end;
+                position: static;
 
-                gap: 10px;
+                width: auto;
+
+                display: flex;
+
+                flex-direction: row;
+
+                background: transparent;
+
+                border: none;
             }
 
             nav a {
-                font-size: 12px;
+                padding: 8px 10px;
+
+                border: 1px solid #292929;
+
+                font-size: 11px;
+            }
+
+            nav a:last-child {
+                border-bottom: 1px solid #292929;
             }
 
             section {
-                padding: 130px 40px;
+                padding: 120px 40px;
             }
 
-            .cards {
-                grid-template-columns: repeat(3, 1fr);
+            .hero {
+                padding-left: 40px;
+                padding-right: 40px;
             }
 
             .death-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .cards {
                 grid-template-columns: repeat(3, 1fr);
             }
 
@@ -757,55 +640,73 @@
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            .hero-description {
-                font-size: 1.05rem;
+            .story-block {
+                padding: 30px;
+            }
+
+            .character-box,
+            .threat-box {
+                padding: 30px;
             }
         }
 
+        /* =========================
+           TELAS MUITO PEQUENAS
+        ========================= */
 
-        /* =====================================================
-           ANIMAÇÃO
-        ===================================================== */
+        @media (max-width: 380px) {
 
-        @media (prefers-reduced-motion: no-preference) {
-
-            .hero-content {
-                animation: fadeIn 1.2s ease;
+            .hero {
+                padding-left: 14px;
+                padding-right: 14px;
             }
 
-            @keyframes fadeIn {
-
-                from {
-                    opacity: 0;
-                    transform: translateY(15px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
+            .hero h1 {
+                font-size: 2.7rem;
+                letter-spacing: 1px;
             }
 
+            .tagline {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            section {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .button {
+                width: 100%;
+                text-align: center;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+<header>
+    <div class="header-inner">
 
-    <!-- =====================================================
-         MENU
-    ====================================================== -->
+        <div class="logo">
+            INEVITÁVEL
+        </div>
 
-    <header>
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
 
-        <nav>
+        <nav id="navMenu">
 
             <a href="#jogo">O JOGO</a>
+
+            <a href="#morte">A MORTE</a>
 
             <a href="#trailer">TRAILER</a>
 
@@ -815,959 +716,577 @@
 
             <a href="#desenvolvimento">DESENVOLVIMENTO</a>
 
-            <a href="#redes">REDES</a>
+            <a href="#galeria">GALERIA</a>
 
         </nav>
 
-    </header>
+    </div>
+</header>
 
 
+<main>
 
-    <main>
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <h1>INEVITÁVEL</h1>
+
+        <div class="tagline">
+            A MORTE É APENAS O COMEÇO
+        </div>
+
+        <p class="hero-description">
+            Um mundo quebrado. Um javali preso em um ciclo de mortes.
+            E uma realidade que parece mudar a cada tentativa.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#trailer" class="button">
+                VER TRAILER
+            </a>
+
+            <a href="#jogo" class="button">
+                CONHECER O JOGO
+            </a>
+
+        </div>
+
+    </section>
 
 
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
+    <!-- =========================
+         O JOGO
+    ========================== -->
 
-        <section class="hero">
+    <section id="jogo">
 
-            <div class="hero-content">
+        <div class="content">
 
-                <h1>𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋</h1>
-
-                <div class="tagline">
-                    A MORTE É APENAS O COMEÇO
-                </div>
-
-                <p class="hero-description">
-
-                    Em uma realidade marcada pela morte,
-                    um javali renascido atravessa um mundo
-                    que parece perder sua própria forma.
-
-                </p>
-
-                <div class="buttons">
-
-                    <a href="#trailer" class="button">
-                        VER TRAILER
-                    </a>
-
-                    <a href="#jogo" class="button secondary">
-                        CONHECER O JOGO
-                    </a>
-
-                </div>
-
+            <div class="section-label">
+                O JOGO
             </div>
 
-        </section>
+            <h2>Um mundo quebrado.</h2>
 
-
-
-        <!-- =====================================================
-             O JOGO
-        ====================================================== -->
-
-        <section id="jogo">
-
-            <div class="content">
-
-                <div class="section-label">
-                    01 / O JOGO
-                </div>
-
-                <h2>UM MUNDO QUE NÃO DEVERIA EXISTIR.</h2>
-
-                <p class="game-intro">
-
-                    <span class="highlight">Inevitável</span>
-                    é uma experiência de ação, exploração
-                    e sobrevivência ambientada em um mundo
-                    estranho e quebrado.
-
-                </p>
+            <div class="game-intro">
 
                 <p>
-
-                    Você controla um javali que continua
-                    retornando depois da morte.
-
-                    Cada retorno aproxima você de uma verdade
-                    que talvez nunca devesse ser descoberta.
-
+                    <strong>Inevitável</strong> é um jogo de ação e exploração
+                    em um mundo estranho, onde a morte não significa simplesmente
+                    voltar ao início.
                 </p>
 
-                <p>
-
-                    Explore o cenário, enfrente ameaças,
-                    atravesse seus limites e descubra o que
-                    existe por trás dessa realidade.
-
-                </p>
-
-                <div class="quote">
-
-                    "Você não joga apenas a história.
-                    Você atravessa as consequências dela."
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             MORTE
-        ====================================================== -->
-
-        <section id="morte">
-
-            <div class="content">
-
-                <div class="section-label">
-                    02 / A MORTE
-                </div>
-
-                <h2 class="death-title">
-                    MORRA. MUDE. DESCUBRA.
-                </h2>
+                <br>
 
                 <p>
-
-                    Em Inevitável, a morte não é simplesmente
-                    o fim de uma tentativa.
-
-                </p>
-
-                <p>
-
-                    Cada morte deixa marcas.
-
-                    O sangue começa a aparecer.
-                    A percepção do cenário muda.
-                    Elementos do mundo começam a parecer
-                    cada vez menos naturais.
-
-                </p>
-
-                <p>
-
-                    Quanto mais você retorna, mais difícil
-                    se torna distinguir uma mudança real
-                    de uma realidade que está se desfazendo
-                    dentro da própria mente.
-
-                </p>
-
-                <div class="death-grid">
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            01
-                        </div>
-
-                        <h3>A PRIMEIRA MARCA</h3>
-
-                        <p>
-                            A morte começa a deixar sinais
-                            no mundo.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            02
-                        </div>
-
-                        <h3>REALIDADE ALTERADA</h3>
-
-                        <p>
-                            Sangue, distorções e mudanças
-                            começam a aparecer.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            03
-                        </div>
-
-                        <h3>A DÚVIDA</h3>
-
-                        <p>
-                            O mundo está mudando...
-                            ou é você?
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             TRAILER
-        ====================================================== -->
-
-        <section id="trailer">
-
-            <div class="content">
-
-                <div class="section-label">
-                    03 / TRAILER
-                </div>
-
-                <h2>VEJA POR SI MESMO.</h2>
-
-                <p>
-
-                    Algumas coisas não precisam ser explicadas.
-
-                    Primeiro, veja.
-
-                </p>
-
-                <div class="trailer-box">
-
-                    <!--
-
-                        QUANDO O TRAILER ESTIVER PRONTO,
-                        SUBSTITUA O CONTEÚDO DESTA DIV POR:
-
-                        <video controls>
-                            <source
-                                src="assets/trailer/trailer.mp4"
-                                type="video/mp4"
-                            >
-                        </video>
-
-                    -->
-
-                    <div class="trailer-placeholder">
-
-                        TRAILER EM BREVE
-
-                        <br><br>
-
-                        <small>
-                            O material já está sendo produzido.
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             MECÂNICAS
-        ====================================================== -->
-
-        <section id="mecanicas">
-
-            <div class="content">
-
-                <div class="section-label">
-                    04 / MECÂNICAS
-                </div>
-
-                <h2>APRENDA A SOBREVIVER.</h2>
-
-                <p>
-
-                    O jogador precisa entender o espaço,
-                    reagir às ameaças e encontrar maneiras
-                    de atravessar um mundo que não permanece
-                    completamente igual.
-
-                </p>
-
-
-                <div class="cards">
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            01
-                        </div>
-
-                        <h3>MOVIMENTO</h3>
-
-                        <p>
-
-                            Corra, pule, atravesse obstáculos
-                            e use o cenário para continuar
-                            avançando.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            02
-                        </div>
-
-                        <h3>COMBATE</h3>
-
-                        <p>
-
-                            Cada confronto exige leitura,
-                            reação e adaptação.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            03
-                        </div>
-
-                        <h3>EXPLORAÇÃO</h3>
-
-                        <p>
-
-                            Descubra caminhos, ambientes
-                            e elementos escondidos pelo mundo.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            04
-                        </div>
-
-                        <h3>MODO CAÇADOR</h3>
-
-                        <p>
-
-                            Entre em um estado onde o instinto
-                            assume o controle e o confronto
-                            ganha outra dinâmica.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            05
-                        </div>
-
-                        <h3>MORTE</h3>
-
-                        <p>
-
-                            Morrer não significa simplesmente
-                            voltar ao ponto inicial.
-
-                            O mundo carrega as consequências.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            06
-                        </div>
-
-                        <h3>ADAPTAÇÃO</h3>
-
-                        <p>
-
-                            Observe os inimigos, entenda seus
-                            padrões e descubra quando atacar
-                            ou recuar.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             HISTÓRIA
-        ====================================================== -->
-
-        <section id="historia">
-
-            <div class="content">
-
-                <div class="section-label">
-                    05 / UNIVERSO
-                </div>
-
-                <h2>O QUE A MORTE TOCA.</h2>
-
-                <p>
-
-                    O mundo de Inevitável não está exatamente
-                    como deveria.
-
-                </p>
-
-                <p>
-
-                    Há coisas que aconteceram.
-
-                    Há coisas que ainda vão acontecer.
-
-                    E talvez algumas delas nunca tenham acontecido.
-
-                </p>
-
-
-                <div class="story-block">
-
-                    <h3>O MUNDO INTACTO</h3>
-
-                    <p>
-
-                        Ruínas antigas de uma civilização
-                        esquecida.
-
-                        Silenciosas, mas ainda reconhecíveis.
-
-                        Ainda existe ordem.
-                        Ainda existe significado.
-
-                    </p>
-
-                </div>
-
-
-                <div class="story-block">
-
-                    <h3>REALIDADE DISTORCIDA</h3>
-
-                    <p>
-
-                        Depois de sucessivas mortes,
-                        algo parece errado.
-
-                        Veias escuras atravessam estruturas.
-                        O sangue invade o ambiente.
-                        A água perde sua aparência natural.
-
-                    </p>
-
-                    <p>
-
-                        Nada deveria ter mudado.
-
-                        Mas mudou.
-
-                        Ou talvez a mudança esteja acontecendo
-                        em outro lugar.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             PROTAGONISTA
-        ====================================================== -->
-
-        <section id="protagonista">
-
-            <div class="content">
-
-                <div class="section-label">
-                    06 / PROTAGONISTA
-                </div>
-
-                <h2 class="character-name">
-                    O JAVALI RENASCIDO
-                </h2>
-
-                <p>
-
-                    Ele deveria ter morrido.
-
-                    Mas continua voltando.
-
-                </p>
-
-                <p>
-
+                    Cada tentativa revela algo novo.
                     Cada morte deixa uma marca.
-
-                    Cada retorno traz consigo algo que
-                    não deveria permanecer.
-
                 </p>
-
-                <p>
-
-                    O corpo carrega as cicatrizes.
-
-                    A mente carrega aquilo que deveria
-                    ter sido esquecido.
-
-                </p>
-
-                <p>
-
-                    Ele não é um herói.
-
-                    É um sobrevivente preso em um ciclo
-                    que parece não ter fim.
-
-                </p>
-
-
-                <div class="character-attributes">
-
-                    <div class="attribute">
-
-                        <span>01</span>
-
-                        MORTES CONTÁVEIS
-
-                    </div>
-
-                    <div class="attribute">
-
-                        <span>02</span>
-
-                        TRANSFORMAÇÃO PROGRESSIVA
-
-                    </div>
-
-                    <div class="attribute">
-
-                        <span>03</span>
-
-                        SANIDADE INSTÁVEL
-
-                    </div>
-
-                    <div class="attribute">
-
-                        <span>04</span>
-
-                        DETERMINAÇÃO INABALÁVEL
-
-                    </div>
-
-                </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
+    <!-- =========================
+         MORTE
+    ========================== -->
 
-        <!-- =====================================================
-             AMEAÇA
-        ====================================================== -->
+    <section id="morte" class="death-section">
 
-        <section id="ameaca">
+        <div class="content">
 
-            <div class="content">
+            <div class="section-label">
+                O CICLO
+            </div>
 
-                <div class="section-label">
-                    07 / A AMEAÇA
-                </div>
+            <div class="death-title">
+                MORRA.<br>
+                MUDE.<br>
+                DESCUBRA.
+            </div>
 
-                <h2>O MONSTRO DE SANGUE.</h2>
+            <p>
+                Em Inevitável, morrer faz parte da experiência.
+                O mundo parece responder às suas quedas.
+            </p>
 
-                <div class="threat-box">
+            <div class="death-grid">
 
-                    <p>
+                <div class="death-card">
 
-                        Uma criatura grotesca formada por
-                        sangue congelado e memórias distorcidas.
+                    <span>01</span>
 
-                    </p>
-
-                    <p>
-
-                        Ele não é apenas mais um inimigo.
-
-                        É uma presença que caça.
-
-                        Observa.
-
-                        Pressiona.
-
-                        E muda sua abordagem durante
-                        os confrontos.
-
-                    </p>
+                    <h3>A marca</h3>
 
                     <p>
-
-                        A distância determina suas escolhas.
-
-                        Seus movimentos exigem respostas.
-
-                        E cada encontro pode transformar
-                        a relação entre predador e presa.
-
+                        Cada morte deixa consequências.
                     </p>
 
                 </div>
 
+                <div class="death-card">
 
-                <div class="cards">
+                    <span>02</span>
 
-                    <div class="card">
+                    <h3>A distorção</h3>
 
-                        <div class="card-number">
-                            01
-                        </div>
+                    <p>
+                        O cenário começa a parecer diferente.
+                    </p>
 
-                        <h3>PERSEGUIÇÃO</h3>
+                </div>
 
-                        <p>
-                            A criatura caça o jogador
-                            sem simplesmente desaparecer.
-                        </p>
+                <div class="death-card">
 
-                    </div>
+                    <span>03</span>
 
+                    <h3>A dúvida</h3>
 
-                    <div class="card">
-
-                        <div class="card-number">
-                            02
-                        </div>
-
-                        <h3>DISTÂNCIA</h3>
-
-                        <p>
-                            O espaço entre predador e presa
-                            influencia o confronto.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-number">
-                            03
-                        </div>
-
-                        <h3>ESTRATÉGIA</h3>
-
-                        <p>
-                            O comportamento pode mudar
-                            conforme a situação.
-                        </p>
-
-                    </div>
+                    <p>
+                        O mundo realmente mudou?
+                    </p>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
+    <!-- =========================
+         TRAILER
+    ========================== -->
 
-        <!-- =====================================================
-             DESENVOLVIMENTO
-        ====================================================== -->
+    <section id="trailer">
 
-        <section id="desenvolvimento">
+        <div class="content">
 
-            <div class="content">
+            <div class="section-label">
+                TRAILER
+            </div>
 
-                <div class="section-label">
-                    08 / DESENVOLVIMENTO
-                </div>
+            <h2>Veja antes de entender.</h2>
 
-                <h2>FEITO DO ZERO.</h2>
+            <p>
+                Algumas coisas não precisam ser explicadas.
+            </p>
 
-                <p>
+            <div class="trailer-box">
 
-                    Inevitável está sendo desenvolvido
-                    de forma independente.
+                <!--
+                Quando o trailer estiver pronto,
+                substitua o conteúdo abaixo pelo vídeo.
 
-                </p>
+                Exemplo:
 
-                <p>
+                <video controls playsinline poster="assets/poster.jpg">
+                    <source src="assets/trailer.mp4" type="video/mp4">
+                </video>
+                -->
 
-                    O projeto começou como uma ideia
-                    e cresceu através de protótipos,
-                    mecânicas, cenários, personagens
-                    e muitas tentativas.
+                <div class="trailer-placeholder">
 
-                </p>
+                    TRAILER EM BREVE
 
+                    <br><br>
 
-                <div class="timeline">
-
-                    <div class="timeline-item">
-
-                        <h3>IDEIA</h3>
-
-                        <p>
-                            O conceito inicial de Inevitável.
-                        </p>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <h3>PROTÓTIPO</h3>
-
-                        <p>
-                            Os primeiros testes de movimento
-                            e interação.
-                        </p>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <h3>MECÂNICAS</h3>
-
-                        <p>
-                            Movimento, combate, exploração
-                            e sistemas de jogo.
-                        </p>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <h3>MUNDO</h3>
-
-                        <p>
-                            Construção dos cenários,
-                            atmosfera e identidade visual.
-                        </p>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <h3>TRAILER</h3>
-
-                        <p>
-                            Transformando o jogo em uma
-                            experiência para ser apresentada.
-                        </p>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <h3>EVENTO</h3>
-
-                        <p>
-                            O próximo passo.
-                        </p>
-
-                    </div>
+                    <small>
+                        Material em produção.
+                    </small>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
+    <!-- =========================
+         MECÂNICAS
+    ========================== -->
 
-        <!-- =====================================================
-             GALERIA
-        ====================================================== -->
+    <section id="mecanicas">
 
-        <section id="galeria">
+        <div class="content">
 
-            <div class="content">
+            <div class="section-label">
+                MECÂNICAS
+            </div>
 
-                <div class="section-label">
-                    09 / GALERIA
+            <h2>Sobreviver é aprender.</h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-number">
+                        01
+                    </div>
+
+                    <h3>Modo Caçador</h3>
+
+                    <p>
+                        Um estado de maior agressividade que muda
+                        a forma como o protagonista enfrenta o perigo.
+                    </p>
+
                 </div>
 
-                <h2>FRAGMENTOS DO MUNDO.</h2>
 
-                <p>
+                <div class="card">
 
-                    Algumas imagens do desenvolvimento
-                    de Inevitável.
-
-                </p>
-
-
-                <div class="gallery">
-
-                    <!--
-
-                        DEPOIS VAMOS TROCAR ESTES BLOCOS
-                        POR IMAGENS REAIS DO JOGO.
-
-                        Exemplo:
-
-                        <div class="gallery-item">
-                            <img
-                                src="assets/images/cenario.png"
-                                alt="Cenário de Inevitável"
-                            >
-                        </div>
-
-                    -->
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 01
+                    <div class="card-number">
+                        02
                     </div>
 
-                    <div class="gallery-item">
-                        SCREENSHOT 02
+                    <h3>Combate</h3>
+
+                    <p>
+                        Leia os movimentos, reaja e aprenda
+                        com os padrões dos inimigos.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-number">
+                        03
                     </div>
 
-                    <div class="gallery-item">
-                        SCREENSHOT 03
-                    </div>
+                    <h3>Exploração</h3>
 
-                    <div class="gallery-item">
-                        SCREENSHOT 04
-                    </div>
-
-                    <div class="gallery-item">
-                        SCREENSHOT 05
-                    </div>
-
-                    <div class="gallery-item">
-                        SCREENSHOT 06
-                    </div>
+                    <p>
+                        Atravesse um mundo quebrado e descubra
+                        o que existe por trás dele.
+                    </p>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
+    <!-- =========================
+         UNIVERSO
+    ========================== -->
 
-        <!-- =====================================================
-             REDES
-        ====================================================== -->
+    <section id="historia">
 
-        <section id="redes">
+        <div class="content">
 
-            <div class="content">
+            <div class="section-label">
+                UNIVERSO
+            </div>
 
-                <div class="section-label">
-                    10 / REDES
-                </div>
+            <h2>O que está acontecendo?</h2>
 
-                <h2>CONTINUE ACOMPANHANDO.</h2>
+            <div class="story-block">
+
+                <h3>Um mundo que não parece certo.</h3>
 
                 <p>
-
-                    O desenvolvimento de Inevitável
-                    continua.
-
-                    Acompanhe o projeto e descubra
-                    o que vem pela frente.
-
+                    Ruínas, criaturas e sinais de algo que aconteceu antes.
+                    Quanto mais o protagonista morre, mais difícil fica
+                    distinguir realidade de percepção.
                 </p>
 
+            </div>
 
-                <div class="social-links">
 
-                    <!--
+            <div class="story-block">
 
-                        COLOQUE O LINK DO INSTAGRAM AQUI
-                        QUANDO FOR DEFINIDO.
+                <h3>O Javali Renascido</h3>
 
-                    -->
+                <p>
+                    Ele sempre volta.
+                    Mas nunca exatamente igual.
+                </p>
 
-                    <a
-                        href="#"
-                        class="button"
-                    >
-                        INSTAGRAM
-                    </a>
+            </div>
 
+
+            <div class="story-block">
+
+                <h3>O Monstro de Sangue</h3>
+
+                <p>
+                    Uma criatura que persegue o protagonista
+                    e transforma cada encontro em uma disputa
+                    entre caçador e presa.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROTAGONISTA
+    ========================== -->
+
+    <section id="protagonista">
+
+        <div class="content">
+
+            <div class="section-label">
+                PROTAGONISTA
+            </div>
+
+            <h2>O Javali Renascido</h2>
+
+            <div class="character-box">
+
+                <p>
+                    Um sobrevivente preso em um ciclo.
+                    Seu corpo retorna, sua memória permanece
+                    e cada morte aproxima a verdade.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AMEAÇA
+    ========================== -->
+
+    <section id="ameaca">
+
+        <div class="content">
+
+            <div class="section-label">
+                AMEAÇA
+            </div>
+
+            <h2>O Monstro de Sangue</h2>
+
+            <div class="threat-box">
+
+                <p>
+                    Uma presença grotesca que observa,
+                    persegue e reage ao jogador.
+                </p>
+
+                <br>
+
+                <p>
+                    Você não está apenas tentando derrotá-lo.
+                    Está tentando entender o que ele é.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DESENVOLVIMENTO
+    ========================== -->
+
+    <section id="desenvolvimento">
+
+        <div class="content">
+
+            <div class="section-label">
+                DESENVOLVIMENTO
+            </div>
+
+            <h2>Feito de forma independente.</h2>
+
+            <div class="development">
+
+                <p>
+                    <strong>Inevitável</strong> é um projeto indie
+                    desenvolvido de forma independente, construído
+                    aos poucos entre código, arte, testes e muita tentativa.
+                </p>
+
+                <br>
+
+                <p>
+                    O jogo ainda está em desenvolvimento.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALERIA
+    ========================== -->
+
+    <section id="galeria">
+
+        <div class="content">
+
+            <div class="section-label">
+                GALERIA
+            </div>
+
+            <h2>Um mundo em construção.</h2>
+
+            <div class="gallery">
+
+                <!--
+                Substitua os blocos pelos seus screenshots.
+
+                Exemplo:
+
+                <div class="gallery-item">
+                    <img src="assets/imagem1.jpg" alt="Cena de Inevitável">
+                </div>
+                -->
+
+                <div class="gallery-item">
+                    SCREENSHOT 01
+                </div>
+
+                <div class="gallery-item">
+                    SCREENSHOT 02
+                </div>
+
+                <div class="gallery-item">
+                    SCREENSHOT 03
+                </div>
+
+                <div class="gallery-item">
+                    SCREENSHOT 04
+                </div>
+
+                <div class="gallery-item">
+                    SCREENSHOT 05
+                </div>
+
+                <div class="gallery-item">
+                    SCREENSHOT 06
                 </div>
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
 
 
+    <!-- =========================
+         REDES
+    ========================== -->
 
-    <!-- =====================================================
-         RODAPÉ
-    ====================================================== -->
+    <section id="redes">
 
-    <footer>
+        <div class="content">
 
-        <p>
-            𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋
-        </p>
+            <div class="section-label">
+                ACOMPANHE
+            </div>
 
-        <p>
-            A MORTE É APENAS O COMEÇO.
-        </p>
+            <h2>Continue acompanhando.</h2>
 
-        <p>
-            © 2026 | Em desenvolvimento independente.
-        </p>
+            <p>
+                Veja o desenvolvimento de Inevitável
+                e acompanhe as próximas atualizações.
+            </p>
 
-    </footer>
+            <div class="social-buttons">
 
+                <!-- Troque # pelo link real -->
+
+                <a
+                    href="#"
+                    class="button"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    INSTAGRAM
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>INEVITÁVEL</strong>
+
+    <p>
+        © 2026 • Em desenvolvimento
+    </p>
+
+</footer>
+
+
+<script>
+
+    const menuButton = document.getElementById("menuButton");
+    const navMenu = document.getElementById("navMenu");
+
+    menuButton.addEventListener("click", () => {
+
+        const isOpen = navMenu.classList.toggle("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+        menuButton.textContent = isOpen
+            ? "×"
+            : "☰";
+
+    });
+
+
+    // Fecha o menu quando o usuário toca em uma seção
+
+    document.querySelectorAll("#navMenu a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.textContent = "☰";
+
+        });
+
+    });
+
+</script>
 
 </body>
-
 </html>
