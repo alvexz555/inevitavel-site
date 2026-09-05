@@ -238,7 +238,7 @@
         section {
             min-height: auto;
 
-            padding: 90px 18px;
+            padding: 100px 18px;
 
             border-top: 1px solid #151515;
 
@@ -249,7 +249,7 @@
 
         .content {
             width: 100%;
-            max-width: 950px;
+            max-width: 1100px;
 
             margin: auto;
         }
@@ -290,14 +290,66 @@
 
 
         /* =========================
+           IMAGE PLACEHOLDERS
+        ========================= */
+
+        .visual-placeholder {
+            width: 100%;
+
+            min-height: 360px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #0c0c0c
+                );
+
+            border: 1px solid #222222;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .visual-placeholder::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 12px;
+
+            border: 1px solid #151515;
+
+            pointer-events: none;
+        }
+
+        .visual-placeholder span {
+            color: #303030;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
            A MORTE
         ========================= */
 
         #morte {
             background:
                 linear-gradient(
-                    rgba(5, 5, 5, 0.94),
-                    rgba(5, 5, 5, 0.98)
+                    rgba(5, 5, 5, 0.96),
+                    rgba(5, 5, 5, 0.99)
                 );
         }
 
@@ -393,6 +445,16 @@
            O JOGO
         ========================= */
 
+        .game-layout {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 35px;
+
+            align-items: center;
+        }
+
         .game-content {
             max-width: 700px;
         }
@@ -401,15 +463,29 @@
             margin-top: 15px;
         }
 
+        .game-visual {
+            min-height: 420px;
+        }
+
 
         /* =========================
            MECÂNICAS
         ========================= */
 
-        .cards {
+        .mechanics-layout {
             display: grid;
 
             grid-template-columns: 1fr;
+
+            gap: 35px;
+
+            align-items: center;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
 
             gap: 10px;
 
@@ -417,29 +493,105 @@
         }
 
         .card {
+            min-height: 190px;
+
             padding: 22px;
 
             border: 1px solid #202020;
 
             background: #090909;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
         }
 
-        .card-number {
-            display: block;
+        .card:hover {
+            transform: translateY(-3px);
 
-            margin-bottom: 20px;
+            border-color: #3a3a3a;
+        }
 
-            color: #666666;
+        .card-icon {
+            width: 42px;
+            height: 42px;
 
-            font-size: 11px;
+            display: flex;
 
-            letter-spacing: 2px;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border: 1px solid #292929;
+
+            background: #101010;
+
+            color: #ffffff;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+
+            font-size: 1rem;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+
+            line-height: 1.6;
+        }
+
+        .mechanics-visual {
+            min-height: 500px;
         }
 
 
         /* =========================
            UNIVERSO
         ========================= */
+
+        .universe-feature {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 10px;
+
+            margin-top: 35px;
+        }
+
+        .universe-feature-block {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            background: #090909;
+
+            border: 1px solid #202020;
+        }
+
+        .universe-feature-block .visual-placeholder {
+            min-height: 330px;
+
+            border: 0;
+
+            border-bottom: 1px solid #202020;
+        }
+
+        .story-content {
+            padding: 28px;
+        }
+
+        .story-content h3 {
+            font-size: 1.3rem;
+
+            letter-spacing: 1px;
+        }
 
         .universe-grid {
             display: grid;
@@ -448,7 +600,7 @@
 
             gap: 10px;
 
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .story-block {
@@ -464,6 +616,16 @@
            ORIGEM
         ========================= */
 
+        .origin-layout {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 35px;
+
+            align-items: center;
+        }
+
         .origin {
             max-width: 750px;
         }
@@ -472,13 +634,31 @@
             color: #ffffff;
         }
 
+        .origin-visual {
+            min-height: 320px;
+        }
+
 
         /* =========================
            DESENVOLVIMENTO
         ========================= */
 
+        .development-layout {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 35px;
+
+            align-items: center;
+        }
+
         .development {
             max-width: 700px;
+        }
+
+        .development-visual {
+            min-height: 300px;
         }
 
 
@@ -570,9 +750,7 @@
         @media (max-width: 699px) {
 
             header {
-                padding:
-                    8px
-                    10px;
+                padding: 8px 10px;
             }
 
             .hero {
@@ -634,8 +812,11 @@
                 );
             }
 
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
             .death-grid,
-            .cards,
             .universe-grid,
             .gallery {
                 grid-template-columns: 1fr;
@@ -643,8 +824,22 @@
 
             .death-card,
             .card,
-            .story-block {
+            .story-block,
+            .story-content {
                 padding: 20px;
+            }
+
+            .visual-placeholder {
+                min-height: 300px;
+            }
+
+            .game-visual,
+            .mechanics-visual {
+                min-height: 330px;
+            }
+
+            .universe-feature-block .visual-placeholder {
+                min-height: 280px;
             }
 
             p {
@@ -719,9 +914,21 @@
                     repeat(3, 1fr);
             }
 
-            .cards {
+            .game-layout {
                 grid-template-columns:
-                    repeat(3, 1fr);
+                    1.05fr
+                    0.95fr;
+            }
+
+            .mechanics-layout {
+                grid-template-columns:
+                    1.05fr
+                    0.95fr;
+            }
+
+            .universe-feature {
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
             .universe-grid {
@@ -729,9 +936,29 @@
                     repeat(2, 1fr);
             }
 
+            .origin-layout {
+                grid-template-columns:
+                    1.1fr
+                    0.9fr;
+            }
+
+            .development-layout {
+                grid-template-columns:
+                    1.1fr
+                    0.9fr;
+            }
+
             .gallery {
                 grid-template-columns:
                     repeat(3, 1fr);
+            }
+
+            .visual-placeholder {
+                min-height: 430px;
+            }
+
+            .mechanics-visual {
+                min-height: 500px;
             }
         }
 
@@ -970,23 +1197,6 @@
 
                     </div>
 
-                    <!--
-                    Quando o trailer estiver pronto,
-                    podemos colocar o vídeo aqui.
-
-                    Exemplo:
-
-                    <video
-                        controls
-                        poster="assets/trailer-cover.jpg"
-                    >
-                        <source
-                            src="assets/trailer.mp4"
-                            type="video/mp4"
-                        >
-                    </video>
-                    -->
-
                 </div>
 
             </div>
@@ -1000,26 +1210,43 @@
 
         <section id="jogo">
 
-            <div class="content game-content">
+            <div class="content">
 
-                <div class="section-label">
-                    O JOGO
+                <div class="game-layout">
+
+                    <div class="game-visual visual-placeholder">
+
+                        <span>
+                            ESPAÇO PARA ARTE DO TRAKAM
+                        </span>
+
+                    </div>
+
+
+                    <div class="game-content">
+
+                        <div class="section-label">
+                            O JOGO
+                        </div>
+
+                        <h2>
+                            Um mundo que não deveria existir.
+                        </h2>
+
+                        <p>
+                            Inevitável é um jogo de ação e exploração protagonizado
+                            por Trakam, um javali contaminado por uma criatura Blord.
+                        </p>
+
+                        <p>
+                            Preso entre vestígios de uma realidade distorcida,
+                            Trakam precisa enfrentar criaturas, compreender sua
+                            própria condição e descobrir o que realmente aconteceu.
+                        </p>
+
+                    </div>
+
                 </div>
-
-                <h2>
-                    Um mundo que não deveria existir.
-                </h2>
-
-                <p>
-                    Inevitável é um jogo de ação e exploração protagonizado
-                    por Trakam, um javali contaminado por uma criatura Blord.
-                </p>
-
-                <p>
-                    Preso entre vestígios de uma realidade distorcida,
-                    Trakam precisa enfrentar criaturas, compreender sua
-                    própria condição e descobrir o que realmente aconteceu.
-                </p>
 
             </div>
 
@@ -1034,67 +1261,102 @@
 
             <div class="content">
 
-                <div class="section-label">
-                    MECÂNICAS
-                </div>
+                <div class="mechanics-layout">
 
-                <h2>
-                    Sobreviver é aprender.
-                </h2>
+                    <div>
+
+                        <div class="section-label">
+                            MECÂNICAS CENTRAIS
+                        </div>
+
+                        <h2>
+                            Sobreviver é aprender.
+                        </h2>
 
 
-                <div class="cards">
+                        <div class="cards">
 
-                    <div class="card">
+                            <div class="card">
 
-                        <span class="card-number">
-                            01
-                        </span>
+                                <div class="card-icon">
+                                    ☠
+                                </div>
 
-                        <h3>
-                            MODO CAÇADOR
-                        </h3>
+                                <h3>
+                                    MORTE COMO EVOLUÇÃO
+                                </h3>
 
-                        <p>
-                            Um estado que altera a forma como Trakam
-                            enfrenta e responde às ameaças.
-                        </p>
+                                <p>
+                                    A morte faz parte do processo de sobrevivência,
+                                    revelando novas possibilidades e consequências.
+                                </p>
+
+                            </div>
+
+
+                            <div class="card">
+
+                                <div class="card-icon">
+                                    ◉
+                                </div>
+
+                                <h3>
+                                    MODO CAÇADOR
+                                </h3>
+
+                                <p>
+                                    Um estado que altera a forma como Trakam
+                                    enfrenta e responde às ameaças.
+                                </p>
+
+                            </div>
+
+
+                            <div class="card">
+
+                                <div class="card-icon">
+                                    ✦
+                                </div>
+
+                                <h3>
+                                    IA ADAPTATIVA
+                                </h3>
+
+                                <p>
+                                    Os inimigos observam o comportamento do jogador
+                                    e adaptam sua resposta durante o confronto.
+                                </p>
+
+                            </div>
+
+
+                            <div class="card">
+
+                                <div class="card-icon">
+                                    ⚔
+                                </div>
+
+                                <h3>
+                                    COMBATE POR REAÇÃO
+                                </h3>
+
+                                <p>
+                                    Leia os movimentos, reaja aos inimigos
+                                    e aprenda com seus padrões.
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="card">
+                    <div class="mechanics-visual visual-placeholder">
 
-                        <span class="card-number">
-                            02
+                        <span>
+                            ESPAÇO PARA ARTE / CENA DO JOGO
                         </span>
-
-                        <h3>
-                            COMBATE
-                        </h3>
-
-                        <p>
-                            Leia os movimentos, reaja aos inimigos
-                            e aprenda com seus padrões.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <span class="card-number">
-                            03
-                        </span>
-
-                        <h3>
-                            EXPLORAÇÃO
-                        </h3>
-
-                        <p>
-                            Atravesse um mundo quebrado e procure pistas
-                            sobre a contaminação e sua origem.
-                        </p>
 
                     </div>
 
@@ -1122,38 +1384,80 @@
                 </h2>
 
 
+                <div class="universe-feature">
+
+
+                    <!-- TRAKAM -->
+
+                    <div class="universe-feature-block">
+
+                        <div class="visual-placeholder">
+
+                            <span>
+                                ESPAÇO PARA ARTE DO TRAKAM
+                            </span>
+
+                        </div>
+
+                        <div class="story-content">
+
+                            <div class="section-label">
+                                PROTAGONISTA
+                            </div>
+
+                            <h3>
+                                TRAKAM
+                            </h3>
+
+                            <p>
+                                Um javali que foi contaminado por uma criatura
+                                Blord. Depois de romper a sincronização com seu
+                                infectador, Trakam escapou da caça, mas não saiu
+                                completamente ileso.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BLORD -->
+
+                    <div class="universe-feature-block">
+
+                        <div class="visual-placeholder">
+
+                            <span>
+                                ESPAÇO PARA ARTE DO BLORD
+                            </span>
+
+                        </div>
+
+                        <div class="story-content">
+
+                            <div class="section-label">
+                                A AMEAÇA
+                            </div>
+
+                            <h3>
+                                OS BLORDS
+                            </h3>
+
+                            <p>
+                                Criaturas originadas de uma mutação criada em
+                                laboratório. Seu corpo se deforma com o tempo,
+                                enquanto a dor causada pela transformação se torna
+                                cada vez maior.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
                 <div class="universe-grid">
-
-                    <div class="story-block">
-
-                        <h3>
-                            TRAKAM
-                        </h3>
-
-                        <p>
-                            Um javali que foi contaminado por uma criatura
-                            Blord. Depois de romper a sincronização com seu
-                            infectador, Trakam escapou da caça, mas não saiu
-                            completamente ileso.
-                        </p>
-
-                    </div>
-
-
-                    <div class="story-block">
-
-                        <h3>
-                            OS BLORDS
-                        </h3>
-
-                        <p>
-                            Criaturas originadas de uma mutação criada em
-                            laboratório. Seu corpo se deforma com o tempo,
-                            enquanto a dor causada pela transformação se torna
-                            cada vez maior.
-                        </p>
-
-                    </div>
 
 
                     <div class="story-block">
@@ -1199,38 +1503,55 @@
 
         <section id="origem">
 
-            <div class="content origin">
+            <div class="content">
 
-                <div class="section-label">
-                    ORIGEM
+                <div class="origin-layout">
+
+                    <div class="origin">
+
+                        <div class="section-label">
+                            ORIGEM
+                        </div>
+
+                        <h2>
+                            Antes do jogo.
+                        </h2>
+
+                        <p>
+                            <strong>Inevitável</strong> nasceu de ideias que começaram
+                            em <strong>Escudo Quebrado</strong>, livro de fantasia
+                            escrito por <strong>A.Rise</strong>.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            Na história original, <strong>Trakam</strong> era apenas
+                            um personagem secundário. Em Inevitável, ele ganhou um
+                            novo papel e se tornou o protagonista de uma história
+                            própria.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            O jogo não é uma adaptação direta do livro. É uma nova obra,
+                            construída a partir de ideias e personagens que começaram
+                            naquele universo.
+                        </p>
+
+                    </div>
+
+
+                    <div class="origin-visual visual-placeholder">
+
+                        <span>
+                            ESPAÇO PARA ARTE DE ESCUDO QUEBRADO
+                        </span>
+
+                    </div>
+
                 </div>
-
-                <h2>
-                    Antes do jogo.
-                </h2>
-
-                <p>
-                    <strong>Inevitável</strong> nasceu de ideias que começaram
-                    em <strong>Escudo Quebrado</strong>, livro de fantasia
-                    escrito por <strong>A.Rise</strong>.
-                </p>
-
-                <br>
-
-                <p>
-                    Na história original, <strong>Trakam</strong> era apenas
-                    um personagem secundário. Em Inevitável, ele ganhou um
-                    novo papel e se tornou o protagonista de uma história
-                    própria.
-                </p>
-
-                <br>
-
-                <p>
-                    O jogo não é uma adaptação direta do livro. É uma nova obra,
-                    construída a partir de ideias e personagens que começaram
-                    naquele universo.
-                </p>
 
             </div>
 
@@ -1243,27 +1564,44 @@
 
         <section id="desenvolvimento">
 
-            <div class="content development">
+            <div class="content">
 
-                <div class="section-label">
-                    DESENVOLVIMENTO
+                <div class="development-layout">
+
+                    <div class="development">
+
+                        <div class="section-label">
+                            DESENVOLVIMENTO
+                        </div>
+
+                        <h2>
+                            Feito de forma independente.
+                        </h2>
+
+                        <p>
+                            Inevitável é um projeto indie desenvolvido de forma
+                            independente, construído aos poucos entre código,
+                            arte, testes e tentativa.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            O jogo ainda está em desenvolvimento.
+                        </p>
+
+                    </div>
+
+
+                    <div class="development-visual visual-placeholder">
+
+                        <span>
+                            ESPAÇO PARA ARTE DO DESENVOLVIMENTO
+                        </span>
+
+                    </div>
+
                 </div>
-
-                <h2>
-                    Feito de forma independente.
-                </h2>
-
-                <p>
-                    Inevitável é um projeto indie desenvolvido de forma
-                    independente, construído aos poucos entre código,
-                    arte, testes e tentativa.
-                </p>
-
-                <br>
-
-                <p>
-                    O jogo ainda está em desenvolvimento.
-                </p>
 
             </div>
 
