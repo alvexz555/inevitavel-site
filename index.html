@@ -3,14 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inevitável</title>
+
+    <title>𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050505;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* MENU */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 1000;
+
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(8px);
+
+            border-bottom: 1px solid #222;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 8px 12px;
+
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 100px 20px 40px;
+
+            background:
+                radial-gradient(circle at center, #171717 0%, #050505 60%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 13vw, 8rem);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #999;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 25px;
+
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            min-height: 70vh;
+            padding: 100px 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            border-top: 1px solid #171717;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+        }
+
+        p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* BLOCOS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .card {
+            border: 1px solid #252525;
+            padding: 25px;
+
+            background: #0a0a0a;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #666;
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* TRAILER */
+
+        .trailer-box {
+            margin-top: 30px;
+
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            background: #0b0b0b;
+            border: 1px solid #252525;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #555;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+
+            border-top: 1px solid #171717;
+
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* DESKTOP */
+
+        @media (min-width: 700px) {
+
+            nav {
+                justify-content: flex-end;
+            }
+
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            section {
+                padding: 120px 40px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋</h1>
+    <!-- MENU -->
 
-    <p>Site oficial do jogo.</p>
+    <header>
+        <nav>
+            <a href="#jogo">O JOGO</a>
+            <a href="#trailer">TRAILER</a>
+            <a href="#mecanicas">MECÂNICAS</a>
+            <a href="#historia">HISTÓRIA</a>
+            <a href="#desenvolvimento">DESENVOLVIMENTO</a>
+        </nav>
+    </header>
+
+
+    <!-- INÍCIO -->
+
+    <main>
+
+        <section class="hero">
+
+            <h1>𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋</h1>
+
+            <p>
+                Um mundo quebrado.
+                Uma jornada sem volta.
+                E algo esperando pelo próximo passo.
+            </p>
+
+            <a href="#trailer" class="button">
+                VER TRAILER
+            </a>
+
+        </section>
+
+
+        <!-- O JOGO -->
+
+        <section id="jogo">
+
+            <div class="content">
+
+                <h2>O JOGO</h2>
+
+                <p>
+                    Inevitável é uma experiência de ação e exploração
+                    ambientada em um mundo estranho e quebrado.
+                </p>
+
+                <p>
+                    Explore, enfrente criaturas e descubra o que existe
+                    por trás desse lugar.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRAILER -->
+
+        <section id="trailer">
+
+            <div class="content">
+
+                <h2>TRAILER</h2>
+
+                <p>
+                    Algumas coisas não precisam ser explicadas.
+                    Primeiro, veja.
+                </p>
+
+                <div class="trailer-box">
+                    TRAILER EM BREVE
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MECÂNICAS -->
+
+        <section id="mecanicas">
+
+            <div class="content">
+
+                <h2>MECÂNICAS</h2>
+
+                <p>
+                    Movimento, combate e exploração fazem parte da
+                    experiência de Inevitável.
+                </p>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>MOVIMENTO</h3>
+                        <p>
+                            Corra, pule e atravesse o cenário.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>COMBATE</h3>
+                        <p>
+                            Enfrente criaturas e sobreviva aos encontros.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>EXPLORAÇÃO</h3>
+                        <p>
+                            Descubra os caminhos e os segredos desse mundo.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTÓRIA -->
+
+        <section id="historia">
+
+            <div class="content">
+
+                <h2>HISTÓRIA</h2>
+
+                <p>
+                    O mundo de Inevitável não está exatamente como deveria.
+                </p>
+
+                <p>
+                    Há coisas que aconteceram.
+                    Há coisas que ainda vão acontecer.
+                    E talvez algumas delas nunca tenham acontecido.
+                </p>
+
+                <p>
+                    O resto...
+                    você terá que descobrir.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DESENVOLVIMENTO -->
+
+        <section id="desenvolvimento">
+
+            <div class="content">
+
+                <h2>DESENVOLVIMENTO</h2>
+
+                <p>
+                    Inevitável está sendo desenvolvido de forma independente,
+                    começando como uma ideia e crescendo através de cada
+                    mecânica, cenário e personagem.
+                </p>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>IDEIA</h3>
+                        <p>
+                            O conceito inicial do jogo.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>DESENVOLVIMENTO</h3>
+                        <p>
+                            Construção das mecânicas e do mundo.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>FUTURO</h3>
+                        <p>
+                            O projeto continua evoluindo.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <p>
+            𝐈𝐍𝐄𝐕𝐈𝐓𝐀́𝐕𝐄𝐋
+        </p>
+
+        <p>
+            Em desenvolvimento.
+        </p>
+
+    </footer>
 
 </body>
 </html>
