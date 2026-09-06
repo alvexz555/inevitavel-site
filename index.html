@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -15,61 +14,40 @@
         content="INEVITÁVEL - A morte é apenas o começo."
     >
 
-    <meta
-        name="theme-color"
-        content="#050505"
-    >
-
     <title>INEVITÁVEL | A morte é apenas o começo</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-    <!-- =====================================================
+    <!-- =========================
          HEADER
-         ===================================================== -->
+    ========================= -->
 
-    <header class="site-header">
+    <header>
 
         <div class="header-content">
 
-            <a
-                href="#inicio"
-                class="logo"
-                aria-label="Inevitável - início"
-            >
+            <div class="logo">
                 INEVITÁVEL
-            </a>
-
+            </div>
 
             <button
-                type="button"
                 class="menu-button"
                 id="menuButton"
                 aria-label="Abrir menu"
                 aria-expanded="false"
                 aria-controls="menu"
             >
-                <span class="menu-icon">
-                    ☰
-                </span>
+                ☰
             </button>
 
         </div>
 
 
-        <nav
-            id="menu"
-            class="site-nav"
-            aria-label="Navegação principal"
-        >
+        <nav id="menu">
 
             <a href="#morte">
                 A MORTE
@@ -108,85 +86,52 @@
     </header>
 
 
+    <main>
 
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
-
-    <main id="inicio">
-
-
-        <!-- =================================================
+        <!-- =========================
              HERO
-             ================================================= -->
+        ========================= -->
 
         <section class="hero">
 
-            <div class="hero-content">
+            <h1>
+                INEVITÁVEL
+            </h1>
 
-                <div class="hero-label">
-                    UM JOGO INDIE
-                </div>
-
-
-                <h1>
-                    INEVITÁVEL
-                </h1>
-
-
-                <div class="tagline">
-                    A MORTE É APENAS O COMEÇO
-                </div>
-
-
-                <p class="hero-description">
-                    Um javali contaminado. Uma criatura que não deveria existir.
-                    E uma realidade onde percepção e verdade deixaram de ser a mesma coisa.
-                </p>
-
-
-                <div class="buttons">
-
-                    <a
-                        href="#trailer"
-                        class="button button-primary"
-                    >
-                        VER TRAILER
-                    </a>
-
-                    <a
-                        href="#jogo"
-                        class="button"
-                    >
-                        CONHEÇA O JOGO
-                    </a>
-
-                </div>
-
+            <div class="tagline">
+                A MORTE É APENAS O COMEÇO
             </div>
 
+            <p class="hero-description">
+                Um javali contaminado. Uma criatura que não deveria existir.
+                E uma realidade onde percepção e verdade deixaram de ser a mesma coisa.
+            </p>
 
-            <a
-                href="#morte"
-                class="hero-scroll"
-                aria-label="Descer para o conteúdo"
-            >
-                <span>
-                    ↓
-                </span>
 
-                <small>
-                    DESCUBRA
-                </small>
-            </a>
+            <div class="buttons">
+
+                <a
+                    href="#trailer"
+                    class="button"
+                >
+                    VER TRAILER
+                </a>
+
+                <a
+                    href="#jogo"
+                    class="button"
+                >
+                    CONHEÇA O JOGO
+                </a>
+
+            </div>
 
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              A MORTE
-             ================================================= -->
+        ========================= -->
 
         <section id="morte">
 
@@ -196,13 +141,11 @@
                     O CICLO
                 </div>
 
-
                 <h2>
                     MORRA.<br>
                     MUDE.<br>
                     DESCUBRA.
                 </h2>
-
 
                 <p class="death-intro">
                     Em Inevitável, a morte não representa apenas o fim.
@@ -211,62 +154,85 @@
                 </p>
 
 
-                <div class="death-grid">
+                <!-- BOTÃO DO ACORDEÃO -->
+
+                <button
+                    class="accordion-toggle"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        EXPLORAR O CICLO
+                    </span>
+
+                    <span class="accordion-icon">
+                        +
+                    </span>
+
+                </button>
 
 
-                    <article class="death-card">
+                <!-- CONTEÚDO -->
 
-                        <span class="number">
-                            01
-                        </span>
+                <div class="accordion-content">
 
-                        <h3>
-                            A CONTAMINAÇÃO
-                        </h3>
+                    <div class="death-grid">
 
-                        <p>
-                            Trakam foi marcado por uma criatura Blord.
-                            Parte dessa contaminação permanece ligada à sua percepção.
-                        </p>
+                        <div class="death-card">
 
-                    </article>
+                            <span class="number">
+                                01
+                            </span>
 
+                            <h3>
+                                A CONTAMINAÇÃO
+                            </h3>
 
-                    <article class="death-card">
+                            <p>
+                                Trakam foi marcado por uma criatura Blord.
+                                Parte dessa contaminação permanece ligada à sua percepção.
+                            </p>
 
-                        <span class="number">
-                            02
-                        </span>
-
-                        <h3>
-                            A SINCRONIZAÇÃO
-                        </h3>
-
-                        <p>
-                            A criatura utiliza os olhos como ponto de leitura
-                            e sincronização perceptiva.
-                        </p>
-
-                    </article>
+                        </div>
 
 
-                    <article class="death-card">
+                        <div class="death-card">
 
-                        <span class="number">
-                            03
-                        </span>
+                            <span class="number">
+                                02
+                            </span>
 
-                        <h3>
-                            A RUPTURA
-                        </h3>
+                            <h3>
+                                A SINCRONIZAÇÃO
+                            </h3>
 
-                        <p>
-                            Quando a sincronização é quebrada, o ciclo perde
-                            sua estabilidade e a caça pode ser interrompida.
-                        </p>
+                            <p>
+                                A criatura utiliza os olhos como ponto de leitura
+                                e sincronização perceptiva.
+                            </p>
 
-                    </article>
+                        </div>
 
+
+                        <div class="death-card">
+
+                            <span class="number">
+                                03
+                            </span>
+
+                            <h3>
+                                A RUPTURA
+                            </h3>
+
+                            <p>
+                                Quando a sincronização é quebrada, o ciclo perde
+                                sua estabilidade e a caça pode ser interrompida.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -275,24 +241,21 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              TRAILER
-             ================================================= -->
+        ========================= -->
 
         <section id="trailer">
 
-            <div class="content trailer-content">
+            <div class="content">
 
                 <div class="section-label">
                     TRAILER
                 </div>
 
-
                 <h2>
                     Veja antes de entender.
                 </h2>
-
 
                 <p class="trailer-text">
                     Algumas coisas não precisam ser explicadas.
@@ -303,9 +266,9 @@
 
                     <div class="trailer-placeholder">
 
-                        <span>
-                            TRAILER EM BREVE
-                        </span>
+                        TRAILER EM BREVE
+
+                        <br><br>
 
                         <small>
                             O material já está sendo produzido.
@@ -313,6 +276,20 @@
 
                     </div>
 
+                    <!--
+                    Quando o trailer estiver pronto:
+
+                    <video
+                        controls
+                        poster="assets/trailer-cover.jpg"
+                    >
+                        <source
+                            src="assets/trailer.mp4"
+                            type="video/mp4"
+                        >
+                    </video>
+                    -->
+
                 </div>
 
             </div>
@@ -320,202 +297,130 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              O JOGO
-             ================================================= -->
+        ========================= -->
 
         <section id="jogo">
 
-            <div class="content">
+            <div class="content game-content">
 
-                <div class="game-layout">
-
-
-                    <div class="game-content">
-
-                        <div class="section-label">
-                            O JOGO
-                        </div>
-
-
-                        <h2>
-                            Um mundo que não deveria existir.
-                        </h2>
-
-
-                        <p>
-                            Inevitável é um jogo de ação e exploração protagonizado
-                            por Trakam, um javali contaminado por uma criatura Blord.
-                        </p>
-
-
-                        <p>
-                            Preso entre vestígios de uma realidade distorcida,
-                            Trakam precisa enfrentar criaturas, compreender sua
-                            própria condição e descobrir o que realmente aconteceu.
-                        </p>
-
-                    </div>
-
-
-                    <div class="game-visual visual-placeholder">
-
-                        <span>
-                            ESPAÇO PARA ARTE DO TRAKAM
-                        </span>
-
-                    </div>
-
-
+                <div class="section-label">
+                    O JOGO
                 </div>
+
+                <h2>
+                    Um mundo que não deveria existir.
+                </h2>
+
+                <p>
+                    Inevitável é um jogo de ação e exploração protagonizado
+                    por Trakam, um javali contaminado por uma criatura Blord.
+                </p>
+
+                <p>
+                    Preso entre vestígios de uma realidade distorcida,
+                    Trakam precisa enfrentar criaturas, compreender sua
+                    própria condição e descobrir o que realmente aconteceu.
+                </p>
 
             </div>
 
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              MECÂNICAS
-             ================================================= -->
+        ========================= -->
 
         <section id="mecanicas">
 
             <div class="content">
 
-
                 <div class="section-label">
-                    MECÂNICAS CENTRAIS
+                    MECÂNICAS
                 </div>
-
 
                 <h2>
                     Sobreviver é aprender.
                 </h2>
 
 
-                <div class="mechanics-layout">
+                <button
+                    class="accordion-toggle"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        MECÂNICAS CENTRAIS
+                    </span>
+
+                    <span class="accordion-icon">
+                        +
+                    </span>
+
+                </button>
 
 
-                    <!-- =====================================
-                         QUATRO MECÂNICAS
-                         ===================================== -->
+                <div class="accordion-content">
 
                     <div class="cards">
 
+                        <div class="card">
 
-                        <article class="card">
+                            <span class="card-number">
+                                01
+                            </span>
 
-                            <div class="card-icon">
-                                ☠
-                            </div>
+                            <h3>
+                                MODO CAÇADOR
+                            </h3>
 
+                            <p>
+                                Um estado que altera a forma como Trakam
+                                enfrenta e responde às ameaças.
+                            </p>
 
-                            <div class="card-content">
-
-                                <h3>
-                                    MORTE COMO EVOLUÇÃO
-                                </h3>
-
-                                <p>
-                                    A morte faz parte do processo de sobrevivência,
-                                    revelando novas possibilidades e consequências.
-                                </p>
-
-                            </div>
-
-                        </article>
+                        </div>
 
 
+                        <div class="card">
 
-                        <article class="card">
+                            <span class="card-number">
+                                02
+                            </span>
 
-                            <div class="card-icon">
-                                ◉
-                            </div>
+                            <h3>
+                                COMBATE
+                            </h3>
 
+                            <p>
+                                Leia os movimentos, reaja aos inimigos
+                                e aprenda com seus padrões.
+                            </p>
 
-                            <div class="card-content">
-
-                                <h3>
-                                    MODO CAÇADOR
-                                </h3>
-
-                                <p>
-                                    Um estado que altera a forma como Trakam
-                                    enfrenta e responde às ameaças.
-                                </p>
-
-                            </div>
-
-                        </article>
+                        </div>
 
 
+                        <div class="card">
 
-                        <article class="card">
+                            <span class="card-number">
+                                03
+                            </span>
 
-                            <div class="card-icon">
-                                ✦
-                            </div>
+                            <h3>
+                                EXPLORAÇÃO
+                            </h3>
 
+                            <p>
+                                Atravesse um mundo quebrado e procure pistas
+                                sobre a contaminação e sua origem.
+                            </p>
 
-                            <div class="card-content">
-
-                                <h3>
-                                    IA ADAPTATIVA
-                                </h3>
-
-                                <p>
-                                    Os inimigos observam o comportamento do jogador
-                                    e adaptam sua resposta durante o confronto.
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-
-                        <article class="card">
-
-                            <div class="card-icon">
-                                ⚔
-                            </div>
-
-
-                            <div class="card-content">
-
-                                <h3>
-                                    COMBATE POR REAÇÃO
-                                </h3>
-
-                                <p>
-                                    Leia os movimentos, reaja aos inimigos
-                                    e aprenda com seus padrões.
-                                </p>
-
-                            </div>
-
-                        </article>
-
+                        </div>
 
                     </div>
-
-
-
-                    <!-- =====================================
-                         ARTE
-                         ===================================== -->
-
-                    <div class="mechanics-visual visual-placeholder">
-
-                        <span>
-                            ESPAÇO PARA ARTE / CENA DO JOGO
-                        </span>
-
-                    </div>
-
 
                 </div>
 
@@ -524,10 +429,9 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              UNIVERSO
-             ================================================= -->
+        ========================= -->
 
         <section id="universo">
 
@@ -537,31 +441,33 @@
                     UNIVERSO
                 </div>
 
-
                 <h2>
                     O que está acontecendo?
                 </h2>
 
 
-                <div class="universe-feature">
+                <button
+                    class="accordion-toggle"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        CONHECER O UNIVERSO
+                    </span>
+
+                    <span class="accordion-icon">
+                        +
+                    </span>
+
+                </button>
 
 
-                    <article class="universe-feature-block">
+                <div class="accordion-content">
 
-                        <div class="visual-placeholder">
+                    <div class="universe-grid">
 
-                            <span>
-                                ESPAÇO PARA ARTE DO TRAKAM
-                            </span>
-
-                        </div>
-
-
-                        <div class="story-content">
-
-                            <div class="section-label">
-                                PROTAGONISTA
-                            </div>
+                        <div class="story-block">
 
                             <h3>
                                 TRAKAM
@@ -576,26 +482,8 @@
 
                         </div>
 
-                    </article>
 
-
-
-                    <article class="universe-feature-block">
-
-                        <div class="visual-placeholder">
-
-                            <span>
-                                ESPAÇO PARA ARTE DO BLORD
-                            </span>
-
-                        </div>
-
-
-                        <div class="story-content">
-
-                            <div class="section-label">
-                                A AMEAÇA
-                            </div>
+                        <div class="story-block">
 
                             <h3>
                                 OS BLORDS
@@ -610,46 +498,38 @@
 
                         </div>
 
-                    </article>
+
+                        <div class="story-block">
+
+                            <h3>
+                                A CONTAMINAÇÃO
+                            </h3>
+
+                            <p>
+                                Para recuperar parte de sua forma, um Blord pode
+                                contaminar outros corpos. A vítima passa a carregar
+                                parte da mesma condição que deu origem à criatura.
+                            </p>
+
+                        </div>
 
 
-                </div>
+                        <div class="story-block">
 
+                            <h3>
+                                A SINCRONIZAÇÃO OCULAR
+                            </h3>
 
+                            <p>
+                                Os olhos funcionam como uma interface de leitura
+                                e sincronização perceptiva. Quando essa conexão
+                                falha, a criatura perde parte de sua capacidade
+                                de manter a caça.
+                            </p>
 
-                <div class="universe-grid">
+                        </div>
 
-
-                    <article class="story-block">
-
-                        <h3>
-                            A CONTAMINAÇÃO
-                        </h3>
-
-                        <p>
-                            Para recuperar parte de sua forma, um Blord pode
-                            contaminar outros corpos. A vítima passa a carregar
-                            parte da mesma condição que deu origem à criatura.
-                        </p>
-
-                    </article>
-
-
-                    <article class="story-block">
-
-                        <h3>
-                            A SINCRONIZAÇÃO OCULAR
-                        </h3>
-
-                        <p>
-                            Os olhos funcionam como uma interface de leitura
-                            e sincronização perceptiva. Quando essa conexão
-                            falha, a criatura perde parte de sua capacidade
-                            de manter a caça.
-                        </p>
-
-                    </article>
-
+                    </div>
 
                 </div>
 
@@ -658,128 +538,86 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              ORIGEM
-             ================================================= -->
+        ========================= -->
 
         <section id="origem">
 
-            <div class="content">
+            <div class="content origin">
 
-                <div class="origin-layout">
-
-
-                    <div class="origin">
-
-                        <div class="section-label">
-                            ORIGEM
-                        </div>
-
-
-                        <h2>
-                            Antes do jogo.
-                        </h2>
-
-
-                        <p>
-                            <strong>Inevitável</strong> nasceu de ideias que começaram
-                            em <strong>Escudo Quebrado</strong>, livro de fantasia
-                            escrito por <strong>A.Rise</strong>.
-                        </p>
-
-
-                        <p>
-                            Na história original, <strong>Trakam</strong> era apenas
-                            um personagem secundário. Em Inevitável, ele ganhou um
-                            novo papel e se tornou o protagonista de uma história
-                            própria.
-                        </p>
-
-
-                        <p>
-                            O jogo não é uma adaptação direta do livro. É uma nova obra,
-                            construída a partir de ideias e personagens que começaram
-                            naquele universo.
-                        </p>
-
-                    </div>
-
-
-                    <div class="origin-visual visual-placeholder">
-
-                        <span>
-                            ESPAÇO PARA ARTE DE ESCUDO QUEBRADO
-                        </span>
-
-                    </div>
-
-
+                <div class="section-label">
+                    ORIGEM
                 </div>
+
+                <h2>
+                    Antes do jogo.
+                </h2>
+
+                <p>
+                    <strong>Inevitável</strong> nasceu de ideias que começaram
+                    em <strong>Escudo Quebrado</strong>, livro de fantasia
+                    escrito por <strong>A.Rise</strong>.
+                </p>
+
+                <br>
+
+                <p>
+                    Na história original, <strong>Trakam</strong> era apenas
+                    um personagem secundário. Em Inevitável, ele ganhou
+                    um novo papel e se tornou o protagonista de uma história
+                    própria.
+                </p>
+
+                <br>
+
+                <p>
+                    O jogo não é uma adaptação direta do livro. É uma nova obra,
+                    construída a partir de ideias e personagens que começaram
+                    naquele universo.
+                </p>
 
             </div>
 
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              DESENVOLVIMENTO
-             ================================================= -->
+        ========================= -->
 
         <section id="desenvolvimento">
 
-            <div class="content">
+            <div class="content development">
 
-                <div class="development-layout">
-
-
-                    <div class="development">
-
-                        <div class="section-label">
-                            DESENVOLVIMENTO
-                        </div>
-
-
-                        <h2>
-                            Feito de forma independente.
-                        </h2>
-
-
-                        <p>
-                            Inevitável é um projeto indie desenvolvido de forma
-                            independente, construído aos poucos entre código,
-                            arte, testes e tentativa.
-                        </p>
-
-
-                        <p>
-                            O jogo ainda está em desenvolvimento.
-                        </p>
-
-                    </div>
-
-
-                    <div class="development-visual visual-placeholder">
-
-                        <span>
-                            ESPAÇO PARA ARTE DO DESENVOLVIMENTO
-                        </span>
-
-                    </div>
-
-
+                <div class="section-label">
+                    DESENVOLVIMENTO
                 </div>
+
+                <h2>
+                    Feito de forma independente.
+                </h2>
+
+                <p>
+                    Inevitável é um projeto indie desenvolvido de forma
+                    independente, construído aos poucos entre código,
+                    arte, testes e tentativa.
+                </p>
+
+                <br>
+
+                <p>
+                    O jogo ainda está em desenvolvimento.
+                </p>
 
             </div>
 
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              GALERIA
-             ================================================= -->
+        ========================= -->
 
         <section id="galeria">
 
@@ -789,44 +627,57 @@
                     GALERIA
                 </div>
 
-
                 <h2>
                     Um mundo em construção.
                 </h2>
 
 
-                <div class="gallery">
+                <button
+                    class="accordion-toggle"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        VER GALERIA
+                    </span>
+
+                    <span class="accordion-icon">
+                        +
+                    </span>
+
+                </button>
 
 
-                    <div class="gallery-item">
-                        SCREENSHOT 01
+                <div class="accordion-content">
+
+                    <div class="gallery">
+
+                        <div class="gallery-item">
+                            SCREENSHOT 01
+                        </div>
+
+                        <div class="gallery-item">
+                            SCREENSHOT 02
+                        </div>
+
+                        <div class="gallery-item">
+                            SCREENSHOT 03
+                        </div>
+
+                        <div class="gallery-item">
+                            SCREENSHOT 04
+                        </div>
+
+                        <div class="gallery-item">
+                            SCREENSHOT 05
+                        </div>
+
+                        <div class="gallery-item">
+                            SCREENSHOT 06
+                        </div>
+
                     </div>
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 02
-                    </div>
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 03
-                    </div>
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 04
-                    </div>
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 05
-                    </div>
-
-
-                    <div class="gallery-item">
-                        SCREENSHOT 06
-                    </div>
-
 
                 </div>
 
@@ -835,10 +686,9 @@
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              REDES
-             ================================================= -->
+        ========================= -->
 
         <section id="redes">
 
@@ -848,11 +698,9 @@
                     ACOMPANHE
                 </div>
 
-
                 <h2>
                     Continue acompanhando.
                 </h2>
-
 
                 <p>
                     Veja o desenvolvimento de Inevitável e acompanhe
@@ -866,7 +714,7 @@
                         href="https://www.instagram.com/alvex.rise/?stkn=cmxkaXY2bTcya3J6"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="button button-primary"
+                        class="button"
                     >
                         INSTAGRAM
                     </a>
@@ -877,34 +725,33 @@
 
         </section>
 
-
     </main>
 
 
-
-    <!-- =====================================================
+    <!-- =========================
          FOOTER
-         ===================================================== -->
+    ========================= -->
 
     <footer>
 
-        <span>
-            INEVITÁVEL
-        </span>
+        INEVITÁVEL
 
-        <span>
-            © 2026 • EM DESENVOLVIMENTO
-        </span>
+        <br><br>
+
+        © 2026 • EM DESENVOLVIMENTO
 
     </footer>
 
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
+    <!-- =========================
+         SCRIPTS
+    ========================= -->
 
     <script>
+
+        /* =========================
+           MENU MOBILE
+        ========================= */
 
         const menuButton =
             document.getElementById("menuButton");
@@ -920,12 +767,10 @@
                 const isOpen =
                     menu.classList.toggle("active");
 
-
                 menuButton.setAttribute(
                     "aria-expanded",
-                    String(isOpen)
+                    isOpen
                 );
-
 
                 menuButton.setAttribute(
                     "aria-label",
@@ -934,15 +779,8 @@
                         : "Abrir menu"
                 );
 
-
-                const icon =
-                    menuButton.querySelector(".menu-icon");
-
-
-                icon.textContent =
-                    isOpen
-                        ? "✕"
-                        : "☰";
+                menuButton.textContent =
+                    isOpen ? "✕" : "☰";
 
             }
         );
@@ -963,26 +801,17 @@
                             "active"
                         );
 
-
                         menuButton.setAttribute(
                             "aria-expanded",
                             "false"
                         );
-
 
                         menuButton.setAttribute(
                             "aria-label",
                             "Abrir menu"
                         );
 
-
-                        const icon =
-                            menuButton.querySelector(
-                                ".menu-icon"
-                            );
-
-
-                        icon.textContent =
+                        menuButton.textContent =
                             "☰";
 
                     }
@@ -992,39 +821,44 @@
         );
 
 
-        window.addEventListener(
-            "resize",
-            () => {
+        /* =========================
+           ACORDEÕES
+        ========================= */
 
-                if (window.innerWidth > 760) {
-
-                    menu.classList.remove(
-                        "active"
-                    );
-
-
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+        const accordionButtons =
+            document.querySelectorAll(
+                ".accordion-toggle"
+            );
 
 
-                    menuButton.setAttribute(
-                        "aria-label",
-                        "Abrir menu"
-                    );
+        accordionButtons.forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const content =
+                            button.nextElementSibling;
+
+                        const isOpen =
+                            button.classList.toggle(
+                                "active"
+                            );
 
 
-                    const icon =
-                        menuButton.querySelector(
-                            ".menu-icon"
+                        button.setAttribute(
+                            "aria-expanded",
+                            isOpen
                         );
 
 
-                    icon.textContent =
-                        "☰";
+                        content.classList.toggle(
+                            "active"
+                        );
 
-                }
+                    }
+                );
 
             }
         );
