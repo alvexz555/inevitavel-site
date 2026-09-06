@@ -1,25 +1,1431 @@
-/* REGRAS GERAIS */
+```css
+/* =========================================================
+   INEVITÁVEL
+   CSS RESPONSIVO
+   ========================================================= */
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+
     background: #050505;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* PC */
-h1 {
-    font-size: 80px;
+body {
+    min-width: 0;
+    min-height: 100vh;
+
+    background: #050505;
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   ELEMENTOS QUE PODEM ESTOURAR GRID/FLEX
+   ========================================================= */
+
+.content,
+.game-content,
+.social-content,
+
+.game-layout,
+.mechanics-layout,
+.origin-layout,
+.development-layout,
+
+.universe-feature,
+.universe-grid,
+.death-grid,
+.gallery,
+.cards {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 10px 14px;
+
+    z-index: 1000;
+
+    background: rgba(5, 5, 5, 0.92);
+
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid #1d1d1d;
+}
+
+.header-content {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    min-width: 0;
+}
+
+.logo {
+    min-width: 0;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+}
+
+.menu-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    border: 1px solid #292929;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+nav {
+    display: none;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+nav.active {
+    display: flex;
+}
+
+nav a {
+    display: block;
+
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #292929;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+nav a:hover {
+    background: #ffffff;
+
+    color: #000000;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 130px 18px 70px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero h1 {
+    max-width: 100%;
+
+    font-size: clamp(2.5rem, 14vw, 8rem);
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+
+    white-space: nowrap;
+}
+
+.tagline {
+    max-width: 100%;
+
+    font-size: clamp(0.8rem, 3vw, 1.3rem);
+
+    letter-spacing: 3px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.hero-description {
+    width: 100%;
+    max-width: 600px;
+
+    color: #bcbcbc;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    max-width: 100%;
+}
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 12px 18px;
+
+    border: 1px solid #ffffff;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    background: #ffffff;
+
+    color: #000000;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+section {
+    min-height: auto;
+
+    padding: 100px 18px;
+
+    border-top: 1px solid #151515;
+
+    position: relative;
+
+    scroll-margin-top: 75px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+.section-label {
+    margin-bottom: 12px;
+
+    color: #777777;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+h2 {
+    max-width: 100%;
+
+    font-size: clamp(2rem, 9vw, 4rem);
+
+    line-height: 1.05;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.1rem;
+
+    margin-bottom: 10px;
+}
+
+p {
+    max-width: 100%;
+
+    color: #bdbdbd;
+
+    font-size: 0.95rem;
+
+    line-height: 1.75;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDERS
+   ========================================================= */
+
+.visual-placeholder {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 360px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #080808,
+            #0c0c0c
+        );
+
+    border: 1px solid #222222;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.visual-placeholder::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 12px;
+
+    border: 1px solid #151515;
+
+    pointer-events: none;
+}
+
+.visual-placeholder span {
+    max-width: 80%;
+
+    color: #303030;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    text-align: center;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   A MORTE
+   ========================================================= */
+
+#morte {
+    background:
+        linear-gradient(
+            rgba(5, 5, 5, 0.96),
+            rgba(5, 5, 5, 0.99)
+        );
+}
+
+.death-intro {
+    max-width: 700px;
+
+    margin-bottom: 35px;
+}
+
+.death-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+}
+
+.death-card {
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+}
+
+.number {
+    display: block;
+
+    color: #666666;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   TRAILER
+   ========================================================= */
+
+#trailer {
     text-align: center;
 }
 
-/* CELULAR */
+.trailer-text {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto 30px;
+}
+
+.trailer-box {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #090909;
+
+    border: 1px solid #222222;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.trailer-placeholder {
+    max-width: 90%;
+
+    padding: 20px;
+
+    color: #777777;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    line-height: 1.7;
+}
+
+.trailer-placeholder small {
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   O JOGO
+   ========================================================= */
+
+.game-layout {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    align-items: center;
+}
+
+.game-content {
+    max-width: 700px;
+}
+
+.game-content p + p {
+    margin-top: 15px;
+}
+
+.game-visual {
+    min-height: 420px;
+}
+
+
+/* =========================================================
+   MECÂNICAS
+   ========================================================= */
+
+.mechanics-layout {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    align-items: center;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.card {
+    min-width: 0;
+    min-height: 190px;
+
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    border-color: #3a3a3a;
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border: 1px solid #292929;
+
+    background: #101010;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+
+    font-size: 1rem;
+}
+
+.card p {
+    font-size: 0.88rem;
+
+    line-height: 1.6;
+}
+
+.mechanics-visual {
+    min-height: 500px;
+}
+
+
+/* =========================================================
+   UNIVERSO
+   ========================================================= */
+
+.universe-feature {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 35px;
+}
+
+.universe-feature-block {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    min-width: 0;
+
+    background: #090909;
+
+    border: 1px solid #202020;
+}
+
+.universe-feature-block .visual-placeholder {
+    min-height: 330px;
+
+    border: 0;
+
+    border-bottom: 1px solid #202020;
+}
+
+.story-content {
+    min-width: 0;
+
+    padding: 28px;
+}
+
+.story-content h3 {
+    font-size: 1.3rem;
+
+    letter-spacing: 1px;
+}
+
+.universe-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.story-block {
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+}
+
+
+/* =========================================================
+   ORIGEM
+   ========================================================= */
+
+.origin-layout {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    align-items: center;
+}
+
+.origin {
+    max-width: 750px;
+
+    min-width: 0;
+}
+
+.origin strong {
+    color: #ffffff;
+}
+
+.origin-visual {
+    min-height: 320px;
+}
+
+
+/* =========================================================
+   DESENVOLVIMENTO
+   ========================================================= */
+
+.development-layout {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    align-items: center;
+}
+
+.development {
+    max-width: 700px;
+
+    min-width: 0;
+}
+
+.development-visual {
+    min-height: 300px;
+}
+
+
+/* =========================================================
+   GALERIA
+   ========================================================= */
+
+.gallery {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.gallery-item {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    background: #0a0a0a;
+
+    border: 1px solid #202020;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   REDES
+   ========================================================= */
+
+#redes {
+    text-align: center;
+
+    min-height: 55vh;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.social-content {
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: auto;
+}
+
+.social-content p {
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    padding: 30px 20px;
+
+    border-top: 1px solid #151515;
+
+    text-align: center;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   Até 699px
+   ========================================================= */
+
 @media (max-width: 699px) {
-    h1 {
-        font-size: 40px;
+
+    /* HEADER */
+
+    header {
+        padding: 8px 10px;
+    }
+
+    .header-content {
+        min-height: 44px;
+    }
+
+    /*
+       O menu sai do fluxo normal e vira
+       um painel abaixo do header.
+    */
+
+    nav {
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        margin-top: 0;
+
+        padding: 10px 10px 14px;
+
+        background: rgba(5, 5, 5, 0.98);
+
+        border-bottom: 1px solid #1d1d1d;
+
+        gap: 6px;
+    }
+
+    nav a {
+        padding: 12px 10px;
+
+        min-height: 42px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding:
+            140px
+            16px
+            70px;
+    }
+
+    .hero h1 {
+        font-size: clamp(
+            2rem,
+            11vw,
+            4rem
+        );
+
+        letter-spacing: 1px;
+
+        white-space: nowrap;
+    }
+
+    .tagline {
+        font-size: 0.8rem;
+
+        letter-spacing: 2px;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+
+        line-height: 1.7;
+    }
+
+
+    /* BUTTONS */
+
+    .buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .button {
+        width: 100%;
+
+        min-height: 46px;
+
+        text-align: center;
+    }
+
+
+    /* SECTIONS */
+
+    section {
+        padding:
+            75px
+            16px;
+    }
+
+    h2 {
+        font-size: clamp(
+            1.9rem,
+            9vw,
+            3rem
+        );
+    }
+
+    p {
+        font-size: 0.93rem;
+    }
+
+
+    /* CARDS */
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .death-grid,
+    .universe-grid,
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* PADDING */
+
+    .death-card,
+    .card,
+    .story-block,
+    .story-content {
+        padding: 20px;
+    }
+
+
+    /* VISUAIS */
+
+    .visual-placeholder {
+        min-height: 280px;
+    }
+
+    .game-visual {
+        min-height: 280px;
+    }
+
+    .mechanics-visual {
+        min-height: 300px;
+    }
+
+    .origin-visual {
+        min-height: 260px;
+    }
+
+    .development-visual {
+        min-height: 250px;
+    }
+
+    .universe-feature-block .visual-placeholder {
+        min-height: 260px;
+    }
+
+
+    /* GALERIA */
+
+    .gallery-item {
+        aspect-ratio: 16 / 10;
     }
 }
+
+
+/* =========================================================
+   CELULAR
+   Até 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    /* HEADER */
+
+    header {
+        padding:
+            7px
+            8px;
+    }
+
+    .logo {
+        font-size: 12px;
+
+        letter-spacing: 1.5px;
+    }
+
+    .menu-button {
+        width: 44px;
+        height: 44px;
+
+        font-size: 19px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding:
+            125px
+            14px
+            60px;
+    }
+
+    .hero h1 {
+        font-size: clamp(
+            2rem,
+            12vw,
+            3.4rem
+        );
+
+        letter-spacing: 0;
+    }
+
+    .tagline {
+        font-size: 0.72rem;
+
+        letter-spacing: 1.5px;
+
+        line-height: 1.6;
+    }
+
+    .hero-description {
+        font-size: 0.88rem;
+
+        line-height: 1.65;
+    }
+
+
+    /* SECTIONS */
+
+    section {
+        padding:
+            65px
+            14px;
+    }
+
+    h2 {
+        font-size: clamp(
+            1.8rem,
+            10vw,
+            2.7rem
+        );
+
+        line-height: 1.05;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+
+    /* LABELS */
+
+    .section-label {
+        font-size: 9px;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    /* CARDS */
+
+    .death-card,
+    .card,
+    .story-block,
+    .story-content {
+        padding: 18px;
+    }
+
+    .card {
+        min-height: auto;
+    }
+
+
+    /* VISUAIS */
+
+    .visual-placeholder {
+        min-height: 230px;
+    }
+
+    .game-visual {
+        min-height: 230px;
+    }
+
+    .mechanics-visual {
+        min-height: 250px;
+    }
+
+    .origin-visual {
+        min-height: 220px;
+    }
+
+    .development-visual {
+        min-height: 220px;
+    }
+
+    .universe-feature-block .visual-placeholder {
+        min-height: 220px;
+    }
+
+
+    /* TRAILER */
+
+    .trailer-placeholder {
+        padding: 14px;
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+    .trailer-placeholder small {
+        font-size: 8px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding:
+            25px
+            14px;
+
+        line-height: 1.6;
+    }
+}
+
+
+/* =========================================================
+   CELULAR MUITO PEQUENO
+   Até 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    header {
+        padding:
+            6px
+            6px;
+    }
+
+    .hero {
+        padding:
+            115px
+            10px
+            55px;
+    }
+
+    /*
+       Aqui permitimos quebra caso a palavra
+       não consiga caber em telas extremamente estreitas.
+    */
+
+    .hero h1 {
+        font-size: 2rem;
+
+        letter-spacing: 0;
+
+        white-space: normal;
+
+        overflow-wrap: break-word;
+    }
+
+    .tagline {
+        font-size: 0.68rem;
+
+        letter-spacing: 1px;
+    }
+
+    .hero-description {
+        font-size: 0.85rem;
+    }
+
+    section {
+        padding:
+            55px
+            10px;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    p {
+        font-size: 0.88rem;
+    }
+
+    .death-card,
+    .card,
+    .story-block,
+    .story-content {
+        padding: 16px;
+    }
+
+    .visual-placeholder {
+        min-height: 200px;
+    }
+
+    .game-visual,
+    .mechanics-visual {
+        min-height: 210px;
+    }
+
+    .origin-visual,
+    .development-visual {
+        min-height: 190px;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   700px+
+   ========================================================= */
+
+@media (min-width: 700px) {
+
+    /* HEADER */
+
+    header {
+        padding:
+            14px
+            30px;
+    }
+
+    .header-content {
+        justify-content: flex-end;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    nav {
+        display: flex;
+
+        position: static;
+
+        flex-direction: row;
+
+        margin-top: 0;
+
+        padding: 0;
+
+        justify-content: flex-end;
+
+        gap: 8px;
+
+        background: transparent;
+
+        border: 0;
+    }
+
+    nav a {
+        width: auto;
+
+        padding:
+            8px
+            10px;
+
+        min-height: auto;
+
+        font-size: 10px;
+    }
+
+
+    /* SECTIONS */
+
+    section {
+        padding:
+            120px
+            40px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding:
+            120px
+            40px
+            80px;
+    }
+
+    .hero h1 {
+        letter-spacing: 6px;
+    }
+
+
+    /* A MORTE */
+
+    .death-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    /* O JOGO */
+
+    .game-layout {
+        grid-template-columns:
+            1.05fr
+            0.95fr;
+    }
+
+
+    /* MECÂNICAS */
+
+    .mechanics-layout {
+        grid-template-columns:
+            1.05fr
+            0.95fr;
+    }
+
+
+    /* UNIVERSO */
+
+    .universe-feature {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .universe-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    /* ORIGEM */
+
+    .origin-layout {
+        grid-template-columns:
+            1.1fr
+            0.9fr;
+    }
+
+
+    /* DESENVOLVIMENTO */
+
+    .development-layout {
+        grid-template-columns:
+            1.1fr
+            0.9fr;
+    }
+
+
+    /* GALERIA */
+
+    .gallery {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    /* VISUAIS */
+
+    .visual-placeholder {
+        min-height: 430px;
+    }
+
+    .mechanics-visual {
+        min-height: 500px;
+    }
+}
+```
