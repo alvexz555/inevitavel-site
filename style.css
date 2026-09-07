@@ -1,1050 +1,629 @@
-/* =========================================================
-   RESET
-========================================================= */
+<script>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    /* =========================
+       MENU SCRIPT
+    ========================= */
 
+    const menuButton =
+        document.getElementById("menuButton");
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 75px;
-}
+    const menu =
+        document.getElementById("menu");
 
 
-body {
-    background: #050505;
-    color: #ffffff;
+    menuButton.addEventListener(
+        "click",
+        () => {
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+            const isOpen =
+                menu.classList.toggle("active");
 
-    overflow-x: hidden;
-
-    min-width: 0;
-}
-
-
-img,
-video {
-    max-width: 100%;
-    display: block;
-}
-
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-button {
-    font-family: inherit;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    padding: 10px 14px;
-
-    z-index: 1000;
-
-    background: rgba(5, 5, 5, 0.92);
-
-    backdrop-filter: blur(10px);
-
-    border-bottom: 1px solid #1d1d1d;
-}
-
-
-.header-content {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    min-width: 0;
-}
-
-
-.logo {
-    font-size: 14px;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-}
-
-
-.menu-button {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 42px;
-    height: 38px;
-
-    background: transparent;
-
-    color: #ffffff;
-
-    border: 1px solid #292929;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    flex-shrink: 0;
-}
-
-
-nav {
-    display: none;
-
-    flex-direction: column;
-
-    gap: 6px;
-
-    margin-top: 10px;
-}
-
-
-nav.active {
-    display: flex;
-}
-
-
-nav a {
-    display: block;
-
-    padding: 10px;
-
-    border: 1px solid #292929;
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    text-align: center;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-
-nav a:hover {
-    background: #ffffff;
-
-    color: #000000;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 100svh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    padding:
-        130px
-        18px
-        70px;
-
-    position: relative;
-}
-
-
-.hero h1 {
-    font-size:
-        clamp(
-            2.5rem,
-            14vw,
-            8rem
-        );
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-
-    line-height: 1;
-
-    margin-bottom: 20px;
-
-    white-space: nowrap;
-}
-
-
-.tagline {
-    font-size:
-        clamp(
-            0.8rem,
-            3vw,
-            1.3rem
-        );
-
-    letter-spacing: 3px;
-
-    line-height: 1.5;
-
-    margin-bottom: 18px;
-}
-
-
-.hero-description {
-    width: 100%;
-
-    max-width: 600px;
-
-    color: #bcbcbc;
-
-    font-size: 0.95rem;
-
-    line-height: 1.7;
-
-    margin-bottom: 30px;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.buttons {
-    display: flex;
-
-    gap: 10px;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    width: 100%;
-}
-
-
-.button {
-    display: inline-block;
-
-    padding:
-        12px
-        18px;
-
-    border: 1px solid #ffffff;
-
-    background: transparent;
-
-    color: #ffffff;
-
-    font-size: 11px;
-
-    letter-spacing: 1.5px;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.button:hover {
-    background: #ffffff;
-
-    color: #000000;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-section {
-    min-height: auto;
-
-    padding:
-        90px
-        18px;
-
-    border-top: 1px solid #151515;
-
-    position: relative;
-
-    scroll-margin-top: 75px;
-}
-
-
-.content {
-    width: 100%;
-
-    max-width: 950px;
-
-    margin: auto;
-
-    min-width: 0;
-}
-
-
-.section-label {
-    margin-bottom: 12px;
-
-    color: #777777;
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-}
-
-
-h2 {
-    font-size:
-        clamp(
-            2rem,
-            9vw,
-            4rem
-        );
-
-    line-height: 1.05;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 20px;
-}
-
-
-h3 {
-    font-size: 1.1rem;
-
-    margin-bottom: 10px;
-}
-
-
-p {
-    color: #bdbdbd;
-
-    font-size: 0.95rem;
-
-    line-height: 1.75;
-}
-
-
-/* =========================================================
-   A MORTE
-========================================================= */
-
-#morte {
-    background:
-        linear-gradient(
-            rgba(5, 5, 5, 0.94),
-            rgba(5, 5, 5, 0.98)
-        );
-}
-
-
-.death-intro {
-    max-width: 700px;
-
-    margin-bottom: 30px;
-}
-
-
-.death-grid {
-    display: grid;
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-}
-
-
-.death-card {
-    padding: 22px;
-
-    border: 1px solid #202020;
-
-    background: #090909;
-
-    min-width: 0;
-}
-
-
-.number {
-    display: block;
-
-    color: #666666;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 15px;
-}
-
-
-/* =========================================================
-   TRAILER
-========================================================= */
-
-#trailer {
-    text-align: center;
-}
-
-
-.trailer-text {
-    max-width: 600px;
-
-    margin:
-        0
-        auto
-        30px;
-}
-
-
-.trailer-box {
-    width: 100%;
-
-    aspect-ratio: 16 / 9;
-
-    background: #090909;
-
-    border: 1px solid #222222;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-
-.trailer-placeholder {
-    padding: 20px;
-
-    color: #777777;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    line-height: 1.7;
-}
-
-
-.trailer-placeholder small {
-    font-size: 9px;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   O JOGO
-========================================================= */
-
-.game-content {
-    max-width: 700px;
-}
-
-
-.game-content p + p {
-    margin-top: 15px;
-}
-
-
-/* =========================================================
-   ACORDEÕES
-========================================================= */
-
-.accordion-toggle {
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-top: 30px;
-
-    padding:
-        17px
-        18px;
-
-    background: #090909;
-
-    color: #ffffff;
-
-    border: 1px solid #202020;
-
-    text-align: left;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
-}
-
-
-.accordion-toggle:hover {
-    background: #0d0d0d;
-
-    border-color: #333333;
-}
-
-
-.accordion-toggle.active {
-    border-color: #333333;
-}
-
-
-.accordion-icon {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 22px;
-    height: 22px;
-
-    flex-shrink: 0;
-
-    font-size: 18px;
-
-    line-height: 1;
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-.accordion-toggle.active .accordion-icon {
-    transform: rotate(45deg);
-}
-
-
-.accordion-content {
-    width: 100%;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   MECÂNICAS
-========================================================= */
-
-.cards {
-    display: grid;
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-
-    margin-top: 10px;
-}
-
-
-.card {
-    padding: 22px;
-
-    border: 1px solid #202020;
-
-    background: #090909;
-
-    min-width: 0;
-}
-
-
-.card-number {
-    display: block;
-
-    margin-bottom: 20px;
-
-    color: #666666;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================================================
-   UNIVERSO
-========================================================= */
-
-.universe-grid {
-    display: grid;
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-
-    margin-top: 10px;
-}
-
-
-.story-block {
-    padding: 22px;
-
-    border: 1px solid #202020;
-
-    background: #090909;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   ORIGEM
-========================================================= */
-
-.origin {
-    max-width: 750px;
-}
-
-
-.origin strong {
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   DESENVOLVIMENTO
-========================================================= */
-
-.development {
-    max-width: 700px;
-}
-
-
-/* =========================================================
-   GALERIA
-========================================================= */
-
-.gallery {
-    width: 100%;
-
-    margin-top: 10px;
-
-    overflow: hidden;
-
-    min-width: 0;
-}
-
-
-.gallery-track {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 10px;
-
-    width: 100%;
-}
-
-
-.gallery-item {
-    aspect-ratio: 16 / 10;
-
-    background: #0a0a0a;
-
-    border: 1px solid #202020;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #555555;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    min-width: 0;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   REDES
-========================================================= */
-
-#redes {
-    text-align: center;
-
-    min-height: 55vh;
-
-    display: flex;
-
-    align-items: center;
-}
-
-
-.social-content {
-    width: 100%;
-
-    max-width: 600px;
-
-    margin: auto;
-}
-
-
-.social-content p {
-    margin-bottom: 25px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    padding:
-        30px
-        20px;
-
-    border-top: 1px solid #151515;
-
-    text-align: center;
-
-    color: #555555;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media (max-width: 699px) {
-
-    header {
-        padding:
-            8px
-            10px;
-    }
-
-
-    .hero {
-        padding:
-            140px
-            16px
-            70px;
-    }
-
-
-    .hero h1 {
-        font-size:
-            clamp(
-                2rem,
-                11vw,
-                4rem
+            menuButton.setAttribute(
+                "aria-expanded",
+                isOpen
             );
 
-        letter-spacing: 1px;
+            menuButton.textContent =
+                isOpen ? "✕" : "☰";
 
-        white-space: nowrap;
-    }
-
-
-    .tagline {
-        font-size: 0.8rem;
-
-        letter-spacing: 2px;
-    }
+        }
+    );
 
 
-    .hero-description {
-        font-size: 0.9rem;
-
-        line-height: 1.7;
-    }
+    const menuLinks =
+        menu.querySelectorAll("a");
 
 
-    .buttons {
-        width: 100%;
+    menuLinks.forEach(
+        link => {
 
-        flex-direction: column;
+            link.addEventListener(
+                "click",
+                () => {
 
-        align-items: stretch;
-    }
+                    menu.classList.remove(
+                        "active"
+                    );
 
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-    .button {
-        width: 100%;
+                    menuButton.textContent =
+                        "☰";
 
-        text-align: center;
-    }
-
-
-    section {
-        padding:
-            75px
-            16px;
-    }
-
-
-    h2 {
-        font-size:
-            clamp(
-                1.9rem,
-                9vw,
-                3rem
+                }
             );
-    }
+
+        }
+    );
 
 
-    p {
-        font-size: 0.93rem;
-    }
 
-
-    /* -----------------------------------------------------
-       ACORDEÕES
-    ----------------------------------------------------- */
-
-    .accordion-content {
-        display: none;
-    }
-
-
-    .accordion-content.active {
-        display: block;
-    }
-
-
-    .death-card,
-    .card,
-    .story-block {
-        padding: 20px;
-    }
-
-
-    /* -----------------------------------------------------
+    /* =========================
        GALERIA MOBILE
-    ----------------------------------------------------- */
+       SWIPE / TOUCH
+       
+       Desktop:
+       NÃO ALTERA O COMPORTAMENTO.
 
-    .gallery {
-        overflow: hidden;
+       Mobile:
+       transforma a galeria em
+       um carrossel controlado
+       pelo dedo.
+    ========================= */
 
-        touch-action: pan-y;
+    const gallery =
+        document.querySelector(".gallery");
+
+    const mobileQuery =
+        window.matchMedia("(max-width: 699px)");
+
+    let galleryViewport = null;
+    let galleryTrack = null;
+
+    let currentIndex = 0;
+
+    let startX = 0;
+    let startY = 0;
+
+    let currentX = 0;
+
+    let isDragging = false;
+    let isHorizontalGesture = false;
+
+    let galleryWidth = 0;
+
+
+    /* =========================
+       PREPARAR GALERIA MOBILE
+    ========================= */
+
+    function setupMobileGallery() {
+
+        if (!gallery || !mobileQuery.matches) {
+            return;
+        }
+
+        /*
+         * Se já estiver preparada,
+         * não cria novamente.
+         */
+        if (galleryViewport) {
+            updateGallerySize();
+            return;
+        }
+
+
+        /*
+         * Cria o viewport.
+         */
+        galleryViewport =
+            document.createElement("div");
+
+        galleryViewport.className =
+            "gallery-viewport";
+
+
+        /*
+         * Guarda o gallery original
+         * dentro do viewport.
+         */
+        gallery.parentNode.insertBefore(
+            galleryViewport,
+            gallery
+        );
+
+        galleryViewport.appendChild(
+            gallery
+        );
+
+
+        /*
+         * A própria .gallery vira
+         * o track do carrossel.
+         */
+        galleryTrack =
+            gallery;
+
+
+        /*
+         * Garante que o CSS/JS controle
+         * somente o comportamento mobile.
+         */
+        galleryTrack.style.display =
+            "flex";
+
+        galleryTrack.style.gap =
+            "0";
+
+        galleryTrack.style.width =
+            "100%";
+
+        galleryTrack.style.transition =
+            "transform 0.3s ease";
+
+        galleryTrack.style.willChange =
+            "transform";
+
+        galleryTrack.style.touchAction =
+            "pan-y";
+
+
+        const items =
+            galleryTrack.querySelectorAll(
+                ".gallery-item"
+            );
+
+
+        items.forEach(
+            item => {
+
+                item.style.flex =
+                    "0 0 100%";
+
+                item.style.width =
+                    "100%";
+
+                item.style.minWidth =
+                    "100%";
+
+                item.style.userSelect =
+                    "none";
+
+                item.style.webkitUserSelect =
+                    "none";
+
+                item.style.webkitTouchCallout =
+                    "none";
+
+            }
+        );
+
+
+        updateGallerySize();
+        updateGalleryPosition();
+
+
+        /*
+         * Touch inicial.
+         */
+        galleryTrack.addEventListener(
+            "touchstart",
+            handleTouchStart,
+            {
+                passive: true
+            }
+        );
+
+
+        /*
+         * Movimento do dedo.
+         */
+        galleryTrack.addEventListener(
+            "touchmove",
+            handleTouchMove,
+            {
+                passive: false
+            }
+        );
+
+
+        /*
+         * Soltou o dedo.
+         */
+        galleryTrack.addEventListener(
+            "touchend",
+            handleTouchEnd,
+            {
+                passive: true
+            }
+        );
+
+
+        /*
+         * Caso o navegador cancele
+         * o gesto.
+         */
+        galleryTrack.addEventListener(
+            "touchcancel",
+            handleTouchCancel,
+            {
+                passive: true
+            }
+        );
+
     }
 
 
-    .gallery-track {
-        display: flex;
 
-        width: 100%;
+    /* =========================
+       TAMANHO DA GALERIA
+    ========================= */
 
-        gap: 0;
+    function updateGallerySize() {
 
-        will-change: transform;
+        if (!galleryViewport) {
+            return;
+        }
 
-        transform: translateX(0);
+        galleryWidth =
+            galleryViewport.clientWidth;
 
-        transition:
-            transform 0.3s ease;
     }
 
 
-    .gallery-item {
-        flex:
-            0 0 100%;
 
-        width: 100%;
+    /* =========================
+       POSIÇÃO ATUAL
+    ========================= */
 
-        min-width: 100%;
+    function updateGalleryPosition(
+        animate = true
+    ) {
 
-        aspect-ratio: 16 / 10;
+        if (!galleryTrack) {
+            return;
+        }
 
-        user-select: none;
-
-        -webkit-user-select: none;
-
-        -webkit-touch-callout: none;
-    }
-
-}
+        galleryTrack.style.transition =
+            animate
+                ? "transform 0.3s ease"
+                : "none";
 
 
-/* =========================================================
-   COMPUTADOR
-========================================================= */
+        galleryTrack.style.transform =
+            `translate3d(
+                ${-(currentIndex * galleryWidth)}px,
+                0,
+                0
+            )`;
 
-@media (min-width: 700px) {
-
-    header {
-        padding:
-            14px
-            30px;
     }
 
 
-    .header-content {
-        justify-content: flex-end;
+
+    /* =========================
+       TOUCH START
+    ========================= */
+
+    function handleTouchStart(event) {
+
+        if (!mobileQuery.matches) {
+            return;
+        }
+
+        const touch =
+            event.touches[0];
+
+        startX =
+            touch.clientX;
+
+        startY =
+            touch.clientY;
+
+        currentX =
+            startX;
+
+        isDragging =
+            true;
+
+        isHorizontalGesture =
+            false;
+
+
+        galleryTrack.style.transition =
+            "none";
+
     }
 
 
-    .logo {
-        display: none;
+
+    /* =========================
+       TOUCH MOVE
+    ========================= */
+
+    function handleTouchMove(event) {
+
+        if (
+            !isDragging ||
+            !mobileQuery.matches
+        ) {
+            return;
+        }
+
+
+        const touch =
+            event.touches[0];
+
+        currentX =
+            touch.clientX;
+
+
+        const currentY =
+            touch.clientY;
+
+
+        const deltaX =
+            currentX - startX;
+
+        const deltaY =
+            currentY - startY;
+
+
+        /*
+         * Ainda estamos descobrindo
+         * se o usuário quer rolar a página
+         * ou arrastar a galeria.
+         */
+        if (!isHorizontalGesture) {
+
+            if (
+                Math.abs(deltaX) >
+                Math.abs(deltaY) &&
+                Math.abs(deltaX) > 8
+            ) {
+
+                isHorizontalGesture =
+                    true;
+
+            } else if (
+                Math.abs(deltaY) > 8
+            ) {
+
+                /*
+                 * Movimento vertical:
+                 * deixa o navegador rolar
+                 * normalmente.
+                 */
+                isDragging =
+                    false;
+
+                galleryTrack.style.transition =
+                    "transform 0.3s ease";
+
+                updateGalleryPosition();
+
+                return;
+
+            }
+
+        }
+
+
+        if (!isHorizontalGesture) {
+            return;
+        }
+
+
+        /*
+         * Impede a página de rolar
+         * quando o gesto já foi identificado
+         * como horizontal.
+         */
+        event.preventDefault();
+
+
+        let offset =
+            deltaX;
+
+
+        /*
+         * Resistência nas extremidades.
+         *
+         * Não existe movimento infinito.
+         */
+        if (
+            currentIndex === 0 &&
+            deltaX > 0
+        ) {
+
+            offset =
+                deltaX * 0.25;
+
+        }
+
+
+        const totalItems =
+            galleryTrack.querySelectorAll(
+                ".gallery-item"
+            ).length;
+
+
+        if (
+            currentIndex === totalItems - 1 &&
+            deltaX < 0
+        ) {
+
+            offset =
+                deltaX * 0.25;
+
+        }
+
+
+        const basePosition =
+            -(currentIndex * galleryWidth);
+
+
+        galleryTrack.style.transform =
+            `translate3d(
+                ${basePosition + offset}px,
+                0,
+                0
+            )`;
+
     }
 
 
-    .menu-button {
-        display: none;
+
+    /* =========================
+       TOUCH END
+    ========================= */
+
+    function handleTouchEnd() {
+
+        if (!isDragging) {
+            return;
+        }
+
+        isDragging =
+            false;
+
+
+        if (!isHorizontalGesture) {
+
+            updateGalleryPosition();
+
+            return;
+        }
+
+
+        const deltaX =
+            currentX - startX;
+
+
+        const threshold =
+            Math.min(
+                100,
+                galleryWidth * 0.20
+            );
+
+
+        const totalItems =
+            galleryTrack.querySelectorAll(
+                ".gallery-item"
+            ).length;
+
+
+        /*
+         * Swipe para esquerda
+         * = próxima imagem.
+         */
+        if (
+            deltaX < -threshold &&
+            currentIndex < totalItems - 1
+        ) {
+
+            currentIndex++;
+
+        }
+
+
+        /*
+         * Swipe para direita
+         * = imagem anterior.
+         */
+        else if (
+            deltaX > threshold &&
+            currentIndex > 0
+        ) {
+
+            currentIndex--;
+
+        }
+
+
+        /*
+         * Se o movimento foi pequeno,
+         * volta para a posição original.
+         */
+        updateGalleryPosition();
+
+
+        isHorizontalGesture =
+            false;
+
     }
 
 
-    nav {
-        display: flex;
 
-        flex-direction: row;
+    /* =========================
+       TOUCH CANCEL
+    ========================= */
 
-        margin-top: 0;
+    function handleTouchCancel() {
 
-        justify-content: flex-end;
+        if (!galleryTrack) {
+            return;
+        }
 
-        gap: 8px;
+        isDragging =
+            false;
+
+        isHorizontalGesture =
+            false;
+
+        updateGalleryPosition();
+
     }
 
 
-    nav a {
-        padding:
-            8px
-            10px;
 
-        font-size: 10px;
+    /* =========================
+       DESKTOP / MOBILE
+       
+       O script original do
+       computador continua intacto.
+
+       O carrossel só é ativado
+       quando estiver no mobile.
+    ========================= */
+
+    function handleGalleryMode() {
+
+        if (mobileQuery.matches) {
+
+            setupMobileGallery();
+
+        }
+
     }
 
 
-    section {
-        padding:
-            120px
-            40px;
-    }
+    /*
+     * Inicialização.
+     */
+    handleGalleryMode();
 
 
-    .hero {
-        padding:
-            120px
-            40px
-            80px;
-    }
+    /*
+     * Atualiza largura quando
+     * a janela muda de tamanho.
+     */
+    window.addEventListener(
+        "resize",
+        () => {
 
+            if (!mobileQuery.matches) {
+                return;
+            }
 
-    .hero h1 {
-        letter-spacing: 6px;
-    }
+            updateGallerySize();
 
+            updateGalleryPosition(false);
 
-    /* -----------------------------------------------------
-       ACORDEÕES
-    ----------------------------------------------------- */
+        }
+    );
 
-    .accordion-toggle {
-        display: none;
-    }
-
-
-    .accordion-content {
-        display: block;
-    }
-
-
-    /* -----------------------------------------------------
-       GRIDS
-    ----------------------------------------------------- */
-
-    .death-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-
-    .cards {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-
-    .universe-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-
-    /* -----------------------------------------------------
-       GALERIA DESKTOP
-
-       Continua sendo uma grade.
-       Nenhum comportamento de swipe é aplicado.
-    ----------------------------------------------------- */
-
-    .gallery-track {
-        display: grid;
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        gap: 10px;
-
-        transform: none;
-
-        transition: none;
-    }
-
-
-    .gallery-item {
-        width: auto;
-
-        min-width: 0;
-
-        user-select: auto;
-
-        -webkit-user-select: auto;
-    }
-
-}
+</script>
