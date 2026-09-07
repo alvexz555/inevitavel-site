@@ -63,15 +63,11 @@
 
     /* =========================
        GALERIA MOBILE
-       SWIPE / TOUCH
        
-       Desktop:
-       NÃO ALTERA O COMPORTAMENTO.
-
-       Mobile:
-       transforma a galeria em
-       um carrossel controlado
-       pelo dedo.
+       SOMENTE CELULAR
+       
+       Desktop não recebe
+       nenhuma alteração.
     ========================= */
 
     const gallery =
@@ -80,222 +76,64 @@
     const mobileQuery =
         window.matchMedia("(max-width: 699px)");
 
-    let galleryViewport = null;
-    let galleryTrack = null;
+    let galleryIndex = 0;
 
-    let currentIndex = 0;
+    let galleryStartX = 0;
+    let galleryStartY = 0;
 
-    let startX = 0;
-    let startY = 0;
+    let galleryCurrentX = 0;
 
-    let currentX = 0;
-
-    let isDragging = false;
-    let isHorizontalGesture = false;
+    let galleryDragging = false;
+    let galleryHorizontal = false;
 
     let galleryWidth = 0;
 
 
     /* =========================
-       PREPARAR GALERIA MOBILE
+       ATUALIZAR TAMANHO
     ========================= */
 
-    function setupMobileGallery() {
+    function updateGalleryWidth() {
 
-        if (!gallery || !mobileQuery.matches) {
-            return;
-        }
-
-        /*
-         * Se já estiver preparada,
-         * não cria novamente.
-         */
-        if (galleryViewport) {
-            updateGallerySize();
-            return;
-        }
-
-
-        /*
-         * Cria o viewport.
-         */
-        galleryViewport =
-            document.createElement("div");
-
-        galleryViewport.className =
-            "gallery-viewport";
-
-
-        /*
-         * Guarda o gallery original
-         * dentro do viewport.
-         */
-        gallery.parentNode.insertBefore(
-            galleryViewport,
-            gallery
-        );
-
-        galleryViewport.appendChild(
-            gallery
-        );
-
-
-        /*
-         * A própria .gallery vira
-         * o track do carrossel.
-         */
-        galleryTrack =
-            gallery;
-
-
-        /*
-         * Garante que o CSS/JS controle
-         * somente o comportamento mobile.
-         */
-        galleryTrack.style.display =
-            "flex";
-
-        galleryTrack.style.gap =
-            "0";
-
-        galleryTrack.style.width =
-            "100%";
-
-        galleryTrack.style.transition =
-            "transform 0.3s ease";
-
-        galleryTrack.style.willChange =
-            "transform";
-
-        galleryTrack.style.touchAction =
-            "pan-y";
-
-
-        const items =
-            galleryTrack.querySelectorAll(
-                ".gallery-item"
-            );
-
-
-        items.forEach(
-            item => {
-
-                item.style.flex =
-                    "0 0 100%";
-
-                item.style.width =
-                    "100%";
-
-                item.style.minWidth =
-                    "100%";
-
-                item.style.userSelect =
-                    "none";
-
-                item.style.webkitUserSelect =
-                    "none";
-
-                item.style.webkitTouchCallout =
-                    "none";
-
-            }
-        );
-
-
-        updateGallerySize();
-        updateGalleryPosition();
-
-
-        /*
-         * Touch inicial.
-         */
-        galleryTrack.addEventListener(
-            "touchstart",
-            handleTouchStart,
-            {
-                passive: true
-            }
-        );
-
-
-        /*
-         * Movimento do dedo.
-         */
-        galleryTrack.addEventListener(
-            "touchmove",
-            handleTouchMove,
-            {
-                passive: false
-            }
-        );
-
-
-        /*
-         * Soltou o dedo.
-         */
-        galleryTrack.addEventListener(
-            "touchend",
-            handleTouchEnd,
-            {
-                passive: true
-            }
-        );
-
-
-        /*
-         * Caso o navegador cancele
-         * o gesto.
-         */
-        galleryTrack.addEventListener(
-            "touchcancel",
-            handleTouchCancel,
-            {
-                passive: true
-            }
-        );
-
-    }
-
-
-
-    /* =========================
-       TAMANHO DA GALERIA
-    ========================= */
-
-    function updateGallerySize() {
-
-        if (!galleryViewport) {
+        if (!gallery) {
             return;
         }
 
         galleryWidth =
-            galleryViewport.clientWidth;
+            gallery.clientWidth;
 
     }
 
 
 
     /* =========================
-       POSIÇÃO ATUAL
+       POSIÇÃO DA GALERIA
+       
+       No desktop:
+       não faz absolutamente nada.
     ========================= */
 
     function updateGalleryPosition(
         animate = true
     ) {
 
-        if (!galleryTrack) {
+        if (
+            !gallery ||
+            !mobileQuery.matches
+        ) {
             return;
         }
 
-        galleryTrack.style.transition =
+
+        gallery.style.transition =
             animate
                 ? "transform 0.3s ease"
                 : "none";
 
 
-        galleryTrack.style.transform =
+        gallery.style.transform =
             `translate3d(
-                ${-(currentIndex * galleryWidth)}px,
+                ${-(galleryIndex * galleryWidth)}px,
                 0,
                 0
             )`;
@@ -308,32 +146,35 @@
        TOUCH START
     ========================= */
 
-    function handleTouchStart(event) {
+    function galleryTouchStart(event) {
 
         if (!mobileQuery.matches) {
             return;
         }
 
+
         const touch =
             event.touches[0];
 
-        startX =
+
+        galleryStartX =
             touch.clientX;
 
-        startY =
+        galleryStartY =
             touch.clientY;
 
-        currentX =
-            startX;
+        galleryCurrentX =
+            galleryStartX;
 
-        isDragging =
+
+        galleryDragging =
             true;
 
-        isHorizontalGesture =
+        galleryHorizontal =
             false;
 
 
-        galleryTrack.style.transition =
+        gallery.style.transition =
             "none";
 
     }
@@ -344,10 +185,10 @@
        TOUCH MOVE
     ========================= */
 
-    function handleTouchMove(event) {
+    function galleryTouchMove(event) {
 
         if (
-            !isDragging ||
+            !galleryDragging ||
             !mobileQuery.matches
         ) {
             return;
@@ -357,7 +198,8 @@
         const touch =
             event.touches[0];
 
-        currentX =
+
+        galleryCurrentX =
             touch.clientX;
 
 
@@ -366,44 +208,45 @@
 
 
         const deltaX =
-            currentX - startX;
+            galleryCurrentX -
+            galleryStartX;
 
         const deltaY =
-            currentY - startY;
+            currentY -
+            galleryStartY;
 
 
         /*
-         * Ainda estamos descobrindo
-         * se o usuário quer rolar a página
-         * ou arrastar a galeria.
+         * Decide se o gesto é:
+         *
+         * horizontal = galeria
+         * vertical   = página
          */
-        if (!isHorizontalGesture) {
+        if (!galleryHorizontal) {
 
             if (
                 Math.abs(deltaX) >
-                Math.abs(deltaY) &&
+                    Math.abs(deltaY) &&
                 Math.abs(deltaX) > 8
             ) {
 
-                isHorizontalGesture =
+                galleryHorizontal =
                     true;
 
-            } else if (
+            }
+            else if (
                 Math.abs(deltaY) > 8
             ) {
 
                 /*
-                 * Movimento vertical:
-                 * deixa o navegador rolar
-                 * normalmente.
+                 * É rolagem vertical.
+                 * Devolve o controle ao navegador.
                  */
-                isDragging =
+                galleryDragging =
                     false;
 
-                galleryTrack.style.transition =
+                gallery.style.transition =
                     "transform 0.3s ease";
-
-                updateGalleryPosition();
 
                 return;
 
@@ -412,63 +255,68 @@
         }
 
 
-        if (!isHorizontalGesture) {
+        if (!galleryHorizontal) {
             return;
         }
 
 
         /*
-         * Impede a página de rolar
-         * quando o gesto já foi identificado
-         * como horizontal.
+         * Agora que sabemos que é
+         * swipe horizontal, impedimos
+         * a página de acompanhar o dedo.
          */
         event.preventDefault();
 
 
-        let offset =
+        const items =
+            gallery.querySelectorAll(
+                ".gallery-item"
+            );
+
+
+        const lastIndex =
+            items.length - 1;
+
+
+        let movement =
             deltaX;
 
 
         /*
-         * Resistência nas extremidades.
-         *
-         * Não existe movimento infinito.
+         * Resistência no começo.
          */
         if (
-            currentIndex === 0 &&
+            galleryIndex === 0 &&
             deltaX > 0
         ) {
 
-            offset =
+            movement =
                 deltaX * 0.25;
 
         }
 
 
-        const totalItems =
-            galleryTrack.querySelectorAll(
-                ".gallery-item"
-            ).length;
-
-
+        /*
+         * Resistência no final.
+         */
         if (
-            currentIndex === totalItems - 1 &&
+            galleryIndex === lastIndex &&
             deltaX < 0
         ) {
 
-            offset =
+            movement =
                 deltaX * 0.25;
 
         }
 
 
         const basePosition =
-            -(currentIndex * galleryWidth);
+            -(galleryIndex * galleryWidth);
 
 
-        galleryTrack.style.transform =
+        gallery.style.transform =
             `translate3d(
-                ${basePosition + offset}px,
+                ${basePosition + movement}px,
                 0,
                 0
             )`;
@@ -481,26 +329,29 @@
        TOUCH END
     ========================= */
 
-    function handleTouchEnd() {
+    function galleryTouchEnd() {
 
-        if (!isDragging) {
+        if (!galleryDragging) {
             return;
         }
 
-        isDragging =
+
+        galleryDragging =
             false;
 
 
-        if (!isHorizontalGesture) {
+        if (!galleryHorizontal) {
 
-            updateGalleryPosition();
+            gallery.style.transition =
+                "transform 0.3s ease";
 
             return;
         }
 
 
         const deltaX =
-            currentX - startX;
+            galleryCurrentX -
+            galleryStartX;
 
 
         const threshold =
@@ -510,48 +361,52 @@
             );
 
 
-        const totalItems =
-            galleryTrack.querySelectorAll(
+        const items =
+            gallery.querySelectorAll(
                 ".gallery-item"
-            ).length;
+            );
+
+
+        const lastIndex =
+            items.length - 1;
 
 
         /*
-         * Swipe para esquerda
-         * = próxima imagem.
+         * Swipe para esquerda:
+         * próxima imagem.
          */
         if (
             deltaX < -threshold &&
-            currentIndex < totalItems - 1
+            galleryIndex < lastIndex
         ) {
 
-            currentIndex++;
+            galleryIndex++;
 
         }
 
 
         /*
-         * Swipe para direita
-         * = imagem anterior.
+         * Swipe para direita:
+         * imagem anterior.
          */
         else if (
             deltaX > threshold &&
-            currentIndex > 0
+            galleryIndex > 0
         ) {
 
-            currentIndex--;
+            galleryIndex--;
 
         }
 
 
         /*
-         * Se o movimento foi pequeno,
-         * volta para a posição original.
+         * Movimento pequeno:
+         * volta para a imagem atual.
          */
         updateGalleryPosition();
 
 
-        isHorizontalGesture =
+        galleryHorizontal =
             false;
 
     }
@@ -562,17 +417,14 @@
        TOUCH CANCEL
     ========================= */
 
-    function handleTouchCancel() {
+    function galleryTouchCancel() {
 
-        if (!galleryTrack) {
-            return;
-        }
-
-        isDragging =
+        galleryDragging =
             false;
 
-        isHorizontalGesture =
+        galleryHorizontal =
             false;
+
 
         updateGalleryPosition();
 
@@ -581,49 +433,116 @@
 
 
     /* =========================
-       DESKTOP / MOBILE
+       ATIVAR SWIPE
        
-       O script original do
-       computador continua intacto.
-
-       O carrossel só é ativado
-       quando estiver no mobile.
+       Somente quando estiver
+       em resolução mobile.
     ========================= */
 
-    function handleGalleryMode() {
+    function setupGalleryMobile() {
+
+        if (!gallery) {
+            return;
+        }
+
 
         if (mobileQuery.matches) {
 
-            setupMobileGallery();
+            updateGalleryWidth();
+
+            updateGalleryPosition(false);
+
+        }
+        else {
+
+            /*
+             * Desktop volta para o
+             * comportamento original:
+             *
+             * grid de 3 colunas
+             * sem transformações.
+             */
+
+            gallery.style.transform =
+                "";
+
+            gallery.style.transition =
+                "";
+
+            gallery.style.touchAction =
+                "";
+
+            galleryIndex =
+                0;
 
         }
 
     }
 
 
-    /*
-     * Inicialização.
-     */
-    handleGalleryMode();
+    /* =========================
+       EVENTOS DA GALERIA
+    ========================= */
+
+    if (gallery) {
+
+        gallery.addEventListener(
+            "touchstart",
+            galleryTouchStart,
+            {
+                passive: true
+            }
+        );
 
 
-    /*
-     * Atualiza largura quando
-     * a janela muda de tamanho.
-     */
+        gallery.addEventListener(
+            "touchmove",
+            galleryTouchMove,
+            {
+                passive: false
+            }
+        );
+
+
+        gallery.addEventListener(
+            "touchend",
+            galleryTouchEnd,
+            {
+                passive: true
+            }
+        );
+
+
+        gallery.addEventListener(
+            "touchcancel",
+            galleryTouchCancel,
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+
+    /* =========================
+       RESIZE
+    ========================= */
+
     window.addEventListener(
         "resize",
         () => {
 
-            if (!mobileQuery.matches) {
-                return;
-            }
-
-            updateGallerySize();
-
-            updateGalleryPosition(false);
+            setupGalleryMobile();
 
         }
     );
+
+
+    /* =========================
+       INICIALIZAÇÃO
+    ========================= */
+
+    setupGalleryMobile();
 
 </script>
