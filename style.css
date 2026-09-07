@@ -1,548 +1,739 @@
-<script>
+/* =========================
+   RESET
+========================= */
 
-    /* =========================
-       MENU SCRIPT
-    ========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    const menuButton =
-        document.getElementById("menuButton");
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+}
 
-    const menu =
-        document.getElementById("menu");
+body {
+    background: #050505;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
 
+img,
+video {
+    max-width: 100%;
+    display: block;
+}
 
-    menuButton.addEventListener(
-        "click",
-        () => {
-
-            const isOpen =
-                menu.classList.toggle("active");
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
-
-            menuButton.textContent =
-                isOpen ? "✕" : "☰";
-
-        }
-    );
-
-
-    const menuLinks =
-        menu.querySelectorAll("a");
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 
-    menuLinks.forEach(
-        link => {
+/* =========================
+   HEADER
+========================= */
 
-            link.addEventListener(
-                "click",
-                () => {
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 14px;
+    z-index: 1000;
 
-                    menu.classList.remove(
-                        "active"
-                    );
+    background: rgba(5, 5, 5, 0.92);
+    backdrop-filter: blur(10px);
 
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+    border-bottom: 1px solid #1d1d1d;
+}
 
-                    menuButton.textContent =
-                        "☰";
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-                }
-            );
+.logo {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
 
-        }
-    );
+.menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    width: 42px;
+    height: 38px;
+
+    background: transparent;
+    color: white;
+
+    border: 1px solid #292929;
+
+    font-size: 20px;
+    cursor: pointer;
+}
+
+nav {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+nav.active {
+    display: flex;
+}
+
+nav a {
+    display: block;
+
+    padding: 10px;
+
+    border: 1px solid #292929;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    text-align: center;
+
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100svh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 130px 18px 70px;
+
+    position: relative;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 14vw, 8rem);
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+
+    white-space: nowrap;
+}
+
+.tagline {
+    font-size: clamp(0.8rem, 3vw, 1.3rem);
+
+    letter-spacing: 3px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.hero-description {
+    max-width: 600px;
+
+    color: #bcbcbc;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+
+    padding: 12px 18px;
+
+    border: 1px solid #ffffff;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    background: #ffffff;
+    color: #000000;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    min-height: auto;
+
+    padding: 90px 18px;
+
+    border-top: 1px solid #151515;
+
+    position: relative;
+
+    scroll-margin-top: 75px;
+}
+
+.content {
+    width: 100%;
+    max-width: 950px;
+
+    margin: auto;
+}
+
+.section-label {
+    margin-bottom: 12px;
+
+    color: #777777;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+h2 {
+    font-size: clamp(2rem, 9vw, 4rem);
+
+    line-height: 1.05;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.1rem;
+
+    margin-bottom: 10px;
+}
+
+p {
+    color: #bdbdbd;
+
+    font-size: 0.95rem;
+
+    line-height: 1.75;
+}
+
+
+/* =========================
+   A MORTE
+========================= */
+
+#morte {
+    background:
+        linear-gradient(
+            rgba(5, 5, 5, 0.94),
+            rgba(5, 5, 5, 0.98)
+        );
+}
+
+.death-intro {
+    max-width: 700px;
+
+    margin-bottom: 35px;
+}
+
+.death-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+}
+
+.death-card {
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+}
+
+.number {
+    display: block;
+
+    color: #666666;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   TRAILER
+========================= */
+
+#trailer {
+    text-align: center;
+}
+
+.trailer-text {
+    max-width: 600px;
+
+    margin: 0 auto 30px;
+}
+
+.trailer-box {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #090909;
+
+    border: 1px solid #222222;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.trailer-placeholder {
+    padding: 20px;
+
+    color: #777777;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    line-height: 1.7;
+}
+
+.trailer-placeholder small {
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   O JOGO
+========================= */
+
+.game-content {
+    max-width: 700px;
+}
+
+.game-content p + p {
+    margin-top: 15px;
+}
+
+
+/* =========================
+   MECÂNICAS
+========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.card {
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+}
+
+.card-number {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #666666;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   UNIVERSO
+========================= */
+
+.universe-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.story-block {
+    padding: 22px;
+
+    border: 1px solid #202020;
+
+    background: #090909;
+}
+
+
+/* =========================
+   ORIGEM
+========================= */
+
+.origin {
+    max-width: 750px;
+}
+
+.origin strong {
+    color: #ffffff;
+}
+
+
+/* =========================
+   DESENVOLVIMENTO
+========================= */
+
+.development {
+    max-width: 700px;
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+.gallery {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.gallery-item {
+    aspect-ratio: 16 / 10;
+
+    background: #0a0a0a;
+
+    border: 1px solid #202020;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   REDES
+========================= */
+
+#redes {
+    text-align: center;
+
+    min-height: 55vh;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.social-content {
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: auto;
+}
+
+.social-content p {
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 30px 20px;
+
+    border-top: 1px solid #151515;
+
+    text-align: center;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 699px) {
+
+    header {
+        padding:
+            8px
+            10px;
+    }
+
+    .hero {
+        padding:
+            140px
+            16px
+            70px;
+    }
+
+    .hero h1 {
+        font-size: clamp(
+            2rem,
+            11vw,
+            4rem
+        );
+
+        letter-spacing: 1px;
+
+        white-space: nowrap;
+    }
+
+    .tagline {
+        font-size: 0.8rem;
+
+        letter-spacing: 2px;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+
+        line-height: 1.7;
+    }
+
+    .buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .button {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    section {
+        padding:
+            75px
+            16px;
+    }
+
+    h2 {
+        font-size: clamp(
+            1.9rem,
+            9vw,
+            3rem
+        );
+    }
+
+    .death-grid,
+    .cards,
+    .universe-grid {
+        grid-template-columns: 1fr;
+    }
 
 
     /* =========================
        GALERIA MOBILE
-       
-       SOMENTE CELULAR
-       
-       Desktop não recebe
-       nenhuma alteração.
     ========================= */
 
-    const gallery =
-        document.querySelector(".gallery");
+    .gallery {
+        display: flex;
 
-    const mobileQuery =
-        window.matchMedia("(max-width: 699px)");
+        overflow: hidden;
 
-    let galleryIndex = 0;
+        gap: 10px;
 
-    let galleryStartX = 0;
-    let galleryStartY = 0;
+        touch-action: pan-y;
+    }
 
-    let galleryCurrentX = 0;
+    .gallery-item {
+        flex:
+            0 0 100%;
 
-    let galleryDragging = false;
-    let galleryHorizontal = false;
+        min-width: 100%;
 
-    let galleryWidth = 0;
-
-
-    /* =========================
-       ATUALIZAR TAMANHO
-    ========================= */
-
-    function updateGalleryWidth() {
-
-        if (!gallery) {
-            return;
-        }
-
-        galleryWidth =
-            gallery.clientWidth;
-
+        aspect-ratio: 16 / 10;
     }
 
 
-
-    /* =========================
-       POSIÇÃO DA GALERIA
-       
-       No desktop:
-       não faz absolutamente nada.
-    ========================= */
-
-    function updateGalleryPosition(
-        animate = true
-    ) {
-
-        if (
-            !gallery ||
-            !mobileQuery.matches
-        ) {
-            return;
-        }
-
-
-        gallery.style.transition =
-            animate
-                ? "transform 0.3s ease"
-                : "none";
-
-
-        gallery.style.transform =
-            `translate3d(
-                ${-(galleryIndex * galleryWidth)}px,
-                0,
-                0
-            )`;
-
+    .death-card,
+    .card,
+    .story-block {
+        padding: 20px;
     }
 
-
-
-    /* =========================
-       TOUCH START
-    ========================= */
-
-    function galleryTouchStart(event) {
-
-        if (!mobileQuery.matches) {
-            return;
-        }
-
-
-        const touch =
-            event.touches[0];
-
-
-        galleryStartX =
-            touch.clientX;
-
-        galleryStartY =
-            touch.clientY;
-
-        galleryCurrentX =
-            galleryStartX;
-
-
-        galleryDragging =
-            true;
-
-        galleryHorizontal =
-            false;
-
-
-        gallery.style.transition =
-            "none";
-
+    p {
+        font-size: 0.93rem;
     }
 
+}
 
 
-    /* =========================
-       TOUCH MOVE
-    ========================= */
+/* =========================
+   DESKTOP
+========================= */
 
-    function galleryTouchMove(event) {
+@media (min-width: 700px) {
 
-        if (
-            !galleryDragging ||
-            !mobileQuery.matches
-        ) {
-            return;
-        }
-
-
-        const touch =
-            event.touches[0];
-
-
-        galleryCurrentX =
-            touch.clientX;
-
-
-        const currentY =
-            touch.clientY;
-
-
-        const deltaX =
-            galleryCurrentX -
-            galleryStartX;
-
-        const deltaY =
-            currentY -
-            galleryStartY;
-
-
-        /*
-         * Decide se o gesto é:
-         *
-         * horizontal = galeria
-         * vertical   = página
-         */
-        if (!galleryHorizontal) {
-
-            if (
-                Math.abs(deltaX) >
-                    Math.abs(deltaY) &&
-                Math.abs(deltaX) > 8
-            ) {
-
-                galleryHorizontal =
-                    true;
-
-            }
-            else if (
-                Math.abs(deltaY) > 8
-            ) {
-
-                /*
-                 * É rolagem vertical.
-                 * Devolve o controle ao navegador.
-                 */
-                galleryDragging =
-                    false;
-
-                gallery.style.transition =
-                    "transform 0.3s ease";
-
-                return;
-
-            }
-
-        }
-
-
-        if (!galleryHorizontal) {
-            return;
-        }
-
-
-        /*
-         * Agora que sabemos que é
-         * swipe horizontal, impedimos
-         * a página de acompanhar o dedo.
-         */
-        event.preventDefault();
-
-
-        const items =
-            gallery.querySelectorAll(
-                ".gallery-item"
-            );
-
-
-        const lastIndex =
-            items.length - 1;
-
-
-        let movement =
-            deltaX;
-
-
-        /*
-         * Resistência no começo.
-         */
-        if (
-            galleryIndex === 0 &&
-            deltaX > 0
-        ) {
-
-            movement =
-                deltaX * 0.25;
-
-        }
-
-
-        /*
-         * Resistência no final.
-         */
-        if (
-            galleryIndex === lastIndex &&
-            deltaX < 0
-        ) {
-
-            movement =
-                deltaX * 0.25;
-
-        }
-
-
-        const basePosition =
-            -(galleryIndex * galleryWidth);
-
-
-        gallery.style.transform =
-            `translate3d(
-                ${basePosition + movement}px,
-                0,
-                0
-            )`;
-
+    header {
+        padding: 14px 30px;
     }
 
-
-
-    /* =========================
-       TOUCH END
-    ========================= */
-
-    function galleryTouchEnd() {
-
-        if (!galleryDragging) {
-            return;
-        }
-
-
-        galleryDragging =
-            false;
-
-
-        if (!galleryHorizontal) {
-
-            gallery.style.transition =
-                "transform 0.3s ease";
-
-            return;
-        }
-
-
-        const deltaX =
-            galleryCurrentX -
-            galleryStartX;
-
-
-        const threshold =
-            Math.min(
-                100,
-                galleryWidth * 0.20
-            );
-
-
-        const items =
-            gallery.querySelectorAll(
-                ".gallery-item"
-            );
-
-
-        const lastIndex =
-            items.length - 1;
-
-
-        /*
-         * Swipe para esquerda:
-         * próxima imagem.
-         */
-        if (
-            deltaX < -threshold &&
-            galleryIndex < lastIndex
-        ) {
-
-            galleryIndex++;
-
-        }
-
-
-        /*
-         * Swipe para direita:
-         * imagem anterior.
-         */
-        else if (
-            deltaX > threshold &&
-            galleryIndex > 0
-        ) {
-
-            galleryIndex--;
-
-        }
-
-
-        /*
-         * Movimento pequeno:
-         * volta para a imagem atual.
-         */
-        updateGalleryPosition();
-
-
-        galleryHorizontal =
-            false;
-
+    .header-content {
+        justify-content: flex-end;
     }
 
-
-
-    /* =========================
-       TOUCH CANCEL
-    ========================= */
-
-    function galleryTouchCancel() {
-
-        galleryDragging =
-            false;
-
-        galleryHorizontal =
-            false;
-
-
-        updateGalleryPosition();
-
+    .logo {
+        display: none;
     }
 
-
-
-    /* =========================
-       ATIVAR SWIPE
-       
-       Somente quando estiver
-       em resolução mobile.
-    ========================= */
-
-    function setupGalleryMobile() {
-
-        if (!gallery) {
-            return;
-        }
-
-
-        if (mobileQuery.matches) {
-
-            updateGalleryWidth();
-
-            updateGalleryPosition(false);
-
-        }
-        else {
-
-            /*
-             * Desktop volta para o
-             * comportamento original:
-             *
-             * grid de 3 colunas
-             * sem transformações.
-             */
-
-            gallery.style.transform =
-                "";
-
-            gallery.style.transition =
-                "";
-
-            gallery.style.touchAction =
-                "";
-
-            galleryIndex =
-                0;
-
-        }
-
+    .menu-button {
+        display: none;
     }
 
+    nav {
+        display: flex;
 
-    /* =========================
-       EVENTOS DA GALERIA
-    ========================= */
+        flex-direction: row;
 
-    if (gallery) {
+        margin-top: 0;
 
-        gallery.addEventListener(
-            "touchstart",
-            galleryTouchStart,
-            {
-                passive: true
-            }
-        );
+        justify-content: flex-end;
 
-
-        gallery.addEventListener(
-            "touchmove",
-            galleryTouchMove,
-            {
-                passive: false
-            }
-        );
-
-
-        gallery.addEventListener(
-            "touchend",
-            galleryTouchEnd,
-            {
-                passive: true
-            }
-        );
-
-
-        gallery.addEventListener(
-            "touchcancel",
-            galleryTouchCancel,
-            {
-                passive: true
-            }
-        );
-
+        gap: 8px;
     }
 
+    nav a {
+        padding: 8px 10px;
 
+        font-size: 10px;
+    }
 
-    /* =========================
-       RESIZE
-    ========================= */
+    section {
+        padding:
+            120px
+            40px;
+    }
 
-    window.addEventListener(
-        "resize",
-        () => {
+    .hero {
+        padding:
+            120px
+            40px
+            80px;
+    }
 
-            setupGalleryMobile();
+    .hero h1 {
+        letter-spacing: 6px;
+    }
 
-        }
-    );
+    .death-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
 
+    .cards {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
 
-    /* =========================
-       INICIALIZAÇÃO
-    ========================= */
+    .universe-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
 
-    setupGalleryMobile();
+    .gallery {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
 
-</script>
+}
