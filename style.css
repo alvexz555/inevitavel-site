@@ -1807,8 +1807,18 @@ p {
     margin-top: 30px;
 }
 
+.gallery {
+    display: flex;
+    overflow: hidden;
+    gap: 10px;
+    touch-action: pan-y;
+}
+
 .gallery-item {
+    flex: 0 0 100%;
+    min-width: 100%;
     aspect-ratio: 16 / 10;
+}
 
     background: #0a0a0a;
 
