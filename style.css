@@ -2067,38 +2067,3 @@ footer {
     }
 
 }
-O único ponto que mudou
-
-Antes, no mobile, você tinha:
-
-.death-grid,
-.cards,
-.universe-grid,
-.gallery {
-    grid-template-columns: 1fr;
-}
-
-Agora a .gallery foi retirada dessa regra e recebeu o comportamento horizontal:
-
-.gallery {
-    display: flex;
-    overflow: hidden;
-    gap: 10px;
-    touch-action: pan-y;
-}
-
-.gallery-item {
-    flex: 0 0 100%;
-    min-width: 100%;
-}
-
-O bloco @media (min-width: 700px) continua com:
-
-.gallery {
-    grid-template-columns:
-        repeat(3, 1fr);
-}
-
-Então o desktop continua 3 × 2. Não transformei o desktop em carrossel. 🖥️
-
-Esse CSS ainda depende do JavaScript para efetivamente mover a galeria com o dedo. O próximo passo é encaixar o swipe no JS sem tocar no código que já funciona.
