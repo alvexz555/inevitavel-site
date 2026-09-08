@@ -4,63 +4,94 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
-       ELEMENTOS
-    ========================= */
-
-    const gallery = document.querySelector(".gallery");
+    const gallery =
+        document.querySelector(".gallery");
 
     if (!gallery) {
         return;
     }
 
-    const items = gallery.querySelectorAll(".gallery-item");
+
+    const items =
+        gallery.querySelectorAll(".gallery-item");
 
     if (items.length === 0) {
         return;
     }
 
 
-    /* =========================
-       SOMENTE MOBILE
-    ========================= */
+    /* =====================================================
+       CONTROLE MOBILE
+    ===================================================== */
 
     const mobileQuery =
         window.matchMedia("(max-width: 699px)");
 
 
-    if (!mobileQuery.matches) {
-        return;
-    }
-
-
-    /* =========================
-       ESTADO
-    ========================= */
-
     let currentIndex = 0;
 
     let startX = 0;
+
     let currentX = 0;
 
     let isDragging = false;
 
+    let horizontalDrag = false;
+
+
     const swipeThreshold = 50;
 
 
-    /* =========================
-       POSIÇÃO
-    ========================= */
+    /* =====================================================
+       ATIVAR GALERIA MOBILE
+    ===================================================== */
+
+    function enableMobileGallery() {
+
+        gallery.style.display = "flex";
+
+        gallery.style.flexDirection = "row";
+
+        gallery.style.overflowX = "hidden";
+
+        gallery.style.overflowY = "hidden";
+
+        gallery.style.touchAction = "pan-y";
+
+
+        items.forEach(item => {
+
+            item.style.flex = "0 0 100%";
+
+            item.style.minWidth = "100%";
+
+        });
+
+
+        updatePosition(false);
+
+    }
+
+
+    /* =====================================================
+       POSICIONAR GALERIA
+    ===================================================== */
 
     function updatePosition(animate = true) {
 
+        const width =
+            gallery.clientWidth;
+
+
         const offset =
-            currentIndex * gallery.clientWidth;
+            currentIndex * width;
+
 
         gallery.style.transition =
             animate
                 ? "transform 0.3s ease"
                 : "none";
+
 
         gallery.style.transform =
             `translateX(-${offset}px)`;
@@ -68,86 +99,159 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================
+    /* =====================================================
        INÍCIO DO TOQUE
-    ========================= */
+    ===================================================== */
 
     gallery.addEventListener(
         "touchstart",
-        (event) => {
+        event => {
 
             if (!mobileQuery.matches) {
                 return;
             }
 
+
             startX =
                 event.touches[0].clientX;
 
-            currentX = startX;
+            currentX =
+                startX;
 
             isDragging = true;
 
-            gallery.style.transition = "none";
+            horizontalDrag = false;
+
+
+            gallery.style.transition =
+                "none";
 
         },
         { passive: true }
     );
 
 
-    /* =========================
-       MOVIMENTO
-    ========================= */
+    /* =====================================================
+       MOVIMENTO DO DEDO
+    ===================================================== */
 
     gallery.addEventListener(
         "touchmove",
-        (event) => {
+        event => {
 
-            if (!isDragging || !mobileQuery.matches) {
+            if (
+                !isDragging ||
+                !mobileQuery.matches
+            ) {
                 return;
             }
+
 
             currentX =
                 event.touches[0].clientX;
 
+
             const movement =
                 currentX - startX;
 
-            const baseOffset =
-                currentIndex * gallery.clientWidth;
+
+            /*
+               Só consideramos como arrasto horizontal
+               depois de alguns pixels.
+            */
+
+            if (
+                Math.abs(movement) > 10
+            ) {
+
+                horizontalDrag = true;
+
+            }
+
+
+            if (!horizontalDrag) {
+                return;
+            }
+
+
+            const width =
+                gallery.clientWidth;
+
+
+            const basePosition =
+                currentIndex * width;
+
+
+            /*
+               Resistência nas extremidades.
+            */
+
+            let position =
+                -basePosition + movement;
+
+
+            if (
+                currentIndex === 0 &&
+                movement > 0
+            ) {
+
+                position =
+                    movement * 0.35;
+
+            }
+
+
+            if (
+                currentIndex === items.length - 1 &&
+                movement < 0
+            ) {
+
+                const maxMovement =
+                    movement * 0.35;
+
+                position =
+                    -basePosition + maxMovement;
+
+            }
+
 
             gallery.style.transform =
-                `translateX(${
-                    -baseOffset + movement
-                }px)`;
+                `translateX(${position}px)`;
 
         },
         { passive: true }
     );
 
 
-    /* =========================
+    /* =====================================================
        FINAL DO TOQUE
-    ========================= */
+    ===================================================== */
 
     gallery.addEventListener(
         "touchend",
         () => {
 
-            if (!isDragging || !mobileQuery.matches) {
+            if (
+                !isDragging ||
+                !mobileQuery.matches
+            ) {
                 return;
             }
 
+
             isDragging = false;
+
 
             const movement =
                 currentX - startX;
 
 
-            /* =========================
-               ESQUERDA
-            ========================= */
+            /* =============================================
+               PRÓXIMA IMAGEM
+            ============================================= */
 
             if (
+                horizontalDrag &&
                 movement < -swipeThreshold &&
                 currentIndex < items.length - 1
             ) {
@@ -157,11 +261,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /* =========================
-               DIREITA
-            ========================= */
+            /* =============================================
+               IMAGEM ANTERIOR
+            ============================================= */
 
             else if (
+                horizontalDrag &&
                 movement > swipeThreshold &&
                 currentIndex > 0
             ) {
@@ -171,19 +276,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /* =========================
-               VOLTA / ENCAIXA
-            ========================= */
+            /*
+               Volta para a posição correta.
+            */
 
             updatePosition(true);
+
+
+            horizontalDrag = false;
 
         }
     );
 
 
-    /* =========================
+    /* =====================================================
        RESIZE
-    ========================= */
+    ===================================================== */
 
     window.addEventListener(
         "resize",
@@ -193,16 +301,72 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+
             updatePosition(false);
 
         }
     );
 
 
-    /* =========================
-       POSIÇÃO INICIAL
-    ========================= */
+    /* =====================================================
+       MUDANÇA MOBILE / DESKTOP
+    ===================================================== */
 
-    updatePosition(false);
+    mobileQuery.addEventListener(
+        "change",
+        event => {
+
+            if (event.matches) {
+
+                enableMobileGallery();
+
+            } else {
+
+                /*
+                   Limpa tudo que o JavaScript colocou
+                   na galeria.
+
+                   Assim o CSS original do desktop
+                   volta a controlar a galeria.
+                */
+
+                gallery.style.display = "";
+
+                gallery.style.flexDirection = "";
+
+                gallery.style.overflowX = "";
+
+                gallery.style.overflowY = "";
+
+                gallery.style.touchAction = "";
+
+                gallery.style.transition = "";
+
+                gallery.style.transform = "";
+
+
+                items.forEach(item => {
+
+                    item.style.flex = "";
+
+                    item.style.minWidth = "";
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ===================================================== */
+
+    if (mobileQuery.matches) {
+
+        enableMobileGallery();
+
+    }
 
 });
