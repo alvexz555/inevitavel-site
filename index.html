@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
 
@@ -16,11 +15,732 @@
 
     <title>INEVITÁVEL | A morte é apenas o começo</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 75px;
+        }
+
+        body {
+            background: #050505;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 14px;
+            z-index: 1000;
+
+            background: rgba(5, 5, 5, 0.92);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #1d1d1d;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 38px;
+
+            background: transparent;
+            color: white;
+
+            border: 1px solid #292929;
+
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        nav {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+
+            margin-top: 10px;
+        }
+
+        nav.active {
+            display: flex;
+        }
+
+        nav a {
+            display: block;
+
+            padding: 10px;
+
+            border: 1px solid #292929;
+
+            font-size: 10px;
+            letter-spacing: 1px;
+
+            text-align: center;
+
+            transition: 0.2s ease;
+        }
+
+        nav a:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100svh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 130px 18px 70px;
+
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 14vw, 8rem);
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            line-height: 1;
+
+            margin-bottom: 20px;
+
+            white-space: nowrap;
+        }
+
+        .tagline {
+            font-size: clamp(0.8rem, 3vw, 1.3rem);
+
+            letter-spacing: 3px;
+
+            line-height: 1.5;
+
+            margin-bottom: 18px;
+        }
+
+        .hero-description {
+            max-width: 600px;
+
+            color: #bcbcbc;
+
+            font-size: 0.95rem;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+
+            gap: 10px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 12px 18px;
+
+            border: 1px solid #ffffff;
+
+            background: transparent;
+
+            color: #ffffff;
+
+            font-size: 11px;
+
+            letter-spacing: 1.5px;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: #ffffff;
+            color: #000000;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            min-height: auto;
+
+            padding: 90px 18px;
+
+            border-top: 1px solid #151515;
+
+            position: relative;
+
+            scroll-margin-top: 75px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 950px;
+
+            margin: auto;
+        }
+
+        .section-label {
+            margin-bottom: 12px;
+
+            color: #777777;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 9vw, 4rem);
+
+            line-height: 1.05;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #bdbdbd;
+
+            font-size: 0.95rem;
+
+            line-height: 1.75;
+        }
+
+
+        /* =========================
+           A MORTE
+        ========================= */
+
+        #morte {
+            background:
+                linear-gradient(
+                    rgba(5, 5, 5, 0.94),
+                    rgba(5, 5, 5, 0.98)
+                );
+        }
+
+        .death-intro {
+            max-width: 700px;
+
+            margin-bottom: 35px;
+        }
+
+        .death-grid {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 10px;
+        }
+
+        .death-card {
+            padding: 22px;
+
+            border: 1px solid #202020;
+
+            background: #090909;
+        }
+
+        .number {
+            display: block;
+
+            color: #666666;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           TRAILER
+        ========================= */
+
+        #trailer {
+            text-align: center;
+        }
+
+        .trailer-text {
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+        }
+
+        .trailer-box {
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            background: #090909;
+
+            border: 1px solid #222222;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .trailer-placeholder {
+            padding: 20px;
+
+            color: #777777;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            line-height: 1.7;
+        }
+
+        .trailer-placeholder small {
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           O JOGO
+        ========================= */
+
+        .game-content {
+            max-width: 700px;
+        }
+
+        .game-content p + p {
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           MECÂNICAS
+        ========================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 10px;
+
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 22px;
+
+            border: 1px solid #202020;
+
+            background: #090909;
+        }
+
+        .card-number {
+            display: block;
+
+            margin-bottom: 20px;
+
+            color: #666666;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           UNIVERSO
+        ========================= */
+
+        .universe-grid {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 10px;
+
+            margin-top: 30px;
+        }
+
+        .story-block {
+            padding: 22px;
+
+            border: 1px solid #202020;
+
+            background: #090909;
+        }
+
+
+        /* =========================
+           ORIGEM
+        ========================= */
+
+        .origin {
+            max-width: 750px;
+        }
+
+        .origin strong {
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           DESENVOLVIMENTO
+        ========================= */
+
+        .development {
+            max-width: 700px;
+        }
+
+
+        /* =========================
+           GALERIA
+        ========================= */
+
+        .gallery {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 10px;
+
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 16 / 10;
+
+            background: #0a0a0a;
+
+            border: 1px solid #202020;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #555555;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           REDES
+        ========================= */
+
+        #redes {
+            text-align: center;
+
+            min-height: 55vh;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+        .social-content {
+            width: 100%;
+
+            max-width: 600px;
+
+            margin: auto;
+        }
+
+        .social-content p {
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 30px 20px;
+
+            border-top: 1px solid #151515;
+
+            text-align: center;
+
+            color: #555555;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 699px) {
+
+            header {
+                padding:
+                    8px
+                    10px;
+            }
+
+            .hero {
+                padding:
+                    140px
+                    16px
+                    70px;
+            }
+
+            .hero h1 {
+                font-size: clamp(
+                    2rem,
+                    11vw,
+                    4rem
+                );
+
+                letter-spacing: 1px;
+
+                white-space: nowrap;
+            }
+
+            .tagline {
+                font-size: 0.8rem;
+
+                letter-spacing: 2px;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+
+                line-height: 1.7;
+            }
+
+            .buttons {
+                width: 100%;
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .button {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            section {
+                padding:
+                    75px
+                    16px;
+            }
+
+            h2 {
+                font-size: clamp(
+                    1.9rem,
+                    9vw,
+                    3rem
+                );
+            }
+
+            .death-grid,
+            .cards,
+            .universe-grid,
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .death-card,
+            .card,
+            .story-block {
+                padding: 20px;
+            }
+
+            p {
+                font-size: 0.93rem;
+            }
+
+            .gallery-item {
+                aspect-ratio: 16 / 10;
+            }
+        }
+
+
+        /* =========================
+           DESKTOP
+        ========================= */
+
+        @media (min-width: 700px) {
+
+            header {
+                padding: 14px 30px;
+            }
+
+            .header-content {
+                justify-content: flex-end;
+            }
+
+            .logo {
+                display: none;
+            }
+
+            .menu-button {
+                display: none;
+            }
+
+            nav {
+                display: flex;
+
+                flex-direction: row;
+
+                margin-top: 0;
+
+                justify-content: flex-end;
+
+                gap: 8px;
+            }
+
+            nav a {
+                padding: 8px 10px;
+
+                font-size: 10px;
+            }
+
+            section {
+                padding:
+                    120px
+                    40px;
+            }
+
+            .hero {
+                padding:
+                    120px
+                    40px
+                    80px;
+            }
+
+            .hero h1 {
+                letter-spacing: 6px;
+            }
+
+            .death-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .cards {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .universe-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .gallery {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+        }
+
+    </style>
 </head>
 
 
 <body>
+
 
     <!-- =========================
          HEADER
@@ -39,7 +759,6 @@
                 id="menuButton"
                 aria-label="Abrir menu"
                 aria-expanded="false"
-                aria-controls="menu"
             >
                 ☰
             </button>
@@ -86,11 +805,11 @@
     </header>
 
 
-    <main>
+    <!-- =========================
+         HERO
+    ========================= -->
 
-        <!-- =========================
-             HERO
-        ========================= -->
+    <main>
 
         <section class="hero">
 
@@ -141,120 +860,71 @@
                     O CICLO
                 </div>
 
+                <h2>
+                    MORRA.<br>
+                    MUDE.<br>
+                    DESCUBRA.
+                </h2>
 
-                <!--
-                    DARK ENGINE
-                    A partir de DESCUBRA
-                -->
+                <p class="death-intro">
+                    Em Inevitável, a morte não representa apenas o fim.
+                    Ela faz parte de um sistema de contaminação, percepção
+                    e sobrevivência que Trakam precisa compreender.
+                </p>
 
-                <div class="dark-engine-zone">
 
-                    <h2>
+                <div class="death-grid">
 
-                        MORRA.<br>
+                    <div class="death-card">
 
-                        MUDE.<br>
-
-                        <span class="dark-engine-text">
-                            DESCUBRA.
+                        <span class="number">
+                            01
                         </span>
 
-                    </h2>
+                        <h3>
+                            A CONTAMINAÇÃO
+                        </h3>
+
+                        <p>
+                            Trakam foi marcado por uma criatura Blord.
+                            Parte dessa contaminação permanece ligada à sua percepção.
+                        </p>
+
+                    </div>
 
 
-                    <p class="death-intro">
-                        Em Inevitável, a morte não representa apenas o fim.
-                        Ela faz parte de um sistema de contaminação, percepção
-                        e sobrevivência que Trakam precisa compreender.
-                    </p>
+                    <div class="death-card">
 
-                </div>
+                        <span class="number">
+                            02
+                        </span>
 
+                        <h3>
+                            A SINCRONIZAÇÃO
+                        </h3>
 
-                <!-- BOTÃO DO ACORDEÃO -->
+                        <p>
+                            A criatura utiliza os olhos como ponto de leitura
+                            e sincronização perceptiva.
+                        </p>
 
-                <button
-                    class="accordion-toggle"
-                    type="button"
-                    aria-expanded="false"
-                >
-
-                    <span>
-                        EXPLORAR O CICLO
-                    </span>
-
-                    <span class="accordion-icon">
-                        +
-                    </span>
-
-                </button>
+                    </div>
 
 
-                <!--
-                    CONTEÚDO DO CICLO
-                    DARK ENGINE
-                -->
+                    <div class="death-card">
 
-                <div class="accordion-content">
+                        <span class="number">
+                            03
+                        </span>
 
-                    <div class="dark-engine-zone">
+                        <h3>
+                            A RUPTURA
+                        </h3>
 
-                        <div class="death-grid">
-
-                            <div class="death-card">
-
-                                <span class="number">
-                                    01
-                                </span>
-
-                                <h3>
-                                    A CONTAMINAÇÃO
-                                </h3>
-
-                                <p>
-                                    Trakam foi marcado por uma criatura Blord.
-                                    Parte dessa contaminação permanece ligada à sua percepção.
-                                </p>
-
-                            </div>
-
-
-                            <div class="death-card">
-
-                                <span class="number">
-                                    02
-                                </span>
-
-                                <h3>
-                                    A SINCRONIZAÇÃO
-                                </h3>
-
-                                <p>
-                                    A criatura utiliza os olhos como ponto de leitura
-                                    e sincronização perceptiva.
-                                </p>
-
-                            </div>
-
-
-                            <div class="death-card">
-
-                                <span class="number">
-                                    03
-                                </span>
-
-                                <h3>
-                                    A RUPTURA
-                                </h3>
-
-                                <p>
-                                    Quando a sincronização é quebrada, o ciclo perde
-                                    sua estabilidade e a caça pode ser interrompida.
-                                </p>
-
-                            </div>
-
-                        </div>
+                        <p>
+                            Quando a sincronização é quebrada, o ciclo perde
+                            sua estabilidade e a caça pode ser interrompida.
+                        </p>
 
                     </div>
 
@@ -301,7 +971,10 @@
                     </div>
 
                     <!--
-                    Quando o trailer estiver pronto:
+                    Quando o trailer estiver pronto,
+                    podemos colocar o vídeo aqui.
+
+                    Exemplo:
 
                     <video
                         controls
@@ -370,89 +1043,58 @@
                 </h2>
 
 
-                <button
-                    class="accordion-toggle"
-                    type="button"
-                    aria-expanded="false"
-                >
+                <div class="cards">
 
-                    <span>
-                        MECÂNICAS CENTRAIS
-                    </span>
+                    <div class="card">
 
-                    <span class="accordion-icon">
-                        +
-                    </span>
+                        <span class="card-number">
+                            01
+                        </span>
 
-                </button>
+                        <h3>
+                            MODO CAÇADOR
+                        </h3>
 
+                        <p>
+                            Um estado que altera a forma como Trakam
+                            enfrenta e responde às ameaças.
+                        </p>
 
-                <div class="accordion-content">
-
-                    <!--
-                        DARK ENGINE
-                        Os três elementos ficam dentro
-                        da mesma área de revelação.
-                    -->
-
-                    <div class="dark-engine-zone">
-
-                        <div class="cards">
-
-                            <div class="card">
-
-                                <span class="card-number">
-                                    01
-                                </span>
-
-                                <h3>
-                                    MODO CAÇADOR
-                                </h3>
-
-                                <p>
-                                    Um estado que altera a forma como Trakam
-                                    enfrenta e responde às ameaças.
-                                </p>
-
-                            </div>
+                    </div>
 
 
-                            <div class="card">
+                    <div class="card">
 
-                                <span class="card-number">
-                                    02
-                                </span>
+                        <span class="card-number">
+                            02
+                        </span>
 
-                                <h3>
-                                    COMBATE
-                                </h3>
+                        <h3>
+                            COMBATE
+                        </h3>
 
-                                <p>
-                                    Leia os movimentos, reaja aos inimigos
-                                    e aprenda com seus padrões.
-                                </p>
+                        <p>
+                            Leia os movimentos, reaja aos inimigos
+                            e aprenda com seus padrões.
+                        </p>
 
-                            </div>
+                    </div>
 
 
-                            <div class="card">
+                    <div class="card">
 
-                                <span class="card-number">
-                                    03
-                                </span>
+                        <span class="card-number">
+                            03
+                        </span>
 
-                                <h3>
-                                    EXPLORAÇÃO
-                                </h3>
+                        <h3>
+                            EXPLORAÇÃO
+                        </h3>
 
-                                <p>
-                                    Atravesse um mundo quebrado e procure pistas
-                                    sobre a contaminação e sua origem.
-                                </p>
-
-                            </div>
-
-                        </div>
+                        <p>
+                            Atravesse um mundo quebrado e procure pistas
+                            sobre a contaminação e sua origem.
+                        </p>
 
                     </div>
 
@@ -480,88 +1122,67 @@
                 </h2>
 
 
-                <button
-                    class="accordion-toggle"
-                    type="button"
-                    aria-expanded="false"
-                >
+                <div class="universe-grid">
 
-                    <span>
-                        CONHECER O UNIVERSO
-                    </span>
+                    <div class="story-block">
 
-                    <span class="accordion-icon">
-                        +
-                    </span>
+                        <h3>
+                            TRAKAM
+                        </h3>
 
-                </button>
+                        <p>
+                            Um javali que foi contaminado por uma criatura
+                            Blord. Depois de romper a sincronização com seu
+                            infectador, Trakam escapou da caça, mas não saiu
+                            completamente ileso.
+                        </p>
 
-
-                <div class="accordion-content">
-
-                    <div class="universe-grid">
-
-                        <div class="story-block">
-
-                            <h3>
-                                TRAKAM
-                            </h3>
-
-                            <p>
-                                Um javali que foi contaminado por uma criatura
-                                Blord. Depois de romper a sincronização com seu
-                                infectador, Trakam escapou da caça, mas não saiu
-                                completamente ileso.
-                            </p>
-
-                        </div>
+                    </div>
 
 
-                        <div class="story-block">
+                    <div class="story-block">
 
-                            <h3>
-                                OS BLORDS
-                            </h3>
+                        <h3>
+                            OS BLORDS
+                        </h3>
 
-                            <p>
-                                Criaturas originadas de uma mutação criada em
-                                laboratório. Seu corpo se deforma com o tempo,
-                                enquanto a dor causada pela transformação se torna
-                                cada vez maior.
-                            </p>
+                        <p>
+                            Criaturas originadas de uma mutação criada em
+                            laboratório. Seu corpo se deforma com o tempo,
+                            enquanto a dor causada pela transformação se torna
+                            cada vez maior.
+                        </p>
 
-                        </div>
-
-
-                        <div class="story-block">
-
-                            <h3>
-                                A CONTAMINAÇÃO
-                            </h3>
-
-                            <p>
-                                Para recuperar parte de sua forma, um Blord pode
-                                contaminar outros corpos. A vítima passa a carregar
-                                parte da mesma condição que deu origem à criatura.
-                            </p>
-
-                        </div>
+                    </div>
 
 
-                        <div class="story-block">
+                    <div class="story-block">
 
-                            <h3>
-                                A SINCRONIZAÇÃO OCULAR
-                            </h3>
+                        <h3>
+                            A CONTAMINAÇÃO
+                        </h3>
 
-                            <p>
-                                Os olhos funcionam como uma interface de leitura
-                                e sincronização perceptiva. Quando essa conexão
-                                falha, a criatura perde parte de sua capacidade
-                                de manter a caça.
-                            </p>
+                        <p>
+                            Para recuperar parte de sua forma, um Blord pode
+                            contaminar outros corpos. A vítima passa a carregar
+                            parte da mesma condição que deu origem à criatura.
+                        </p>
 
-                        </div>
+                    </div>
+
+
+                    <div class="story-block">
+
+                        <h3>
+                            A SINCRONIZAÇÃO OCULAR
+                        </h3>
+
+                        <p>
+                            Os olhos funcionam como uma interface de leitura
+                            e sincronização perceptiva. Quando essa conexão
+                            falha, a criatura perde parte de sua capacidade
+                            de manter a caça.
+                        </p>
 
                     </div>
 
@@ -598,8 +1219,8 @@
 
                 <p>
                     Na história original, <strong>Trakam</strong> era apenas
-                    um personagem secundário. Em Inevitável, ele ganhou
-                    um novo papel e se tornou o protagonista de uma história
+                    um personagem secundário. Em Inevitável, ele ganhou um
+                    novo papel e se tornou o protagonista de uma história
                     própria.
                 </p>
 
@@ -666,219 +1287,33 @@
                 </h2>
 
 
-                <button
-                    class="accordion-toggle"
-                    type="button"
-                    aria-expanded="false"
-                >
+                <div class="gallery">
 
-                    <span>
-                        VER GALERIA
-                    </span>
+                    <div class="gallery-item">
+                        SCREENSHOT 01
+                    </div>
 
-                    <span class="accordion-icon">
-                        +
-                    </span>
+                    <div class="gallery-item">
+                        SCREENSHOT 02
+                    </div>
 
-                </button>
+                    <div class="gallery-item">
+                        SCREENSHOT 03
+                    </div>
 
+                    <div class="gallery-item">
+                        SCREENSHOT 04
+                    </div>
 
-                <div class="accordion-content">
+                    <div class="gallery-item">
+                        SCREENSHOT 05
+                    </div>
 
-                    <div class="gallery">
-
-                        <div class="gallery-item">
-                            SCREENSHOT 01
-                        </div>
-
-                        <div class="gallery-item">
-                            SCREENSHOT 02
-                        </div>
-
-                        <div class="gallery-item">
-                            SCREENSHOT 03
-                        </div>
-
-                        <div class="gallery-item">
-                            SCREENSHOT 04
-                        </div>
-
-                        <div class="gallery-item">
-                            SCREENSHOT 05
-                        </div>
-
-                        <div class="gallery-item">
-                            SCREENSHOT 06
-                        </div>
-
+                    <div class="gallery-item">
+                        SCREENSHOT 06
                     </div>
 
                 </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             PESQUISA
-        ========================= -->
-
-        <section id="pesquisa">
-
-            <div class="content survey-content">
-
-                <div class="section-label">
-                    EXPERIÊNCIA
-                </div>
-
-                <h2>
-                    Avalie Inevitável.
-                </h2>
-
-                <p>
-                    O que você achou do site?
-                </p>
-
-
-                <form id="surveyForm">
-
-                    <div class="survey-rating">
-
-                        <label class="survey-option">
-
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="1"
-                                required
-                            >
-
-                            <span class="survey-stars">
-                                ⭐
-                            </span>
-
-                            <span>
-                                Não gostei
-                            </span>
-
-                        </label>
-
-
-                        <label class="survey-option">
-
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="2"
-                            >
-
-                            <span class="survey-stars">
-                                ⭐⭐
-                            </span>
-
-                            <span>
-                                Foi bom
-                            </span>
-
-                        </label>
-
-
-                        <label class="survey-option">
-
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="3"
-                            >
-
-                            <span class="survey-stars">
-                                ⭐⭐⭐
-                            </span>
-
-                            <span>
-                                Gostei muito
-                            </span>
-
-                        </label>
-
-                    </div>
-
-
-                    <div class="survey-comment">
-
-                        <label for="surveyComment">
-                            Quer deixar um comentário?
-                        </label>
-
-                        <p>
-                            Conte o que achou da experiência
-                            ou o que mais chamou sua atenção.
-                        </p>
-
-                        <textarea
-                            id="surveyComment"
-                            name="comment"
-                            rows="5"
-                            maxlength="1000"
-                            placeholder="Escreva aqui..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="survey-permission">
-
-                        <p>
-                            Seu comentário pode aparecer nas redes sociais
-                            ou na divulgação do jogo. Você autoriza o uso?
-                        </p>
-
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="permission"
-                                value="yes"
-                                required
-                            >
-
-                            Sim, autorizo
-
-                        </label>
-
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="permission"
-                                value="no"
-                            >
-
-                            Não, não autorizo
-
-                        </label>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="button"
-                    >
-                        ENVIAR
-                    </button>
-
-                </form>
-
-
-                <div
-                    id="surveyFeedback"
-                    class="survey-feedback"
-                    aria-live="polite"
-                ></div>
 
             </div>
 
@@ -943,14 +1378,10 @@
 
 
     <!-- =========================
-         SCRIPTS
+         MENU SCRIPT
     ========================= -->
 
     <script>
-
-        /* =========================
-           MENU MOBILE
-        ========================= */
 
         const menuButton =
             document.getElementById("menuButton");
@@ -969,13 +1400,6 @@
                 menuButton.setAttribute(
                     "aria-expanded",
                     isOpen
-                );
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    isOpen
-                        ? "Fechar menu"
-                        : "Abrir menu"
                 );
 
                 menuButton.textContent =
@@ -1005,175 +1429,8 @@
                             "false"
                         );
 
-                        menuButton.setAttribute(
-                            "aria-label",
-                            "Abrir menu"
-                        );
-
                         menuButton.textContent =
                             "☰";
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================
-           ACORDEÕES
-        ========================= */
-
-        const accordionButtons =
-            document.querySelectorAll(
-                ".accordion-toggle"
-            );
-
-
-        accordionButtons.forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        const content =
-                            button.nextElementSibling;
-
-                        const isOpen =
-                            button.classList.toggle(
-                                "active"
-                            );
-
-
-                        button.setAttribute(
-                            "aria-expanded",
-                            isOpen
-                        );
-
-
-                        content.classList.toggle(
-                            "active"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================
-           DARK ENGINE
-           PC + MOBILE
-        ========================= */
-
-        const darkEngineZones =
-            document.querySelectorAll(
-                ".dark-engine-zone"
-            );
-
-
-        darkEngineZones.forEach(
-            zone => {
-
-                const updateReveal =
-                    (x, y) => {
-
-                        const rect =
-                            zone.getBoundingClientRect();
-
-                        const localX =
-                            x - rect.left;
-
-                        const localY =
-                            y - rect.top;
-
-
-                        zone.style.setProperty(
-                            "--dark-x",
-                            `${localX}px`
-                        );
-
-
-                        zone.style.setProperty(
-                            "--dark-y",
-                            `${localY}px`
-                        );
-
-
-                        zone.classList.add(
-                            "dark-engine-active"
-                        );
-
-                    };
-
-
-                /* MOUSE */
-
-                zone.addEventListener(
-                    "mousemove",
-                    event => {
-
-                        updateReveal(
-                            event.clientX,
-                            event.clientY
-                        );
-
-                    }
-                );
-
-
-                /* TOQUE */
-
-                zone.addEventListener(
-                    "touchmove",
-                    event => {
-
-                        if (!event.touches.length) {
-                            return;
-                        }
-
-
-                        const touch =
-                            event.touches[0];
-
-
-                        updateReveal(
-                            touch.clientX,
-                            touch.clientY
-                        );
-
-                    },
-                    {
-                        passive: true
-                    }
-                );
-
-
-                /* ENTRA NA ÁREA */
-
-                zone.addEventListener(
-                    "mouseenter",
-                    () => {
-
-                        zone.classList.add(
-                            "dark-engine-active"
-                        );
-
-                    }
-                );
-
-
-                /* SAI DA ÁREA */
-
-                zone.addEventListener(
-                    "mouseleave",
-                    () => {
-
-                        zone.classList.remove(
-                            "dark-engine-active"
-                        );
 
                     }
                 );
@@ -1184,5 +1441,4 @@
     </script>
 
 </body>
-
 </html>
