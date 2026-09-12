@@ -6,25 +6,19 @@
 .dark-engine-zone {
     position: relative;
 
-    --dark-x: 50%;
-    --dark-y: 50%;
-
-    isolation: isolate;
-
-    overflow: hidden;
+    --dark-x: -1000px;
+    --dark-y: -1000px;
 
     /*
-       Permite interação por toque sem quebrar
-       completamente o comportamento da página.
+       Mantém a estrutura original da página.
+       O Dark Engine só adiciona uma camada visual.
     */
-    touch-action: pan-y;
 }
 
 
-/*
-   O conteúdo permanece visível estruturalmente,
-   mas fica coberto por uma camada escura.
-*/
+/* =========================================================
+   MÁSCARA
+========================================================= */
 
 .dark-engine-zone::after {
     content: "";
@@ -33,68 +27,23 @@
 
     inset: 0;
 
-    z-index: 10;
+    z-index: 20;
 
     pointer-events: none;
 
     background:
         radial-gradient(
-            circle 90px at var(--dark-x) var(--dark-y),
+            circle 100px at var(--dark-x) var(--dark-y),
             transparent 0%,
-            transparent 35%,
-            rgba(5, 5, 5, 0.55) 60%,
-            rgba(5, 5, 5, 0.96) 100%
+            transparent 42%,
+            rgba(0, 0, 0, 0.45) 65%,
+            rgba(0, 0, 0, 0.94) 100%
         );
-
-    opacity: 0;
-
-    transition:
-        opacity 0.25s ease;
-}
-
-
-/*
-   Quando o cursor entra na área,
-   a camada começa a funcionar.
-*/
-
-.dark-engine-zone.dark-engine-active::after {
-    opacity: 1;
 }
 
 
 /* =========================================================
-   TEXTO DESCUBRA
-========================================================= */
-
-.dark-engine-text {
-    position: relative;
-
-    display: inline-block;
-
-    z-index: 11;
-
-    /*
-       O texto participa da mesma lógica visual
-       da área Dark Engine.
-    */
-}
-
-
-/*
-   Fazemos o DESCUBRA acompanhar
-   a sensação de algo escondido.
-*/
-
-.dark-engine-zone.dark-engine-active
-.dark-engine-text {
-    text-shadow:
-        0 0 12px rgba(255, 255, 255, 0.12);
-}
-
-
-/* =========================================================
-   CONTEÚDO INTERNO
+   CONTEÚDO
 ========================================================= */
 
 .dark-engine-zone > * {
@@ -104,93 +53,14 @@
 }
 
 
-/*
-   Mantém os cards acima do fundo,
-   mas abaixo da máscara.
-*/
+/* =========================================================
+   DESCUBRA
+========================================================= */
 
-.dark-engine-zone .death-grid,
-.dark-engine-zone .cards {
+.dark-engine-text {
     position: relative;
 
-    z-index: 1;
-}
-
-
-/* =========================================================
-   MÁSCARA DE PERCEPÇÃO
-========================================================= */
-
-/*
-   Uma segunda camada cria uma borda mais pesada
-   ao redor da área revelada.
-*/
-
-.dark-engine-zone::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 9;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle 120px at var(--dark-x) var(--dark-y),
-            transparent 0%,
-            transparent 28%,
-            rgba(0, 0, 0, 0.25) 48%,
-            rgba(0, 0, 0, 0.78) 72%,
-            rgba(0, 0, 0, 0.96) 100%
-        );
-
-    opacity: 0;
-
-    transition:
-        opacity 0.2s ease;
-}
-
-
-.dark-engine-zone.dark-engine-active::before {
-    opacity: 1;
-}
-
-
-/* =========================================================
-   EFEITO DE CONTROLE
-========================================================= */
-
-/*
-   O conteúdo ganha uma pequena mudança
-   quando a percepção está ativa.
-*/
-
-.dark-engine-zone.dark-engine-active
-.death-card,
-.dark-engine-zone.dark-engine-active
-.card {
-    transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-/*
-   Pequena reação dos cards ao serem revelados.
-*/
-
-.dark-engine-zone.dark-engine-active
-.death-card:hover,
-.dark-engine-zone.dark-engine-active
-.card:hover {
-
-    border-color: #3a3a3a;
-
-    background: #0c0c0c;
+    display: inline-block;
 }
 
 
@@ -200,69 +70,14 @@
 
 @media (max-width: 699px) {
 
-    .dark-engine-zone {
-        /*
-           Área um pouco maior para facilitar
-           a interação com o dedo.
-        */
-        --dark-radius: 110px;
-    }
-
-
     .dark-engine-zone::after {
         background:
             radial-gradient(
                 circle 105px at var(--dark-x) var(--dark-y),
                 transparent 0%,
-                transparent 35%,
-                rgba(5, 5, 5, 0.55) 60%,
-                rgba(5, 5, 5, 0.96) 100%
-            );
-    }
-
-
-    .dark-engine-zone::before {
-        background:
-            radial-gradient(
-                circle 135px at var(--dark-x) var(--dark-y),
-                transparent 0%,
-                transparent 28%,
-                rgba(0, 0, 0, 0.25) 48%,
-                rgba(0, 0, 0, 0.78) 72%,
-                rgba(0, 0, 0, 0.96) 100%
-            );
-    }
-
-}
-
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-@media (min-width: 700px) {
-
-    .dark-engine-zone::after {
-        background:
-            radial-gradient(
-                circle 100px at var(--dark-x) var(--dark-y),
-                transparent 0%,
-                transparent 35%,
-                rgba(5, 5, 5, 0.55) 60%,
-                rgba(5, 5, 5, 0.96) 100%
-            );
-    }
-
-
-    .dark-engine-zone::before {
-        background:
-            radial-gradient(
-                circle 130px at var(--dark-x) var(--dark-y),
-                transparent 0%,
-                transparent 28%,
-                rgba(0, 0, 0, 0.25) 48%,
-                rgba(0, 0, 0, 0.78) 72%,
-                rgba(0, 0, 0, 0.96) 100%
+                transparent 42%,
+                rgba(0, 0, 0, 0.45) 65%,
+                rgba(0, 0, 0, 0.94) 100%
             );
     }
 
