@@ -1633,7 +1633,7 @@ footer {
      * O gesto dentro do Dark Engine pertence
      * exclusivamente ao sistema de revelação.
      */
-    touch-action: none;
+    touch-action: pan-y;
 
     -webkit-user-select: none;
     user-select: none;
