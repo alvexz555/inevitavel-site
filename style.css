@@ -1,1115 +1,1232 @@
-/* =========================================================
-   INEVITÁVEL
-   CSS RESPONSIVO
-   DARK ENGINE
-   ========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 75px;
-    background: #050505;
-}
-
-
-body {
-    min-width: 0;
-    min-height: 100vh;
-    width: 100%;
-    max-width: 100%;
-    background: #050505;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-}
-
-
-img,
-video {
-    max-width: 100%;
-    display: block;
-}
-
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-button {
-    font-family: inherit;
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px 14px;
-    z-index: 1000;
-    background: rgba(5,5,5,.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #1d1d1d;
-}
-
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 0;
-}
-
-
-.logo {
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-
-.menu-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 38px;
-    background: transparent;
-    color: #fff;
-    border: 1px solid #292929;
-    font-size: 20px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-
-nav {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-
-nav.active {
-    display: flex;
-}
-
-
-nav a {
-    display: block;
-    padding: 10px;
-    border: 1px solid #292929;
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-align: center;
-    transition:
-        background .2s ease,
-        color .2s ease;
-}
-
-
-nav a:hover {
-    background: #fff;
-    color: #000;
-}
-
-
-/* =========================================================
-   GERAL
-   ========================================================= */
-
-section {
-    min-height: auto;
-    padding: 90px 18px;
-    border-top: 1px solid #151515;
-}
-
-
-.content {
-    width: 100%;
-    max-width: 950px;
-    margin: auto;
-    min-width: 0;
-}
-
-
-.section-label {
-    margin-bottom: 12px;
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 3px;
-}
-
-
-h2 {
-    font-size: clamp(2rem, 9vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-
-h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-
-p {
-    color: #bdbdbd;
-    font-size: .95rem;
-    line-height: 1.75;
-}
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 130px 18px 70px;
-    overflow: hidden;
-}
-
-
-.dark-engine-content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.hero h1 {
-    font-size: clamp(2.5rem, 14vw, 8rem);
-    font-weight: 900;
-    letter-spacing: 2px;
-    line-height: 1;
-    margin-bottom: 20px;
-    white-space: nowrap;
-}
-
-
-.tagline {
-    font-size: clamp(.8rem, 3vw, 1.3rem);
-    letter-spacing: 3px;
-    line-height: 1.5;
-    margin-bottom: 18px;
-}
-
-
-.hero-description {
-    width: 100%;
-    max-width: 600px;
-    color: #bcbcbc;
-    font-size: .95rem;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
-.buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-
-.button {
-    display: inline-block;
-    padding: 12px 18px;
-    z-index: 2;
-    border: 1px solid #fff;
-    background: transparent;
-    color: #fff;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="INEVITÁVEL - A morte é apenas o começo.">
+  <title>INEVITÁVEL | A morte é apenas o começo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">INEVITÁVEL</div>
+
+      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+        ☰
+      </button>
+    </div>
+
+    <nav id="menu" aria-label="Navegação principal">
+      <a href="#morte">A MORTE</a>
+      <a href="#trailer">TRAILER</a>
+      <a href="#jogo">O JOGO</a>
+      <a href="#mecanicas">MECÂNICAS</a>
+      <a href="#universo">UNIVERSO</a>
+      <a href="#origem">ORIGEM</a>
+      <a href="#desenvolvimento">DESENVOLVIMENTO</a>
+      <a href="#galeria">GALERIA</a>
+      <a href="#pesquisa">EXPERIÊNCIA</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div>
+        <h1>INEVITÁVEL</h1>
+
+        <div class="tagline">
+          A MORTE É APENAS O COMEÇO
+        </div>
+
+        <p class="hero-description">
+          Um javali contaminado. Uma criatura que não deveria existir.
+          E uma realidade onde percepção e verdade deixaram de ser a mesma coisa.
+        </p>
+
+        <div class="buttons">
+          <a href="#trailer" class="button">
+            VER TRAILER
+          </a>
+
+          <a href="#jogo" class="button">
+            CONHEÇA O JOGO
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="morte">
+      <div class="content">
+
+        <div class="section-label">
+          O CICLO
+        </div>
+
+        <h2 class="dark-engine-exempt">
+          MORRA.<br>
+          MUDE.<br>
+          DESCUBRA.
+        </h2>
+
+
+        <div class="dark-engine-zone">
+
+          <div class="dark-engine-area">
+
+            <p class="death-intro">
+              Em Inevitável, a morte não representa apenas o fim.
+              Ela faz parte de um sistema de contaminação, percepção
+              e sobrevivência que Trakam precisa compreender.
+            </p>
+
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+              <span>EXPLORAR O CICLO</span>
+              <span class="accordion-icon">+</span>
+            </button>
+
+            <div class="accordion-content">
+
+              <div class="death-grid">
+
+                <div class="death-card">
+                  <span class="number">01</span>
+                  <h3>A CONTAMINAÇÃO</h3>
+                  <p>
+                    Trakam foi marcado por uma criatura Blord.
+                    Parte dessa contaminação permanece ligada
+                    à sua percepção.
+                  </p>
+                </div>
+
+                <div class="death-card">
+                  <span class="number">02</span>
+                  <h3>A SINCRONIZAÇÃO</h3>
+                  <p>
+                    A criatura utiliza os olhos como ponto
+                    de leitura e sincronização perceptiva.
+                  </p>
+                </div>
 
-.button:hover {
-    background: #fff;
-    color: #000;
-    transform: translateY(-2px);
-}
+                <div class="death-card">
+                  <span class="number">03</span>
+                  <h3>A RUPTURA</h3>
+                  <p>
+                    Quando a sincronização é quebrada,
+                    o ciclo perde sua estabilidade e a
+                    caça pode ser interrompida.
+                  </p>
+                </div>
 
+              </div>
 
-/* =========================================================
-   DARK ENGINE
-   DESKTOP
-   ========================================================= */
+            </div>
 
-.dark-engine-zone {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
+          </div>
 
-    width: 100%;
-    max-width: 100%;
+          <!-- Camada usada somente no celular -->
+          <canvas class="dark-engine-mobile-canvas" aria-hidden="true"></canvas>
 
-    --dark-x: 50%;
-    --dark-y: 50%;
+        </div>
 
-    -webkit-user-select: none;
-    user-select: none;
-}
+      </div>
+    </section>
 
 
-.dark-engine-area {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-}
+    <section id="trailer">
+      <div class="content">
+
+        <div class="section-label">
+          TRAILER
+        </div>
+
+        <h2>
+          Veja antes de entender.
+        </h2>
+
+        <p class="trailer-text">
+          Algumas coisas não precisam ser explicadas.
+        </p>
 
+        <div class="trailer-box">
+          <div class="trailer-placeholder">
+            TRAILER EM BREVE
+            <br><br>
+            <small>
+              O material já está sendo produzido.
+            </small>
+          </div>
+        </div>
 
-.dark-engine-zone::before,
-.dark-engine-zone::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-}
+      </div>
+    </section>
 
 
-.dark-engine-zone::before {
-    background: rgba(0, 0, 0, .96);
-    opacity: 1;
-    transition: opacity .18s ease;
-}
+    <section id="jogo">
+      <div class="content game-content">
 
+        <div class="section-label">
+          O JOGO
+        </div>
 
-.dark-engine-zone::after {
-    background: radial-gradient(
-        circle 115px at var(--dark-x) var(--dark-y),
+        <h2>
+          Um mundo que não deveria existir.
+        </h2>
 
-        transparent 0%,
-        transparent 28%,
+        <p>
+          Inevitável é um jogo de ação e exploração protagonizado
+          por Trakam, um javali contaminado por uma criatura Blord.
+        </p>
 
-        rgba(0, 0, 0, .10) 38%,
-        rgba(0, 0, 0, .34) 52%,
-        rgba(0, 0, 0, .72) 70%,
-        rgba(0, 0, 0, .96) 100%
-    );
+        <p>
+          Preso entre vestígios de uma realidade distorcida,
+          Trakam precisa enfrentar criaturas, compreender sua
+          própria condição e descobrir o que realmente aconteceu.
+        </p>
 
-    opacity: 0;
+      </div>
+    </section>
 
-    transition:
-        opacity .18s ease;
-}
 
+    <section id="mecanicas">
+      <div class="content">
 
-.dark-engine-zone.dark-engine-active::before {
-    opacity: 0;
-}
+        <div class="section-label">
+          MECÂNICAS
+        </div>
+
+        <h2 class="dark-engine-exempt">
+          Sobreviver é aprender.
+        </h2>
+
+
+        <div class="dark-engine-zone">
+
+          <div class="dark-engine-area">
+
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+              <span>MECÂNICAS CENTRAIS</span>
+              <span class="accordion-icon">+</span>
+            </button>
+
+            <div class="accordion-content">
+
+              <div class="cards">
+
+                <div class="card">
+                  <span class="card-number">01</span>
+                  <h3>MODO CAÇADOR</h3>
+                  <p>
+                    Um estado que altera a forma como Trakam
+                    enfrenta e responde às ameaças.
+                  </p>
+                </div>
+
+                <div class="card">
+                  <span class="card-number">02</span>
+                  <h3>COMBATE</h3>
+                  <p>
+                    Leia os movimentos, reaja aos inimigos
+                    e aprenda com seus padrões.
+                  </p>
+                </div>
+
+                <div class="card">
+                  <span class="card-number">03</span>
+                  <h3>EXPLORAÇÃO</h3>
+                  <p>
+                    Atravesse um mundo quebrado e procure
+                    pistas sobre a contaminação e sua origem.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Camada usada somente no celular -->
+          <canvas class="dark-engine-mobile-canvas" aria-hidden="true"></canvas>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="universo">
+      <div class="content">
+
+        <div class="section-label">
+          UNIVERSO
+        </div>
+
+        <h2>
+          O que está acontecendo?
+        </h2>
+
+        <button class="accordion-toggle" type="button" aria-expanded="false">
+          <span>CONHECER O UNIVERSO</span>
+          <span class="accordion-icon">+</span>
+        </button>
+
+        <div class="accordion-content">
+
+          <div class="universe-grid">
+
+            <div class="story-block">
+              <h3>TRAKAM</h3>
+              <p>
+                Um javali que foi contaminado por uma criatura
+                Blord. Depois de romper a sincronização com seu
+                infectador, Trakam escapou da caça, mas não saiu
+                completamente ileso.
+              </p>
+            </div>
 
+            <div class="story-block">
+              <h3>OS BLORDS</h3>
+              <p>
+                Criaturas originadas de uma mutação criada em
+                laboratório. Seu corpo se deforma com o tempo,
+                enquanto a dor causada pela transformação se
+                torna cada vez maior.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>A CONTAMINAÇÃO</h3>
+              <p>
+                Para recuperar parte de sua forma, um Blord pode
+                contaminar outros corpos. A vítima passa a carregar
+                parte da mesma condição que deu origem à criatura.
+              </p>
+            </div>
 
-.dark-engine-zone.dark-engine-active::after {
-    opacity: 1;
-}
+            <div class="story-block">
+              <h3>A SINCRONIZAÇÃO OCULAR</h3>
+              <p>
+                Os olhos funcionam como uma interface de leitura
+                e sincronização perceptiva. Quando essa conexão
+                falha, a criatura perde parte de sua capacidade
+                de manter a caça.
+              </p>
+            </div>
 
+          </div>
 
-/* =========================================================
-   ELEMENTOS FORA DA MÁSCARA
-   ========================================================= */
+        </div>
 
-.dark-engine-exempt {
-    position: relative;
-    z-index: 3;
-}
+      </div>
+    </section>
 
 
-.dark-engine-zone .accordion-toggle,
-.dark-engine-zone .accordion-content {
-    -webkit-user-select: none;
-    user-select: none;
-}
+    <section id="origem">
+      <div class="content origin">
 
+        <div class="section-label">
+          ORIGEM
+        </div>
 
-/* =========================================================
-   CANVAS MOBILE
-   ========================================================= */
+        <h2>
+          Antes do jogo.
+        </h2>
 
-.dark-engine-mobile-canvas {
-    display: none;
+        <p>
+          <strong>Inevitável</strong> nasceu de ideias que começaram
+          em <strong>Escudo Quebrado</strong>, livro de fantasia
+          escrito por <strong>A.Rise</strong>.
+        </p>
 
-    position: absolute;
-    inset: 0;
+        <p>
+          Na história original, <strong>Trakam</strong> era apenas
+          um personagem secundário. Em Inevitável, ele ganhou um
+          novo papel e se tornou o protagonista de uma história própria.
+        </p>
 
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
+        <p>
+          O jogo não é uma adaptação direta do livro. É uma nova obra,
+          construída a partir de ideias e personagens que começaram
+          naquele universo.
+        </p>
 
-    z-index: 2;
+      </div>
+    </section>
 
-    pointer-events: none;
-}
 
+    <section id="desenvolvimento">
+      <div class="content development">
 
-/* =========================================================
-   MORTE
-   ========================================================= */
+        <div class="section-label">
+          DESENVOLVIMENTO
+        </div>
 
-#morte {
-    background:
-        linear-gradient(
-            rgba(5,5,5,.94),
-            rgba(5,5,5,.98)
+        <h2>
+          Feito de forma independente.
+        </h2>
+
+        <p>
+          Inevitável é um projeto indie desenvolvido de forma
+          independente, construído aos poucos entre código, arte,
+          testes e tentativa.
+        </p>
+
+        <p>
+          O jogo ainda está em desenvolvimento.
+        </p>
+
+      </div>
+    </section>
+
+
+    <section id="galeria">
+      <div class="content">
+
+        <div class="section-label">
+          GALERIA
+        </div>
+
+        <h2>
+          Um mundo em construção.
+        </h2>
+
+        <button class="accordion-toggle" type="button" aria-expanded="false">
+          <span>VER GALERIA</span>
+          <span class="accordion-icon">+</span>
+        </button>
+
+        <div class="accordion-content">
+
+          <div class="gallery">
+
+            <div class="gallery-item">
+              SCREENSHOT 01
+            </div>
+
+            <div class="gallery-item">
+              SCREENSHOT 02
+            </div>
+
+            <div class="gallery-item">
+              SCREENSHOT 03
+            </div>
+
+            <div class="gallery-item">
+              SCREENSHOT 04
+            </div>
+
+            <div class="gallery-item">
+              SCREENSHOT 05
+            </div>
+
+            <div class="gallery-item">
+              SCREENSHOT 06
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="pesquisa">
+      <div class="content survey-content">
+
+        <div class="section-label">
+          EXPERIÊNCIA
+        </div>
+
+        <h2>
+          Avalie Inevitável.
+        </h2>
+
+        <p>
+          O que você achou do site?
+        </p>
+
+        <form id="surveyForm">
+
+          <div class="survey-rating">
+
+            <label class="survey-option">
+              <input type="radio" name="rating" value="1" required>
+              <span class="survey-stars">⭐</span>
+              <span>Não gostei</span>
+            </label>
+
+            <label class="survey-option">
+              <input type="radio" name="rating" value="2">
+              <span class="survey-stars">⭐⭐</span>
+              <span>Foi bom</span>
+            </label>
+
+            <label class="survey-option">
+              <input type="radio" name="rating" value="3">
+              <span class="survey-stars">⭐⭐⭐</span>
+              <span>Gostei muito</span>
+            </label>
+
+          </div>
+
+
+          <div class="survey-comment">
+
+            <label for="surveyComment">
+              Quer deixar um comentário?
+            </label>
+
+            <p>
+              Conte o que achou da experiência ou o que mais
+              chamou sua atenção.
+            </p>
+
+            <textarea id="surveyComment" name="comment" rows="5" maxlength="1000" placeholder="Escreva aqui..."></textarea>
+
+          </div>
+
+
+          <div class="survey-permission">
+
+            <p>
+              Seu comentário pode aparecer nas redes sociais
+              ou na divulgação do jogo. Você autoriza o uso?
+            </p>
+
+            <label>
+              <input type="radio" name="permission" value="yes" required>
+              Sim, autorizo
+            </label>
+
+            <label>
+              <input type="radio" name="permission" value="no">
+              Não, não autorizo
+            </label>
+
+          </div>
+
+          <button type="submit" class="button">
+            ENVIAR
+          </button>
+
+        </form>
+
+        <div id="surveyFeedback" class="survey-feedback" aria-live="polite"></div>
+
+      </div>
+    </section>
+
+
+    <section id="redes">
+      <div class="social-content">
+
+        <div class="section-label">
+          ACOMPANHE
+        </div>
+
+        <h2>
+          Continue acompanhando.
+        </h2>
+
+        <p>
+          Veja o desenvolvimento de Inevitável e acompanhe
+          as próximas atualizações.
+        </p>
+
+        <div class="buttons">
+
+          <a href="https://www.instagram.com/alvex.rise/?stkn=cmxkaXY2bTcya3J6" target="_blank" rel="noopener noreferrer" class="button">
+            INSTAGRAM
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer>
+    INEVITÁVEL
+    <br><br>
+    © 2026 • EM DESENVOLVIMENTO
+  </footer>
+
+
+  <script>
+    // ==========================================
+    // MENU
+    // ==========================================
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const menu =
+      document.getElementById("menu");
+
+    menuButton.addEventListener("click", () => {
+
+      const isOpen =
+        menu.classList.toggle("active");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ?
+        "Fechar menu" :
+        "Abrir menu"
+      );
+
+      menuButton.textContent =
+        isOpen ? "✕" : "☰";
+
+    });
+
+    menu.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        menu.classList.remove("active");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
         );
-}
 
+        menuButton.setAttribute(
+          "aria-label",
+          "Abrir menu"
+        );
 
-.death-intro {
-    max-width: 700px;
-    margin-bottom: 30px;
-}
+        menuButton.textContent = "☰";
 
+      });
 
-.death-grid,
-.cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
+    });
 
+    // ==========================================
+    // ACCORDION
+    // ==========================================
 
-.death-card,
-.card,
-.story-block {
-    padding: 22px;
-    border: 1px solid #202020;
-    background: #090909;
-    min-width: 0;
-}
-
+    document
+      .querySelectorAll(".accordion-toggle")
+      .forEach(button => {
 
-.number,
-.card-number {
-    display: block;
-    color: #666;
-    font-size: 11px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
+        button.addEventListener("click", () => {
 
+          const content =
+            button.nextElementSibling;
 
-.card-number {
-    margin-bottom: 20px;
-}
+          const isOpen =
+            button.classList.toggle("active");
 
+          button.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
 
-/* =========================================================
-   TRAILER
-   ========================================================= */
+          content.classList.toggle(
+            "active",
+            isOpen
+          );
 
-#trailer {
-    text-align: center;
-}
+        });
 
+      });
 
-.trailer-text {
-    max-width: 600px;
-    margin: 0 auto 30px;
-}
+    // ==========================================
+    // DARK ENGINE
+    // ==========================================
 
+    const darkZones =
+      document.querySelectorAll(".dark-engine-zone");
 
-.trailer-box {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #090909;
-    border: 1px solid #222;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    darkZones.forEach(zone => {
 
+      let activePointerId = null;
 
-.trailer-placeholder {
-    padding: 20px;
-    color: #777;
-    font-size: 11px;
-    letter-spacing: 3px;
-    line-height: 1.7;
-}
+      let mobileReveals = [];
 
+      let lastRevealPoint = null;
 
-.trailer-placeholder small {
-    font-size: 9px;
-    letter-spacing: 1px;
-}
+      const canvas =
+        zone.querySelector(
+          ".dark-engine-mobile-canvas"
+        );
 
+      const ctx =
+        canvas.getContext("2d");
 
-.game-content {
-    max-width: 700px;
-}
+      const isMobile = () =>
+        window.innerWidth <= 699;
 
+      // ------------------------------------------
+      // DESKTOP
+      // ------------------------------------------
 
-.game-content p + p {
-    margin-top: 15px;
-}
+      const moveLight = event => {
 
+        const rect =
+          zone.getBoundingClientRect();
 
-/* =========================================================
-   ACCORDION
-   ========================================================= */
+        const x =
+          event.clientX - rect.left;
 
-.accordion-toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 30px;
-    padding: 17px 18px;
-    background: #090909;
-    color: #fff;
-    border: 1px solid #202020;
-    text-align: left;
-    font-size: 11px;
-    letter-spacing: 2px;
-    cursor: pointer;
+        const y =
+          event.clientY - rect.top;
 
-    transition:
-        background .2s ease,
-        border-color .2s ease;
-}
+        zone.style.setProperty(
+          "--dark-x",
+          `${x}px`
+        );
 
+        zone.style.setProperty(
+          "--dark-y",
+          `${y}px`
+        );
 
-.accordion-toggle:hover {
-    background: #0d0d0d;
-    border-color: #333;
-}
+      };
 
+      zone.addEventListener(
+        "pointerenter",
+        event => {
 
-.accordion-toggle.active {
-    border-color: #333;
-}
+          if (
+            event.pointerType === "mouse"
+          ) {
 
+            moveLight(event);
 
-.accordion-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 22px;
-    height: 22px;
-
-    flex-shrink: 0;
-
-    font-size: 18px;
-    line-height: 1;
-
-    transition:
-        transform .25s ease;
-}
-
-
-.accordion-toggle.active .accordion-icon {
-    transform: rotate(45deg);
-}
-
-
-.accordion-content {
-    width: 100%;
-    min-width: 0;
-}
-
-
-/* =========================================================
-   UNIVERSO
-   ========================================================= */
-
-.universe-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-
-.origin {
-    max-width: 750px;
-}
-
-
-.origin strong {
-    color: #fff;
-}
-
-
-.origin p + p,
-.development p + p {
-    margin-top: 15px;
-}
-
-
-.development {
-    max-width: 700px;
-}
-
-
-/* =========================================================
-   GALERIA
-   ========================================================= */
-
-.gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-
-.gallery-item {
-    aspect-ratio: 16/10;
-    background: #0a0a0a;
-    border: 1px solid #202020;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #555;
-    font-size: 10px;
-    letter-spacing: 2px;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   PESQUISA
-   ========================================================= */
-
-#pesquisa {
-    text-align: center;
-}
-
-
-.survey-content {
-    max-width: 700px;
-}
-
-
-.survey-rating {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin: 30px 0;
-}
-
-
-.survey-option {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding: 16px;
-
-    border: 1px solid #202020;
-    background: #090909;
-
-    color: #bdbdbd;
-
-    cursor: pointer;
-    text-align: left;
-
-    transition:
-        border-color .2s ease,
-        background .2s ease;
-}
-
-
-.survey-option:hover {
-    border-color: #444;
-    background: #0c0c0c;
-}
-
-
-.survey-option input {
-    accent-color: #fff;
-}
-
-
-.survey-stars {
-    letter-spacing: 2px;
-    white-space: nowrap;
-}
-
-
-.survey-comment,
-.survey-permission {
-    margin-top: 25px;
-    text-align: left;
-}
-
-
-.survey-comment > label,
-.survey-permission > p {
-    display: block;
-    color: #fff;
-    font-size: 12px;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-}
-
-
-.survey-comment p {
-    font-size: .85rem;
-    margin-bottom: 12px;
-}
-
-
-textarea {
-    width: 100%;
-    min-height: 130px;
-    resize: vertical;
-
-    padding: 14px;
-
-    background: #090909;
-    color: #fff;
-
-    border: 1px solid #202020;
-    outline: none;
-
-    font: inherit;
-}
-
-
-textarea:focus {
-    border-color: #555;
-}
-
-
-.survey-permission {
-    display: grid;
-    gap: 10px;
-}
-
-
-.survey-permission label {
-    color: #bdbdbd;
-    font-size: .9rem;
-}
-
-
-.survey-permission input {
-    margin-right: 8px;
-    accent-color: #fff;
-}
-
-
-.survey-content .button {
-    margin-top: 25px;
-}
-
-
-.survey-feedback {
-    min-height: 24px;
-    margin-top: 20px;
-    color: #aaa;
-    font-size: .85rem;
-    opacity: 0;
-
-    transition:
-        opacity .2s ease;
-}
-
-
-.survey-feedback.visible {
-    opacity: 1;
-}
-
-
-/* =========================================================
-   REDES
-   ========================================================= */
-
-#redes {
-    text-align: center;
-    min-height: 55vh;
-    display: flex;
-    align-items: center;
-}
-
-
-.social-content {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-}
-
-
-.social-content p {
-    margin-bottom: 25px;
-}
-
-
-footer {
-    padding: 30px 20px;
-    border-top: 1px solid #151515;
-    text-align: center;
-    color: #555;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 699px) {
-
-    header {
-        padding: 8px 10px;
-    }
-
-
-    .hero {
-        padding: 140px 16px 70px;
-    }
-
-
-    .hero h1 {
-        font-size: clamp(2rem, 11vw, 4rem);
-    }
-
-
-    .tagline {
-        font-size: .8rem;
-        letter-spacing: 2px;
-    }
-
-
-    .hero-description {
-        font-size: .9rem;
-        line-height: 1.7;
-    }
-
-
-    .buttons {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-
-    .button {
-        width: 100%;
-        text-align: center;
-    }
-
-
-    section {
-        padding: 75px 16px;
-    }
-
-
-    h2 {
-        font-size: clamp(1.9rem, 9vw, 3rem);
-    }
-
-
-    p {
-        font-size: .93rem;
-    }
-
-
-    .accordion-content {
-        display: none;
-    }
-
-
-    .accordion-content.active {
-        display: block;
-    }
-
-
-    .death-card,
-    .card,
-    .story-block {
-        padding: 20px;
-    }
-
-
-    /* ==========================================
-       DARK ENGINE MOBILE
-       ========================================== */
-
-    .dark-engine-zone {
-        position: relative;
-
-        width: 100%;
-        max-width: 100%;
-
-        overflow: hidden;
-
-        /*
-         * Permite que o navegador faça scroll
-         * vertical normalmente.
-         *
-         * O JavaScript decide quando o gesto
-         * horizontal pertence ao Dark Engine.
-         */
-        touch-action: pan-y;
-
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
-
-    /*
-     * Desliga completamente as camadas
-     * usadas pelo sistema desktop.
-     */
-
-    .dark-engine-zone::before,
-    .dark-engine-zone::after {
-        display: none;
-    }
-
-
-    /*
-     * O canvas passa a ser a camada escura.
-     */
-
-    .dark-engine-mobile-canvas {
-        display: block;
-
-        position: absolute;
-        inset: 0;
-
-        width: 100%;
-        height: 100%;
-
-        max-width: 100%;
-
-        z-index: 2;
-
-        pointer-events: none;
-
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
-
-    /*
-     * Conteúdo do Dark Engine.
-     */
-
-    .dark-engine-area {
-        position: relative;
-
-        z-index: 1;
-
-        min-width: 0;
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   DESKTOP
-   ========================================================= */
-
-@media (min-width: 700px) {
-
-    header {
-        padding: 14px 30px;
-    }
-
-
-    .header-content {
-        justify-content: flex-end;
-    }
-
-
-    .logo,
-    .menu-button {
-        display: none;
-    }
-
-
-    nav {
-        display: flex;
-        flex-direction: row;
-        margin-top: 0;
-        justify-content: flex-end;
-        gap: 8px;
-    }
-
-
-    nav a {
-        padding: 8px 10px;
-        font-size: 10px;
-    }
-
-
-    section {
-        padding: 120px 40px;
-    }
-
-
-    .hero {
-        padding: 120px 40px 80px;
-    }
-
-
-    .hero h1 {
-        letter-spacing: 6px;
-    }
-
-
-    .accordion-toggle {
-        display: none;
-    }
-
-
-    .accordion-content {
-        display: block;
-    }
-
-
-    .death-grid,
-    .cards {
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(0,1fr)
+            zone.classList.add(
+              "dark-engine-active"
             );
-    }
 
+          }
 
-    .universe-grid {
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0,1fr)
+        }
+      );
+
+      zone.addEventListener(
+        "pointermove",
+        event => {
+
+          // ------------------------------
+          // DESKTOP
+          // ------------------------------
+
+          if (
+            event.pointerType === "mouse"
+          ) {
+
+            moveLight(event);
+
+            zone.classList.add(
+              "dark-engine-active"
             );
-    }
 
+            return;
+          }
 
-    .gallery {
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(0,1fr)
+          // ------------------------------
+          // MOBILE
+          // ------------------------------
+
+          if (
+            isMobile() &&
+            event.pointerId === activePointerId
+          ) {
+
+            addMobileReveal(event);
+
+          }
+
+        }
+      );
+
+      zone.addEventListener(
+        "pointerleave",
+        event => {
+
+          if (
+            event.pointerType === "mouse"
+          ) {
+
+            zone.classList.remove(
+              "dark-engine-active"
             );
-    }
 
+          }
 
-    .survey-rating {
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(0,1fr)
+        }
+      );
+
+      // ------------------------------------------
+      // POSIÇÃO DO DEDO
+      // ------------------------------------------
+
+      const getMobilePoint = event => {
+
+        const rect =
+          zone.getBoundingClientRect();
+
+        return {
+
+          x: Math.max(
+            0,
+            Math.min(
+              rect.width,
+              event.clientX - rect.left
+            )
+          ),
+
+          y: Math.max(
+            0,
+            Math.min(
+              rect.height,
+              event.clientY - rect.top
+            )
+          )
+
+        };
+
+      };
+
+      // ------------------------------------------
+      // REDESENHA O CANVAS
+      // ------------------------------------------
+
+      const redrawMobileCanvas = () => {
+
+        if (
+          !canvas ||
+          !isMobile()
+        ) {
+          return;
+        }
+
+        const rect =
+          zone.getBoundingClientRect();
+
+        if (
+          rect.width <= 0 ||
+          rect.height <= 0
+        ) {
+          return;
+        }
+
+        const dpr =
+          window.devicePixelRatio || 1;
+
+        canvas.width =
+          Math.round(
+            rect.width * dpr
+          );
+
+        canvas.height =
+          Math.round(
+            rect.height * dpr
+          );
+
+        canvas.style.width =
+          `${rect.width}px`;
+
+        canvas.style.height =
+          `${rect.height}px`;
+
+        ctx.setTransform(
+          dpr,
+          0,
+          0,
+          dpr,
+          0,
+          0
+        );
+
+        // --------------------------------------
+        // CAMADA ESCURA
+        // --------------------------------------
+
+        ctx.globalCompositeOperation =
+          "source-over";
+
+        ctx.clearRect(
+          0,
+          0,
+          rect.width,
+          rect.height
+        );
+
+        ctx.fillStyle =
+          "rgba(0, 0, 0, .96)";
+
+        ctx.fillRect(
+          0,
+          0,
+          rect.width,
+          rect.height
+        );
+
+        // --------------------------------------
+        // ABRE OS REVEALS
+        // --------------------------------------
+
+        ctx.globalCompositeOperation =
+          "destination-out";
+
+        mobileReveals.forEach(point => {
+
+          const x =
+            point.x * rect.width;
+
+          const y =
+            point.y * rect.height;
+
+          const radius = 75;
+
+          const gradient =
+            ctx.createRadialGradient(
+              x,
+              y,
+              0,
+              x,
+              y,
+              radius
             );
-    }
 
-}
+          gradient.addColorStop(
+            0,
+            "rgba(0,0,0,1)"
+          );
 
+          gradient.addColorStop(
+            .30,
+            "rgba(0,0,0,1)"
+          );
 
-/* =========================================================
-   DESKTOP MAIOR
-   ========================================================= */
+          gradient.addColorStop(
+            .42,
+            "rgba(0,0,0,.92)"
+          );
 
-@media (min-width: 900px) {
+          gradient.addColorStop(
+            .56,
+            "rgba(0,0,0,.65)"
+          );
 
-    .content {
-        max-width: 1050px;
-    }
+          gradient.addColorStop(
+            .72,
+            "rgba(0,0,0,.30)"
+          );
 
+          gradient.addColorStop(
+            1,
+            "rgba(0,0,0,0)"
+          );
 
-    .hero-description {
-        font-size: 1rem;
-    }
+          ctx.fillStyle =
+            gradient;
 
+          ctx.beginPath();
 
-    .death-card,
-    .card,
-    .story-block {
-        padding: 26px;
-    }
+          ctx.arc(
+            x,
+            y,
+            radius,
+            0,
+            Math.PI * 2
+          );
 
+          ctx.fill();
 
-    p {
-        font-size: .96rem;
-    }
+        });
 
-}
+        ctx.globalCompositeOperation =
+          "source-over";
 
+      };
 
-/* =========================================================
-   CELULARES PEQUENOS
-   ========================================================= */
+      // ------------------------------------------
+      // ADICIONA REVEAL
+      // ------------------------------------------
 
-@media (max-width: 380px) {
+      const addMobileReveal = event => {
 
-    section {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
+        const point =
+          getMobilePoint(event);
 
+        // Evita centenas de pontos
+        // praticamente no mesmo lugar.
 
-    .hero {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
+        if (lastRevealPoint) {
 
+          const dx =
+            point.x -
+            lastRevealPoint.x;
 
-    .accordion-toggle {
-        padding: 16px 14px;
-        font-size: 10px;
-        letter-spacing: 1.5px;
-    }
+          const dy =
+            point.y -
+            lastRevealPoint.y;
 
+          const distance =
+            Math.sqrt(
+              dx * dx +
+              dy * dy
+            );
 
-    .death-card,
-    .card,
-    .story-block {
-        padding: 18px;
-    }
+          if (distance < 12) {
+            return;
+          }
 
+        }
 
-    h2 {
-        font-size: 1.8rem;
-    }
+        const rect =
+          zone.getBoundingClientRect();
 
-}
+        // Guarda a posição normalizada.
+        // Isso permite redesenhar corretamente
+        // caso a tela mude de tamanho.
+
+        mobileReveals.push({
+
+          x: point.x /
+            rect.width,
+
+          y: point.y /
+            rect.height
+
+        });
+
+        lastRevealPoint = point;
+
+        redrawMobileCanvas();
+
+      };
+
+      // ------------------------------------------
+      // TOUCH / POINTER DOWN
+      // ------------------------------------------
+
+      zone.addEventListener(
+        "pointerdown",
+        event => {
+
+          if (
+            event.pointerType === "mouse" ||
+            !isMobile()
+          ) {
+            return;
+          }
+
+          activePointerId =
+            event.pointerId;
+
+          lastRevealPoint = null;
+
+          addMobileReveal(event);
+
+          zone.setPointerCapture(
+            event.pointerId
+          );
+
+        }
+      );
+
+      // ------------------------------------------
+      // TOUCH / POINTER UP
+      // ------------------------------------------
+
+      zone.addEventListener(
+        "pointerup",
+        event => {
+
+          if (
+            event.pointerType === "mouse" ||
+            event.pointerId !== activePointerId
+          ) {
+            return;
+          }
+
+          activePointerId = null;
+
+          lastRevealPoint = null;
+
+          if (
+            zone.hasPointerCapture(
+              event.pointerId
+            )
+          ) {
+
+            zone.releasePointerCapture(
+              event.pointerId
+            );
+
+          }
+
+        }
+      );
+
+      // ------------------------------------------
+      // TOUCH / POINTER CANCEL
+      // ------------------------------------------
+
+      zone.addEventListener(
+        "pointercancel",
+        event => {
+
+          if (
+            event.pointerType === "mouse" ||
+            event.pointerId !== activePointerId
+          ) {
+            return;
+          }
+
+          activePointerId = null;
+
+          lastRevealPoint = null;
+
+          if (
+            zone.hasPointerCapture(
+              event.pointerId
+            )
+          ) {
+
+            zone.releasePointerCapture(
+              event.pointerId
+            );
+
+          }
+
+        }
+      );
+
+      // ------------------------------------------
+      // REDIMENSIONAMENTO
+      // ------------------------------------------
+
+      window.addEventListener(
+        "resize",
+        () => {
+
+          if (isMobile()) {
+            redrawMobileCanvas();
+          }
+
+        }
+      );
+
+      // ------------------------------------------
+      // OBSERVA MUDANÇAS DE TAMANHO
+      // ------------------------------------------
+
+      if (
+        typeof ResizeObserver !== "undefined"
+      ) {
+
+        const observer =
+          new ResizeObserver(() => {
+
+            if (isMobile()) {
+              redrawMobileCanvas();
+            }
+
+          });
+
+        observer.observe(zone);
+
+      }
+
+      // ------------------------------------------
+      // INICIALIZAÇÃO MOBILE
+      // ------------------------------------------
+
+      if (isMobile()) {
+        redrawMobileCanvas();
+      }
+
+    });
+
+    // ==========================================
+    // PESQUISA
+    // ==========================================
+
+    const surveyForm =
+      document.getElementById(
+        "surveyForm"
+      );
+
+    const surveyFeedback =
+      document.getElementById(
+        "surveyFeedback"
+      );
+
+    surveyForm.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+        const rating =
+          surveyForm.querySelector(
+            'input[name="rating"]:checked'
+          );
+
+        const permission =
+          surveyForm.querySelector(
+            'input[name="permission"]:checked'
+          );
+
+        const comment =
+          document
+          .getElementById(
+            "surveyComment"
+          )
+          .value
+          .trim();
+
+        if (
+          !rating ||
+          !permission
+        ) {
+          return;
+        }
+
+        surveyFeedback.textContent =
+          "Obrigado por avaliar Inevitável. Sua resposta foi registrada nesta página.";
+
+        surveyFeedback.classList.add(
+          "visible"
+        );
+
+        surveyForm.reset();
+
+        console.log({
+
+          rating: Number(
+            rating.value
+          ),
+
+          comment,
+
+          permission: permission.value
+
+        });
+
+      }
+    );
+  </script>
+
+</body>
+
+</html>
