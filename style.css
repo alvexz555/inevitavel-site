@@ -1,1703 +1,1628 @@
 /* =========================================================
-INEVITÁVEL
-CSS RESPONSIVO
-DARK ENGINE
-========================================================= */
+   INEVITÁVEL
+   CSS RESPONSIVO
+   DARK ENGINE
+   ========================================================= */
 
-- {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-scroll-behavior: smooth;
-scroll-padding-top: 75px;
-background: #050505;
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+    background: #050505;
 }
 
 body {
-min-width: 0;
-min-height: 100vh;
-width: 100%;
-max-width: 100%;
-background: #050505;
-color: #fff;
-font-family: Arial, Helvetica, sans-serif;
-overflow-x: hidden;
+    min-width: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    background: #050505;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
 img,
 video {
-max-width: 100%;
-display: block;
+    max-width: 100%;
+    display: block;
 }
 
 a {
-color: inherit;
-text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 button {
-font-family: inherit;
+    font-family: inherit;
 }
 
 /* =========================================================
-HEADER
-========================================================= */
+   HEADER
+   ========================================================= */
 
 header {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-padding: 10px 14px;
-z-index: 1000;
-background: rgba(5,5,5,.92);
-backdrop-filter: blur(10px);
-border-bottom: 1px solid #1d1d1d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 14px;
+    z-index: 1000;
+    background: rgba(5, 5, 5, .92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #1d1d1d;
 }
 
 .header-content {
-display: flex;
-justify-content: space-between;
-align-items: center;
-min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 0;
 }
 
 .logo {
-font-size: 14px;
-font-weight: 900;
-letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 .menu-button {
-display: flex;
-align-items: center;
-justify-content: center;
-width: 42px;
-height: 38px;
-background: transparent;
-color: #fff;
-border: 1px solid #292929;
-font-size: 20px;
-cursor: pointer;
-flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 38px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #292929;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 nav {
-display: none;
-flex-direction: column;
-gap: 6px;
-overflow: hidden;
-margin-top: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 nav.active {
-display: flex;
+    display: flex;
 }
 
 nav a {
-display: block;
-padding: 10px;
-border: 1px solid #292929;
-font-size: 10px;
-letter-spacing: 1px;
-text-align: center;
-transition:
-background .2s ease,
-color .2s ease;
+    display: block;
+    padding: 10px;
+    border: 1px solid #292929;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    transition:
+        background .2s ease,
+        color .2s ease;
 }
 
 nav a:hover {
-background: #fff;
-color: #000;
+    background: #fff;
+    color: #000;
 }
 
 /* =========================================================
-GERAL
-========================================================= */
+   GERAL
+   ========================================================= */
 
 section {
-min-height: auto;
-padding: 90px 18px;
-border-top: 1px solid #151515;
+    min-height: auto;
+    padding: 90px 18px;
+    border-top: 1px solid #151515;
 }
 
 .content {
-width: 100%;
-max-width: 950px;
-margin: auto;
-min-width: 0;
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+    min-width: 0;
 }
 
 .section-label {
-margin-bottom: 12px;
-color: #777;
-font-size: 10px;
-letter-spacing: 3px;
+    margin-bottom: 12px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 3px;
 }
 
 h2 {
-font-size: clamp(2rem, 9vw, 4rem);
-line-height: 1.05;
-letter-spacing: 1px;
-margin-bottom: 20px;
+    font-size: clamp(2rem, 9vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 h3 {
-font-size: 1.1rem;
-margin-bottom: 10px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 p {
-color: #bdbdbd;
-font-size: .95rem;
-line-height: 1.75;
+    color: #bdbdbd;
+    font-size: .95rem;
+    line-height: 1.75;
 }
 
 /* =========================================================
-HERO
-========================================================= */
+   HERO
+   ========================================================= */
 
 .hero {
-position: relative;
-min-height: 100svh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 130px 18px 70px;
-overflow: hidden;
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 130px 18px 70px;
+    overflow: hidden;
 }
 
 .dark-engine-content {
-position: relative;
-z-index: 1;
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero h1 {
-font-size: clamp(2.5rem, 14vw, 8rem);
-font-weight: 900;
-letter-spacing: 2px;
-line-height: 1;
-margin-bottom: 20px;
-white-space: nowrap;
+    font-size: clamp(2.5rem, 14vw, 8rem);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 20px;
+    white-space: nowrap;
 }
 
 .tagline {
-font-size: clamp(.8rem, 3vw, 1.3rem);
-letter-spacing: 3px;
-line-height: 1.5;
-margin-bottom: 18px;
+    font-size: clamp(.8rem, 3vw, 1.3rem);
+    letter-spacing: 3px;
+    line-height: 1.5;
+    margin-bottom: 18px;
 }
 
 .hero-description {
-width: 100%;
-max-width: 600px;
-color: #bcbcbc;
-font-size: .95rem;
-line-height: 1.7;
-margin-bottom: 30px;
+    width: 100%;
+    max-width: 600px;
+    color: #bcbcbc;
+    font-size: .95rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
 }
 
 /* =========================================================
-BOTÕES
-========================================================= */
+   BOTÕES
+   ========================================================= */
 
 .buttons {
-display: flex;
-gap: 10px;
-justify-content: center;
-flex-wrap: wrap;
-width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .button {
-display: inline-block;
-padding: 12px 18px;
-z-index: 2;
-border: 1px solid #fff;
-background: transparent;
-color: #fff;
-font-size: 11px;
-letter-spacing: 1.5px;
-cursor: pointer;
-transition:
-background .2s ease,
-color .2s ease,
-transform .2s ease;
+    display: inline-block;
+    padding: 12px 18px;
+    z-index: 2;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
 
 .button:hover {
-background: #fff;
-color: #000;
-transform: translateY(-2px);
+    background: #fff;
+    color: #000;
+    transform: translateY(-2px);
 }
 
 /* =========================================================
-DARK ENGINE
-DESKTOP
-========================================================= */
+   DARK ENGINE
+   DESKTOP
+   ========================================================= */
 
 .dark-engine-zone {
-position: relative;
-isolation: isolate;
-overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 
-```
-width: 100%;
-max-width: 100%;
+    --dark-x: 50%;
+    --dark-y: 50%;
 
---dark-x: 50%;
---dark-y: 50%;
-
--webkit-user-select: none;
-user-select: none;
-```
-
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .dark-engine-area {
-position: relative;
-z-index: 1;
-min-width: 0;
+    position: relative;
+    z-index: 1;
+    min-width: 0;
 }
 
 .dark-engine-zone::before,
 .dark-engine-zone::after {
-content: "";
-position: absolute;
-inset: 0;
-pointer-events: none;
-z-index: 2;
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .dark-engine-zone::before {
-background: rgba(0, 0, 0, .96);
-opacity: 1;
-transition: opacity .18s ease;
+    background: rgba(0, 0, 0, .96);
+    opacity: 1;
+    transition: opacity .18s ease;
 }
 
 .dark-engine-zone::after {
-background: radial-gradient(
-circle 115px at var(--dark-x) var(--dark-y),
+    background: radial-gradient(
+        circle 115px at var(--dark-x) var(--dark-y),
+        transparent 0%,
+        transparent 28%,
+        rgba(0, 0, 0, .10) 38%,
+        rgba(0, 0, 0, .34) 52%,
+        rgba(0, 0, 0, .72) 70%,
+        rgba(0, 0, 0, .96) 100%
+    );
 
-```
-    transparent 0%,
-    transparent 28%,
+    opacity: 0;
 
-    rgba(0, 0, 0, .10) 38%,
-    rgba(0, 0, 0, .34) 52%,
-    rgba(0, 0, 0, .72) 70%,
-    rgba(0, 0, 0, .96) 100%
-);
-
-opacity: 0;
-
-transition:
-    opacity .18s ease;
-```
-
+    transition:
+        opacity .18s ease;
 }
 
 .dark-engine-zone.dark-engine-active::before {
-opacity: 0;
+    opacity: 0;
 }
 
 .dark-engine-zone.dark-engine-active::after {
-opacity: 1;
+    opacity: 1;
 }
 
 /* =========================================================
-ELEMENTOS FORA DA MÁSCARA
-========================================================= */
+   ELEMENTOS FORA DA MÁSCARA
+   ========================================================= */
 
 .dark-engine-exempt {
-position: relative;
-z-index: 3;
+    position: relative;
+    z-index: 3;
 }
 
 .dark-engine-zone .accordion-toggle,
 .dark-engine-zone .accordion-content {
--webkit-user-select: none;
-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 /* =========================================================
-CANVAS MOBILE
-========================================================= */
+   CANVAS MOBILE
+   ========================================================= */
 
 .dark-engine-mobile-canvas {
-display: none;
-
-```
-position: absolute;
-inset: 0;
-
-width: 100%;
-height: 100%;
-max-width: 100%;
-
-z-index: 2;
-
-pointer-events: none;
-```
-
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* =========================================================
-MORTE
-========================================================= */
+   MORTE
+   ========================================================= */
 
 #morte {
-background:
-linear-gradient(
-rgba(5,5,5,.94),
-rgba(5,5,5,.98)
-);
+    background:
+        linear-gradient(
+            rgba(5, 5, 5, .94),
+            rgba(5, 5, 5, .98)
+        );
 }
 
 .death-intro {
-max-width: 700px;
-margin-bottom: 30px;
+    max-width: 700px;
+    margin-bottom: 30px;
 }
 
 .death-grid,
 .cards {
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 .death-card,
 .card,
 .story-block {
-padding: 22px;
-border: 1px solid #202020;
-background: #090909;
-min-width: 0;
+    padding: 22px;
+    border: 1px solid #202020;
+    background: #090909;
+    min-width: 0;
 }
 
 .number,
 .card-number {
-display: block;
-color: #666;
-font-size: 11px;
-letter-spacing: 2px;
-margin-bottom: 15px;
+    display: block;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
 
 .card-number {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 /* =========================================================
-TRAILER
-========================================================= */
+   TRAILER
+   ========================================================= */
 
 #trailer {
-text-align: center;
+    text-align: center;
 }
 
 .trailer-text {
-max-width: 600px;
-margin: 0 auto 30px;
+    max-width: 600px;
+    margin: 0 auto 30px;
 }
 
 .trailer-box {
-width: 100%;
-aspect-ratio: 16/9;
-background: #090909;
-border: 1px solid #222;
-overflow: hidden;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #090909;
+    border: 1px solid #222;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .trailer-placeholder {
-padding: 20px;
-color: #777;
-font-size: 11px;
-letter-spacing: 3px;
-line-height: 1.7;
+    padding: 20px;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 3px;
+    line-height: 1.7;
 }
 
 .trailer-placeholder small {
-font-size: 9px;
-letter-spacing: 1px;
+    font-size: 9px;
+    letter-spacing: 1px;
 }
 
 .game-content {
-max-width: 700px;
+    max-width: 700px;
 }
 
 .game-content p + p {
-margin-top: 15px;
+    margin-top: 15px;
 }
 
 /* =========================================================
-ACCORDION
-========================================================= */
+   ACCORDION
+   ========================================================= */
 
 .accordion-toggle {
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 20px;
-margin-top: 30px;
-padding: 17px 18px;
-background: #090909;
-color: #fff;
-border: 1px solid #202020;
-text-align: left;
-font-size: 11px;
-letter-spacing: 2px;
-cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 17px 18px;
+    background: #090909;
+    color: #fff;
+    border: 1px solid #202020;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
 
-```
-transition:
-    background .2s ease,
-    border-color .2s ease;
-```
-
+    transition:
+        background .2s ease,
+        border-color .2s ease;
 }
 
 .accordion-toggle:hover {
-background: #0d0d0d;
-border-color: #333;
+    background: #0d0d0d;
+    border-color: #333;
 }
 
 .accordion-toggle.active {
-border-color: #333;
+    border-color: #333;
 }
 
 .accordion-icon {
-display: flex;
-align-items: center;
-justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    font-size: 18px;
+    line-height: 1;
 
-```
-width: 22px;
-height: 22px;
-
-flex-shrink: 0;
-
-font-size: 18px;
-line-height: 1;
-
-transition:
-    transform .25s ease;
-```
-
+    transition:
+        transform .25s ease;
 }
 
 .accordion-toggle.active .accordion-icon {
-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .accordion-content {
-width: 100%;
-min-width: 0;
+    width: 100%;
+    min-width: 0;
 }
 
 /* =========================================================
-UNIVERSO
-========================================================= */
+   UNIVERSO
+   ========================================================= */
 
 .universe-grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
-margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .origin {
-max-width: 750px;
+    max-width: 750px;
 }
 
 .origin strong {
-color: #fff;
+    color: #fff;
 }
 
 .origin p + p,
 .development p + p {
-margin-top: 15px;
+    margin-top: 15px;
 }
 
 .development {
-max-width: 700px;
+    max-width: 700px;
 }
 
 /* =========================================================
-GALERIA
-========================================================= */
+   GALERIA
+   ========================================================= */
 
 .gallery {
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
-margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .gallery-item {
-aspect-ratio: 16/10;
-background: #0a0a0a;
-border: 1px solid #202020;
-
-```
-display: flex;
-align-items: center;
-justify-content: center;
-
-color: #555;
-font-size: 10px;
-letter-spacing: 2px;
-
-min-width: 0;
-```
-
+    aspect-ratio: 16 / 10;
+    background: #0a0a0a;
+    border: 1px solid #202020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 10px;
+    letter-spacing: 2px;
+    min-width: 0;
 }
-// ==========================================
-// DARK ENGINE
-// ==========================================
+
+/* ==========================================
+   DARK ENGINE
+   ========================================== */
 
 const darkZones =
-document.querySelectorAll(".dark-engine-zone");
+    document.querySelectorAll(".dark-engine-zone");
 
 darkZones.forEach(zone => {
 
-```
-let activePointerId = null;
+    let activePointerId = null;
 
-/*
- * Cada ponto fica normalizado entre 0 e 1.
- * Assim o reveal continua no lugar correto
- * mesmo se o tamanho da zona mudar.
- */
-let mobileReveals = [];
+    /*
+     * Cada ponto fica normalizado entre 0 e 1.
+     * Assim o reveal continua no lugar correto
+     * mesmo se o tamanho da zona mudar.
+     */
+    let mobileReveals = [];
 
-let lastRevealPoint = null;
+    let lastRevealPoint = null;
 
-let canvasWidth = 0;
-let canvasHeight = 0;
-let canvasDpr = 1;
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    let canvasDpr = 1;
 
-let drawQueued = false;
+    let drawQueued = false;
 
-const canvas =
-    zone.querySelector(
-        ".dark-engine-mobile-canvas"
-    );
+    const canvas =
+        zone.querySelector(
+            ".dark-engine-mobile-canvas"
+        );
 
-if (!canvas) {
-    return;
-}
+    if (!canvas) {
+        return;
+    }
 
-const ctx =
-    canvas.getContext("2d");
+    const ctx =
+        canvas.getContext("2d");
 
-const isMobile = () =>
-    window.innerWidth <= 699;
+    const isMobile = () =>
+        window.innerWidth <= 699;
 
-// ==========================================
-// DESKTOP
-// ==========================================
+    // ==========================================
+    // DESKTOP
+    // ==========================================
 
-const moveLight = event => {
+    const moveLight = event => {
 
-    const rect =
-        zone.getBoundingClientRect();
+        const rect =
+            zone.getBoundingClientRect();
 
-    const x =
-        event.clientX - rect.left;
+        const x =
+            event.clientX - rect.left;
 
-    const y =
-        event.clientY - rect.top;
+        const y =
+            event.clientY - rect.top;
 
-    zone.style.setProperty(
-        "--dark-x",
-        `${x}px`
-    );
+        zone.style.setProperty(
+            "--dark-x",
+            `${x}px`
+        );
 
-    zone.style.setProperty(
-        "--dark-y",
-        `${y}px`
-    );
+        zone.style.setProperty(
+            "--dark-y",
+            `${y}px`
+        );
 
-};
+    };
 
-zone.addEventListener(
-    "pointerenter",
-    event => {
+    zone.addEventListener(
+        "pointerenter",
+        event => {
 
-        if (
-            event.pointerType === "mouse"
-        ) {
+            if (
+                event.pointerType === "mouse"
+            ) {
 
-            moveLight(event);
+                moveLight(event);
 
-            zone.classList.add(
-                "dark-engine-active"
-            );
+                zone.classList.add(
+                    "dark-engine-active"
+                );
+
+            }
 
         }
+    );
 
-    }
-);
+    zone.addEventListener(
+        "pointermove",
+        event => {
 
-zone.addEventListener(
-    "pointermove",
-    event => {
+            // ==================================
+            // DESKTOP
+            // ==================================
 
-        // ==================================
-        // DESKTOP
-        // ==================================
+            if (
+                event.pointerType === "mouse"
+            ) {
+
+                moveLight(event);
+
+                zone.classList.add(
+                    "dark-engine-active"
+                );
+
+                return;
+            }
+
+            // ==================================
+            // MOBILE
+            // ==================================
+
+            if (
+                isMobile() &&
+                event.pointerId === activePointerId
+            ) {
+
+                addMobileReveal(event);
+
+            }
+
+        }
+    );
+
+    zone.addEventListener(
+        "pointerleave",
+        event => {
+
+            if (
+                event.pointerType === "mouse"
+            ) {
+
+                zone.classList.remove(
+                    "dark-engine-active"
+                );
+
+            }
+
+        }
+    );
+
+    // ==========================================
+    // POSIÇÃO DO DEDO
+    // ==========================================
+
+    const getMobilePoint = event => {
+
+        const rect =
+            zone.getBoundingClientRect();
+
+        return {
+
+            x: Math.max(
+                0,
+                Math.min(
+                    rect.width,
+                    event.clientX - rect.left
+                )
+            ),
+
+            y: Math.max(
+                0,
+                Math.min(
+                    rect.height,
+                    event.clientY - rect.top
+                )
+            )
+
+        };
+
+    };
+
+    // ==========================================
+    // DESENHO
+    // ==========================================
+
+    const drawMobileCanvas = () => {
 
         if (
-            event.pointerType === "mouse"
+            !isMobile() ||
+            canvasWidth <= 0 ||
+            canvasHeight <= 0
         ) {
-
-            moveLight(event);
-
-            zone.classList.add(
-                "dark-engine-active"
-            );
-
             return;
         }
 
-        // ==================================
-        // MOBILE
-        // ==================================
+        /*
+         * Garante que o sistema continue
+         * usando a escala correta do aparelho.
+         */
 
-        if (
-            isMobile() &&
-            event.pointerId === activePointerId
-        ) {
-
-            addMobileReveal(event);
-
-        }
-
-    }
-);
-
-zone.addEventListener(
-    "pointerleave",
-    event => {
-
-        if (
-            event.pointerType === "mouse"
-        ) {
-
-            zone.classList.remove(
-                "dark-engine-active"
-            );
-
-        }
-
-    }
-);
-
-// ==========================================
-// POSIÇÃO DO DEDO
-// ==========================================
-
-const getMobilePoint = event => {
-
-    const rect =
-        zone.getBoundingClientRect();
-
-    return {
-
-        x: Math.max(
+        ctx.setTransform(
+            canvasDpr,
             0,
-            Math.min(
-                rect.width,
-                event.clientX - rect.left
-            )
-        ),
-
-        y: Math.max(
             0,
-            Math.min(
-                rect.height,
-                event.clientY - rect.top
-            )
-        )
-
-    };
-
-};
-
-// ==========================================
-// DESENHO
-// ==========================================
-
-const drawMobileCanvas = () => {
-
-    if (
-        !isMobile() ||
-        canvasWidth <= 0 ||
-        canvasHeight <= 0
-    ) {
-        return;
-    }
-
-    /*
-     * Garante que o sistema continue
-     * usando a escala correta do aparelho.
-     */
-
-    ctx.setTransform(
-        canvasDpr,
-        0,
-        0,
-        canvasDpr,
-        0,
-        0
-    );
-
-    // --------------------------------------
-    // MÁSCARA ESCURA
-    // --------------------------------------
-
-    ctx.globalCompositeOperation =
-        "source-over";
-
-    ctx.clearRect(
-        0,
-        0,
-        canvasWidth,
-        canvasHeight
-    );
-
-    ctx.fillStyle =
-        "rgba(0, 0, 0, .96)";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvasWidth,
-        canvasHeight
-    );
-
-    // --------------------------------------
-    // REVELAÇÕES
-    // --------------------------------------
-
-    ctx.globalCompositeOperation =
-        "destination-out";
-
-    mobileReveals.forEach(point => {
-
-        const x =
-            point.x * canvasWidth;
-
-        const y =
-            point.y * canvasHeight;
-
-        const radius = 115;
-
-        const gradient =
-            ctx.createRadialGradient(
-                x,
-                y,
-                0,
-                x,
-                y,
-                radius
-            );
-
-        gradient.addColorStop(
+            canvasDpr,
             0,
-            "rgba(0,0,0,1)"
+            0
         );
 
-        gradient.addColorStop(
-            .30,
-            "rgba(0,0,0,1)"
-        );
+        // --------------------------------------
+        // MÁSCARA ESCURA
+        // --------------------------------------
 
-        gradient.addColorStop(
-            .42,
-            "rgba(0,0,0,.92)"
-        );
+        ctx.globalCompositeOperation =
+            "source-over";
 
-        gradient.addColorStop(
-            .56,
-            "rgba(0,0,0,.65)"
-        );
-
-        gradient.addColorStop(
-            .72,
-            "rgba(0,0,0,.30)"
-        );
-
-        gradient.addColorStop(
-            1,
-            "rgba(0,0,0,0)"
+        ctx.clearRect(
+            0,
+            0,
+            canvasWidth,
+            canvasHeight
         );
 
         ctx.fillStyle =
-            gradient;
+            "rgba(0, 0, 0, .96)";
 
-        ctx.beginPath();
-
-        ctx.arc(
-            x,
-            y,
-            radius,
+        ctx.fillRect(
             0,
-            Math.PI * 2
+            0,
+            canvasWidth,
+            canvasHeight
         );
 
-        ctx.fill();
+        // --------------------------------------
+        // REVELAÇÕES
+        // --------------------------------------
 
-    });
+        ctx.globalCompositeOperation =
+            "destination-out";
 
-    ctx.globalCompositeOperation =
-        "source-over";
+        mobileReveals.forEach(point => {
 
-};
+            const x =
+                point.x * canvasWidth;
 
-// ==========================================
-// DESENHO OTIMIZADO
-// ==========================================
+            const y =
+                point.y * canvasHeight;
 
-const requestMobileDraw = () => {
+            /*
+             * Tamanho do reveal no mobile.
+             */
+            const radius = 75;
 
-    if (drawQueued) {
-        return;
-    }
+            const gradient =
+                ctx.createRadialGradient(
+                    x,
+                    y,
+                    0,
+                    x,
+                    y,
+                    radius
+                );
 
-    drawQueued = true;
+            gradient.addColorStop(
+                0,
+                "rgba(0,0,0,1)"
+            );
 
-    requestAnimationFrame(() => {
+            gradient.addColorStop(
+                .30,
+                "rgba(0,0,0,1)"
+            );
 
-        drawQueued = false;
+            gradient.addColorStop(
+                .42,
+                "rgba(0,0,0,.92)"
+            );
 
-        drawMobileCanvas();
+            gradient.addColorStop(
+                .56,
+                "rgba(0,0,0,.65)"
+            );
 
-    });
+            gradient.addColorStop(
+                .72,
+                "rgba(0,0,0,.30)"
+            );
 
-};
+            gradient.addColorStop(
+                1,
+                "rgba(0,0,0,0)"
+            );
 
-// ==========================================
-// REDIMENSIONA CANVAS
-// ==========================================
+            ctx.fillStyle =
+                gradient;
 
-const resizeMobileCanvas = () => {
+            ctx.beginPath();
 
-    if (!isMobile()) {
-        return;
-    }
+            ctx.arc(
+                x,
+                y,
+                radius,
+                0,
+                Math.PI * 2
+            );
 
-    const rect =
-        zone.getBoundingClientRect();
+            ctx.fill();
 
-    if (
-        rect.width <= 0 ||
-        rect.height <= 0
-    ) {
-        return;
-    }
+        });
 
-    canvasWidth =
-        rect.width;
-
-    canvasHeight =
-        rect.height;
-
-    canvasDpr =
-        window.devicePixelRatio || 1;
-
-    canvas.width =
-        Math.round(
-            canvasWidth * canvasDpr
-        );
-
-    canvas.height =
-        Math.round(
-            canvasHeight * canvasDpr
-        );
-
-    canvas.style.width =
-        `${canvasWidth}px`;
-
-    canvas.style.height =
-        `${canvasHeight}px`;
-
-    drawMobileCanvas();
-
-};
-
-// ==========================================
-// ADICIONA PONTO
-// ==========================================
-
-const addMobileReveal = event => {
-
-    const point =
-        getMobilePoint(event);
-
-    const rect =
-        zone.getBoundingClientRect();
-
-    if (
-        rect.width <= 0 ||
-        rect.height <= 0
-    ) {
-        return;
-    }
-
-    /*
-     * Converte para coordenadas normalizadas.
-     */
-
-    const normalizedPoint = {
-
-        x:
-            point.x /
-            rect.width,
-
-        y:
-            point.y /
-            rect.height
+        ctx.globalCompositeOperation =
+            "source-over";
 
     };
 
-    // ======================================
-    // PRIMEIRO PONTO
-    // ======================================
+    // ==========================================
+    // DESENHO OTIMIZADO
+    // ==========================================
 
-    if (!lastRevealPoint) {
+    const requestMobileDraw = () => {
 
-        mobileReveals.push(
-            normalizedPoint
-        );
+        if (drawQueued) {
+            return;
+        }
+
+        drawQueued = true;
+
+        requestAnimationFrame(() => {
+
+            drawQueued = false;
+
+            drawMobileCanvas();
+
+        });
+
+    };
+
+    // ==========================================
+    // REDIMENSIONA CANVAS
+    // ==========================================
+
+    const resizeMobileCanvas = () => {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        const rect =
+            zone.getBoundingClientRect();
+
+        if (
+            rect.width <= 0 ||
+            rect.height <= 0
+        ) {
+            return;
+        }
+
+        canvasWidth =
+            rect.width;
+
+        canvasHeight =
+            rect.height;
+
+        canvasDpr =
+            window.devicePixelRatio || 1;
+
+        canvas.width =
+            Math.round(
+                canvasWidth * canvasDpr
+            );
+
+        canvas.height =
+            Math.round(
+                canvasHeight * canvasDpr
+            );
+
+        canvas.style.width =
+            `${canvasWidth}px`;
+
+        canvas.style.height =
+            `${canvasHeight}px`;
+
+        drawMobileCanvas();
+
+    };
+
+    // ==========================================
+    // ADICIONA PONTO
+    // ==========================================
+
+    const addMobileReveal = event => {
+
+        const point =
+            getMobilePoint(event);
+
+        const rect =
+            zone.getBoundingClientRect();
+
+        if (
+            rect.width <= 0 ||
+            rect.height <= 0
+        ) {
+            return;
+        }
+
+        /*
+         * Converte para coordenadas normalizadas.
+         */
+
+        const normalizedPoint = {
+
+            x:
+                point.x /
+                rect.width,
+
+            y:
+                point.y /
+                rect.height
+
+        };
+
+        // ======================================
+        // PRIMEIRO PONTO
+        // ======================================
+
+        if (!lastRevealPoint) {
+
+            mobileReveals.push(
+                normalizedPoint
+            );
+
+            lastRevealPoint =
+                normalizedPoint;
+
+            requestMobileDraw();
+
+            return;
+
+        }
+
+        // ======================================
+        // DISTÂNCIA
+        // ======================================
+
+        const dx =
+            (
+                normalizedPoint.x -
+                lastRevealPoint.x
+            ) * rect.width;
+
+        const dy =
+            (
+                normalizedPoint.y -
+                lastRevealPoint.y
+            ) * rect.height;
+
+        const distance =
+            Math.hypot(
+                dx,
+                dy
+            );
+
+        /*
+         * Cria pontos intermediários.
+         *
+         * Isso transforma:
+         *
+         * ponto -> ponto
+         *
+         * em:
+         *
+         * ponto -> • -> • -> • -> ponto
+         *
+         * evitando buracos durante o arrasto.
+         */
+
+        const spacing = 8;
+
+        const steps =
+            Math.max(
+                1,
+                Math.ceil(
+                    distance / spacing
+                )
+            );
+
+        for (
+            let i = 1;
+            i <= steps;
+            i++
+        ) {
+
+            const t =
+                i / steps;
+
+            const interpolatedPoint = {
+
+                x:
+                    lastRevealPoint.x +
+                    (
+                        normalizedPoint.x -
+                        lastRevealPoint.x
+                    ) * t,
+
+                y:
+                    lastRevealPoint.y +
+                    (
+                        normalizedPoint.y -
+                        lastRevealPoint.y
+                    ) * t
+
+            };
+
+            mobileReveals.push(
+                interpolatedPoint
+            );
+
+        }
 
         lastRevealPoint =
             normalizedPoint;
 
         requestMobileDraw();
 
-        return;
+    };
 
-    }
+    // ==========================================
+    // POINTER DOWN
+    // ==========================================
 
-    // ======================================
-    // DISTÂNCIA
-    // ======================================
+    zone.addEventListener(
+        "pointerdown",
+        event => {
 
-    const dx =
-        (
-            normalizedPoint.x -
-            lastRevealPoint.x
-        ) * rect.width;
+            if (
+                event.pointerType === "mouse" ||
+                !isMobile()
+            ) {
+                return;
+            }
 
-    const dy =
-        (
-            normalizedPoint.y -
-            lastRevealPoint.y
-        ) * rect.height;
+            activePointerId =
+                event.pointerId;
 
-    const distance =
-        Math.hypot(
-            dx,
-            dy
-        );
+            lastRevealPoint =
+                null;
 
-    /*
-     * Cria pontos intermediários.
-     *
-     * Isso transforma:
-     *
-     * ponto -> ponto
-     *
-     * em:
-     *
-     * ponto -> • -> • -> • -> ponto
-     *
-     * evitando buracos durante o arrasto.
-     */
+            addMobileReveal(event);
 
-    const spacing = 8;
+            /*
+             * A partir daqui o dedo continua
+             * pertencendo ao Dark Engine mesmo
+             * quando sair momentaneamente da área.
+             */
 
-    const steps =
-        Math.max(
-            1,
-            Math.ceil(
-                distance / spacing
-            )
-        );
-
-    for (
-        let i = 1;
-        i <= steps;
-        i++
-    ) {
-
-        const t =
-            i / steps;
-
-        const interpolatedPoint = {
-
-            x:
-                lastRevealPoint.x +
-                (
-                    normalizedPoint.x -
-                    lastRevealPoint.x
-                ) * t,
-
-            y:
-                lastRevealPoint.y +
-                (
-                    normalizedPoint.y -
-                    lastRevealPoint.y
-                ) * t
-
-        };
-
-        mobileReveals.push(
-            interpolatedPoint
-        );
-
-    }
-
-    lastRevealPoint =
-        normalizedPoint;
-
-    requestMobileDraw();
-
-};
-
-// ==========================================
-// POINTER DOWN
-// ==========================================
-
-zone.addEventListener(
-    "pointerdown",
-    event => {
-
-        if (
-            event.pointerType === "mouse" ||
-            !isMobile()
-        ) {
-            return;
-        }
-
-        activePointerId =
-            event.pointerId;
-
-        lastRevealPoint =
-            null;
-
-        addMobileReveal(event);
-
-        /*
-         * A partir daqui o dedo continua
-         * pertencendo ao Dark Engine mesmo
-         * quando sair momentaneamente da área.
-         */
-
-        zone.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
-
-// ==========================================
-// POINTER UP
-// ==========================================
-
-zone.addEventListener(
-    "pointerup",
-    event => {
-
-        if (
-            event.pointerType === "mouse" ||
-            event.pointerId !== activePointerId
-        ) {
-            return;
-        }
-
-        activePointerId =
-            null;
-
-        lastRevealPoint =
-            null;
-
-        if (
-            zone.hasPointerCapture(
-                event.pointerId
-            )
-        ) {
-
-            zone.releasePointerCapture(
+            zone.setPointerCapture(
                 event.pointerId
             );
 
         }
+    );
 
-    }
-);
+    // ==========================================
+    // POINTER UP
+    // ==========================================
 
-// ==========================================
-// POINTER CANCEL
-// ==========================================
+    zone.addEventListener(
+        "pointerup",
+        event => {
 
-zone.addEventListener(
-    "pointercancel",
-    event => {
+            if (
+                event.pointerType === "mouse" ||
+                event.pointerId !== activePointerId
+            ) {
+                return;
+            }
 
-        if (
-            event.pointerType === "mouse" ||
-            event.pointerId !== activePointerId
-        ) {
-            return;
+            activePointerId =
+                null;
+
+            lastRevealPoint =
+                null;
+
+            if (
+                zone.hasPointerCapture(
+                    event.pointerId
+                )
+            ) {
+
+                zone.releasePointerCapture(
+                    event.pointerId
+                );
+
+            }
+
         }
+    );
 
-        activePointerId =
-            null;
+    // ==========================================
+    // POINTER CANCEL
+    // ==========================================
 
-        lastRevealPoint =
-            null;
+    zone.addEventListener(
+        "pointercancel",
+        event => {
 
-        if (
-            zone.hasPointerCapture(
-                event.pointerId
-            )
-        ) {
+            if (
+                event.pointerType === "mouse" ||
+                event.pointerId !== activePointerId
+            ) {
+                return;
+            }
 
-            zone.releasePointerCapture(
-                event.pointerId
-            );
+            activePointerId =
+                null;
+
+            lastRevealPoint =
+                null;
+
+            if (
+                zone.hasPointerCapture(
+                    event.pointerId
+                )
+            ) {
+
+                zone.releasePointerCapture(
+                    event.pointerId
+                );
+
+            }
 
         }
+    );
 
-    }
-);
+    // ==========================================
+    // RESIZE
+    // ==========================================
 
-// ==========================================
-// RESIZE
-// ==========================================
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        if (isMobile()) {
-            resizeMobileCanvas();
-        }
-
-    }
-);
-
-// ==========================================
-// RESIZE OBSERVER
-// ==========================================
-
-if (
-    typeof ResizeObserver !== "undefined"
-) {
-
-    const observer =
-        new ResizeObserver(() => {
+    window.addEventListener(
+        "resize",
+        () => {
 
             if (isMobile()) {
                 resizeMobileCanvas();
             }
 
-        });
+        }
+    );
 
-    observer.observe(zone);
+    // ==========================================
+    // RESIZE OBSERVER
+    // ==========================================
 
-}
+    if (
+        typeof ResizeObserver !== "undefined"
+    ) {
 
-// ==========================================
-// INICIALIZAÇÃO
-// ==========================================
+        const observer =
+            new ResizeObserver(() => {
 
-if (isMobile()) {
-    resizeMobileCanvas();
-}
-```
+                if (isMobile()) {
+                    resizeMobileCanvas();
+                }
+
+            });
+
+        observer.observe(zone);
+
+    }
+
+    // ==========================================
+    // INICIALIZAÇÃO
+    // ==========================================
+
+    if (isMobile()) {
+        resizeMobileCanvas();
+    }
 
 });
 
 /* =========================================================
-PESQUISA
-========================================================= */
+   PESQUISA
+   ========================================================= */
 
 #pesquisa {
-text-align: center;
+    text-align: center;
 }
 
 .survey-content {
-max-width: 700px;
+    max-width: 700px;
 }
 
 .survey-rating {
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
-margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 30px 0;
 }
 
 .survey-option {
-display: flex;
-align-items: center;
-gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #202020;
+    background: #090909;
+    color: #bdbdbd;
+    cursor: pointer;
+    text-align: left;
 
-```
-padding: 16px;
-
-border: 1px solid #202020;
-background: #090909;
-
-color: #bdbdbd;
-
-cursor: pointer;
-text-align: left;
-
-transition:
-    border-color .2s ease,
-    background .2s ease;
-```
-
+    transition:
+        border-color .2s ease,
+        background .2s ease;
 }
 
 .survey-option:hover {
-border-color: #444;
-background: #0c0c0c;
+    border-color: #444;
+    background: #0c0c0c;
 }
 
 .survey-option input {
-accent-color: #fff;
+    accent-color: #fff;
 }
 
 .survey-stars {
-letter-spacing: 2px;
-white-space: nowrap;
+    letter-spacing: 2px;
+    white-space: nowrap;
 }
 
 .survey-comment,
 .survey-permission {
-margin-top: 25px;
-text-align: left;
+    margin-top: 25px;
+    text-align: left;
 }
 
 .survey-comment > label,
 .survey-permission > p {
-display: block;
-color: #fff;
-font-size: 12px;
-letter-spacing: 1px;
-margin-bottom: 8px;
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
 }
 
 .survey-comment p {
-font-size: .85rem;
-margin-bottom: 12px;
+    font-size: .85rem;
+    margin-bottom: 12px;
 }
 
 textarea {
-width: 100%;
-min-height: 130px;
-resize: vertical;
-
-```
-padding: 14px;
-
-background: #090909;
-color: #fff;
-
-border: 1px solid #202020;
-outline: none;
-
-font: inherit;
-```
-
+    width: 100%;
+    min-height: 130px;
+    resize: vertical;
+    padding: 14px;
+    background: #090909;
+    color: #fff;
+    border: 1px solid #202020;
+    outline: none;
+    font: inherit;
 }
 
 textarea:focus {
-border-color: #555;
+    border-color: #555;
 }
 
 .survey-permission {
-display: grid;
-gap: 10px;
+    display: grid;
+    gap: 10px;
 }
 
 .survey-permission label {
-color: #bdbdbd;
-font-size: .9rem;
+    color: #bdbdbd;
+    font-size: .9rem;
 }
 
 .survey-permission input {
-margin-right: 8px;
-accent-color: #fff;
+    margin-right: 8px;
+    accent-color: #fff;
 }
 
 .survey-content .button {
-margin-top: 25px;
+    margin-top: 25px;
 }
 
 .survey-feedback {
-min-height: 24px;
-margin-top: 20px;
-color: #aaa;
-font-size: .85rem;
-opacity: 0;
+    min-height: 24px;
+    margin-top: 20px;
+    color: #aaa;
+    font-size: .85rem;
+    opacity: 0;
 
-```
-transition:
-    opacity .2s ease;
-```
-
+    transition:
+        opacity .2s ease;
 }
 
 .survey-feedback.visible {
-opacity: 1;
+    opacity: 1;
 }
 
 /* =========================================================
-REDES
-========================================================= */
+   REDES
+   ========================================================= */
 
 #redes {
-text-align: center;
-min-height: 55vh;
-display: flex;
-align-items: center;
+    text-align: center;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
 }
 
 .social-content {
-width: 100%;
-max-width: 600px;
-margin: auto;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
 }
 
 .social-content p {
-margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 footer {
-padding: 30px 20px;
-border-top: 1px solid #151515;
-text-align: center;
-color: #555;
+    padding: 30px 20px;
+    border-top: 1px solid #151515;
+    text-align: center;
+    color: #555;
 }
 
 /* =========================================================
-MOBILE
-========================================================= */
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 699px) {
 
-```
-header {
-    padding: 8px 10px;
-}
+    header {
+        padding: 8px 10px;
+    }
 
-.hero {
-    padding: 140px 16px 70px;
-}
+    .hero {
+        padding: 140px 16px 70px;
+    }
 
-.hero h1 {
-    font-size: clamp(2rem, 11vw, 4rem);
-}
+    .hero h1 {
+        font-size: clamp(2rem, 11vw, 4rem);
+    }
 
-.tagline {
-    font-size: .8rem;
-    letter-spacing: 2px;
-}
+    .tagline {
+        font-size: .8rem;
+        letter-spacing: 2px;
+    }
 
-.hero-description {
-    font-size: .9rem;
-    line-height: 1.7;
-}
+    .hero-description {
+        font-size: .9rem;
+        line-height: 1.7;
+    }
 
-.buttons {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-}
+    .buttons {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-.button {
-    width: 100%;
-    text-align: center;
-}
+    .button {
+        width: 100%;
+        text-align: center;
+    }
 
-section {
-    padding: 75px 16px;
-}
+    section {
+        padding: 75px 16px;
+    }
 
-h2 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
-}
+    h2 {
+        font-size: clamp(1.9rem, 9vw, 3rem);
+    }
 
-p {
-    font-size: .93rem;
-}
+    p {
+        font-size: .93rem;
+    }
 
-.accordion-content {
-    display: none;
-}
+    .accordion-content {
+        display: none;
+    }
 
-.accordion-content.active {
-    display: block;
-}
+    .accordion-content.active {
+        display: block;
+    }
 
-.death-card,
-.card,
-.story-block {
-    padding: 20px;
-}
+    .death-card,
+    .card,
+    .story-block {
+        padding: 20px;
+    }
 
-/* ==========================================
-```
+    /* ==========================================
+       DARK ENGINE MOBILE
+       ========================================== */
 
-DARK ENGINE MOBILE
-========================================== */
+    .dark-engine-zone {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
 
-.dark-engine-zone {
-position: relative;
-width: 100%;
-max-width: 100%;
-overflow: hidden;
+        /*
+         * O gesto dentro do Dark Engine pertence
+         * exclusivamente ao sistema de revelação.
+         */
+        touch-action: pan-y;
 
-```
-/*
- * O gesto dentro do Dark Engine pertence
- * exclusivamente ao sistema de revelação.
- */
-touch-action: pan-y;
+        -webkit-user-select: none;
+        user-select: none;
+    }
 
--webkit-user-select: none;
-user-select: none;
-```
+    /*
+     * No celular o sistema desktop é desligado.
+     * O canvas assume o controle da máscara.
+     */
 
-}
+    .dark-engine-zone::before,
+    .dark-engine-zone::after {
+        display: none;
+    }
 
-/*
+    /*
+     * Canvas da máscara.
+     */
 
-- No celular o sistema desktop é desligado.
-- O canvas assume o controle da máscara.
-*/
+    .dark-engine-mobile-canvas {
+        display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        z-index: 2;
+        pointer-events: none;
 
-.dark-engine-zone::before,
-.dark-engine-zone::after {
-display: none;
-}
+        /*
+         * Evita que o canvas interfira
+         * no toque dos elementos abaixo.
+         */
+        -webkit-user-select: none;
+        user-select: none;
+    }
 
-/*
+    /*
+     * O conteúdo continua abaixo da máscara.
+     */
 
-- Canvas da máscara.
-*/
-
-.dark-engine-mobile-canvas {
-display: block;
-
-```
-position: absolute;
-inset: 0;
-
-width: 100%;
-height: 100%;
-
-max-width: 100%;
-
-z-index: 2;
-
-pointer-events: none;
-
-/*
- * Evita que o canvas interfira
- * no toque dos elementos abaixo.
- */
--webkit-user-select: none;
-user-select: none;
-```
-
-}
-
-/*
-
-- O conteúdo continua abaixo da máscara.
-*/
-
-.dark-engine-area {
-position: relative;
-z-index: 1;
-
-```
-min-width: 0;
-width: 100%;
-```
-
+    .dark-engine-area {
+        position: relative;
+        z-index: 1;
+        min-width: 0;
+        width: 100%;
+    }
 }
 
 /* =========================================================
-DESKTOP
-========================================================= */
+   DESKTOP
+   ========================================================= */
 
 @media (min-width: 700px) {
 
-```
-header {
-    padding: 14px 30px;
-}
+    header {
+        padding: 14px 30px;
+    }
 
-.header-content {
-    justify-content: flex-end;
-}
+    .header-content {
+        justify-content: flex-end;
+    }
 
-.logo,
-.menu-button {
-    display: none;
-}
+    .logo,
+    .menu-button {
+        display: none;
+    }
 
-nav {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0;
-    justify-content: flex-end;
-    gap: 8px;
-}
+    nav {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        justify-content: flex-end;
+        gap: 8px;
+    }
 
-nav a {
-    padding: 8px 10px;
-    font-size: 10px;
-}
+    nav a {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
 
-section {
-    padding: 120px 40px;
-}
+    section {
+        padding: 120px 40px;
+    }
 
-.hero {
-    padding: 120px 40px 80px;
-}
+    .hero {
+        padding: 120px 40px 80px;
+    }
 
-.hero h1 {
-    letter-spacing: 6px;
-}
+    .hero h1 {
+        letter-spacing: 6px;
+    }
 
-.accordion-toggle {
-    display: none;
-}
+    .accordion-toggle {
+        display: none;
+    }
 
-.accordion-content {
-    display: block;
-}
+    .accordion-content {
+        display: block;
+    }
 
-.death-grid,
-.cards {
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(0,1fr)
-        );
-}
+    .death-grid,
+    .cards {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
 
-.universe-grid {
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        );
-}
+    .universe-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
 
-.gallery {
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(0,1fr)
-        );
-}
+    .gallery {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
 
-.survey-rating {
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(0,1fr)
-        );
-}
-```
-
+    .survey-rating {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
 }
 
 /* =========================================================
-DESKTOP MAIOR
-========================================================= */
+   DESKTOP MAIOR
+   ========================================================= */
 
 @media (min-width: 900px) {
 
-```
-.content {
-    max-width: 1050px;
-}
+    .content {
+        max-width: 1050px;
+    }
 
-.hero-description {
-    font-size: 1rem;
-}
+    .hero-description {
+        font-size: 1rem;
+    }
 
-.death-card,
-.card,
-.story-block {
-    padding: 26px;
-}
+    .death-card,
+    .card,
+    .story-block {
+        padding: 26px;
+    }
 
-p {
-    font-size: .96rem;
-}
-```
-
+    p {
+        font-size: .96rem;
+    }
 }
 
 /* =========================================================
-CELULARES PEQUENOS
-========================================================= */
+   CELULARES PEQUENOS
+   ========================================================= */
 
 @media (max-width: 380px) {
 
-```
-section {
-    padding-left: 14px;
-    padding-right: 14px;
-}
+    section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
 
-.hero {
-    padding-left: 14px;
-    padding-right: 14px;
-}
+    .hero {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
 
-.accordion-toggle {
-    padding: 16px 14px;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
+    .accordion-toggle {
+        padding: 16px 14px;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
 
-.death-card,
-.card,
-.story-block {
-    padding: 18px;
-}
+    .death-card,
+    .card,
+    .story-block {
+        padding: 18px;
+    }
 
-h2 {
-    font-size: 1.8rem;
-}
-```
-
+    h2 {
+        font-size: 1.8rem;
+    }
 }
