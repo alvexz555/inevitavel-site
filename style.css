@@ -1,12 +1,21 @@
+```css
 /* =========================================================
    INEVITÁVEL
    CSS RESPONSIVO
    DARK ENGINE
    ========================================================= */
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; scroll-padding-top: 75px; background: #050505; }
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+    background: #050505;
+}
 
 body {
     min-width: 0;
@@ -18,13 +27,30 @@ body {
     overflow-x: hidden;
 }
 
-img, video { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; }
+img,
+video {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 header {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     padding: 10px 14px;
     z-index: 1000;
@@ -68,7 +94,9 @@ nav {
     margin-top: 10px;
 }
 
-nav.active { display: flex; }
+nav.active {
+    display: flex;
+}
 
 nav a {
     display: block;
@@ -77,13 +105,20 @@ nav a {
     font-size: 10px;
     letter-spacing: 1px;
     text-align: center;
-    transition: background .2s ease, color .2s ease;
+    transition:
+        background .2s ease,
+        color .2s ease;
 }
 
 nav a:hover {
     background: #fff;
     color: #000;
 }
+
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
 
 section {
     min-height: auto;
@@ -122,6 +157,7 @@ p {
     font-size: .95rem;
     line-height: 1.75;
 }
+
 
 /* =========================================================
    HERO
@@ -204,10 +240,9 @@ p {
     transform: translateY(-2px);
 }
 
+
 /* =========================================================
    DARK ENGINE
-   Apenas o conteúdo narrativo interno fica sob a máscara.
-   Títulos principais permanecem sempre visíveis.
    ========================================================= */
 
 .dark-engine-zone {
@@ -267,8 +302,6 @@ p {
     opacity: 1;
 }
 
-/* Elementos fora da máscara continuam totalmente normais. */
-
 .dark-engine-exempt {
     position: relative;
     z-index: 3;
@@ -280,15 +313,20 @@ p {
     user-select: none;
 }
 
+
 /* =========================================================
    DARK ENGINE MOBILE
-   Cada toque cria uma área revelada permanente.
+   Revelações permanentes + trilha por arrasto
    ========================================================= */
 
 @media (max-width: 699px) {
 
     .dark-engine-zone {
-        touch-action: pan-y;
+        /*
+         * O navegador não deve transformar o gesto
+         * dentro do Dark Engine em scroll.
+         */
+        touch-action: none;
     }
 
     .dark-engine-zone.dark-engine-mobile-active::before {
@@ -300,6 +338,7 @@ p {
         opacity: 1;
     }
 }
+
 
 /* =========================================================
    MORTE
@@ -346,6 +385,7 @@ p {
     margin-bottom: 20px;
 }
 
+
 /* =========================================================
    TRAILER
    ========================================================= */
@@ -391,6 +431,7 @@ p {
 .game-content p + p {
     margin-top: 15px;
 }
+
 
 /* =========================================================
    ACCORDION
@@ -446,6 +487,7 @@ p {
     min-width: 0;
 }
 
+
 /* =========================================================
    UNIVERSO / ORIGEM / DESENVOLVIMENTO
    ========================================================= */
@@ -474,6 +516,7 @@ p {
     max-width: 700px;
 }
 
+
 /* =========================================================
    GALERIA
    ========================================================= */
@@ -497,6 +540,7 @@ p {
     letter-spacing: 2px;
     min-width: 0;
 }
+
 
 /* =========================================================
    PESQUISA
@@ -614,6 +658,7 @@ textarea:focus {
     opacity: 1;
 }
 
+
 /* =========================================================
    REDES / FOOTER
    ========================================================= */
@@ -641,6 +686,7 @@ footer {
     text-align: center;
     color: #555;
 }
+
 
 /* =========================================================
    MOBILE
@@ -708,8 +754,12 @@ footer {
         padding: 20px;
     }
 
+    /*
+     * Importante:
+     * o Dark Engine controla o gesto dentro da própria área.
+     */
     .dark-engine-zone {
-        touch-action: pan-y;
+        touch-action: none;
     }
 
     .dark-engine-zone::after {
@@ -724,6 +774,7 @@ footer {
         );
     }
 }
+
 
 /* =========================================================
    DESKTOP
@@ -795,6 +846,7 @@ footer {
     }
 }
 
+
 /* =========================================================
    DESKTOP GRANDE
    ========================================================= */
@@ -820,6 +872,7 @@ footer {
         font-size: .96rem;
     }
 }
+
 
 /* =========================================================
    TELAS MUITO PEQUENAS
@@ -865,3 +918,4 @@ footer {
         );
     }
 }
+```
