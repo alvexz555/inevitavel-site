@@ -1,4 +1,3 @@
-```css
 /* =========================================================
    INEVITÁVEL
    CSS RESPONSIVO
@@ -11,21 +10,25 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 75px;
     background: #050505;
 }
 
+
 body {
     min-width: 0;
     min-height: 100vh;
     width: 100%;
+    max-width: 100%;
     background: #050505;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
 }
+
 
 img,
 video {
@@ -33,10 +36,12 @@ video {
     display: block;
 }
 
+
 a {
     color: inherit;
     text-decoration: none;
 }
+
 
 button {
     font-family: inherit;
@@ -59,6 +64,7 @@ header {
     border-bottom: 1px solid #1d1d1d;
 }
 
+
 .header-content {
     display: flex;
     justify-content: space-between;
@@ -66,11 +72,13 @@ header {
     min-width: 0;
 }
 
+
 .logo {
     font-size: 14px;
     font-weight: 900;
     letter-spacing: 2px;
 }
+
 
 .menu-button {
     display: flex;
@@ -86,6 +94,7 @@ header {
     flex-shrink: 0;
 }
 
+
 nav {
     display: none;
     flex-direction: column;
@@ -94,9 +103,11 @@ nav {
     margin-top: 10px;
 }
 
+
 nav.active {
     display: flex;
 }
+
 
 nav a {
     display: block;
@@ -110,6 +121,7 @@ nav a {
         color .2s ease;
 }
 
+
 nav a:hover {
     background: #fff;
     color: #000;
@@ -117,7 +129,7 @@ nav a:hover {
 
 
 /* =========================================================
-   SEÇÕES
+   GERAL
    ========================================================= */
 
 section {
@@ -126,12 +138,14 @@ section {
     border-top: 1px solid #151515;
 }
 
+
 .content {
     width: 100%;
     max-width: 950px;
     margin: auto;
     min-width: 0;
 }
+
 
 .section-label {
     margin-bottom: 12px;
@@ -140,6 +154,7 @@ section {
     letter-spacing: 3px;
 }
 
+
 h2 {
     font-size: clamp(2rem, 9vw, 4rem);
     line-height: 1.05;
@@ -147,10 +162,12 @@ h2 {
     margin-bottom: 20px;
 }
 
+
 h3 {
     font-size: 1.1rem;
     margin-bottom: 10px;
 }
+
 
 p {
     color: #bdbdbd;
@@ -175,6 +192,7 @@ p {
     overflow: hidden;
 }
 
+
 .dark-engine-content {
     position: relative;
     z-index: 1;
@@ -183,6 +201,7 @@ p {
     flex-direction: column;
     align-items: center;
 }
+
 
 .hero h1 {
     font-size: clamp(2.5rem, 14vw, 8rem);
@@ -193,6 +212,7 @@ p {
     white-space: nowrap;
 }
 
+
 .tagline {
     font-size: clamp(.8rem, 3vw, 1.3rem);
     letter-spacing: 3px;
@@ -200,15 +220,20 @@ p {
     margin-bottom: 18px;
 }
 
+
 .hero-description {
     width: 100%;
-    max-width: 850px;
-    margin: 0 auto 30px;
+    max-width: 600px;
     color: #bcbcbc;
     font-size: .95rem;
     line-height: 1.7;
-    text-align: center;
+    margin-bottom: 30px;
 }
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 .buttons {
     display: flex;
@@ -217,6 +242,7 @@ p {
     flex-wrap: wrap;
     width: 100%;
 }
+
 
 .button {
     display: inline-block;
@@ -234,6 +260,7 @@ p {
         transform .2s ease;
 }
 
+
 .button:hover {
     background: #fff;
     color: #000;
@@ -243,6 +270,7 @@ p {
 
 /* =========================================================
    DARK ENGINE
+   DESKTOP
    ========================================================= */
 
 .dark-engine-zone {
@@ -250,19 +278,23 @@ p {
     isolation: isolate;
     overflow: hidden;
 
+    width: 100%;
+    max-width: 100%;
+
     --dark-x: 50%;
     --dark-y: 50%;
-    --mobile-reveals: none;
 
     -webkit-user-select: none;
     user-select: none;
 }
+
 
 .dark-engine-area {
     position: relative;
     z-index: 1;
     min-width: 0;
 }
+
 
 .dark-engine-zone::before,
 .dark-engine-zone::after {
@@ -273,17 +305,21 @@ p {
     z-index: 2;
 }
 
+
 .dark-engine-zone::before {
     background: rgba(0, 0, 0, .96);
     opacity: 1;
     transition: opacity .18s ease;
 }
 
+
 .dark-engine-zone::after {
     background: radial-gradient(
         circle 115px at var(--dark-x) var(--dark-y),
+
         transparent 0%,
         transparent 28%,
+
         rgba(0, 0, 0, .10) 38%,
         rgba(0, 0, 0, .34) 52%,
         rgba(0, 0, 0, .72) 70%,
@@ -291,21 +327,31 @@ p {
     );
 
     opacity: 0;
-    transition: opacity .18s ease;
+
+    transition:
+        opacity .18s ease;
 }
+
 
 .dark-engine-zone.dark-engine-active::before {
     opacity: 0;
 }
 
+
 .dark-engine-zone.dark-engine-active::after {
     opacity: 1;
 }
+
+
+/* =========================================================
+   ELEMENTOS FORA DA MÁSCARA
+   ========================================================= */
 
 .dark-engine-exempt {
     position: relative;
     z-index: 3;
 }
+
 
 .dark-engine-zone .accordion-toggle,
 .dark-engine-zone .accordion-content {
@@ -315,28 +361,22 @@ p {
 
 
 /* =========================================================
-   DARK ENGINE MOBILE
-   Revelações permanentes + trilha por arrasto
+   CANVAS MOBILE
    ========================================================= */
 
-@media (max-width: 699px) {
+.dark-engine-mobile-canvas {
+    display: none;
 
-    .dark-engine-zone {
-        /*
-         * O navegador não deve transformar o gesto
-         * dentro do Dark Engine em scroll.
-         */
-        touch-action: none;
-    }
+    position: absolute;
+    inset: 0;
 
-    .dark-engine-zone.dark-engine-mobile-active::before {
-        opacity: 0;
-    }
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
 
-    .dark-engine-zone.dark-engine-mobile-active::after {
-        background: var(--mobile-reveals);
-        opacity: 1;
-    }
+    z-index: 2;
+
+    pointer-events: none;
 }
 
 
@@ -345,16 +385,19 @@ p {
    ========================================================= */
 
 #morte {
-    background: linear-gradient(
-        rgba(5,5,5,.94),
-        rgba(5,5,5,.98)
-    );
+    background:
+        linear-gradient(
+            rgba(5,5,5,.94),
+            rgba(5,5,5,.98)
+        );
 }
+
 
 .death-intro {
     max-width: 700px;
     margin-bottom: 30px;
 }
+
 
 .death-grid,
 .cards {
@@ -362,6 +405,7 @@ p {
     grid-template-columns: 1fr;
     gap: 10px;
 }
+
 
 .death-card,
 .card,
@@ -372,6 +416,7 @@ p {
     min-width: 0;
 }
 
+
 .number,
 .card-number {
     display: block;
@@ -380,6 +425,7 @@ p {
     letter-spacing: 2px;
     margin-bottom: 15px;
 }
+
 
 .card-number {
     margin-bottom: 20px;
@@ -394,10 +440,12 @@ p {
     text-align: center;
 }
 
+
 .trailer-text {
     max-width: 600px;
     margin: 0 auto 30px;
 }
+
 
 .trailer-box {
     width: 100%;
@@ -411,6 +459,7 @@ p {
     text-align: center;
 }
 
+
 .trailer-placeholder {
     padding: 20px;
     color: #777;
@@ -419,14 +468,17 @@ p {
     line-height: 1.7;
 }
 
+
 .trailer-placeholder small {
     font-size: 9px;
     letter-spacing: 1px;
 }
 
+
 .game-content {
     max-width: 700px;
 }
+
 
 .game-content p + p {
     margin-top: 15px;
@@ -452,35 +504,46 @@ p {
     font-size: 11px;
     letter-spacing: 2px;
     cursor: pointer;
+
     transition:
         background .2s ease,
         border-color .2s ease;
 }
+
 
 .accordion-toggle:hover {
     background: #0d0d0d;
     border-color: #333;
 }
 
+
 .accordion-toggle.active {
     border-color: #333;
 }
+
 
 .accordion-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 22px;
     height: 22px;
+
     flex-shrink: 0;
+
     font-size: 18px;
     line-height: 1;
-    transition: transform .25s ease;
+
+    transition:
+        transform .25s ease;
 }
+
 
 .accordion-toggle.active .accordion-icon {
     transform: rotate(45deg);
 }
+
 
 .accordion-content {
     width: 100%;
@@ -489,7 +552,7 @@ p {
 
 
 /* =========================================================
-   UNIVERSO / ORIGEM / DESENVOLVIMENTO
+   UNIVERSO
    ========================================================= */
 
 .universe-grid {
@@ -499,18 +562,22 @@ p {
     margin-top: 10px;
 }
 
+
 .origin {
     max-width: 750px;
 }
+
 
 .origin strong {
     color: #fff;
 }
 
+
 .origin p + p,
 .development p + p {
     margin-top: 15px;
 }
+
 
 .development {
     max-width: 700px;
@@ -528,16 +595,20 @@ p {
     margin-top: 10px;
 }
 
+
 .gallery-item {
     aspect-ratio: 16/10;
     background: #0a0a0a;
     border: 1px solid #202020;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     color: #555;
     font-size: 10px;
     letter-spacing: 2px;
+
     min-width: 0;
 }
 
@@ -550,9 +621,11 @@ p {
     text-align: center;
 }
 
+
 .survey-content {
     max-width: 700px;
 }
+
 
 .survey-rating {
     display: grid;
@@ -561,40 +634,51 @@ p {
     margin: 30px 0;
 }
 
+
 .survey-option {
     display: flex;
     align-items: center;
     gap: 12px;
+
     padding: 16px;
+
     border: 1px solid #202020;
     background: #090909;
+
     color: #bdbdbd;
+
     cursor: pointer;
     text-align: left;
+
     transition:
         border-color .2s ease,
         background .2s ease;
 }
+
 
 .survey-option:hover {
     border-color: #444;
     background: #0c0c0c;
 }
 
+
 .survey-option input {
     accent-color: #fff;
 }
+
 
 .survey-stars {
     letter-spacing: 2px;
     white-space: nowrap;
 }
 
+
 .survey-comment,
 .survey-permission {
     margin-top: 25px;
     text-align: left;
 }
+
 
 .survey-comment > label,
 .survey-permission > p {
@@ -605,45 +689,57 @@ p {
     margin-bottom: 8px;
 }
 
+
 .survey-comment p {
     font-size: .85rem;
     margin-bottom: 12px;
 }
 
+
 textarea {
     width: 100%;
     min-height: 130px;
     resize: vertical;
+
     padding: 14px;
+
     background: #090909;
     color: #fff;
+
     border: 1px solid #202020;
     outline: none;
+
     font: inherit;
 }
+
 
 textarea:focus {
     border-color: #555;
 }
+
 
 .survey-permission {
     display: grid;
     gap: 10px;
 }
 
+
 .survey-permission label {
     color: #bdbdbd;
     font-size: .9rem;
 }
+
 
 .survey-permission input {
     margin-right: 8px;
     accent-color: #fff;
 }
 
+
 .survey-content .button {
     margin-top: 25px;
 }
+
 
 .survey-feedback {
     min-height: 24px;
@@ -651,8 +747,11 @@ textarea:focus {
     color: #aaa;
     font-size: .85rem;
     opacity: 0;
-    transition: opacity .2s ease;
+
+    transition:
+        opacity .2s ease;
 }
+
 
 .survey-feedback.visible {
     opacity: 1;
@@ -660,7 +759,7 @@ textarea:focus {
 
 
 /* =========================================================
-   REDES / FOOTER
+   REDES
    ========================================================= */
 
 #redes {
@@ -670,15 +769,18 @@ textarea:focus {
     align-items: center;
 }
 
+
 .social-content {
     width: 100%;
     max-width: 600px;
     margin: auto;
 }
 
+
 .social-content p {
     margin-bottom: 25px;
 }
+
 
 footer {
     padding: 30px 20px;
@@ -698,24 +800,28 @@ footer {
         padding: 8px 10px;
     }
 
+
     .hero {
         padding: 140px 16px 70px;
     }
 
+
     .hero h1 {
         font-size: clamp(2rem, 11vw, 4rem);
     }
+
 
     .tagline {
         font-size: .8rem;
         letter-spacing: 2px;
     }
 
+
     .hero-description {
         font-size: .9rem;
         line-height: 1.7;
-        max-width: 850px;
     }
+
 
     .buttons {
         width: 100%;
@@ -723,30 +829,37 @@ footer {
         align-items: stretch;
     }
 
+
     .button {
         width: 100%;
         text-align: center;
     }
 
+
     section {
         padding: 75px 16px;
     }
+
 
     h2 {
         font-size: clamp(1.9rem, 9vw, 3rem);
     }
 
+
     p {
         font-size: .93rem;
     }
+
 
     .accordion-content {
         display: none;
     }
 
+
     .accordion-content.active {
         display: block;
     }
+
 
     .death-card,
     .card,
@@ -754,25 +867,43 @@ footer {
         padding: 20px;
     }
 
-    /*
-     * Importante:
-     * o Dark Engine controla o gesto dentro da própria área.
-     */
+
+    /* ==========================================
+       DARK ENGINE MOBILE
+       ========================================== */
+
     .dark-engine-zone {
+        width: 100%;
+        max-width: 100%;
+
+        /*
+         * O dedo controla o Dark Engine.
+         * A página não tenta transformar esse
+         * gesto em scroll horizontal.
+         */
         touch-action: none;
     }
 
+
+    /*
+     * Desliga completamente as camadas
+     * usadas pelo sistema desktop.
+     */
+
+    .dark-engine-zone::before,
     .dark-engine-zone::after {
-        background: radial-gradient(
-            circle 115px at var(--dark-x) var(--dark-y),
-            transparent 0%,
-            transparent 30%,
-            rgba(0,0,0,.10) 40%,
-            rgba(0,0,0,.34) 54%,
-            rgba(0,0,0,.72) 72%,
-            rgba(0,0,0,.96) 100%
-        );
+        display: none;
     }
+
+
+    /*
+     * O canvas passa a ser a camada escura.
+     */
+
+    .dark-engine-mobile-canvas {
+        display: block;
+    }
+
 }
 
 
@@ -786,14 +917,17 @@ footer {
         padding: 14px 30px;
     }
 
+
     .header-content {
         justify-content: flex-end;
     }
+
 
     .logo,
     .menu-button {
         display: none;
     }
+
 
     nav {
         display: flex;
@@ -803,52 +937,79 @@ footer {
         gap: 8px;
     }
 
+
     nav a {
         padding: 8px 10px;
         font-size: 10px;
     }
 
+
     section {
         padding: 120px 40px;
     }
+
 
     .hero {
         padding: 120px 40px 80px;
     }
 
+
     .hero h1 {
         letter-spacing: 6px;
     }
+
 
     .accordion-toggle {
         display: none;
     }
 
+
     .accordion-content {
         display: block;
     }
 
+
     .death-grid,
     .cards {
-        grid-template-columns: repeat(3, minmax(0,1fr));
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0,1fr)
+            );
     }
+
 
     .universe-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
     }
+
 
     .gallery {
-        grid-template-columns: repeat(3, minmax(0,1fr));
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0,1fr)
+            );
     }
 
+
     .survey-rating {
-        grid-template-columns: repeat(3, minmax(0,1fr));
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0,1fr)
+            );
     }
+
 }
 
 
 /* =========================================================
-   DESKTOP GRANDE
+   DESKTOP MAIOR
    ========================================================= */
 
 @media (min-width: 900px) {
@@ -857,10 +1018,11 @@ footer {
         max-width: 1050px;
     }
 
+
     .hero-description {
         font-size: 1rem;
-        max-width: 850px;
     }
+
 
     .death-card,
     .card,
@@ -868,14 +1030,16 @@ footer {
         padding: 26px;
     }
 
+
     p {
         font-size: .96rem;
     }
+
 }
 
 
 /* =========================================================
-   TELAS MUITO PEQUENAS
+   CELULARES PEQUENOS
    ========================================================= */
 
 @media (max-width: 380px) {
@@ -885,10 +1049,12 @@ footer {
         padding-right: 14px;
     }
 
+
     .hero {
         padding-left: 14px;
         padding-right: 14px;
     }
+
 
     .accordion-toggle {
         padding: 16px 14px;
@@ -896,26 +1062,16 @@ footer {
         letter-spacing: 1.5px;
     }
 
+
     .death-card,
     .card,
     .story-block {
         padding: 18px;
     }
 
+
     h2 {
         font-size: 1.8rem;
     }
 
-    .dark-engine-zone::after {
-        background: radial-gradient(
-            circle 110px at var(--dark-x) var(--dark-y),
-            transparent 0%,
-            transparent 30%,
-            rgba(0,0,0,.10) 40%,
-            rgba(0,0,0,.34) 54%,
-            rgba(0,0,0,.72) 72%,
-            rgba(0,0,0,.96) 100%
-        );
-    }
 }
-```
