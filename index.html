@@ -685,7 +685,162 @@
 
         </section>
 
+        <!-- =========================
+             PESQUISA
+        ========================= -->
 
+        <section id="pesquisa">
+
+            <div class="content survey-content">
+
+                <div class="section-label">
+                    EXPERIÊNCIA
+                </div>
+
+                <h2>
+                    Avalie Inevitável.
+                </h2>
+
+                <p>
+                    O que você achou do site?
+                </p>
+
+
+                <form id="surveyForm">
+
+                    <div class="survey-rating">
+
+                        <label class="survey-option">
+                            <input
+                                type="radio"
+                                name="rating"
+                                value="1"
+                                required
+                            >
+
+                            <span class="survey-stars">
+                                ⭐
+                            </span>
+
+                            <span>
+                                Não gostei
+                            </span>
+
+                        </label>
+
+
+                        <label class="survey-option">
+                            <input
+                                type="radio"
+                                name="rating"
+                                value="2"
+                            >
+
+                            <span class="survey-stars">
+                                ⭐⭐
+                            </span>
+
+                            <span>
+                                Foi bom
+                            </span>
+
+                        </label>
+
+
+                        <label class="survey-option">
+                            <input
+                                type="radio"
+                                name="rating"
+                                value="3"
+                            >
+
+                            <span class="survey-stars">
+                                ⭐⭐⭐
+                            </span>
+
+                            <span>
+                                Gostei muito
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="survey-comment">
+
+                        <label for="surveyComment">
+                            Quer deixar um comentário?
+                        </label>
+
+                        <p>
+                            Conte o que achou da experiência
+                            ou o que mais chamou sua atenção.
+                        </p>
+
+                        <textarea
+                            id="surveyComment"
+                            name="comment"
+                            rows="5"
+                            maxlength="1000"
+                            placeholder="Escreva aqui..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="survey-permission">
+
+                        <p>
+                            Seu comentário pode aparecer nas redes sociais
+                            ou na divulgação do jogo. Você autoriza o uso?
+                        </p>
+
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="permission"
+                                value="yes"
+                                required
+                            >
+
+                            Sim, autorizo
+                        </label>
+
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="permission"
+                                value="no"
+                            >
+
+                            Não, não autorizo
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        ENVIAR
+                    </button>
+
+                </form>
+
+
+                <div
+                    id="surveyFeedback"
+                    class="survey-feedback"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
         <!-- =========================
              REDES
         ========================= -->
