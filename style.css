@@ -611,759 +611,7 @@ p {
 
     min-width: 0;
 }
-// ==========================================
-// DARK ENGINE
-// ==========================================
 
-const darkZones =
-    document.querySelectorAll(".dark-engine-zone");
-
-
-darkZones.forEach(zone => {
-
-    let activePointerId = null;
-
-    /*
-     * Cada ponto fica normalizado entre 0 e 1.
-     * Assim o reveal continua no lugar correto
-     * mesmo se o tamanho da zona mudar.
-     */
-    let mobileReveals = [];
-
-    let lastRevealPoint = null;
-
-    let canvasWidth = 0;
-    let canvasHeight = 0;
-    let canvasDpr = 1;
-
-    let drawQueued = false;
-
-
-    const canvas =
-        zone.querySelector(
-            ".dark-engine-mobile-canvas"
-        );
-
-
-    if (!canvas) {
-        return;
-    }
-
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    const isMobile = () =>
-        window.innerWidth <= 699;
-
-
-    // ==========================================
-    // DESKTOP
-    // ==========================================
-
-    const moveLight = event => {
-
-        const rect =
-            zone.getBoundingClientRect();
-
-
-        const x =
-            event.clientX - rect.left;
-
-
-        const y =
-            event.clientY - rect.top;
-
-
-        zone.style.setProperty(
-            "--dark-x",
-            `${x}px`
-        );
-
-
-        zone.style.setProperty(
-            "--dark-y",
-            `${y}px`
-        );
-
-    };
-
-
-    zone.addEventListener(
-        "pointerenter",
-        event => {
-
-            if (
-                event.pointerType === "mouse"
-            ) {
-
-                moveLight(event);
-
-                zone.classList.add(
-                    "dark-engine-active"
-                );
-
-            }
-
-        }
-    );
-
-
-    zone.addEventListener(
-        "pointermove",
-        event => {
-
-            // ==================================
-            // DESKTOP
-            // ==================================
-
-            if (
-                event.pointerType === "mouse"
-            ) {
-
-                moveLight(event);
-
-                zone.classList.add(
-                    "dark-engine-active"
-                );
-
-                return;
-            }
-
-
-            // ==================================
-            // MOBILE
-            // ==================================
-
-            if (
-                isMobile() &&
-                event.pointerId === activePointerId
-            ) {
-
-                addMobileReveal(event);
-
-            }
-
-        }
-    );
-
-
-    zone.addEventListener(
-        "pointerleave",
-        event => {
-
-            if (
-                event.pointerType === "mouse"
-            ) {
-
-                zone.classList.remove(
-                    "dark-engine-active"
-                );
-
-            }
-
-        }
-    );
-
-
-    // ==========================================
-    // POSIÇÃO DO DEDO
-    // ==========================================
-
-    const getMobilePoint = event => {
-
-        const rect =
-            zone.getBoundingClientRect();
-
-
-        return {
-
-            x: Math.max(
-                0,
-                Math.min(
-                    rect.width,
-                    event.clientX - rect.left
-                )
-            ),
-
-            y: Math.max(
-                0,
-                Math.min(
-                    rect.height,
-                    event.clientY - rect.top
-                )
-            )
-
-        };
-
-    };
-
-
-    // ==========================================
-    // DESENHO
-    // ==========================================
-
-    const drawMobileCanvas = () => {
-
-        if (
-            !isMobile() ||
-            canvasWidth <= 0 ||
-            canvasHeight <= 0
-        ) {
-            return;
-        }
-
-
-        /*
-         * Garante que o sistema continue
-         * usando a escala correta do aparelho.
-         */
-
-        ctx.setTransform(
-            canvasDpr,
-            0,
-            0,
-            canvasDpr,
-            0,
-            0
-        );
-
-
-        // --------------------------------------
-        // MÁSCARA ESCURA
-        // --------------------------------------
-
-        ctx.globalCompositeOperation =
-            "source-over";
-
-
-        ctx.clearRect(
-            0,
-            0,
-            canvasWidth,
-            canvasHeight
-        );
-
-
-        ctx.fillStyle =
-            "rgba(0, 0, 0, .96)";
-
-
-        ctx.fillRect(
-            0,
-            0,
-            canvasWidth,
-            canvasHeight
-        );
-
-
-        // --------------------------------------
-        // REVELAÇÕES
-        // --------------------------------------
-
-        ctx.globalCompositeOperation =
-            "destination-out";
-
-
-        mobileReveals.forEach(point => {
-
-            const x =
-                point.x * canvasWidth;
-
-
-            const y =
-                point.y * canvasHeight;
-
-
-            const radius = 115;
-
-
-            const gradient =
-                ctx.createRadialGradient(
-                    x,
-                    y,
-                    0,
-                    x,
-                    y,
-                    radius
-                );
-
-
-            gradient.addColorStop(
-                0,
-                "rgba(0,0,0,1)"
-            );
-
-
-            gradient.addColorStop(
-                .30,
-                "rgba(0,0,0,1)"
-            );
-
-
-            gradient.addColorStop(
-                .42,
-                "rgba(0,0,0,.92)"
-            );
-
-
-            gradient.addColorStop(
-                .56,
-                "rgba(0,0,0,.65)"
-            );
-
-
-            gradient.addColorStop(
-                .72,
-                "rgba(0,0,0,.30)"
-            );
-
-
-            gradient.addColorStop(
-                1,
-                "rgba(0,0,0,0)"
-            );
-
-
-            ctx.fillStyle =
-                gradient;
-
-
-            ctx.beginPath();
-
-
-            ctx.arc(
-                x,
-                y,
-                radius,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fill();
-
-        });
-
-
-        ctx.globalCompositeOperation =
-            "source-over";
-
-    };
-
-
-    // ==========================================
-    // DESENHO OTIMIZADO
-    // ==========================================
-
-    const requestMobileDraw = () => {
-
-        if (drawQueued) {
-            return;
-        }
-
-
-        drawQueued = true;
-
-
-        requestAnimationFrame(() => {
-
-            drawQueued = false;
-
-            drawMobileCanvas();
-
-        });
-
-    };
-
-
-    // ==========================================
-    // REDIMENSIONA CANVAS
-    // ==========================================
-
-    const resizeMobileCanvas = () => {
-
-        if (!isMobile()) {
-            return;
-        }
-
-
-        const rect =
-            zone.getBoundingClientRect();
-
-
-        if (
-            rect.width <= 0 ||
-            rect.height <= 0
-        ) {
-            return;
-        }
-
-
-        canvasWidth =
-            rect.width;
-
-
-        canvasHeight =
-            rect.height;
-
-
-        canvasDpr =
-            window.devicePixelRatio || 1;
-
-
-        canvas.width =
-            Math.round(
-                canvasWidth * canvasDpr
-            );
-
-
-        canvas.height =
-            Math.round(
-                canvasHeight * canvasDpr
-            );
-
-
-        canvas.style.width =
-            `${canvasWidth}px`;
-
-
-        canvas.style.height =
-            `${canvasHeight}px`;
-
-
-        drawMobileCanvas();
-
-    };
-
-
-    // ==========================================
-    // ADICIONA PONTO
-    // ==========================================
-
-    const addMobileReveal = event => {
-
-        const point =
-            getMobilePoint(event);
-
-
-        const rect =
-            zone.getBoundingClientRect();
-
-
-        if (
-            rect.width <= 0 ||
-            rect.height <= 0
-        ) {
-            return;
-        }
-
-
-        /*
-         * Converte para coordenadas normalizadas.
-         */
-
-        const normalizedPoint = {
-
-            x:
-                point.x /
-                rect.width,
-
-            y:
-                point.y /
-                rect.height
-
-        };
-
-
-        // ======================================
-        // PRIMEIRO PONTO
-        // ======================================
-
-        if (!lastRevealPoint) {
-
-            mobileReveals.push(
-                normalizedPoint
-            );
-
-
-            lastRevealPoint =
-                normalizedPoint;
-
-
-            requestMobileDraw();
-
-            return;
-
-        }
-
-
-        // ======================================
-        // DISTÂNCIA
-        // ======================================
-
-        const dx =
-            (
-                normalizedPoint.x -
-                lastRevealPoint.x
-            ) * rect.width;
-
-
-        const dy =
-            (
-                normalizedPoint.y -
-                lastRevealPoint.y
-            ) * rect.height;
-
-
-        const distance =
-            Math.hypot(
-                dx,
-                dy
-            );
-
-
-        /*
-         * Cria pontos intermediários.
-         *
-         * Isso transforma:
-         *
-         * ponto -> ponto
-         *
-         * em:
-         *
-         * ponto -> • -> • -> • -> ponto
-         *
-         * evitando buracos durante o arrasto.
-         */
-
-        const spacing = 8;
-
-
-        const steps =
-            Math.max(
-                1,
-                Math.ceil(
-                    distance / spacing
-                )
-            );
-
-
-        for (
-            let i = 1;
-            i <= steps;
-            i++
-        ) {
-
-            const t =
-                i / steps;
-
-
-            const interpolatedPoint = {
-
-                x:
-                    lastRevealPoint.x +
-                    (
-                        normalizedPoint.x -
-                        lastRevealPoint.x
-                    ) * t,
-
-                y:
-                    lastRevealPoint.y +
-                    (
-                        normalizedPoint.y -
-                        lastRevealPoint.y
-                    ) * t
-
-            };
-
-
-            mobileReveals.push(
-                interpolatedPoint
-            );
-
-        }
-
-
-        lastRevealPoint =
-            normalizedPoint;
-
-
-        requestMobileDraw();
-
-    };
-
-
-    // ==========================================
-    // POINTER DOWN
-    // ==========================================
-
-    zone.addEventListener(
-        "pointerdown",
-        event => {
-
-            if (
-                event.pointerType === "mouse" ||
-                !isMobile()
-            ) {
-                return;
-            }
-
-
-            activePointerId =
-                event.pointerId;
-
-
-            lastRevealPoint =
-                null;
-
-
-            addMobileReveal(event);
-
-
-            /*
-             * A partir daqui o dedo continua
-             * pertencendo ao Dark Engine mesmo
-             * quando sair momentaneamente da área.
-             */
-
-            zone.setPointerCapture(
-                event.pointerId
-            );
-
-        }
-    );
-
-
-    // ==========================================
-    // POINTER UP
-    // ==========================================
-
-    zone.addEventListener(
-        "pointerup",
-        event => {
-
-            if (
-                event.pointerType === "mouse" ||
-                event.pointerId !== activePointerId
-            ) {
-                return;
-            }
-
-
-            activePointerId =
-                null;
-
-
-            lastRevealPoint =
-                null;
-
-
-            if (
-                zone.hasPointerCapture(
-                    event.pointerId
-                )
-            ) {
-
-                zone.releasePointerCapture(
-                    event.pointerId
-                );
-
-            }
-
-        }
-    );
-
-
-    // ==========================================
-    // POINTER CANCEL
-    // ==========================================
-
-    zone.addEventListener(
-        "pointercancel",
-        event => {
-
-            if (
-                event.pointerType === "mouse" ||
-                event.pointerId !== activePointerId
-            ) {
-                return;
-            }
-
-
-            activePointerId =
-                null;
-
-
-            lastRevealPoint =
-                null;
-
-
-            if (
-                zone.hasPointerCapture(
-                    event.pointerId
-                )
-            ) {
-
-                zone.releasePointerCapture(
-                    event.pointerId
-                );
-
-            }
-
-        }
-    );
-
-
-    // ==========================================
-    // RESIZE
-    // ==========================================
-
-    window.addEventListener(
-        "resize",
-        () => {
-
-            if (isMobile()) {
-                resizeMobileCanvas();
-            }
-
-        }
-    );
-
-
-    // ==========================================
-    // RESIZE OBSERVER
-    // ==========================================
-
-    if (
-        typeof ResizeObserver !== "undefined"
-    ) {
-
-        const observer =
-            new ResizeObserver(() => {
-
-                if (isMobile()) {
-                    resizeMobileCanvas();
-                }
-
-            });
-
-
-        observer.observe(zone);
-
-    }
-
-
-    // ==========================================
-    // INICIALIZAÇÃO
-    // ==========================================
-
-    if (isMobile()) {
-        resizeMobileCanvas();
-    }
-
-});
 
 /* =========================================================
    PESQUISA
@@ -1619,77 +867,83 @@ footer {
         padding: 20px;
     }
 
+
     /* ==========================================
-   DARK ENGINE MOBILE
-   ========================================== */
+       DARK ENGINE MOBILE
+       ========================================== */
 
-.dark-engine-zone {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
+    .dark-engine-zone {
+        position: relative;
+
+        width: 100%;
+        max-width: 100%;
+
+        overflow: hidden;
+
+        /*
+         * Permite que o navegador faça scroll
+         * vertical normalmente.
+         *
+         * O JavaScript decide quando o gesto
+         * horizontal pertence ao Dark Engine.
+         */
+        touch-action: pan-y;
+
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
 
     /*
-     * O gesto dentro do Dark Engine pertence
-     * exclusivamente ao sistema de revelação.
+     * Desliga completamente as camadas
+     * usadas pelo sistema desktop.
      */
-    touch-action: pan-y;
 
-    -webkit-user-select: none;
-    user-select: none;
-}
+    .dark-engine-zone::before,
+    .dark-engine-zone::after {
+        display: none;
+    }
 
-
-/*
- * No celular o sistema desktop é desligado.
- * O canvas assume o controle da máscara.
- */
-
-.dark-engine-zone::before,
-.dark-engine-zone::after {
-    display: none;
-}
-
-
-/*
- * Canvas da máscara.
- */
-
-.dark-engine-mobile-canvas {
-    display: block;
-
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: 100%;
-
-    z-index: 2;
-
-    pointer-events: none;
 
     /*
-     * Evita que o canvas interfira
-     * no toque dos elementos abaixo.
+     * O canvas passa a ser a camada escura.
      */
-    -webkit-user-select: none;
-    user-select: none;
+
+    .dark-engine-mobile-canvas {
+        display: block;
+
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        max-width: 100%;
+
+        z-index: 2;
+
+        pointer-events: none;
+
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+
+    /*
+     * Conteúdo do Dark Engine.
+     */
+
+    .dark-engine-area {
+        position: relative;
+
+        z-index: 1;
+
+        min-width: 0;
+        width: 100%;
+    }
+
 }
 
-
-/*
- * O conteúdo continua abaixo da máscara.
- */
-
-.dark-engine-area {
-    position: relative;
-    z-index: 1;
-
-    min-width: 0;
-    width: 100%;
-}
 
 /* =========================================================
    DESKTOP
