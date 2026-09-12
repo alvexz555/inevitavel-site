@@ -253,10 +253,6 @@
 
             mobileReveals.push({ x, y });
 
-            if (mobileReveals.length > 40) {
-                mobileReveals.shift();
-            }
-
             const gradients = mobileReveals.map(point =>
                 `radial-gradient(circle 115px at ${point.x}px ${point.y}px,
                     transparent 0%,
