@@ -6,6 +6,190 @@
     <meta name="description" content="INEVITÁVEL - A morte é apenas o começo.">
     <title>INEVITÁVEL | A morte é apenas o começo</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================
+           INEVITÁVEL - SISTEMA DE DEGRADAÇÃO
+           ========================================== */
+
+        .inevitable-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .inevitable-text.glitching {
+            animation: inevitable-glitch 0.12s infinite;
+        }
+
+        .inevitable-text.glitching::before,
+        .inevitable-text.glitching::after {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .inevitable-text.glitching::before {
+            animation: inevitable-glitch-before 0.18s infinite;
+        }
+
+        .inevitable-text.glitching::after {
+            animation: inevitable-glitch-after 0.14s infinite;
+        }
+
+        @keyframes inevitable-glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 1px);
+            }
+
+            40% {
+                transform: translate(2px, -1px);
+            }
+
+            60% {
+                transform: translate(-1px, 2px);
+            }
+
+            80% {
+                transform: translate(1px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        @keyframes inevitable-glitch-before {
+            0% {
+                clip-path: inset(0 0 80% 0);
+                transform: translate(-3px);
+            }
+
+            50% {
+                clip-path: inset(40% 0 20% 0);
+                transform: translate(3px);
+            }
+
+            100% {
+                clip-path: inset(70% 0 0 0);
+                transform: translate(-2px);
+            }
+        }
+
+        @keyframes inevitable-glitch-after {
+            0% {
+                clip-path: inset(70% 0 0 0);
+                transform: translate(3px);
+            }
+
+            50% {
+                clip-path: inset(10% 0 50% 0);
+                transform: translate(-3px);
+            }
+
+            100% {
+                clip-path: inset(0 0 75% 0);
+                transform: translate(2px);
+            }
+        }
+
+        .inevitable-clickable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .inevitable-error-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        .inevitable-error {
+            position: absolute;
+            font-family: monospace;
+            font-weight: 900;
+            font-size: clamp(14px, 2vw, 24px);
+            opacity: 0;
+            animation: inevitable-error-pop 0.8s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes inevitable-error-pop {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(0deg);
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.2) rotate(var(--rotation));
+            }
+        }
+
+        .inevitable-confetti {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            pointer-events: none;
+            z-index: 30;
+            animation: inevitable-confetti 0.9s forwards;
+        }
+
+        @keyframes inevitable-confetti {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform:
+                    translate(var(--x), var(--y))
+                    rotate(var(--rotation));
+            }
+        }
+
+        .inevitable-restabilizing {
+            animation: inevitable-restabilize 0.7s;
+        }
+
+        @keyframes inevitable-restabilize {
+            0% {
+                filter: contrast(3);
+                transform: skewX(8deg);
+            }
+
+            25% {
+                filter: contrast(0.5);
+                transform: skewX(-5deg);
+            }
+
+            50% {
+                filter: contrast(2);
+                transform: skewX(3deg);
+            }
+
+            100% {
+                filter: none;
+                transform: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -41,11 +225,21 @@
 
 <main>
 
+    <!-- ==========================================
+         HERO
+         ========================================== -->
+
     <section class="hero" id="inicio">
+
         <div>
+
             <h1>INEVITÁVEL</h1>
 
-            <div class="tagline">
+            <div
+                class="tagline inevitable-text"
+                id="deathTagline"
+                data-text="A MORTE É APENAS O COMEÇO"
+            >
                 A MORTE É APENAS O COMEÇO
             </div>
 
@@ -55,6 +249,7 @@
             </p>
 
             <div class="buttons">
+
                 <a href="#trailer" class="button">
                     VER TRAILER
                 </a>
@@ -62,19 +257,32 @@
                 <a href="#jogo" class="button">
                     CONHEÇA O JOGO
                 </a>
+
             </div>
+
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         MORTE
+         ========================================== -->
+
     <section id="morte">
+
         <div class="content">
 
             <div class="section-label">
                 O CICLO
             </div>
 
-            <h2 class="dark-engine-exempt">
+            <h2
+                class="dark-engine-exempt inevitable-text inevitable-clickable"
+                id="manifestoText"
+                data-text="MORRA. MUDE. DESCUBRA."
+                title="Interagir"
+            >
                 MORRA.<br>
                 MUDE.<br>
                 DESCUBRA.
@@ -106,7 +314,9 @@
 
                             <div class="death-card">
                                 <span class="number">01</span>
+
                                 <h3>A CONTAMINAÇÃO</h3>
+
                                 <p>
                                     Trakam foi marcado por uma criatura Blord.
                                     Parte dessa contaminação permanece ligada
@@ -116,7 +326,9 @@
 
                             <div class="death-card">
                                 <span class="number">02</span>
+
                                 <h3>A SINCRONIZAÇÃO</h3>
+
                                 <p>
                                     A criatura utiliza os olhos como ponto
                                     de leitura e sincronização perceptiva.
@@ -125,7 +337,9 @@
 
                             <div class="death-card">
                                 <span class="number">03</span>
+
                                 <h3>A RUPTURA</h3>
+
                                 <p>
                                     Quando a sincronização é quebrada,
                                     o ciclo perde sua estabilidade e a
@@ -139,7 +353,6 @@
 
                 </div>
 
-                <!-- Camada usada somente no celular -->
                 <canvas
                     class="dark-engine-mobile-canvas"
                     aria-hidden="true"
@@ -148,10 +361,16 @@
             </div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         TRAILER
+         ========================================== -->
+
     <section id="trailer">
+
         <div class="content">
 
             <div class="section-label">
@@ -167,20 +386,30 @@
             </p>
 
             <div class="trailer-box">
+
                 <div class="trailer-placeholder">
                     TRAILER EM BREVE
+
                     <br><br>
+
                     <small>
                         O material já está sendo produzido.
                     </small>
                 </div>
+
             </div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         JOGO
+         ========================================== -->
+
     <section id="jogo">
+
         <div class="content game-content">
 
             <div class="section-label">
@@ -203,17 +432,28 @@
             </p>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         MECÂNICAS
+         ========================================== -->
+
     <section id="mecanicas">
+
         <div class="content">
 
             <div class="section-label">
                 MECÂNICAS
             </div>
 
-            <h2 class="dark-engine-exempt">
+            <h2
+                class="dark-engine-exempt inevitable-text inevitable-clickable"
+                id="survivalText"
+                data-text="Sobreviver é aprender."
+                title="Interagir"
+            >
                 Sobreviver é aprender.
             </h2>
 
@@ -237,7 +477,9 @@
 
                             <div class="card">
                                 <span class="card-number">01</span>
+
                                 <h3>MODO CAÇADOR</h3>
+
                                 <p>
                                     Um estado que altera a forma como Trakam
                                     enfrenta e responde às ameaças.
@@ -246,7 +488,9 @@
 
                             <div class="card">
                                 <span class="card-number">02</span>
+
                                 <h3>COMBATE</h3>
+
                                 <p>
                                     Leia os movimentos, reaja aos inimigos
                                     e aprenda com seus padrões.
@@ -255,7 +499,9 @@
 
                             <div class="card">
                                 <span class="card-number">03</span>
+
                                 <h3>EXPLORAÇÃO</h3>
+
                                 <p>
                                     Atravesse um mundo quebrado e procure
                                     pistas sobre a contaminação e sua origem.
@@ -268,7 +514,6 @@
 
                 </div>
 
-                <!-- Camada usada somente no celular -->
                 <canvas
                     class="dark-engine-mobile-canvas"
                     aria-hidden="true"
@@ -277,10 +522,16 @@
             </div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         UNIVERSO
+         ========================================== -->
+
     <section id="universo">
+
         <div class="content">
 
             <div class="section-label">
@@ -306,6 +557,7 @@
 
                     <div class="story-block">
                         <h3>TRAKAM</h3>
+
                         <p>
                             Um javali que foi contaminado por uma criatura
                             Blord. Depois de romper a sincronização com seu
@@ -316,6 +568,7 @@
 
                     <div class="story-block">
                         <h3>OS BLORDS</h3>
+
                         <p>
                             Criaturas originadas de uma mutação criada em
                             laboratório. Seu corpo se deforma com o tempo,
@@ -326,6 +579,7 @@
 
                     <div class="story-block">
                         <h3>A CONTAMINAÇÃO</h3>
+
                         <p>
                             Para recuperar parte de sua forma, um Blord pode
                             contaminar outros corpos. A vítima passa a carregar
@@ -335,6 +589,7 @@
 
                     <div class="story-block">
                         <h3>A SINCRONIZAÇÃO OCULAR</h3>
+
                         <p>
                             Os olhos funcionam como uma interface de leitura
                             e sincronização perceptiva. Quando essa conexão
@@ -348,10 +603,16 @@
             </div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         ORIGEM
+         ========================================== -->
+
     <section id="origem">
+
         <div class="content origin">
 
             <div class="section-label">
@@ -381,10 +642,16 @@
             </p>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         DESENVOLVIMENTO
+         ========================================== -->
+
     <section id="desenvolvimento">
+
         <div class="content development">
 
             <div class="section-label">
@@ -406,10 +673,16 @@
             </p>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         GALERIA
+         ========================================== -->
+
     <section id="galeria">
+
         <div class="content">
 
             <div class="section-label">
@@ -462,17 +735,28 @@
             </div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         PESQUISA
+         ========================================== -->
+
     <section id="pesquisa">
+
         <div class="content survey-content">
 
             <div class="section-label">
                 EXPERIÊNCIA
             </div>
 
-            <h2>
+            <h2
+                class="inevitable-text inevitable-clickable"
+                id="surveyTitle"
+                data-text="Avalie Inevitável."
+                title="Interagir"
+            >
                 Avalie Inevitável.
             </h2>
 
@@ -485,34 +769,52 @@
                 <div class="survey-rating">
 
                     <label class="survey-option">
+
                         <input
                             type="radio"
                             name="rating"
                             value="1"
                             required
                         >
+
                         <span class="survey-stars">⭐</span>
-                        <span>Não gostei</span>
+
+                        <span>
+                            Não gostei
+                        </span>
+
                     </label>
 
                     <label class="survey-option">
+
                         <input
                             type="radio"
                             name="rating"
                             value="2"
                         >
+
                         <span class="survey-stars">⭐⭐</span>
-                        <span>Foi bom</span>
+
+                        <span>
+                            Foi bom
+                        </span>
+
                     </label>
 
                     <label class="survey-option">
+
                         <input
                             type="radio"
                             name="rating"
                             value="3"
                         >
+
                         <span class="survey-stars">⭐⭐⭐</span>
-                        <span>Gostei muito</span>
+
+                        <span>
+                            Gostei muito
+                        </span>
+
                     </label>
 
                 </div>
@@ -548,22 +850,28 @@
                     </p>
 
                     <label>
+
                         <input
                             type="radio"
                             name="permission"
                             value="yes"
                             required
                         >
+
                         Sim, autorizo
+
                     </label>
 
                     <label>
+
                         <input
                             type="radio"
                             name="permission"
                             value="no"
                         >
+
                         Não, não autorizo
+
                     </label>
 
                 </div>
@@ -584,10 +892,16 @@
             ></div>
 
         </div>
+
     </section>
 
 
+    <!-- ==========================================
+         REDES
+         ========================================== -->
+
     <section id="redes">
+
         <div class="social-content">
 
             <div class="section-label">
@@ -617,6 +931,7 @@
             </div>
 
         </div>
+
     </section>
 
 </main>
@@ -720,11 +1035,608 @@
 
 
     // ==========================================
+    // SISTEMA DE DEGRADAÇÃO
+    // ==========================================
+
+    const wait =
+        ms =>
+            new Promise(
+                resolve =>
+                    setTimeout(resolve, ms)
+            );
+
+
+    const glitchText = async (
+        element,
+        newText,
+        duration = 900
+    ) => {
+
+        if (!element) {
+            return;
+        }
+
+
+        element.dataset.text =
+            newText;
+
+
+        element.classList.add(
+            "glitching"
+        );
+
+
+        await wait(duration);
+
+
+        element.textContent =
+            newText;
+
+
+        element.classList.remove(
+            "glitching"
+        );
+
+    };
+
+
+    const restoreText = async (
+        element,
+        originalText
+    ) => {
+
+        if (!element) {
+            return;
+        }
+
+
+        element.classList.add(
+            "inevitable-restabilizing"
+        );
+
+
+        await wait(700);
+
+
+        element.textContent =
+            originalText;
+
+        element.dataset.text =
+            originalText;
+
+
+        element.classList.remove(
+            "inevitable-restabilizing"
+        );
+
+    };
+
+
+    // ==========================================
+    // BLOCO 1
+    // A MORTE É APENAS O COMEÇO
+    // ==========================================
+
+    const deathTagline =
+        document.getElementById(
+            "deathTagline"
+        );
+
+
+    const deathCycle = async () => {
+
+        await wait(7000);
+
+
+        await glitchText(
+            deathTagline,
+            "A VIDA É APENAS MAIS UM FIM",
+            1000
+        );
+
+
+        await wait(4500);
+
+
+        await glitchText(
+            deathTagline,
+            "OQUE VOCÊ ESCOLHE?",
+            1400
+        );
+
+
+        await wait(3500);
+
+
+        await glitchText(
+            deathTagline,
+            "A MORTE É APENAS O COMEÇO",
+            1100
+        );
+
+
+        await wait(6000);
+
+
+        deathCycle();
+
+    };
+
+
+    deathCycle();
+
+
+    // ==========================================
+    // SISTEMA DE ERROR
+    // ==========================================
+
+    const createErrorBurst = (
+        container,
+        amount = 12
+    ) => {
+
+        if (!container) {
+            return;
+        }
+
+
+        let errorContainer =
+            container.querySelector(
+                ".inevitable-error-container"
+            );
+
+
+        if (!errorContainer) {
+
+            errorContainer =
+                document.createElement("div");
+
+            errorContainer.className =
+                "inevitable-error-container";
+
+            container.style.position =
+                "relative";
+
+            container.appendChild(
+                errorContainer
+            );
+
+        }
+
+
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            const error =
+                document.createElement("span");
+
+
+            error.className =
+                "inevitable-error";
+
+
+            error.textContent =
+                "ERROR";
+
+
+            error.style.left =
+                `${Math.random() * 90}%`;
+
+
+            error.style.top =
+                `${Math.random() * 90}%`;
+
+
+            error.style.setProperty(
+                "--rotation",
+                `${Math.random() * 40 - 20}deg`
+            );
+
+
+            errorContainer.appendChild(
+                error
+            );
+
+
+            setTimeout(() => {
+
+                error.remove();
+
+            }, 900);
+
+        }
+
+
+        // ------------------------------
+        // CONFETE
+        // ------------------------------
+
+        for (
+            let i = 0;
+            i < Math.min(amount * 2, 40);
+            i++
+        ) {
+
+            const piece =
+                document.createElement("span");
+
+
+            piece.className =
+                "inevitable-confetti";
+
+
+            piece.style.left =
+                "50%";
+
+
+            piece.style.top =
+                "50%";
+
+
+            piece.style.setProperty(
+                "--x",
+                `${Math.random() * 400 - 200}px`
+            );
+
+
+            piece.style.setProperty(
+                "--y",
+                `${Math.random() * 300 - 150}px`
+            );
+
+
+            piece.style.setProperty(
+                "--rotation",
+                `${Math.random() * 720 - 360}deg`
+            );
+
+
+            errorContainer.appendChild(
+                piece
+            );
+
+
+            setTimeout(() => {
+
+                piece.remove();
+
+            }, 900);
+
+        }
+
+    };
+
+
+    // ==========================================
+    // BLOCO 2
+    // MORRA. MUDE. DESCUBRA.
+    // ==========================================
+
+    const manifestoText =
+        document.getElementById(
+            "manifestoText"
+        );
+
+
+    const manifestoContainer =
+        manifestoText.closest(
+            "section"
+        );
+
+
+    let manifestoState = 0;
+
+    let manifestoBusy = false;
+
+
+    manifestoText.addEventListener(
+        "click",
+        async () => {
+
+            if (manifestoBusy) {
+                return;
+            }
+
+
+            manifestoBusy = true;
+
+
+            // ------------------------------
+            // 0 -> 1
+            // ------------------------------
+
+            if (
+                manifestoState === 0
+            ) {
+
+                manifestoState = 1;
+
+
+                await glitchText(
+                    manifestoText,
+                    "MORTE. MUDANÇA. DESCOBERTA",
+                    800
+                );
+
+
+                manifestoBusy = false;
+
+                return;
+            }
+
+
+            // ------------------------------
+            // 1 -> 2
+            // ------------------------------
+
+            if (
+                manifestoState === 1
+            ) {
+
+                manifestoState = 2;
+
+
+                await glitchText(
+                    manifestoText,
+                    "ERROR",
+                    600
+                );
+
+
+                createErrorBurst(
+                    manifestoContainer,
+                    20
+                );
+
+
+                manifestoBusy = false;
+
+                return;
+            }
+
+
+            // ------------------------------
+            // 2 -> 3
+            // ------------------------------
+
+            if (
+                manifestoState === 2
+            ) {
+
+                manifestoState = 3;
+
+
+                await glitchText(
+                    manifestoText,
+                    "VOCÊ NÃO DEVIA ESTAR AQUI",
+                    1000
+                );
+
+
+                manifestoBusy = false;
+
+                return;
+            }
+
+
+            // ------------------------------
+            // 3 -> 0
+            // RESTABILIZAÇÃO
+            // ------------------------------
+
+            if (
+                manifestoState === 3
+            ) {
+
+                manifestoState = 0;
+
+
+                await restoreText(
+                    manifestoText,
+                    "MORRA. MUDE. DESCUBRA."
+                );
+
+
+                manifestoBusy = false;
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // BLOCO 3
+    // SOBREVIVER É APRENDER
+    // ==========================================
+
+    const survivalText =
+        document.getElementById(
+            "survivalText"
+        );
+
+
+    const survivalContainer =
+        survivalText.closest(
+            "section"
+        );
+
+
+    let survivalState = 0;
+
+    let survivalBusy = false;
+
+
+    const survivalCycle =
+        async () => {
+
+            await wait(9000);
+
+
+            if (
+                survivalState !== 0 ||
+                survivalBusy
+            ) {
+
+                survivalCycle();
+
+                return;
+
+            }
+
+
+            survivalBusy = true;
+
+
+            await glitchText(
+                survivalText,
+                "sobreviver é morrer",
+                900
+            );
+
+
+            await wait(4000);
+
+
+            if (
+                survivalState === 0
+            ) {
+
+                await glitchText(
+                    survivalText,
+                    "morrer é aprender",
+                    900
+                );
+
+            }
+
+
+            survivalBusy = false;
+
+
+            await wait(6000);
+
+
+            if (
+                survivalState === 0
+            ) {
+
+                await glitchText(
+                    survivalText,
+                    "Sobreviver é aprender.",
+                    900
+                );
+
+            }
+
+
+            survivalCycle();
+
+        };
+
+
+    survivalCycle();
+
+
+    survivalText.addEventListener(
+        "click",
+        async () => {
+
+            if (survivalBusy) {
+                return;
+            }
+
+
+            survivalBusy = true;
+
+
+            survivalState = 1;
+
+
+            await glitchText(
+                survivalText,
+                "morrer",
+                700
+            );
+
+
+            createErrorBurst(
+                survivalContainer,
+                24
+            );
+
+
+            await wait(1200);
+
+
+            survivalBusy = false;
+
+        }
+    );
+
+
+    // ==========================================
+    // BLOCO 4
+    // AVALIE INEVITÁVEL
+    // ==========================================
+
+    const surveyTitle =
+        document.getElementById(
+            "surveyTitle"
+        );
+
+
+    let surveyTitleChanged =
+        false;
+
+
+    surveyTitle.addEventListener(
+        "click",
+        async () => {
+
+            if (surveyTitleChanged) {
+                return;
+            }
+
+
+            surveyTitleChanged =
+                true;
+
+
+            await glitchText(
+                surveyTitle,
+                "avaliar é inevitável.",
+                700
+            );
+
+
+            await wait(3500);
+
+
+            await restoreText(
+                surveyTitle,
+                "Avalie Inevitável."
+            );
+
+
+            surveyTitleChanged =
+                false;
+
+        }
+    );
+
+
+    // ==========================================
     // DARK ENGINE
     // ==========================================
 
     const darkZones =
-        document.querySelectorAll(".dark-engine-zone");
+        document.querySelectorAll(
+            ".dark-engine-zone"
+        );
 
 
     darkZones.forEach(zone => {
@@ -750,20 +1662,18 @@
             window.innerWidth <= 699;
 
 
-        // ------------------------------------------
-        // DESKTOP
-        // ------------------------------------------
-
         const moveLight = event => {
 
             const rect =
                 zone.getBoundingClientRect();
 
             const x =
-                event.clientX - rect.left;
+                event.clientX -
+                rect.left;
 
             const y =
-                event.clientY - rect.top;
+                event.clientY -
+                rect.top;
 
 
             zone.style.setProperty(
@@ -803,10 +1713,6 @@
             "pointermove",
             event => {
 
-                // ------------------------------
-                // DESKTOP
-                // ------------------------------
-
                 if (
                     event.pointerType === "mouse"
                 ) {
@@ -821,13 +1727,10 @@
                 }
 
 
-                // ------------------------------
-                // MOBILE
-                // ------------------------------
-
                 if (
                     isMobile() &&
-                    event.pointerId === activePointerId
+                    event.pointerId ===
+                    activePointerId
                 ) {
 
                     addMobileReveal(event);
@@ -856,298 +1759,279 @@
         );
 
 
-        // ------------------------------------------
-        // POSIÇÃO DO DEDO
-        // ------------------------------------------
+        const getMobilePoint =
+            event => {
 
-        const getMobilePoint = event => {
-
-            const rect =
-                zone.getBoundingClientRect();
+                const rect =
+                    zone.getBoundingClientRect();
 
 
-            return {
+                return {
 
-                x: Math.max(
-                    0,
-                    Math.min(
-                        rect.width,
-                        event.clientX - rect.left
+                    x: Math.max(
+                        0,
+                        Math.min(
+                            rect.width,
+                            event.clientX -
+                            rect.left
+                        )
+                    ),
+
+                    y: Math.max(
+                        0,
+                        Math.min(
+                            rect.height,
+                            event.clientY -
+                            rect.top
+                        )
                     )
-                ),
 
-                y: Math.max(
-                    0,
-                    Math.min(
-                        rect.height,
-                        event.clientY - rect.top
-                    )
-                )
+                };
 
             };
 
-        };
+
+        const redrawMobileCanvas =
+            () => {
+
+                if (
+                    !canvas ||
+                    !isMobile()
+                ) {
+                    return;
+                }
 
 
-        // ------------------------------------------
-        // REDESENHA O CANVAS
-        // ------------------------------------------
-
-        const redrawMobileCanvas = () => {
-
-            if (
-                !canvas ||
-                !isMobile()
-            ) {
-                return;
-            }
+                const rect =
+                    zone.getBoundingClientRect();
 
 
-            const rect =
-                zone.getBoundingClientRect();
+                if (
+                    rect.width <= 0 ||
+                    rect.height <= 0
+                ) {
+                    return;
+                }
 
 
-            if (
-                rect.width <= 0 ||
-                rect.height <= 0
-            ) {
-                return;
-            }
+                const dpr =
+                    window.devicePixelRatio ||
+                    1;
 
 
-            const dpr =
-                window.devicePixelRatio || 1;
-
-
-            canvas.width =
-                Math.round(
-                    rect.width * dpr
-                );
-
-
-            canvas.height =
-                Math.round(
-                    rect.height * dpr
-                );
-
-
-            canvas.style.width =
-                `${rect.width}px`;
-
-
-            canvas.style.height =
-                `${rect.height}px`;
-
-
-            ctx.setTransform(
-                dpr,
-                0,
-                0,
-                dpr,
-                0,
-                0
-            );
-
-
-            // --------------------------------------
-            // CAMADA ESCURA
-            // --------------------------------------
-
-            ctx.globalCompositeOperation =
-                "source-over";
-
-
-            ctx.clearRect(
-                0,
-                0,
-                rect.width,
-                rect.height
-            );
-
-
-            ctx.fillStyle =
-                "rgba(0, 0, 0, .96)";
-
-
-            ctx.fillRect(
-                0,
-                0,
-                rect.width,
-                rect.height
-            );
-
-
-            // --------------------------------------
-            // ABRE OS REVEALS
-            // --------------------------------------
-
-            ctx.globalCompositeOperation =
-                "destination-out";
-
-
-            mobileReveals.forEach(point => {
-
-                const x =
-                    point.x * rect.width;
-
-                const y =
-                    point.y * rect.height;
-
-
-                const radius = 115;
-
-
-                const gradient =
-                    ctx.createRadialGradient(
-                        x,
-                        y,
-                        0,
-                        x,
-                        y,
-                        radius
+                canvas.width =
+                    Math.round(
+                        rect.width * dpr
                     );
 
 
-                gradient.addColorStop(
+                canvas.height =
+                    Math.round(
+                        rect.height * dpr
+                    );
+
+
+                canvas.style.width =
+                    `${rect.width}px`;
+
+
+                canvas.style.height =
+                    `${rect.height}px`;
+
+
+                ctx.setTransform(
+                    dpr,
                     0,
-                    "rgba(0,0,0,1)"
+                    0,
+                    dpr,
+                    0,
+                    0
                 );
 
 
-                gradient.addColorStop(
-                    .30,
-                    "rgba(0,0,0,1)"
-                );
+                ctx.globalCompositeOperation =
+                    "source-over";
 
 
-                gradient.addColorStop(
-                    .42,
-                    "rgba(0,0,0,.92)"
-                );
-
-
-                gradient.addColorStop(
-                    .56,
-                    "rgba(0,0,0,.65)"
-                );
-
-
-                gradient.addColorStop(
-                    .72,
-                    "rgba(0,0,0,.30)"
-                );
-
-
-                gradient.addColorStop(
-                    1,
-                    "rgba(0,0,0,0)"
+                ctx.clearRect(
+                    0,
+                    0,
+                    rect.width,
+                    rect.height
                 );
 
 
                 ctx.fillStyle =
-                    gradient;
+                    "rgba(0, 0, 0, .96)";
 
 
-                ctx.beginPath();
-
-
-                ctx.arc(
-                    x,
-                    y,
-                    radius,
+                ctx.fillRect(
                     0,
-                    Math.PI * 2
+                    0,
+                    rect.width,
+                    rect.height
                 );
 
 
-                ctx.fill();
-
-            });
-
-
-            ctx.globalCompositeOperation =
-                "source-over";
-
-        };
+                ctx.globalCompositeOperation =
+                    "destination-out";
 
 
-        // ------------------------------------------
-        // ADICIONA REVEAL
-        // ------------------------------------------
+                mobileReveals.forEach(
+                    point => {
 
-        const addMobileReveal = event => {
+                        const x =
+                            point.x *
+                            rect.width;
 
-            const point =
-                getMobilePoint(event);
-
-
-            // Evita centenas de pontos
-            // praticamente no mesmo lugar.
-
-            if (lastRevealPoint) {
-
-                const dx =
-                    point.x -
-                    lastRevealPoint.x;
-
-                const dy =
-                    point.y -
-                    lastRevealPoint.y;
+                        const y =
+                            point.y *
+                            rect.height;
 
 
-                const distance =
-                    Math.sqrt(
-                        dx * dx +
-                        dy * dy
-                    );
+                        const radius = 115;
 
 
-                if (distance < 12) {
-                    return;
+                        const gradient =
+                            ctx.createRadialGradient(
+                                x,
+                                y,
+                                0,
+                                x,
+                                y,
+                                radius
+                            );
+
+
+                        gradient.addColorStop(
+                            0,
+                            "rgba(0,0,0,1)"
+                        );
+
+
+                        gradient.addColorStop(
+                            .30,
+                            "rgba(0,0,0,1)"
+                        );
+
+
+                        gradient.addColorStop(
+                            .42,
+                            "rgba(0,0,0,.92)"
+                        );
+
+
+                        gradient.addColorStop(
+                            .56,
+                            "rgba(0,0,0,.65)"
+                        );
+
+
+                        gradient.addColorStop(
+                            .72,
+                            "rgba(0,0,0,.30)"
+                        );
+
+
+                        gradient.addColorStop(
+                            1,
+                            "rgba(0,0,0,0)"
+                        );
+
+
+                        ctx.fillStyle =
+                            gradient;
+
+
+                        ctx.beginPath();
+
+
+                        ctx.arc(
+                            x,
+                            y,
+                            radius,
+                            0,
+                            Math.PI * 2
+                        );
+
+
+                        ctx.fill();
+
+                    }
+                );
+
+
+                ctx.globalCompositeOperation =
+                    "source-over";
+
+            };
+
+
+        const addMobileReveal =
+            event => {
+
+                const point =
+                    getMobilePoint(event);
+
+
+                if (lastRevealPoint) {
+
+                    const dx =
+                        point.x -
+                        lastRevealPoint.x;
+
+                    const dy =
+                        point.y -
+                        lastRevealPoint.y;
+
+
+                    const distance =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    if (distance < 12) {
+                        return;
+                    }
+
                 }
 
-            }
+
+                const rect =
+                    zone.getBoundingClientRect();
 
 
-            const rect =
-                zone.getBoundingClientRect();
+                mobileReveals.push({
+
+                    x:
+                        point.x /
+                        rect.width,
+
+                    y:
+                        point.y /
+                        rect.height
+
+                });
 
 
-            // Guarda a posição normalizada.
-            // Isso permite redesenhar corretamente
-            // caso a tela mude de tamanho.
-
-            mobileReveals.push({
-
-                x:
-                    point.x /
-                    rect.width,
-
-                y:
-                    point.y /
-                    rect.height
-
-            });
+                lastRevealPoint =
+                    point;
 
 
-            lastRevealPoint = point;
+                redrawMobileCanvas();
 
+            };
 
-            redrawMobileCanvas();
-
-        };
-
-
-        // ------------------------------------------
-        // TOUCH / POINTER DOWN
-        // ------------------------------------------
 
         zone.addEventListener(
             "pointerdown",
             event => {
 
                 if (
-                    event.pointerType === "mouse" ||
+                    event.pointerType ===
+                    "mouse" ||
                     !isMobile()
                 ) {
                     return;
@@ -1158,7 +2042,8 @@
                     event.pointerId;
 
 
-                lastRevealPoint = null;
+                lastRevealPoint =
+                    null;
 
 
                 addMobileReveal(event);
@@ -1172,25 +2057,25 @@
         );
 
 
-        // ------------------------------------------
-        // TOUCH / POINTER UP
-        // ------------------------------------------
-
         zone.addEventListener(
             "pointerup",
             event => {
 
                 if (
-                    event.pointerType === "mouse" ||
-                    event.pointerId !== activePointerId
+                    event.pointerType ===
+                    "mouse" ||
+                    event.pointerId !==
+                    activePointerId
                 ) {
                     return;
                 }
 
 
-                activePointerId = null;
+                activePointerId =
+                    null;
 
-                lastRevealPoint = null;
+                lastRevealPoint =
+                    null;
 
 
                 if (
@@ -1208,26 +2093,26 @@
             }
         );
 
-
-        // ------------------------------------------
-        // TOUCH / POINTER CANCEL
-        // ------------------------------------------
 
         zone.addEventListener(
             "pointercancel",
             event => {
 
                 if (
-                    event.pointerType === "mouse" ||
-                    event.pointerId !== activePointerId
+                    event.pointerType ===
+                    "mouse" ||
+                    event.pointerId !==
+                    activePointerId
                 ) {
                     return;
                 }
 
 
-                activePointerId = null;
+                activePointerId =
+                    null;
 
-                lastRevealPoint = null;
+                lastRevealPoint =
+                    null;
 
 
                 if (
@@ -1245,10 +2130,6 @@
             }
         );
 
-
-        // ------------------------------------------
-        // REDIMENSIONAMENTO
-        // ------------------------------------------
 
         window.addEventListener(
             "resize",
@@ -1262,32 +2143,27 @@
         );
 
 
-        // ------------------------------------------
-        // OBSERVA MUDANÇAS DE TAMANHO
-        // ------------------------------------------
-
         if (
-            typeof ResizeObserver !== "undefined"
+            typeof ResizeObserver !==
+            "undefined"
         ) {
 
             const observer =
-                new ResizeObserver(() => {
+                new ResizeObserver(
+                    () => {
 
-                    if (isMobile()) {
-                        redrawMobileCanvas();
+                        if (isMobile()) {
+                            redrawMobileCanvas();
+                        }
+
                     }
-
-                });
+                );
 
 
             observer.observe(zone);
 
         }
 
-
-        // ------------------------------------------
-        // INICIALIZAÇÃO MOBILE
-        // ------------------------------------------
 
         if (isMobile()) {
             redrawMobileCanvas();
