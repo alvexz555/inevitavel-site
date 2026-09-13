@@ -2024,6 +2024,777 @@
     }
 
 </script>
+<script>
+/* =========================================================
+   INEVITÁVEL
+   EXPERIMENTO 01
+   GLITCH DOS TÍTULOS
+   ========================================================= */
 
+(() => {
+    "use strict";
+
+    const targets = [
+        document.getElementById("deathTagline"),
+        document.getElementById("manifestoText"),
+        document.getElementById("survivalText"),
+        document.getElementById("surveyTitle")
+    ].filter(Boolean);
+
+    if (!targets.length) return;
+
+
+    /* =====================================================
+       CONFIGURAÇÃO
+       ===================================================== */
+
+    const CONFIG = {
+        minDelay: 2500,
+        maxDelay: 6500,
+
+        minDuration: 120,
+        maxDuration: 420,
+
+        maxIntensity: 1
+    };
+
+
+    /* =====================================================
+       ESTADO
+       ===================================================== */
+
+    const states = new WeakMap();
+
+
+    /* =====================================================
+       PREPARAÇÃO
+       ===================================================== */
+
+    targets.forEach(element => {
+
+        states.set(element, {
+            running: false,
+            originalTransform: "",
+            originalFilter: "",
+            originalPosition: ""
+        });
+
+        element.style.willChange =
+            "transform, filter";
+
+        scheduleGlitch(element);
+    });
+
+
+    /* =====================================================
+       UTILIDADES
+       ===================================================== */
+
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function randomInt(min, max) {
+        return Math.floor(
+            random(min, max + 1)
+        );
+    }
+
+
+    function wait(ms) {
+        return new Promise(resolve => {
+            setTimeout(resolve, ms);
+        });
+    }
+
+
+    /* =====================================================
+       AGENDAMENTO
+       ===================================================== */
+
+    function scheduleGlitch(element) {
+
+        const delay = random(
+            CONFIG.minDelay,
+            CONFIG.maxDelay
+        );
+
+        setTimeout(() => {
+
+            glitch(element);
+
+            scheduleGlitch(element);
+
+        }, delay);
+    }
+
+
+    /* =====================================================
+       GLITCH PRINCIPAL
+       ===================================================== */
+
+    async function glitch(element) {
+
+        const state = states.get(element);
+
+        if (!state || state.running) {
+            return;
+        }
+
+        state.running = true;
+
+        const intensity =
+            random(.35, CONFIG.maxIntensity);
+
+        const duration =
+            random(
+                CONFIG.minDuration,
+                CONFIG.maxDuration
+            );
+
+        const originalTransform =
+            element.style.transform;
+
+        const originalFilter =
+            element.style.filter;
+
+
+        const iterations =
+            randomInt(2, 5);
+
+
+        for (let i = 0; i < iterations; i++) {
+
+            const x =
+                random(
+                    -8 * intensity,
+                    8 * intensity
+                );
+
+            const y =
+                random(
+                    -3 * intensity,
+                    3 * intensity
+                );
+
+            const rotate =
+                random(
+                    -.35 * intensity,
+                    .35 * intensity
+                );
+
+            const red =
+                random(
+                    -3,
+                    3
+                );
+
+            const blue =
+                random(
+                    -3,
+                    3
+                );
+
+
+            element.style.transform =
+                `translate(${x}px, ${y}px)
+                 rotate(${rotate}deg)`;
+
+
+            element.style.filter =
+                `drop-shadow(${red}px 0 rgba(255,0,0,.55))
+                 drop-shadow(${blue}px 0 rgba(0,120,255,.55))`;
+
+
+            await wait(
+                duration / iterations
+            );
+
+
+            element.style.transform =
+                `translate(
+                    ${random(-2, 2)}px,
+                    ${random(-1, 1)}px
+                )`;
+
+
+            element.style.filter =
+                "none";
+
+
+            await wait(
+                random(20, 70)
+            );
+        }
+
+
+        element.style.transform =
+            originalTransform;
+
+        element.style.filter =
+            originalFilter;
+
+
+        state.running = false;
+    }
+
+
+    /* =====================================================
+       GLITCH AO INTERAGIR
+       ===================================================== */
+
+    targets.forEach(element => {
+
+        element.addEventListener(
+            "mouseenter",
+            () => {
+
+                if (
+                    window.matchMedia(
+                        "(hover: hover)"
+                    ).matches
+                ) {
+                    glitch(element);
+                }
+
+            }
+        );
+
+
+        element.addEventListener(
+            "click",
+            () => {
+
+                glitch(element);
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       GLITCH MAIS FORTE QUANDO ENTRA NA TELA
+       ===================================================== */
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        if (
+                            Math.random() < .65
+                        ) {
+                            glitch(
+                                entry.target
+                            );
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: .5
+                }
+            );
+
+
+        targets.forEach(element => {
+            observer.observe(element);
+        });
+
+    }
+
+})();
+</script>
+<script>
+/* =========================================================
+   INEVITÁVEL
+   EXPERIMENTO 02
+   CORRUPÇÃO DE TEXTO
+   ========================================================= */
+
+(() => {
+    "use strict";
+
+
+    /* =====================================================
+       ELEMENTOS
+       ===================================================== */
+
+    const targets = [
+        document.getElementById("deathTagline"),
+        document.getElementById("manifestoText"),
+        document.getElementById("survivalText"),
+        document.getElementById("surveyTitle")
+    ].filter(Boolean);
+
+
+    if (!targets.length) return;
+
+
+    /* =====================================================
+       CONFIGURAÇÃO
+       ===================================================== */
+
+    const CONFIG = {
+
+        minDelay: 3500,
+        maxDelay: 8000,
+
+        minDuration: 180,
+        maxDuration: 650,
+
+        charactersPerBurst: {
+            min: 1,
+            max: 4
+        },
+
+        corruptionCharacters:
+            "!@#$%&?_/\\|[]{}<>01XZ",
+
+        chancePerCharacter: .18
+
+    };
+
+
+    /* =====================================================
+       ESTADO
+       ===================================================== */
+
+    const originalTexts =
+        new WeakMap();
+
+    const running =
+        new WeakMap();
+
+
+    /* =====================================================
+       GUARDAR TEXTOS ORIGINAIS
+       ===================================================== */
+
+    targets.forEach(element => {
+
+        originalTexts.set(
+            element,
+            element.innerHTML
+        );
+
+        running.set(
+            element,
+            false
+        );
+
+
+        scheduleCorruption(element);
+
+    });
+
+
+    /* =====================================================
+       UTILIDADES
+       ===================================================== */
+
+    function random(min, max) {
+        return Math.random() *
+            (max - min) + min;
+    }
+
+
+    function randomInt(min, max) {
+        return Math.floor(
+            random(min, max + 1)
+        );
+    }
+
+
+    function randomCharacter() {
+
+        const chars =
+            CONFIG.corruptionCharacters;
+
+        return chars[
+            Math.floor(
+                Math.random() *
+                chars.length
+            )
+        ];
+    }
+
+
+    function wait(ms) {
+
+        return new Promise(resolve => {
+
+            setTimeout(
+                resolve,
+                ms
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CONVERTER TEXTO SEM DESTRUIR BR
+       ===================================================== */
+
+    function createCorruptedHTML(element) {
+
+        const clone =
+            element.cloneNode(true);
+
+
+        corruptTextNodes(clone);
+
+
+        return clone.innerHTML;
+    }
+
+
+    function corruptTextNodes(node) {
+
+        node.childNodes.forEach(child => {
+
+            if (
+                child.nodeType ===
+                Node.TEXT_NODE
+            ) {
+
+                child.textContent =
+                    corruptString(
+                        child.textContent
+                    );
+
+                return;
+            }
+
+
+            if (
+                child.nodeType ===
+                Node.ELEMENT_NODE
+            ) {
+
+                corruptTextNodes(child);
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CORROMPER STRING
+       ===================================================== */
+
+    function corruptString(text) {
+
+        const chars =
+            Array.from(text);
+
+
+        const possibleIndexes = [];
+
+
+        chars.forEach(
+            (char, index) => {
+
+                if (
+                    char.trim() !== ""
+                ) {
+                    possibleIndexes.push(
+                        index
+                    );
+                }
+
+            }
+        );
+
+
+        if (
+            !possibleIndexes.length
+        ) {
+            return text;
+        }
+
+
+        const amount =
+            Math.min(
+                randomInt(
+                    CONFIG.charactersPerBurst.min,
+                    CONFIG.charactersPerBurst.max
+                ),
+                possibleIndexes.length
+            );
+
+
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            if (
+                Math.random() >
+                CONFIG.chancePerCharacter
+            ) {
+                continue;
+            }
+
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() *
+                    possibleIndexes.length
+                );
+
+
+            const index =
+                possibleIndexes[
+                    randomIndex
+                ];
+
+
+            chars[index] =
+                randomCharacter();
+
+        }
+
+
+        return chars.join("");
+
+    }
+
+
+    /* =====================================================
+       CICLO DE CORRUPÇÃO
+       ===================================================== */
+
+    async function corrupt(element) {
+
+        if (
+            running.get(element)
+        ) {
+            return;
+        }
+
+
+        running.set(
+            element,
+            true
+        );
+
+
+        const original =
+            originalTexts.get(
+                element
+            );
+
+
+        const duration =
+            random(
+                CONFIG.minDuration,
+                CONFIG.maxDuration
+            );
+
+
+        const stages =
+            randomInt(3, 7);
+
+
+        for (
+            let i = 0;
+            i < stages;
+            i++
+        ) {
+
+            element.innerHTML =
+                createCorruptedHTML(
+                    element
+                );
+
+
+            await wait(
+                duration / stages
+            );
+
+
+            if (
+                Math.random() < .35
+            ) {
+
+                element.innerHTML =
+                    original;
+
+                await wait(
+                    random(20, 80)
+                );
+
+            }
+
+        }
+
+
+        element.innerHTML =
+            original;
+
+
+        running.set(
+            element,
+            false
+        );
+
+    }
+
+
+    /* =====================================================
+       AGENDAMENTO
+       ===================================================== */
+
+    function scheduleCorruption(element) {
+
+        const delay =
+            random(
+                CONFIG.minDelay,
+                CONFIG.maxDelay
+            );
+
+
+        setTimeout(() => {
+
+            corrupt(element);
+
+            scheduleCorruption(
+                element
+            );
+
+        }, delay);
+
+    }
+
+
+    /* =====================================================
+       INTERAÇÃO
+       ===================================================== */
+
+    targets.forEach(element => {
+
+        element.addEventListener(
+            "click",
+            () => {
+
+                corrupt(element);
+
+            }
+        );
+
+
+        element.addEventListener(
+            "mouseenter",
+            () => {
+
+                if (
+                    window.matchMedia(
+                        "(hover: hover)"
+                    ).matches
+                ) {
+
+                    if (
+                        Math.random() < .45
+                    ) {
+
+                        corrupt(
+                            element
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CORRUPÇÃO AO ENTRAR NA TELA
+       ===================================================== */
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            if (
+                                Math.random() < .5
+                            ) {
+
+                                setTimeout(
+                                    () => {
+
+                                        corrupt(
+                                            entry.target
+                                        );
+
+                                    },
+                                    random(
+                                        300,
+                                        1200
+                                    )
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: .5
+                }
+            );
+
+
+        targets.forEach(element => {
+
+            observer.observe(
+                element
+            );
+
+        });
+
+    }
+
+})();
+</script>
 </body>
 </html>
