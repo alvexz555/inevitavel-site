@@ -392,32 +392,39 @@ p {
 
 #trailer .content {
   width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
 }
 
 .trailer-text {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto 30px;
 }
 
 /*
- * Vídeo real do trailer.
- * Mantém proporção, ocupa a largura disponível
- * e não interfere no restante do layout.
+ * PLAYER REAL DO TRAILER
+ *
+ * Mantém o formato 16:9,
+ * acompanha a largura do conteúdo
+ * e não força uma altura artificial.
  */
 
 #trailer video {
   display: block;
   width: 100%;
-  max-width: 100%;
+  max-width: 1050px;
   height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   margin: 0 auto;
   background: #000;
   border: 1px solid #222;
 }
 
 /*
- * Mantido para compatibilidade caso o trailer-box
- * ainda seja usado em alguma versão do HTML.
+ * Compatibilidade com versões antigas
+ * que utilizavam trailer-box.
  */
 
 .trailer-box {
@@ -808,15 +815,21 @@ footer {
     width: 100%;
   }
 
-  /*
-   * Garante que o trailer continue responsivo
-   * no celular.
-   */
+  /* ==========================================
+     TRAILER MOBILE
+     ========================================== */
+
+  #trailer .content {
+    width: 100%;
+    max-width: 100%;
+  }
 
   #trailer video {
     width: 100%;
     max-width: 100%;
     height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
   }
 }
 
@@ -921,6 +934,19 @@ footer {
   p {
     font-size: .96rem;
   }
+
+  /*
+   * Trailer acompanha o tamanho visual
+   * do conteúdo principal no desktop.
+   */
+
+  #trailer .content {
+    max-width: 1050px;
+  }
+
+  #trailer video {
+    max-width: 1050px;
+  }
 }
 
 /* =========================================================
@@ -953,5 +979,10 @@ footer {
 
   h2 {
     font-size: 1.8rem;
+  }
+
+  #trailer video {
+    width: 100%;
+    max-width: 100%;
   }
 }
