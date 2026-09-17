@@ -1755,133 +1755,217 @@
     }
 
 
-    /* =========================================================
-       SOBREVIVER É APRENDER
-       ========================================================= */
+  /* =========================================================
+   SOBREVIVER É APRENDER
+   ========================================================= */
 
-    const survivalText =
-        document.getElementById(
-            "survivalText"
-        );
+const survivalText =
+  document.getElementById(
+    "survivalText"
+  );
 
-    const survivalContainer =
-        survivalText
-            ? survivalText.closest("section")
-            : null;
+const survivalContainer =
+  survivalText ?
+  survivalText.closest("section") :
+  null;
 
-    let survivalBusy = false;
-    let survivalClicks = 0;
-    let survivalCycleRunning = true;
-
-
-    const survivalCycle = async () => {
-
-        if (!survivalText) return;
-
-        while (survivalCycleRunning) {
-
-            await wait(9000);
-
-            if (
-                survivalBusy ||
-                survivalClicks >= 7
-            ) {
-                continue;
-            }
-
-            survivalBusy = true;
+let survivalBusy = false;
+let survivalClicks = 0;
+let survivalManual = false;
+let survivalCycleId = 0;
 
 
-            await glitchText(
-                survivalText,
-                "sobreviver é morrer",
-                900
-            );
+/* ---------------------------------------------------------
+   CICLO AUTOMÁTICO
+   --------------------------------------------------------- */
 
+const survivalCycle = async () => {
 
-            await wait(4000);
+  if (!survivalText) return;
 
+  const cycleId = ++survivalCycleId;
 
-            if (survivalClicks < 7) {
+  while (
+    !survivalManual &&
+    cycleId === survivalCycleId
+  ) {
 
-                await glitchText(
-                    survivalText,
-                    "morrer é aprender",
-                    900
-                );
+    await wait(9000);
 
-            }
-
-
-            survivalBusy = false;
-
-
-            await wait(5000);
-
-
-            if (survivalClicks < 7) {
-
-                await glitchText(
-                    survivalText,
-                    "Sobreviver é aprender.",
-                    900
-                );
-
-            }
-
-        }
-
-    };
-
-
-    survivalCycle();
-
-
-    if (survivalText) {
-
-        survivalText.addEventListener(
-            "click",
-            async () => {
-
-                if (survivalBusy) return;
-
-                survivalClicks++;
-
-
-                if (
-                    survivalText.textContent.trim() ===
-                    "morrer é aprender"
-                ) {
-
-                    createErrorBurst(
-                        survivalContainer,
-                        24
-                    );
-
-                }
-
-
-                if (survivalClicks >= 7) {
-
-                    survivalBusy = true;
-
-                    await restoreText(
-                        survivalText,
-                        "Sobreviver é aprender."
-                    );
-
-                    survivalClicks = 0;
-
-                    survivalBusy = false;
-
-                }
-
-            }
-        );
-
+    if (
+      survivalManual ||
+      cycleId !== survivalCycleId
+    ) {
+      return;
     }
 
+    survivalBusy = true;
 
+    await glitchText(
+      survivalText,
+      "sobreviver é morrer",
+      900
+    );
+
+    if (
+      survivalManual ||
+      cycleId !== survivalCycleId
+    ) {
+      survivalBusy = false;
+      return;
+    }
+
+    await wait(4000);
+
+    if (
+      survivalManual ||
+      cycleId !== survivalCycleId
+    ) {
+      survivalBusy = false;
+      return;
+    }
+
+    await glitchText(
+      survivalText,
+      "morrer é aprender",
+      900
+    );
+
+    survivalBusy = false;
+
+    if (
+      survivalManual ||
+      cycleId !== survivalCycleId
+    ) {
+      return;
+    }
+
+    await wait(5000);
+
+    if (
+      survivalManual ||
+      cycleId !== survivalCycleId
+    ) {
+      return;
+    }
+
+    await glitchText(
+      survivalText,
+      "Sobreviver é aprender.",
+      900
+    );
+
+  }
+
+};
+
+survivalCycle();
+
+
+/* ---------------------------------------------------------
+   INTERAÇÃO MANUAL
+   --------------------------------------------------------- */
+
+if (survivalText) {
+
+  survivalText.addEventListener(
+    "click",
+    async () => {
+
+      /*
+       * PRIMEIRO CLIQUE:
+       * abandona completamente o automático.
+       */
+
+      if (!survivalManual) {
+
+        survivalManual = true;
+
+        /*
+         * Invalida qualquer ciclo automático
+         * que ainda esteja aguardando.
+         */
+
+        survivalCycleId++;
+
+        survivalBusy = true;
+
+        /*
+         * Entramos diretamente no estado
+         * que o usuário pode explorar manualmente.
+         */
+
+        await glitchText(
+          survivalText,
+          "morrer é aprender",
+          700
+        );
+
+        survivalBusy = false;
+
+        return;
+      }
+
+
+      /*
+       * A partir daqui o elemento está
+       * totalmente no modo manual.
+       */
+
+      if (survivalBusy) return;
+
+      if (
+        survivalText.textContent.trim() !==
+        "morrer é aprender"
+      ) {
+        return;
+      }
+
+      survivalClicks++;
+
+      /*
+       * Cada clique em "morrer é aprender"
+       * dispara o erro + confete.
+       */
+
+      createErrorBurst(
+        survivalContainer,
+        24
+      );
+
+
+      /*
+       * SETE CLIQUES:
+       * reinicia completamente o sistema.
+       */
+
+      if (survivalClicks >= 7) {
+
+        survivalBusy = true;
+
+        survivalClicks = 0;
+
+        await restoreText(
+          survivalText,
+          "Sobreviver é aprender."
+        );
+
+        survivalManual = false;
+
+        survivalBusy = false;
+
+        /*
+         * Novo ciclo automático.
+         */
+
+        survivalCycle();
+
+      }
+
+    }
+  );
+
+}
     /* =========================================================
        PESQUISA
        ========================================================= */
