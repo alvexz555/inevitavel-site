@@ -1089,3 +1089,648 @@ footer {
     max-width: 100%;
   }
 }
+/* =========================================================
+   INEVITÁVEL ENGINE
+   SISTEMA DE CONTAMINAÇÃO
+   Adicionar no FINAL deste arquivo
+   ========================================================= */
+
+#inevitable-engine {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  /*
+   * IMPORTANTE:
+   * Não captura mouse nem toque.
+   * O site continua totalmente interativo.
+   */
+  pointer-events: none;
+
+  overflow: hidden;
+
+  /*
+   * Abaixo do header atual.
+   * Acima do conteúdo normal.
+   */
+  z-index: 900;
+
+  /*
+   * Permite que a camada visual interaja
+   * com o que existe atrás dela sem
+   * bloquear o Dark Engine.
+   */
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   CAMADAS
+   ========================================================= */
+
+#inevitable-blood-layer,
+#inevitable-stain-layer,
+#inevitable-glitch-layer,
+#inevitable-clean-layer {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SANGUE
+   ========================================================= */
+
+#inevitable-blood-layer {
+
+  background:
+
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(139, 0, 0, .95),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(120, 0, 0, .95),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(100, 0, 0, .85),
+      transparent 35%
+    );
+
+  opacity: 0;
+
+  /*
+   * MULTIPLY é importante para o Dark Engine.
+   *
+   * Áreas pretas continuam essencialmente pretas,
+   * enquanto as áreas claras começam a receber
+   * a contaminação vermelha.
+   */
+  mix-blend-mode: multiply;
+
+  transition:
+    opacity 1.2s ease,
+    background 1.2s ease;
+}
+
+
+/* =========================================================
+   MANCHAS
+   ========================================================= */
+
+#inevitable-stain-layer {
+
+  opacity: 0;
+
+  background:
+
+    radial-gradient(
+      ellipse at 15% 25%,
+      rgba(100, 0, 0, .95) 0%,
+      rgba(100, 0, 0, .55) 10%,
+      transparent 32%
+    ),
+
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(120, 0, 0, .9) 0%,
+      rgba(120, 0, 0, .45) 12%,
+      transparent 30%
+    ),
+
+    radial-gradient(
+      ellipse at 70% 75%,
+      rgba(100, 0, 0, .95) 0%,
+      rgba(100, 0, 0, .5) 15%,
+      transparent 35%
+    ),
+
+    radial-gradient(
+      ellipse at 25% 85%,
+      rgba(80, 0, 0, .9) 0%,
+      rgba(80, 0, 0, .4) 12%,
+      transparent 32%
+    );
+
+  filter: blur(18px);
+
+  mix-blend-mode: multiply;
+
+  transition:
+    opacity 1s ease,
+    filter 1s ease;
+}
+
+
+/* =========================================================
+   GLITCH
+   ========================================================= */
+
+#inevitable-glitch-layer {
+
+  opacity: 0;
+
+  background:
+
+    repeating-linear-gradient(
+      to bottom,
+
+      transparent 0,
+      transparent 3px,
+
+      rgba(255, 0, 0, .08) 4px,
+
+      transparent 5px
+    );
+
+  mix-blend-mode: screen;
+
+  transition:
+    opacity .4s ease;
+}
+
+
+/* =========================================================
+   LIMPEZA
+   ========================================================= */
+
+#inevitable-clean-layer {
+
+  opacity: 0;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, .08),
+      transparent 60%
+    );
+
+  transition:
+    opacity 2s ease;
+}
+
+
+/* =========================================================
+   ESTÁGIO 1
+   Primeira manifestação
+   ========================================================= */
+
+body.inevitable-stage-1
+#inevitable-blood-layer {
+
+  opacity: .10;
+}
+
+
+/* =========================================================
+   ESTÁGIO 2
+   Primeiras manchas
+   ========================================================= */
+
+body.inevitable-stage-2
+#inevitable-blood-layer {
+
+  opacity: .16;
+}
+
+body.inevitable-stage-2
+#inevitable-stain-layer {
+
+  opacity: .25;
+}
+
+
+/* =========================================================
+   ESTÁGIO 3
+   Contaminação perceptível
+   ========================================================= */
+
+body.inevitable-stage-3
+#inevitable-blood-layer {
+
+  opacity: .25;
+}
+
+body.inevitable-stage-3
+#inevitable-stain-layer {
+
+  opacity: .42;
+}
+
+
+/* =========================================================
+   ESTÁGIO 4
+   Vermelho começa a dominar
+   ========================================================= */
+
+body.inevitable-stage-4
+#inevitable-blood-layer {
+
+  opacity: .38;
+}
+
+body.inevitable-stage-4
+#inevitable-stain-layer {
+
+  opacity: .60;
+}
+
+
+/* =========================================================
+   ESTÁGIO 5
+   Interface contaminada
+   ========================================================= */
+
+body.inevitable-stage-5
+#inevitable-blood-layer {
+
+  opacity: .50;
+}
+
+body.inevitable-stage-5
+#inevitable-stain-layer {
+
+  opacity: .78;
+}
+
+
+/* =========================================================
+   ESTÁGIO 6
+   Quase tomada
+   ========================================================= */
+
+body.inevitable-stage-6
+#inevitable-blood-layer {
+
+  opacity: .65;
+}
+
+body.inevitable-stage-6
+#inevitable-stain-layer {
+
+  opacity: .95;
+}
+
+
+/* =========================================================
+   ESTÁGIO 7
+   Colapso visual
+   ========================================================= */
+
+body.inevitable-stage-7
+#inevitable-blood-layer {
+
+  opacity: .80;
+}
+
+body.inevitable-stage-7
+#inevitable-stain-layer {
+
+  opacity: 1;
+
+  filter: blur(12px);
+}
+
+body.inevitable-stage-7
+#inevitable-glitch-layer {
+
+  opacity: .30;
+
+  animation:
+    inevitable-glitch-scan .12s infinite;
+}
+
+
+/* =========================================================
+   ESTÁGIO 8
+   TOMADA
+   ========================================================= */
+
+body.inevitable-stage-8
+#inevitable-blood-layer {
+
+  opacity: .92;
+}
+
+body.inevitable-stage-8
+#inevitable-stain-layer {
+
+  opacity: 1;
+
+  filter: blur(8px);
+}
+
+body.inevitable-stage-8
+#inevitable-glitch-layer {
+
+  opacity: .55;
+
+  animation:
+    inevitable-glitch-scan .08s infinite;
+}
+
+
+/* =========================================================
+   ESTADO FINAL
+   ========================================================= */
+
+body.inevitable-final
+#inevitable-blood-layer {
+
+  opacity: 1;
+
+  /*
+   * Aqui o vermelho deixa de ser apenas
+   * uma mancha e vira o estado final.
+   */
+  background:
+
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(170, 0, 0, .95),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(110, 0, 0, .95),
+      transparent 35%
+    ),
+
+    #8b0000;
+}
+
+body.inevitable-final
+#inevitable-stain-layer {
+
+  opacity: 1;
+
+  filter: blur(6px);
+}
+
+body.inevitable-final
+#inevitable-glitch-layer {
+
+  opacity: .65;
+
+  animation:
+    inevitable-glitch-scan .07s infinite;
+}
+
+
+/* =========================================================
+   TEXTO NO ESTADO FINAL
+   =========================================================
+
+   Aqui começamos a inverter a interface.
+
+   Não usamos filter: invert(), porque isso
+   também inverteria imagens, vídeos e elementos
+   que não queremos alterar.
+   ========================================================= */
+
+body.inevitable-final
+section,
+body.inevitable-final
+.content,
+body.inevitable-final
+h1,
+body.inevitable-final
+h2,
+body.inevitable-final
+h3,
+body.inevitable-final
+p,
+body.inevitable-final
+span,
+body.inevitable-final
+label {
+
+  color: #fff;
+}
+
+
+/* Elementos que normalmente possuem
+   tons cinza */
+
+body.inevitable-final
+p,
+body.inevitable-final
+.section-label,
+body.inevitable-final
+.hero-description,
+body.inevitable-final
+.number,
+body.inevitable-final
+.card-number {
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   BOTÕES NO ESTADO FINAL
+   ========================================================= */
+
+body.inevitable-final
+.button,
+body.inevitable-final
+.accordion-toggle {
+
+  color: #fff;
+
+  border-color: rgba(255, 255, 255, .7);
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body.inevitable-final
+header {
+
+  background: rgba(90, 0, 0, .90);
+
+  border-color:
+    rgba(255, 255, 255, .18);
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+body.inevitable-final
+.death-card,
+body.inevitable-final
+.card,
+body.inevitable-final
+.story-block,
+body.inevitable-final
+.gallery-item,
+body.inevitable-final
+.survey-option {
+
+  background: rgba(70, 0, 0, .35);
+
+  border-color:
+    rgba(255, 255, 255, .15);
+}
+
+
+/* =========================================================
+   ANIMAÇÃO DE GLITCH
+   ========================================================= */
+
+@keyframes inevitable-glitch-scan {
+
+  0% {
+    transform:
+      translate(0, 0);
+  }
+
+  20% {
+    transform:
+      translate(-2px, 1px);
+  }
+
+  40% {
+    transform:
+      translate(2px, -1px);
+  }
+
+  60% {
+    transform:
+      translate(-1px, 2px);
+  }
+
+  80% {
+    transform:
+      translate(1px, -2px);
+  }
+
+  100% {
+    transform:
+      translate(0, 0);
+  }
+}
+
+
+/* =========================================================
+   LIMPEZA
+   ========================================================= */
+
+body.inevitable-cleaning
+#inevitable-blood-layer,
+
+body.inevitable-cleaning
+#inevitable-stain-layer,
+
+body.inevitable-cleaning
+#inevitable-glitch-layer {
+
+  opacity: 0;
+
+  transition:
+    opacity 2.5s ease;
+}
+
+
+body.inevitable-cleaning
+#inevitable-clean-layer {
+
+  opacity: .08;
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #inevitable-engine {
+
+    /*
+     * Mantém o sistema fora da área
+     * de interação.
+     */
+    pointer-events: none;
+  }
+
+
+  #inevitable-stain-layer {
+
+    filter: blur(12px);
+  }
+
+
+  body.inevitable-stage-7
+  #inevitable-stain-layer {
+
+    filter: blur(9px);
+  }
+
+
+  body.inevitable-stage-8
+  #inevitable-stain-layer {
+
+    filter: blur(7px);
+  }
+
+
+  body.inevitable-stage-7
+  #inevitable-glitch-layer {
+
+    animation-duration: .15s;
+  }
+
+
+  body.inevitable-stage-8
+  #inevitable-glitch-layer {
+
+    animation-duration: .12s;
+  }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #inevitable-blood-layer,
+  #inevitable-stain-layer,
+  #inevitable-glitch-layer,
+  #inevitable-clean-layer {
+
+    transition:
+      opacity .4s ease;
+  }
+
+
+  #inevitable-glitch-layer {
+
+    animation: none !important;
+  }
+}
