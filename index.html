@@ -2258,81 +2258,788 @@
             );
 
 
+      /* =========================================================
+   FORMULÁRIO DA PESQUISA + INEVITABLE ENGINE
+========================================================= */
+
+
+/* =========================================================
+   FORMULÁRIO DA PESQUISA
+========================================================= */
+
+const surveyForm = document.getElementById("surveyForm");
+const surveyFeedback = document.getElementById("surveyFeedback");
+
+
+if (surveyForm && surveyFeedback) {
+
+    surveyForm.addEventListener("submit", event => {
+
+        event.preventDefault();
+
+
+        /* ---------------------------------------------
+           VALIDAÇÃO REAL DO FORMULÁRIO
+        --------------------------------------------- */
+
+        if (!surveyForm.checkValidity()) {
+
+            surveyForm.reportValidity();
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------
+           CAPTURA DOS DADOS
+        --------------------------------------------- */
+
+        const rating =
+            surveyForm.querySelector(
+                'input[name="rating"]:checked'
+            );
+
+        const permission =
+            surveyForm.querySelector(
+                'input[name="permission"]:checked'
+            );
+
+        const commentField =
+            document.getElementById("surveyComment");
+
+        const comment =
+            commentField
+                ? commentField.value.trim()
+                : "";
+
+
+        if (!rating || !permission) {
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           FEEDBACK
+        --------------------------------------------- */
+
+        surveyFeedback.textContent =
+            "Obrigado por avaliar Inevitável. Sua resposta foi registrada nesta página.";
+
+        surveyFeedback.classList.add("visible");
+
+
+        /* ---------------------------------------------
+           ENVIA PARA O INEVITABLE ENGINE
+        --------------------------------------------- */
+
         if (
-            surveyForm &&
-            surveyFeedback
+            window.InevitableEngine &&
+            typeof window.InevitableEngine.onSurveyCompleted === "function"
         ) {
 
-            surveyForm.addEventListener(
-                "submit",
-                event => {
+            window.InevitableEngine.onSurveyCompleted();
 
-                    event.preventDefault();
+        }
 
 
-                    const rating =
-                        surveyForm.querySelector(
-                            'input[name="rating"]:checked'
-                        );
+        /* ---------------------------------------------
+           RESET DO FORMULÁRIO
+        --------------------------------------------- */
+
+        surveyForm.reset();
 
 
-                    const permission =
-                        surveyForm.querySelector(
-                            'input[name="permission"]:checked'
-                        );
+        /* ---------------------------------------------
+           DEBUG
+        --------------------------------------------- */
+
+        console.log({
+            rating: Number(rating.value),
+            comment,
+            permission: permission.value
+        });
+
+    });
+
+}
 
 
-                    const commentField =
-                        document.getElementById(
-                            "surveyComment"
-                        );
+/* =========================================================
+   INEVITABLE ENGINE
+   Sistema de contaminação progressiva
+========================================================= */
+
+(() => {
 
 
-                    const comment =
-                        commentField
-                            ? commentField.value.trim()
-                            : "";
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
+
+    const engine =
+        document.getElementById(
+            "inevitable-engine"
+        );
+
+    const bloodLayer =
+        document.getElementById(
+            "inevitable-blood-layer"
+        );
+
+    const stainLayer =
+        document.getElementById(
+            "inevitable-stain-layer"
+        );
+
+    const glitchLayer =
+        document.getElementById(
+            "inevitable-glitch-layer"
+        );
+
+    const cleanLayer =
+        document.getElementById(
+            "inevitable-clean-layer"
+        );
 
 
-                    if (
-                        !rating ||
-                        !permission
-                    ) {
-                        return;
-                    }
+    /* =====================================================
+       SEGURANÇA
+    ===================================================== */
+
+    if (
+        !engine ||
+        !bloodLayer ||
+        !stainLayer ||
+        !glitchLayer ||
+        !cleanLayer
+    ) {
+
+        console.warn(
+            "[Inevitable Engine] Camadas visuais não encontradas."
+        );
+
+        return;
+
+    }
 
 
-                    surveyFeedback.textContent =
-                        "Obrigado por avaliar Inevitável. Sua resposta foi registrada nesta página.";
+    /* =====================================================
+       CONFIGURAÇÃO
+    ===================================================== */
+
+    const CONFIG = {
+
+        stages: [
+            0,
+            10,
+            25,
+            40,
+            55,
+            70,
+            85,
+            100
+        ],
+
+        weights: {
+
+            sectionEnter: 3,
+
+            accordion: 2,
+
+            manifesto: 4,
+
+            survival: 4,
+
+            trailerPlay: 15,
+
+            surveyReach: 10,
+
+            surveySubmit: 20
+
+        },
+
+        maxContamination: 100
+
+    };
 
 
-                    surveyFeedback.classList.add(
-                        "visible"
-                    );
+    /* =====================================================
+       ESTADO
+    ===================================================== */
+
+    let contamination = 0;
+
+    let currentStage = 0;
+
+    let surveyReached = false;
+
+    let surveyCompleted = false;
+
+    let cleaning = false;
 
 
-                    surveyForm.reset();
+    /* =====================================================
+       UTILITÁRIOS
+    ===================================================== */
+
+    const clamp = (
+        value,
+        min,
+        max
+    ) => {
+
+        return Math.max(
+            min,
+            Math.min(max, value)
+        );
+
+    };
 
 
-                    console.log({
+    /* =====================================================
+       REMOVE ESTÁGIOS ANTIGOS
+    ===================================================== */
 
-                        rating:
-                            Number(
-                                rating.value
-                            ),
+    const removeStageClasses = () => {
 
-                        comment,
+        Array
+            .from(document.body.classList)
+            .filter(className =>
+                className.startsWith(
+                    "inevitable-stage-"
+                )
+            )
+            .forEach(className => {
 
-                        permission:
-                            permission.value
+                document.body.classList.remove(
+                    className
+                );
 
-                    });
+            });
+
+    };
+
+
+    /* =====================================================
+       CALCULA ESTÁGIO
+    ===================================================== */
+
+    const getStage = () => {
+
+        let stage = 0;
+
+        CONFIG.stages.forEach(
+            (threshold, index) => {
+
+                if (
+                    contamination >= threshold
+                ) {
+
+                    stage = index;
 
                 }
+
+            }
+        );
+
+        return stage;
+
+    };
+
+
+    /* =====================================================
+       ATUALIZA VISUAL
+    ===================================================== */
+
+    const updateVisualState = () => {
+
+        const nextStage =
+            getStage();
+
+
+        if (
+            nextStage === currentStage
+        ) {
+
+            return;
+
+        }
+
+
+        currentStage =
+            nextStage;
+
+
+        removeStageClasses();
+
+
+        if (
+            currentStage > 0
+        ) {
+
+            document.body.classList.add(
+                `inevitable-stage-${currentStage}`
             );
 
         }
 
+
+        if (
+            currentStage >= 7
+        ) {
+
+            document.body.classList.add(
+                "inevitable-final"
+            );
+
+        }
+        else {
+
+            document.body.classList.remove(
+                "inevitable-final"
+            );
+
+        }
+
+    };
+
+
+    /* =====================================================
+       ADICIONA CONTAMINAÇÃO
+    ===================================================== */
+
+    const contaminate = (
+        amount,
+        reason = "unknown"
+    ) => {
+
+        if (cleaning) {
+            return;
+        }
+
+
+        if (
+            !Number.isFinite(amount) ||
+            amount <= 0
+        ) {
+
+            return;
+
+        }
+
+
+        const previous =
+            contamination;
+
+
+        contamination =
+            clamp(
+                contamination + amount,
+                0,
+                CONFIG.maxContamination
+            );
+
+
+        console.log(
+            "[Inevitable Engine]",
+            reason,
+            `+${amount}`,
+            `${previous} → ${contamination}`
+        );
+
+
+        updateVisualState();
+
+    };
+
+
+    /* =====================================================
+       LIMPEZA
+    ===================================================== */
+
+    const clean = async () => {
+
+        if (cleaning) {
+            return;
+        }
+
+
+        cleaning = true;
+
+
+        console.log(
+            "[Inevitable Engine] Iniciando limpeza."
+        );
+
+
+        document.body.classList.add(
+            "inevitable-cleaning"
+        );
+
+
+        await wait(1400);
+
+
+        contamination = 0;
+
+        currentStage = 0;
+
+        surveyReached = false;
+
+        surveyCompleted = false;
+
+
+        removeStageClasses();
+
+
+        document.body.classList.remove(
+            "inevitable-final"
+        );
+
+
+        await wait(900);
+
+
+        document.body.classList.remove(
+            "inevitable-cleaning"
+        );
+
+
+        await wait(100);
+
+
+        cleaning = false;
+
+
+        console.log(
+            "[Inevitable Engine] Estado restaurado."
+        );
+
+    };
+
+
+    /* =====================================================
+       CONTAMINAÇÃO POR SEÇÕES
+    ===================================================== */
+
+    const observedSections =
+        document.querySelectorAll(
+            "main > section"
+        );
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const sectionObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting &&
+                                entry.intersectionRatio >= 0.35
+                            ) {
+
+                                contaminate(
+                                    CONFIG.weights.sectionEnter,
+                                    `section:${entry.target.id || "unknown"}`
+                                );
+
+
+                                sectionObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.35
+                }
+            );
+
+
+        observedSections.forEach(
+            section => {
+
+                sectionObserver.observe(
+                    section
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ACCORDIONS
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".accordion-toggle"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        button.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        contaminate(
+                            CONFIG.weights.accordion,
+                            "accordion-open"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       MANIFESTO
+    ===================================================== */
+
+    if (manifestoText) {
+
+        manifestoText.addEventListener(
+            "click",
+            () => {
+
+                contaminate(
+                    CONFIG.weights.manifesto,
+                    "manifesto"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SOBREVIVER É APRENDER
+    ===================================================== */
+
+    if (survivalText) {
+
+        survivalText.addEventListener(
+            "click",
+            () => {
+
+                contaminate(
+                    CONFIG.weights.survival,
+                    "survival"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TRAILER
+    ===================================================== */
+
+    const trailer =
+        document.querySelector(
+            "#trailer video"
+        );
+
+
+    if (trailer) {
+
+        trailer.addEventListener(
+            "play",
+            () => {
+
+                contaminate(
+                    CONFIG.weights.trailerPlay,
+                    "trailer-play"
+                );
+
+            },
+            {
+                once: true
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PESQUISA
+    ===================================================== */
+
+    const surveySection =
+        document.getElementById(
+            "pesquisa"
+        );
+
+
+    if (
+        surveySection &&
+        "IntersectionObserver" in window
+    ) {
+
+        const surveyObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting &&
+                                !surveyReached
+                            ) {
+
+                                surveyReached =
+                                    true;
+
+
+                                contaminate(
+                                    CONFIG.weights.surveyReach,
+                                    "survey-reached"
+                                );
+
+
+                                surveyObserver.disconnect();
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.25
+                }
+            );
+
+
+        surveyObserver.observe(
+            surveySection
+        );
+
+    }
+
+
+    /* =====================================================
+       API DO ENGINE
+    ===================================================== */
+
+    window.InevitableEngine = {
+
+        contaminate,
+
+        clean,
+
+
+        getState: () => ({
+
+            contamination,
+
+            stage:
+                currentStage,
+
+            surveyReached,
+
+            surveyCompleted,
+
+            cleaning
+
+        }),
+
+
+        onSurveyCompleted:
+            async () => {
+
+                if (
+                    surveyCompleted
+                ) {
+
+                    return;
+
+                }
+
+
+                /* -----------------------------------------
+                   LEVA AO ESTADO FINAL
+                ----------------------------------------- */
+
+                contaminate(
+                    CONFIG.weights.surveySubmit,
+                    "survey-submit"
+                );
+
+
+                /*
+                 * A conclusão da pesquisa garante
+                 * o estado final.
+                 */
+
+                contamination =
+                    CONFIG.maxContamination;
+
+
+                updateVisualState();
+
+
+                surveyCompleted =
+                    true;
+
+
+                console.log(
+                    "[Inevitable Engine] Pesquisa concluída."
+                );
+
+
+                /* -----------------------------------------
+                   PEQUENA PAUSA NO ESTADO FINAL
+                ----------------------------------------- */
+
+                await wait(700);
+
+
+                /* -----------------------------------------
+                   LIMPEZA
+                ----------------------------------------- */
+
+                await clean();
+
+            }
+
+    };
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ===================================================== */
+
+    console.log(
+        "[Inevitable Engine] iniciado."
+    );
+
+})();
     </script>
 <!-- =====================================================
      INEVITABLE ENGINE
