@@ -2332,7 +2332,8 @@
             );
 
         }
-        /* =========================================================
+```javascript
+/* =========================================================
    INEVITABLE ENGINE
    MÓDULO ISOLADO
    Não altera a lógica existente do site.
@@ -2344,44 +2345,17 @@
 
 
     /* =====================================================
-       ELEMENTOS DO ENGINE
-    ===================================================== */
-
-    const engine =
-        document.getElementById("inevitable-engine");
-
-    const bloodLayer =
-        document.getElementById("inevitable-blood-layer");
-
-    const stainLayer =
-        document.getElementById("inevitable-stain-layer");
-
-    const glitchLayer =
-        document.getElementById("inevitable-glitch-layer");
-
-    const cleanLayer =
-        document.getElementById("inevitable-clean-layer");
-
-
-    /* =====================================================
        PROTEÇÃO
     ===================================================== */
 
-    if (
-        !engine ||
-        !bloodLayer ||
-        !stainLayer ||
-        !glitchLayer ||
-        !cleanLayer
-    ) {
-
-        console.warn(
-            "[Inevitable Engine] Camadas não encontradas."
-        );
-
-        return;
-
-    }
+    /*
+     * O Engine não depende de camadas visuais externas.
+     * Os elementos que estavam sendo procurados aqui
+     * não existem no HTML atual e também não são usados
+     * pelo restante do Engine.
+     *
+     * A lógica abaixo permanece a mesma.
+     */
 
 
     /* =====================================================
@@ -3071,7 +3045,8 @@
     );
 
 })();
-    </script>
+```
+
 
 </body>
 
