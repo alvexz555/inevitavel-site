@@ -1,26 +1,38 @@
 /* =========================================================
    INEVITÁVEL
-   STYLE BASE
-   Preto • Vermelho • Glitch • Dark Engine
+   IDENTIDADE VISUAL BASE
+   Compatível com o HTML atual
 ========================================================= */
 
 :root {
-    --bg: #050505;
-    --bg-soft: #0b0b0b;
-    --panel: #101010;
+    --bg: #000;
+    --bg-soft: #080808;
+    --surface: #0d0d0d;
+    --surface-2: #121212;
+
+    --text: #f2f2f2;
+    --muted: #9b9b9b;
 
     --red: #8b0000;
     --red-light: #c40000;
     --red-dark: #3d0000;
 
-    --text: #f2f2f2;
-    --muted: #999;
+    --border: rgba(255, 255, 255, .10);
 
-    --border: rgba(255,255,255,.14);
+    /* Blood State */
+    --blood: 0;
+    --blood-opacity: 0;
+    --blood-red: #120000;
 
-    --dark-x: 50%;
-    --dark-y: 50%;
+    --max-width: 1180px;
+
+    --space-section: clamp(80px, 12vw, 160px);
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -28,20 +40,27 @@
     padding: 0;
 }
 
+
 html {
     scroll-behavior: smooth;
-    background: var(--bg);
+    background: #000;
 }
+
 
 body {
     min-height: 100vh;
 
     background:
         radial-gradient(
-            circle at center,
-            #170000 0%,
-            #080000 35%,
-            #000 75%
+            circle at 50% 45%,
+            rgba(80, 0, 0, calc(.10 + (var(--blood) * .22))),
+            transparent 45%
+        ),
+        linear-gradient(
+            to bottom,
+            #000 0%,
+            var(--blood-red) 55%,
+            #000 100%
         );
 
     color: var(--text);
@@ -54,59 +73,162 @@ body {
     line-height: 1.6;
 
     overflow-x: hidden;
+
+    transition:
+        background .7s ease,
+        filter .3s ease;
 }
+
 
 /* =========================================================
-   ESTRUTURA
+   BLOOD STATE
 ========================================================= */
 
-main {
-    width: 100%;
+#blood-state {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120, 0, 0, calc(.10 + (var(--blood) * .25))),
+            transparent 60%
+        );
 }
 
-section {
+
+.blood-state-interface {
     position: relative;
 
-    min-height: 70vh;
+    max-width: 760px;
+
+    margin: 0 auto;
 
     padding:
-        100px 20px;
+        clamp(50px, 8vw, 100px)
+        clamp(25px, 6vw, 70px);
 
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
+    text-align: center;
 
-    overflow: hidden;
+    border:
+        1px solid
+        rgba(139, 0, 0, calc(.35 + (var(--blood) * .45)));
+
+    background:
+        rgba(0, 0, 0, .72);
+
+    box-shadow:
+        0 0 calc(30px + (var(--blood) * 70px))
+        rgba(139, 0, 0, calc(.08 + (var(--blood) * .20)));
+
+    transition:
+        border-color .5s ease,
+        box-shadow .5s ease,
+        background .5s ease;
 }
 
-.content,
-.social-content {
-    width: min(1000px, 92%);
-    margin: 0 auto;
+
+.blood-state-interface::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: calc(var(--blood) * 100%);
+
+    max-height: 100%;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(90, 0, 0, .65),
+            rgba(120, 0, 0, .08)
+        );
+
+    opacity: .55;
+
+    pointer-events: none;
+
+    transition:
+        height .7s ease,
+        opacity .5s ease;
 }
 
-h1,
-h2,
-h3 {
-    line-height: 1.05;
+
+.blood-state-interface > * {
+    position: relative;
+    z-index: 2;
 }
 
-h1,
-h2 {
+
+.blood-state-interface h2 {
+    margin-bottom: 20px;
+
+    font-size:
+        clamp(2rem, 7vw, 5rem);
+
+    line-height: 1;
+
+    letter-spacing: .08em;
+
     text-transform: uppercase;
 }
 
-h2 {
-    font-size: clamp(2rem, 6vw, 4.5rem);
-    margin-bottom: 30px;
+
+.blood-state-interface p {
+    margin-bottom: 35px;
+
+    color: var(--muted);
+
+    letter-spacing: .12em;
 }
 
-h3 {
-    color: #fff;
+
+.blood-state-interface [data-blood-counter] {
+    margin-top: 28px;
+
+    font-family: monospace;
+
+    color: var(--red-light);
+
+    font-size: .8rem;
+
+    letter-spacing: .2em;
 }
 
-p {
-    color: #c7c7c7;
+
+/* =========================================================
+   ESTADOS ALTOS DO BLOOD STATE
+========================================================= */
+
+body:has([data-blood-state]) {
+    --blood-red:
+        color-mix(
+            in srgb,
+            #000 85%,
+            #7a0000 calc(var(--blood) * 100%)
+        );
 }
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 
 /* =========================================================
    HEADER
@@ -114,193 +236,298 @@ p {
 
 header {
     position: sticky;
+
     top: 0;
 
     z-index: 100;
 
+    width: 100%;
+
     background:
-        rgba(0,0,0,.92);
+        rgba(0, 0, 0, .88);
 
     border-bottom:
-        1px solid rgba(139,0,0,.35);
+        1px solid
+        rgba(255, 255, 255, .08);
 
     backdrop-filter: blur(10px);
 }
 
+
 .header-content {
-    width: min(1200px, 94%);
-    min-height: 70px;
+    width: min(
+        calc(100% - 40px),
+        var(--max-width)
+    );
+
+    min-height: 72px;
 
     margin: 0 auto;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
+
 
 .logo {
     font-weight: 900;
 
-    letter-spacing: .25em;
+    font-size: 1.1rem;
 
-    color: #fff;
+    letter-spacing: .18em;
 }
+
 
 .menu-button {
-    display: none;
+    width: 46px;
+    height: 46px;
 
-    background: transparent;
+    border:
+        1px solid
+        rgba(255, 255, 255, .18);
 
-    border: 1px solid #555;
+    background: #050505;
 
-    color: #fff;
+    color: white;
 
-    padding: 8px 12px;
+    font-size: 1.2rem;
 
     cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
 }
 
-nav {
-    width: min(1200px, 94%);
+
+.menu-button:hover {
+    border-color: var(--red-light);
+
+    background: #100000;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+#menu {
+    display: none;
+
+    width: min(
+        calc(100% - 40px),
+        var(--max-width)
+    );
+
     margin: 0 auto;
 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 15px 0 25px;
 
-    gap: 8px;
-
-    padding-bottom: 12px;
+    flex-direction: column;
 }
 
-nav a {
+
+#menu.active {
+    display: flex;
+}
+
+
+#menu a {
+    padding: 12px 5px;
+
     color: #aaa;
 
-    text-decoration: none;
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, .06);
 
-    font-size: .72rem;
+    font-size: .85rem;
 
     letter-spacing: .12em;
 
-    padding: 6px 8px;
-
     transition:
-        color .25s ease,
-        text-shadow .25s ease;
+        color .2s ease,
+        padding-left .2s ease;
 }
 
-nav a:hover {
-    color: #fff;
 
-    text-shadow:
-        0 0 8px var(--red-light);
+#menu a:hover {
+    color: white;
+
+    padding-left: 10px;
 }
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section {
+    position: relative;
+
+    min-height: 60vh;
+
+    padding:
+        var(--space-section)
+        20px;
+
+    background: transparent;
+}
+
+
+.content,
+.social-content {
+    width: min(
+        100%,
+        var(--max-width)
+    );
+
+    margin: 0 auto;
+}
+
 
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero {
-    min-height: 90vh;
+    min-height: calc(100vh - 72px);
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 
+    padding:
+        100px 20px;
+
     background:
         radial-gradient(
             circle at center,
-            rgba(120,0,0,.22),
-            transparent 60%
+            rgba(100, 0, 0, .16),
+            transparent 55%
         );
 }
 
+
 .hero h1 {
-    font-size: clamp(4rem, 14vw, 10rem);
+    font-size:
+        clamp(4rem, 16vw, 11rem);
 
-    letter-spacing: .18em;
+    line-height: .85;
 
-    margin-bottom: 20px;
+    font-weight: 900;
 
-    text-shadow:
-        0 0 25px rgba(139,0,0,.35);
+    letter-spacing: -.05em;
 }
 
-.hero-description {
-    max-width: 700px;
-
-    margin:
-        30px auto 40px;
-
-    color: #aaa;
-}
 
 .tagline {
-    font-size: clamp(.9rem, 2vw, 1.3rem);
+    margin-top: 25px;
 
-    letter-spacing: .28em;
+    color: #ddd;
 
-    color: #ccc;
+    font-size:
+        clamp(1rem, 3vw, 1.5rem);
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
 }
 
+
+.hero-description {
+    max-width: 650px;
+
+    margin: 30px auto 0;
+
+    color: #999;
+
+    font-size:
+        clamp(.95rem, 2vw, 1.1rem);
+}
+
+
 /* =========================================================
-   BOTÕES
+   BUTTONS
 ========================================================= */
 
 .buttons {
     display: flex;
 
-    justify-content: center;
-
     flex-wrap: wrap;
 
-    gap: 15px;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 35px;
 }
 
+
 .button {
-    display: inline-block;
+    display: inline-flex;
 
-    border: 1px solid #aaa;
+    align-items: center;
 
-    background: transparent;
+    justify-content: center;
 
-    color: #fff;
+    min-height: 46px;
 
-    padding: 14px 26px;
+    padding:
+        12px 20px;
 
-    text-decoration: none;
+    border:
+        1px solid
+        rgba(255, 255, 255, .18);
 
-    letter-spacing: .15em;
+    background:
+        #090909;
 
-    font-size: .75rem;
+    color: white;
+
+    font-size: .8rem;
+
+    font-weight: 800;
+
+    letter-spacing: .1em;
 
     cursor: pointer;
 
     transition:
-        background .3s ease,
-        color .3s ease,
-        border-color .3s ease,
-        transform .2s ease;
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
+
 
 .button:hover {
-    background: #fff;
+    background: #160000;
 
-    color: #000;
+    border-color: var(--red-light);
 
-    border-color: #fff;
+    box-shadow:
+        0 0 20px
+        rgba(139, 0, 0, .22);
 
-    transform: scale(1.04);
+    transform: translateY(-2px);
 }
+
 
 .button:active {
-    transform: scale(.97);
+    transform: translateY(0);
 }
 
+
 /* =========================================================
-   LABELS
+   TEXTOS
 ========================================================= */
 
 .section-label {
@@ -308,12 +535,80 @@ nav a:hover {
 
     color: var(--red-light);
 
-    font-size: .7rem;
+    font-family: monospace;
+
+    font-size: .75rem;
 
     font-weight: 700;
 
-    letter-spacing: .35em;
+    letter-spacing: .2em;
 }
+
+
+h2 {
+    margin-bottom: 30px;
+
+    font-size:
+        clamp(2rem, 6vw, 4.5rem);
+
+    line-height: 1;
+
+    letter-spacing: -.03em;
+}
+
+
+h3 {
+    margin-bottom: 12px;
+
+    font-size: 1rem;
+
+    letter-spacing: .08em;
+}
+
+
+p {
+    color: #aaa;
+}
+
+
+.game-content,
+.origin,
+.development {
+    max-width: 850px;
+}
+
+
+.game-content p,
+.origin p,
+.development p {
+    margin-bottom: 22px;
+
+    font-size:
+        clamp(1rem, 2vw, 1.15rem);
+}
+
+
+/* =========================================================
+   TEXTOS INTERATIVOS
+========================================================= */
+
+.inevitable-clickable {
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        text-shadow .2s ease;
+}
+
+
+.inevitable-clickable:hover {
+    color: #fff;
+
+    text-shadow:
+        0 0 12px
+        rgba(196, 0, 0, .45);
+}
+
 
 /* =========================================================
    DARK ENGINE
@@ -322,42 +617,64 @@ nav a:hover {
 .dark-engine-zone {
     position: relative;
 
-    overflow: hidden;
+    min-height: 420px;
 
     margin-top: 40px;
 
-    background: #000;
+    overflow: hidden;
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        rgba(255, 255, 255, .08);
 
-    min-height: 300px;
+    background:
+        #020202;
+
+    --dark-x: 50%;
+    --dark-y: 50%;
 }
+
 
 .dark-engine-area {
     position: relative;
 
     z-index: 2;
 
-    padding: 40px;
-}
+    min-height: 420px;
 
-/*
-   Luz do cursor
-*/
+    padding:
+        clamp(30px, 6vw, 70px);
 
-.dark-engine-zone.dark-engine-active {
     background:
         radial-gradient(
             circle 180px at var(--dark-x) var(--dark-y),
-            rgba(255,255,255,.09),
-            rgba(0,0,0,.97) 75%
+            rgba(255, 255, 255, .10),
+            rgba(0, 0, 0, .96) 75%
         );
+
+    transition:
+        background .1s linear;
 }
 
+
 .dark-engine-mobile-canvas {
-    z-index: 1;
+    display: none;
 }
+
+
+/* =========================================================
+   DEATH INTRO
+========================================================= */
+
+.death-intro {
+    max-width: 700px;
+
+    margin-bottom: 35px;
+
+    font-size:
+        clamp(1rem, 2vw, 1.15rem);
+}
+
 
 /* =========================================================
    ACCORDION
@@ -368,75 +685,64 @@ nav a:hover {
 
     display: flex;
 
-    justify-content: space-between;
     align-items: center;
 
-    padding: 20px;
+    justify-content: space-between;
 
-    background: rgba(0,0,0,.65);
+    padding: 20px 0;
 
-    border: 1px solid var(--border);
+    border: 0;
 
-    color: #fff;
+    border-top:
+        1px solid
+        rgba(255, 255, 255, .12);
 
-    cursor: pointer;
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, .12);
 
-    font-size: .8rem;
+    background: transparent;
 
-    letter-spacing: .15em;
+    color: white;
 
     text-align: left;
 
-    transition:
-        background .3s ease,
-        border-color .3s ease;
+    font-size: .85rem;
+
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+    cursor: pointer;
 }
 
-.accordion-toggle:hover,
-.accordion-toggle.active {
-    background: rgba(139,0,0,.18);
-
-    border-color:
-        rgba(139,0,0,.7);
-}
 
 .accordion-icon {
-    font-size: 1.4rem;
+    color: var(--red-light);
+
+    font-size: 1.5rem;
 
     transition:
-        transform .3s ease;
+        transform .25s ease;
 }
+
 
 .accordion-toggle.active .accordion-icon {
     transform: rotate(45deg);
 }
 
+
 .accordion-content {
     display: none;
 
-    padding-top: 25px;
+    padding-top: 30px;
 }
+
 
 .accordion-content.active {
     display: block;
-
-    animation:
-        inevitable-accordion .4s ease;
 }
 
-@keyframes inevitable-accordion {
-
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
 
 /* =========================================================
    CARDS
@@ -444,417 +750,184 @@ nav a:hover {
 
 .death-grid,
 .cards,
-.universe-grid {
+.universe-grid,
+.gallery {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
-    gap: 20px;
+    gap: 16px;
 }
 
-.universe-grid {
-    grid-template-columns:
-        repeat(2, 1fr);
-}
 
 .death-card,
 .card,
-.story-block,
-.gallery-item {
-    background:
-        linear-gradient(
-            145deg,
-            #121212,
-            #070707
-        );
-
-    border:
-        1px solid rgba(255,255,255,.08);
+.story-block {
+    min-height: 220px;
 
     padding: 28px;
 
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(10, 10, 10, .82);
+
     transition:
-        transform .3s ease,
-        border-color .3s ease,
-        background .3s ease;
+        border-color .25s ease,
+        transform .25s ease,
+        background .25s ease;
 }
+
 
 .death-card:hover,
 .card:hover,
-.story-block:hover,
-.gallery-item:hover {
-    transform: translateY(-4px);
-
+.story-block:hover {
     border-color:
-        rgba(139,0,0,.7);
+        rgba(139, 0, 0, .6);
 
     background:
-        linear-gradient(
-            145deg,
-            #1b0808,
-            #080000
-        );
+        rgba(25, 0, 0, .75);
+
+    transform: translateY(-3px);
 }
+
 
 .number,
 .card-number {
     display: block;
 
+    margin-bottom: 25px;
+
     color: var(--red-light);
-
-    font-size: .75rem;
-
-    letter-spacing: .2em;
-
-    margin-bottom: 15px;
-}
-
-.death-card h3,
-.card h3,
-.story-block h3 {
-    margin-bottom: 15px;
-
-    font-size: 1rem;
-
-    letter-spacing: .12em;
-}
-
-.death-card p,
-.card p,
-.story-block p {
-    color: #999;
-
-    font-size: .9rem;
-}
-
-/* =========================================================
-   MANIFESTO / INTERAÇÕES
-========================================================= */
-
-.inevitable-clickable {
-    cursor: pointer;
-
-    user-select: none;
-
-    transition:
-        color .3s ease,
-        text-shadow .3s ease;
-}
-
-.inevitable-clickable:hover {
-    color: #fff;
-
-    text-shadow:
-        0 0 12px rgba(139,0,0,.8);
-}
-
-.inevitable-text {
-    position: relative;
-}
-
-/* =========================================================
-   GLITCH
-========================================================= */
-
-.inevitable-text.glitching {
-    animation:
-        inevitable-glitch .12s infinite;
-}
-
-.inevitable-text.glitching::before,
-.inevitable-text.glitching::after {
-    content: attr(data-text);
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: .8;
-}
-
-.inevitable-text.glitching::before {
-    animation:
-        inevitable-glitch-before .18s infinite;
-}
-
-.inevitable-text.glitching::after {
-    animation:
-        inevitable-glitch-after .14s infinite;
-}
-
-@keyframes inevitable-glitch {
-
-    0% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(-2px, 1px);
-    }
-
-    40% {
-        transform: translate(2px, -1px);
-    }
-
-    60% {
-        transform: translate(-1px, 2px);
-    }
-
-    80% {
-        transform: translate(1px, -2px);
-    }
-
-    100% {
-        transform: translate(0);
-    }
-
-}
-
-@keyframes inevitable-glitch-before {
-
-    0% {
-        clip-path: inset(0 0 80% 0);
-        transform: translate(-3px);
-    }
-
-    50% {
-        clip-path: inset(40% 0 20% 0);
-        transform: translate(3px);
-    }
-
-    100% {
-        clip-path: inset(70% 0 0 0);
-        transform: translate(-2px);
-    }
-
-}
-
-@keyframes inevitable-glitch-after {
-
-    0% {
-        clip-path: inset(70% 0 0 0);
-        transform: translate(3px);
-    }
-
-    50% {
-        clip-path: inset(10% 0 50% 0);
-        transform: translate(-3px);
-    }
-
-    100% {
-        clip-path: inset(0 0 75% 0);
-        transform: translate(2px);
-    }
-
-}
-
-/* =========================================================
-   ERROR / CONFETE
-========================================================= */
-
-.inevitable-error-container {
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 20;
-}
-
-.inevitable-error {
-    position: absolute;
 
     font-family: monospace;
 
-    font-weight: 900;
+    font-size: .8rem;
 
-    font-size: clamp(14px, 2vw, 24px);
-
-    color: #ff0000;
-
-    opacity: 0;
-
-    animation:
-        inevitable-error-pop .8s forwards;
+    letter-spacing: .15em;
 }
 
-@keyframes inevitable-error-pop {
-
-    0% {
-        opacity: 0;
-        transform:
-            scale(.3)
-            rotate(0deg);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            scale(1.2)
-            rotate(var(--rotation));
-    }
-
-}
-
-.inevitable-confetti {
-    position: absolute;
-
-    width: 7px;
-    height: 7px;
-
-    background: var(--red-light);
-
-    pointer-events: none;
-
-    z-index: 30;
-
-    animation:
-        inevitable-confetti .9s forwards;
-}
-
-@keyframes inevitable-confetti {
-
-    0% {
-        opacity: 1;
-
-        transform:
-            translate(0,0)
-            rotate(0deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate(var(--x),var(--y))
-            rotate(var(--rotation));
-    }
-
-}
 
 /* =========================================================
-   RESTABILIZAÇÃO
+   UNIVERSO
 ========================================================= */
 
-.inevitable-restabilizing {
-    animation:
-        inevitable-restabilize .7s;
+.universe-grid {
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    margin-top: 30px;
 }
 
-@keyframes inevitable-restabilize {
 
-    0% {
-        filter: contrast(3);
-        transform: skewX(8deg);
-    }
-
-    25% {
-        filter: contrast(.5);
-        transform: skewX(-5deg);
-    }
-
-    50% {
-        filter: contrast(2);
-        transform: skewX(3deg);
-    }
-
-    100% {
-        filter: none;
-        transform: none;
-    }
-
+.story-block {
+    min-height: 240px;
 }
+
 
 /* =========================================================
    TRAILER
 ========================================================= */
 
-video {
+#trailer video {
+    margin-top: 35px;
+
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255, 255, 255, .1);
 
     background: #000;
 
-    margin-top: 30px;
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, .6);
 }
 
-/* =========================================================
-   ORIGEM / DESENVOLVIMENTO
-========================================================= */
 
-.origin,
-.development,
-.game-content {
-    max-width: 800px;
-}
-
-.origin p,
-.development p,
-.game-content p {
-    max-width: 750px;
-
+.trailer-text {
     margin-bottom: 20px;
-
-    color: #aaa;
 }
+
 
 /* =========================================================
    GALERIA
 ========================================================= */
 
 .gallery {
-    display: grid;
-
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
-    gap: 15px;
+    margin-top: 30px;
 }
 
+
 .gallery-item {
-    min-height: 180px;
+    min-height: 220px;
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .08);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0c0c0c,
+            #030303
+        );
 
     color: #555;
 
-    font-size: .7rem;
+    font-family: monospace;
 
-    letter-spacing: .15em;
+    font-size: .75rem;
+
+    letter-spacing: .12em;
+
+    transition:
+        border-color .2s ease,
+        color .2s ease;
 }
+
+
+.gallery-item:hover {
+    color: #aaa;
+
+    border-color:
+        rgba(139, 0, 0, .55);
+}
+
 
 /* =========================================================
    PESQUISA
 ========================================================= */
 
 .survey-content {
-    max-width: 800px;
+    max-width: 850px;
 }
+
+
+#surveyForm {
+    margin-top: 35px;
+}
+
 
 .survey-rating {
     display: grid;
 
-    gap: 12px;
+    gap: 10px;
 
-    margin: 30px 0;
+    margin-bottom: 35px;
 }
+
 
 .survey-option {
     display: flex;
@@ -863,122 +936,136 @@ video {
 
     gap: 12px;
 
-    padding: 15px;
+    padding: 16px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255, 255, 255, .1);
+
+    background: #080808;
 
     cursor: pointer;
 
     transition:
-        background .25s ease,
-        border-color .25s ease;
+        border-color .2s ease,
+        background .2s ease;
 }
+
 
 .survey-option:hover {
-    background:
-        rgba(139,0,0,.12);
-
     border-color:
-        rgba(139,0,0,.5);
+        rgba(139, 0, 0, .55);
+
+    background: #100000;
 }
+
 
 .survey-option input {
     accent-color: var(--red-light);
 }
 
+
 .survey-stars {
-    letter-spacing: .1em;
+    letter-spacing: .05em;
 }
 
-.survey-comment {
-    margin: 30px 0;
+
+.survey-comment,
+.survey-permission {
+    margin-bottom: 30px;
 }
 
-.survey-comment label {
+
+.survey-comment label,
+.survey-permission p {
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+
+    color: white;
 
     font-weight: 700;
 }
 
-.survey-comment p {
-    margin-bottom: 15px;
 
-    font-size: .85rem;
+.survey-comment p {
+    margin-bottom: 12px;
+
+    font-size: .9rem;
 }
+
 
 textarea {
     width: 100%;
 
-    min-height: 130px;
+    min-height: 140px;
 
     padding: 15px;
 
     resize: vertical;
 
-    background: #080808;
-
     border:
-        1px solid rgba(255,255,255,.15);
-
-    color: #fff;
-
-    font: inherit;
+        1px solid
+        rgba(255, 255, 255, .12);
 
     outline: none;
+
+    background: #050505;
+
+    color: white;
+
+    font:
+        inherit;
+
+    transition:
+        border-color .2s ease;
 }
+
 
 textarea:focus {
     border-color: var(--red-light);
-
-    box-shadow:
-        0 0 15px rgba(139,0,0,.2);
 }
 
-.survey-permission {
-    display: grid;
-
-    gap: 10px;
-
-    margin-bottom: 30px;
-}
-
-.survey-permission p {
-    margin-bottom: 10px;
-}
 
 .survey-permission label {
-    color: #aaa;
+    display: block;
+
+    margin: 10px 0;
+
+    color: #bbb;
 
     cursor: pointer;
 }
 
+
 .survey-permission input {
+    margin-right: 8px;
+
     accent-color: var(--red-light);
 }
 
+
 .survey-feedback {
+    display: none;
+
     margin-top: 25px;
 
-    padding: 15px;
+    padding: 20px;
 
     border-left:
-        3px solid var(--red-light);
+        3px solid
+        var(--red-light);
 
-    background:
-        rgba(139,0,0,.1);
+    background: #0d0000;
 
-    opacity: 0;
-
-    transition:
-        opacity .4s ease;
+    color: #ddd;
 }
+
 
 .survey-feedback.visible {
-    opacity: 1;
+    display: block;
 }
+
 
 /* =========================================================
    REDES
@@ -988,137 +1075,230 @@ textarea:focus {
     min-height: 50vh;
 
     display: flex;
-    align-items: center;
 
+    align-items: center;
+}
+
+
+.social-content {
     text-align: center;
 }
 
-.social-content {
-    max-width: 700px;
+
+.social-content p {
+    max-width: 600px;
+
+    margin: 0 auto;
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 footer {
-    padding: 50px 20px;
+    padding:
+        60px 20px;
 
-    text-align: center;
+    border-top:
+        1px solid
+        rgba(255, 255, 255, .08);
+
+    background: #000;
 
     color: #555;
 
-    font-size: .7rem;
+    text-align: center;
 
-    letter-spacing: .2em;
+    font-family: monospace;
 
-    border-top:
-        1px solid rgba(255,255,255,.06);
+    font-size: .75rem;
+
+    letter-spacing: .08em;
 }
 
+
 /* =========================================================
-   BLOOD STATE
-   Base para a nova camada modular
+   DARK ENGINE ATIVO
 ========================================================= */
 
-#blood-state {
+.dark-engine-active .dark-engine-area {
     background:
         radial-gradient(
-            circle at center,
-            rgba(80,0,0,.16),
-            transparent 65%
+            circle 230px at var(--dark-x) var(--dark-y),
+            rgba(255, 255, 255, .16),
+            rgba(0, 0, 0, .97) 72%
         );
 }
 
-.blood-state-interface {
-    position: relative;
 
-    padding: 80px 20px;
-
-    text-align: center;
-
-    overflow: hidden;
+.dark-engine-mobile-active .dark-engine-area {
+    background:
+        rgba(0, 0, 0, .35);
 }
 
-.blood-state-interface h2 {
-    margin-bottom: 20px;
-}
-
-.blood-state-interface p {
-    margin-bottom: 35px;
-}
-
-.blood-state-interface [data-blood-counter] {
-    margin-top: 25px;
-
-    font-size: .7rem;
-
-    letter-spacing: .3em;
-
-    color: #777;
-}
 
 /* =========================================================
-   RESPONSIVIDADE
+   GLITCH / ERROR
+========================================================= */
+
+.inevitable-error {
+    color: var(--red-light);
+
+    text-shadow:
+        2px 0 #fff,
+        -2px 0 #400000;
+}
+
+
+.inevitable-confetti {
+    background: var(--red-light);
+
+    box-shadow:
+        0 0 8px
+        rgba(196, 0, 0, .7);
+}
+
+
+/* =========================================================
+   RESPONSIVO
 ========================================================= */
 
 @media (max-width: 800px) {
 
-    .menu-button {
-        display: block;
-    }
-
-    nav {
-        display: none;
-
-        flex-direction: column;
-
-        padding: 15px;
-
-        background: #050505;
-    }
-
-    nav.active {
-        display: flex;
-    }
-
-    nav a {
-        padding: 12px;
-
-        border-bottom:
-            1px solid rgba(255,255,255,.06);
-    }
-
     section {
         padding:
-            80px 15px;
+            80px 16px;
     }
+
+
+    .hero {
+        min-height: 85vh;
+    }
+
+
+    .hero h1 {
+        font-size:
+            clamp(3.5rem, 19vw, 7rem);
+    }
+
 
     .death-grid,
     .cards,
-    .universe-grid,
     .gallery {
         grid-template-columns: 1fr;
     }
 
+
+    .universe-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .death-card,
+    .card,
+    .story-block {
+        min-height: auto;
+    }
+
+
+    .dark-engine-zone {
+        min-height: 360px;
+    }
+
+
     .dark-engine-area {
-        padding: 25px 18px;
+        min-height: 360px;
     }
 
-    .hero h1 {
-        letter-spacing: .08em;
+
+    /*
+       No mobile o canvas preto é a camada interativa.
+       O JS atual já controla o canvas.
+    */
+
+    .dark-engine-mobile-canvas {
+        display: block;
+
+        position: absolute;
+
+        inset: 0;
+
+        z-index: 10;
     }
 
-    .buttons {
-        flex-direction: column;
-        align-items: stretch;
+
+    .dark-engine-area {
+        background: transparent;
     }
 
-    .button {
-        text-align: center;
+
+    .dark-engine-mobile-active .dark-engine-area {
+        background: transparent;
+    }
+
+
+    .blood-state-interface {
+        padding:
+            55px 22px;
     }
 
 }
+
+
+@media (max-width: 520px) {
+
+    .header-content {
+        width:
+            calc(100% - 28px);
+    }
+
+
+    #menu {
+        width:
+            calc(100% - 28px);
+    }
+
+
+    .buttons {
+        flex-direction: column;
+    }
+
+
+    .button {
+        width: 100%;
+    }
+
+
+    .tagline {
+        font-size: .9rem;
+
+        letter-spacing: .08em;
+    }
+
+
+    h2 {
+        font-size:
+            clamp(2rem, 11vw, 3.5rem);
+    }
+
+
+    .blood-state-interface h2 {
+        font-size:
+            clamp(2rem, 13vw, 4rem);
+    }
+
+
+    .blood-state-interface p {
+        font-size: .85rem;
+    }
+
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1126,8 +1306,11 @@ footer {
     *::before,
     *::after {
         animation-duration: .01ms !important;
+
         animation-iteration-count: 1 !important;
+
         scroll-behavior: auto !important;
+
         transition-duration: .01ms !important;
     }
 
