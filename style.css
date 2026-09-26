@@ -1,45 +1,128 @@
 /* =========================================================
    INEVITÁVEL
-   CSS RESPONSIVO
-   DARK ENGINE
+   CSS RESPONSIVO + DARK ENGINE + CONTAMINAÇÃO
+   ========================================================= */
+
+:root {
+    --blood: #7a0000;
+    --blood-dark: #260000;
+    --blood-light: #ff1a1a;
+
+    --black: #050505;
+    --black-soft: #0b0b0b;
+    --gray-dark: #141414;
+    --gray: #242424;
+    --gray-light: #888;
+    --white: #f2f2f2;
+
+    --danger: #ff0000;
+    --clean: #f2f2f2;
+
+    --engine-progress: 0;
+    --engine-opacity: 0;
+    --engine-glitch: 0;
+
+    --transition-fast: 180ms ease;
+    --transition-normal: 400ms ease;
+    --transition-slow: 900ms ease;
+}
+
+/* =========================================================
+   RESET
    ========================================================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 75px;
-  background: #050505;
+    scroll-behavior: smooth;
+    background: var(--black);
 }
 
 body {
-  min-width: 0;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  background: #050505;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(100, 0, 0, 0.08),
+            transparent 45%
+        ),
+        var(--black);
+
+    color: var(--white);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
+
+    transition:
+        background 900ms ease,
+        color 600ms ease,
+        filter 600ms ease;
 }
 
-img,
-video {
-  max-width: 100%;
-  display: block;
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.015) 0,
+            rgba(255, 255, 255, 0.015) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    opacity: 0.25;
+}
+
+/* =========================================================
+   TIPOGRAFIA
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.1;
+}
+
+p {
+    line-height: 1.7;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
-button {
-  font-family: inherit;
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
 }
 
 /* =========================================================
@@ -47,113 +130,96 @@ button {
    ========================================================= */
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 14px;
-  z-index: 1000;
-  background: rgba(5, 5, 5, .92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #1d1d1d;
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(5, 5, 5, 0.88);
+
+    border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+
+    backdrop-filter: blur(14px);
+
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal);
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 0;
+.header-inner {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
 }
 
 .logo {
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 2px;
+    font-size: 1.2rem;
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    color: #fff;
+
+    transition: var(--transition-normal);
 }
 
-.menu-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 38px;
-  background: transparent;
-  color: #fff;
-  border: 1px solid #292929;
-  font-size: 20px;
-  cursor: pointer;
-  flex-shrink: 0;
+.logo:hover {
+    color: var(--blood-light);
 }
 
 nav {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-nav.active {
-  display: flex;
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
 nav a {
-  display: block;
-  padding: 10px;
-  border: 1px solid #292929;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-align: center;
-  transition:
-    background .2s ease,
-    color .2s ease;
+    position: relative;
+
+    color: #aaa;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    transition:
+        color var(--transition-fast),
+        text-shadow var(--transition-fast);
+}
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--blood-light);
+
+    transition: width var(--transition-fast);
 }
 
 nav a:hover {
-  background: #fff;
-  color: #000;
+    color: #fff;
+
+    text-shadow:
+        0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-/* =========================================================
-   GERAL
-   ========================================================= */
-
-section {
-  min-height: auto;
-  padding: 90px 18px;
-  border-top: 1px solid #151515;
-}
-
-.content {
-  width: 100%;
-  max-width: 950px;
-  margin: auto;
-  min-width: 0;
-}
-
-.section-label {
-  margin-bottom: 12px;
-  color: #777;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-h2 {
-  font-size: clamp(2rem, 9vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-
-p {
-  color: #bdbdbd;
-  font-size: .95rem;
-  line-height: 1.75;
+nav a:hover::after {
+    width: 100%;
 }
 
 /* =========================================================
@@ -161,970 +227,609 @@ p {
    ========================================================= */
 
 .hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 130px 18px 70px;
-  overflow: hidden;
+    position: relative;
+
+    min-height: 90vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 100px 0;
+
+    overflow: hidden;
 }
 
-.dark-engine-content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100, 0, 0, 0.18),
+            transparent 55%
+        );
+
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 850px;
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 14vw, 8rem);
-  font-weight: 900;
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 20px;
-  white-space: nowrap;
+    font-size: clamp(3rem, 10vw, 8rem);
+
+    font-weight: 900;
+
+    letter-spacing: -0.06em;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 20px rgba(255, 0, 0, 0.05);
+
+    transition:
+        color var(--transition-normal),
+        text-shadow var(--transition-normal),
+        transform var(--transition-normal);
 }
 
-.tagline {
-  font-size: clamp(.8rem, 3vw, 1.3rem);
-  letter-spacing: 3px;
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
+.hero p {
+    max-width: 700px;
 
-.hero-description {
-  width: 100%;
-  max-width: 600px;
-  color: #bcbcbc;
-  font-size: .95rem;
-  line-height: 1.7;
-  margin: 0 auto 30px;
-  text-align: center;
+    margin-top: 28px;
+
+    color: #aaa;
+
+    font-size: clamp(1rem, 2vw, 1.25rem);
 }
 
 /* =========================================================
    BOTÕES
    ========================================================= */
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 12px 22px;
+
+    border: 1px solid rgba(255, 0, 0, 0.45);
+
+    background: #0c0c0c;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        color var(--transition-fast);
 }
 
-.button {
-  display: inline-block;
-  padding: 12px 18px;
-  z-index: 2;
-  border: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition:
-    background .2s ease,
-    color .2s ease,
-    transform .2s ease;
+.btn:hover {
+    transform: translateY(-2px);
+
+    background: #260000;
+
+    border-color: #ff0000;
+
+    box-shadow:
+        0 0 25px rgba(255, 0, 0, 0.25);
 }
 
-.button:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-2px);
+.btn:active {
+    transform: scale(0.97);
 }
 
 /* =========================================================
-   DARK ENGINE
-   DESKTOP
+   SEÇÕES
+   ========================================================= */
+
+section {
+    position: relative;
+
+    padding: 100px 0;
+
+    z-index: 5;
+}
+
+.section-title {
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: -0.04em;
+}
+
+.section-title p {
+    max-width: 700px;
+
+    margin-top: 14px;
+
+    color: #888;
+}
+
+/* =========================================================
+   DARK ENGINE ZONE
    ========================================================= */
 
 .dark-engine-zone {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
+    position: relative;
 
-  --dark-x: 50%;
-  --dark-y: 50%;
+    overflow: hidden;
 
-  -webkit-user-select: none;
-  user-select: none;
-}
+    min-height: 500px;
 
-.dark-engine-area {
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-}
-
-.dark-engine-zone::before,
-.dark-engine-zone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
+    background: #030303;
 }
 
 .dark-engine-zone::before {
-  background: rgba(0, 0, 0, .96);
-  opacity: 1;
-  transition: opacity .18s ease;
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(120, 0, 0, 0.12),
+            transparent 60%
+        );
+
+    pointer-events: none;
 }
-
-.dark-engine-zone::after {
-  background: radial-gradient(
-    circle 115px at var(--dark-x) var(--dark-y),
-    transparent 0%,
-    transparent 28%,
-    rgba(0, 0, 0, .10) 38%,
-    rgba(0, 0, 0, .34) 52%,
-    rgba(0, 0, 0, .72) 70%,
-    rgba(0, 0, 0, .96) 100%
-  );
-
-  opacity: 0;
-
-  transition:
-    opacity .18s ease;
-}
-
-.dark-engine-zone.dark-engine-active::before {
-  opacity: 0;
-}
-
-.dark-engine-zone.dark-engine-active::after {
-  opacity: 1;
-}
-
-/* =========================================================
-   ELEMENTOS FORA DA MÁSCARA
-   ========================================================= */
-
-.dark-engine-exempt {
-  position: relative;
-  z-index: 3;
-}
-
-.dark-engine-zone .accordion-toggle,
-.dark-engine-zone .accordion-content {
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-/* =========================================================
-   CANVAS MOBILE
-   ========================================================= */
 
 .dark-engine-mobile-canvas {
-  display: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  z-index: 2;
-  pointer-events: none;
+    display: none;
 }
 
 /* =========================================================
-   MORTE
+   CARDS
    ========================================================= */
 
-#morte {
-  background:
-    linear-gradient(
-      rgba(5, 5, 5, .94),
-      rgba(5, 5, 5, .98)
-    );
+.cards,
+.death-cards,
+.gallery,
+.social-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+        );
+
+    gap: 20px;
 }
 
-.death-intro {
-  max-width: 700px;
-  margin-bottom: 30px;
-}
-
-.death-grid,
-.cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.death-card,
 .card,
-.story-block {
-  padding: 22px;
-  border: 1px solid #202020;
-  background: #090909;
-  min-width: 0;
+.death-card {
+    position: relative;
+
+    padding: 28px;
+
+    min-height: 180px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.01)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        background var(--transition-normal),
+        box-shadow var(--transition-normal);
 }
 
-.number,
-.card-number {
-  display: block;
-  color: #666;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
+.card::before,
+.death-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 0, 0, 0.08),
+            transparent
+        );
+
+    transform: translateX(-100%);
+
+    transition: transform 700ms ease;
 }
 
-.card-number {
-  margin-bottom: 20px;
+.card:hover,
+.death-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(255, 0, 0, 0.35);
+
+    background:
+        rgba(60, 0, 0, 0.15);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(255, 0, 0, 0.05);
+}
+
+.card:hover::before,
+.death-card:hover::before {
+    transform: translateX(100%);
 }
 
 /* =========================================================
    TRAILER
    ========================================================= */
 
-#trailer {
-  text-align: center;
+.trailer {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+
+    border: 1px solid rgba(255, 0, 0, 0.18);
 }
 
-#trailer .content {
-  width: 100%;
-  max-width: 1050px;
-  margin: 0 auto;
+.trailer video {
+    display: block;
+
+    width: 100%;
+    height: auto;
 }
 
-.trailer-text {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 30px;
-}
-
-/*
- * PLAYER REAL DO TRAILER
- *
- * Mantém o formato 16:9,
- * acompanha a largura do conteúdo
- * e não força uma altura artificial.
- */
-
-#trailer video {
-  display: block;
-  width: 100%;
-  max-width: 1050px;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  margin: 0 auto;
-  background: #000;
-  border: 1px solid #222;
-}
-
-/*
- * Compatibilidade com versões antigas
- * que utilizavam trailer-box.
- */
-
-.trailer-box {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #090909;
-  border: 1px solid #222;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.trailer-placeholder {
-  padding: 20px;
-  color: #777;
-  font-size: 11px;
-  letter-spacing: 3px;
-  line-height: 1.7;
-}
-
-.trailer-placeholder small {
-  font-size: 9px;
-  letter-spacing: 1px;
-}
 /* =========================================================
-   ERROR SANGRANDO
+   ERROR BLEEDING
    ========================================================= */
 
-.inevitable-error {
-  position: absolute;
-  font-family: monospace;
-  font-weight: 900;
-  font-size: clamp(14px, 2vw, 24px);
-  color: #8b0000;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 21;
+.error-bleeding {
+    position: relative;
 
-  animation:
-    inevitable-error-pop .8s forwards,
-    inevitable-error-bleed .8s ease-in forwards;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 0, 0, 0.2);
+
+    background: #080000;
 }
 
-.inevitable-error::before,
-.inevitable-error::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  background: #8b0000;
-  border-radius: 0 0 50% 50%;
-  transform-origin: top;
+.error-bleeding::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 8px,
+            rgba(255, 0, 0, 0.04) 8px,
+            rgba(255, 0, 0, 0.04) 10px
+        );
+
+    animation: errorScan 5s linear infinite;
+
+    pointer-events: none;
 }
 
-/* Filete principal */
+@keyframes errorScan {
+    from {
+        transform: translateX(-10%);
+    }
 
-.inevitable-error::before {
-  left: 25%;
-  top: 70%;
-  width: 3px;
-  height: 0;
-
-  animation:
-    inevitable-blood-drip .8s ease-in forwards;
+    to {
+        transform: translateX(10%);
+    }
 }
 
-/* Gota */
-
-.inevitable-error::after {
-  left: 60%;
-  top: 75%;
-  width: 5px;
-  height: 5px;
-
-  animation:
-    inevitable-blood-drop .8s ease-in forwards;
-}
-
-@keyframes inevitable-error-bleed {
-
-  0% {
-    transform: scaleY(1);
-  }
-
-  45% {
-    transform: scaleY(1.04);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-
-}
-
-@keyframes inevitable-blood-drip {
-
-  0% {
-    height: 0;
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  100% {
-    height: 28px;
-    opacity: 0;
-  }
-
-}
-
-@keyframes inevitable-blood-drop {
-
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(.5);
-  }
-
-  25% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(25px) scale(1.2);
-  }
-
-}
 /* =========================================================
    ACCORDION
    ========================================================= */
 
-.accordion-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 30px;
-  padding: 17px 18px;
-  background: #090909;
-  color: #fff;
-  border: 1px solid #202020;
-  text-align: left;
-  font-size: 11px;
-  letter-spacing: 2px;
-  cursor: pointer;
-
-  transition:
-    background .2s ease,
-    border-color .2s ease;
+.accordion {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.accordion-toggle:hover {
-  background: #0d0d0d;
-  border-color: #333;
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.accordion-toggle.active {
-  border-color: #333;
-}
+.accordion-header {
+    width: 100%;
 
-.accordion-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  font-size: 18px;
-  line-height: 1;
+    padding: 22px 0;
 
-  transition:
-    transform .25s ease;
-}
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.accordion-toggle.active .accordion-icon {
-  transform: rotate(45deg);
+    background: transparent;
+
+    border: 0;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-weight: 800;
 }
 
 .accordion-content {
-  width: 100%;
-  min-width: 0;
+    max-height: 0;
+
+    overflow: hidden;
+
+    color: #888;
+
+    transition:
+        max-height 400ms ease,
+        padding 400ms ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+
+    padding-bottom: 22px;
 }
 
 /* =========================================================
    UNIVERSO
    ========================================================= */
 
-.universe-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 10px;
-}
+.universe {
+    position: relative;
 
-.origin {
-  max-width: 750px;
-}
-
-.origin strong {
-  color: #fff;
-}
-
-.origin p + p,
-.development p + p {
-  margin-top: 15px;
-}
-
-.development {
-  max-width: 700px;
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(120, 0, 0, 0.08),
+            transparent 40%
+        ),
+        #050505;
 }
 
 /* =========================================================
-   GALERIA
+   GALLERY
    ========================================================= */
-
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 10px;
-}
 
 .gallery-item {
-  aspect-ratio: 16 / 10;
-  background: #0a0a0a;
-  border: 1px solid #202020;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #555;
-  font-size: 10px;
-  letter-spacing: 2px;
-  min-width: 0;
+    position: relative;
+
+    aspect-ratio: 16 / 10;
+
+    overflow: hidden;
+
+    background: #0b0b0b;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 700ms ease,
+        filter 700ms ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+
+    filter:
+        saturate(1.3)
+        contrast(1.1);
 }
 
 /* =========================================================
-   PESQUISA
+   SURVEY
    ========================================================= */
 
-#pesquisa {
-  text-align: center;
+.survey {
+    max-width: 800px;
+
+    margin: 0 auto;
 }
 
-.survey-content {
-  max-width: 700px;
-}
+.survey-options {
+    display: grid;
 
-.survey-rating {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin: 30px 0;
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin: 25px 0;
 }
 
 .survey-option {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid #202020;
-  background: #090909;
-  color: #bdbdbd;
-  cursor: pointer;
-  text-align: left;
+    min-height: 52px;
 
-  transition:
-    border-color .2s ease,
-    background .2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    background: #0b0b0b;
+
+    color: #aaa;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        transform var(--transition-fast);
 }
 
 .survey-option:hover {
-  border-color: #444;
-  background: #0c0c0c;
+    transform: translateY(-2px);
+
+    border-color: rgba(255, 0, 0, 0.45);
+
+    color: #fff;
 }
 
-.survey-option input {
-  accent-color: #fff;
+.survey-option.active {
+    background: #320000;
+
+    border-color: #ff0000;
+
+    color: #fff;
+
+    box-shadow:
+        0 0 20px rgba(255, 0, 0, 0.15);
 }
 
-.survey-stars {
-  letter-spacing: 2px;
-  white-space: nowrap;
+textarea,
+input {
+    width: 100%;
+
+    padding: 15px;
+
+    background: #080808;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: #fff;
+
+    outline: none;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
-.survey-comment,
-.survey-permission {
-  margin-top: 25px;
-  text-align: left;
-}
+textarea:focus,
+input:focus {
+    border-color: #800000;
 
-.survey-comment > label,
-.survey-permission > p {
-  display: block;
-  color: #fff;
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.survey-comment p {
-  font-size: .85rem;
-  margin-bottom: 12px;
+    box-shadow:
+        0 0 20px rgba(255, 0, 0, 0.08);
 }
 
 textarea {
-  width: 100%;
-  min-height: 130px;
-  resize: vertical;
-  padding: 14px;
-  background: #090909;
-  color: #fff;
-  border: 1px solid #202020;
-  outline: none;
-  font: inherit;
-}
+    min-height: 140px;
 
-textarea:focus {
-  border-color: #555;
-}
-
-.survey-permission {
-  display: grid;
-  gap: 10px;
-}
-
-.survey-permission label {
-  color: #bdbdbd;
-  font-size: .9rem;
-}
-
-.survey-permission input {
-  margin-right: 8px;
-  accent-color: #fff;
-}
-
-.survey-content .button {
-  margin-top: 25px;
-}
-
-.survey-feedback {
-  min-height: 24px;
-  margin-top: 20px;
-  color: #aaa;
-  font-size: .85rem;
-  opacity: 0;
-
-  transition:
-    opacity .2s ease;
-}
-
-.survey-feedback.visible {
-  opacity: 1;
+    resize: vertical;
 }
 
 /* =========================================================
-   REDES
+   SOCIAL / FOOTER
    ========================================================= */
-
-#redes {
-  text-align: center;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-}
-
-.social-content {
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-}
-
-.social-content p {
-  margin-bottom: 25px;
-}
 
 footer {
-  padding: 30px 20px;
-  border-top: 1px solid #151515;
-  text-align: center;
-  color: #555;
+    position: relative;
+
+    padding: 60px 0;
+
+    background: #020202;
+
+    border-top:
+        1px solid rgba(255, 0, 0, 0.1);
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+.social-grid {
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(150px, 1fr)
+        );
+}
 
-@media (max-width: 699px) {
-
-  header {
-    padding: 8px 10px;
-  }
-
-  .hero {
-    padding: 140px 16px 70px;
-  }
-
-  .hero h1 {
-    font-size: clamp(2rem, 11vw, 4rem);
-  }
-
-  .tagline {
-    font-size: .8rem;
-    letter-spacing: 2px;
-  }
-
-  .hero-description {
-    font-size: .9rem;
-    line-height: 1.7;
-  }
-
-  .buttons {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .button {
-    width: 100%;
-    text-align: center;
-  }
-
-  section {
-    padding: 75px 16px;
-  }
-
-  h2 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
-  }
-
-  p {
-    font-size: .93rem;
-  }
-
-  .accordion-content {
-    display: none;
-  }
-
-  .accordion-content.active {
-    display: block;
-  }
-
-  .death-card,
-  .card,
-  .story-block {
+.social-link {
     padding: 20px;
-  }
 
-  /* ==========================================
-     DARK ENGINE MOBILE
-     ========================================== */
+    border: 1px solid rgba(255, 255, 255, 0.08);
 
-  .dark-engine-zone {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
+    color: #888;
 
-    touch-action: pan-y;
+    text-align: center;
 
-    -webkit-user-select: none;
-    user-select: none;
-  }
+    transition:
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
 
-  .dark-engine-zone::before,
-  .dark-engine-zone::after {
-    display: none;
-  }
+.social-link:hover {
+    color: #fff;
 
-  .dark-engine-mobile-canvas {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    z-index: 2;
-    pointer-events: none;
+    border-color: rgba(255, 0, 0, 0.4);
 
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  .dark-engine-area {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-    width: 100%;
-  }
-
-  /* ==========================================
-     TRAILER MOBILE
-     ========================================== */
-
-  #trailer .content {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  #trailer video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-  }
+    background: rgba(100, 0, 0, 0.08);
 }
 
 /* =========================================================
-   DESKTOP
-   ========================================================= */
-
-@media (min-width: 700px) {
-
-  header {
-    padding: 14px 30px;
-  }
-
-  .header-content {
-    justify-content: flex-end;
-  }
-
-  .logo,
-  .menu-button {
-    display: none;
-  }
-
-  nav {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-
-  nav a {
-    padding: 8px 10px;
-    font-size: 10px;
-  }
-
-  section {
-    padding: 120px 40px;
-  }
-
-  .hero {
-    padding: 120px 40px 80px;
-  }
-
-  .hero h1 {
-    letter-spacing: 6px;
-  }
-
-  .accordion-toggle {
-    display: none;
-  }
-
-  .accordion-content {
-    display: block;
-  }
-
-  .death-grid,
-  .cards {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-
-  .universe-grid {
-    grid-template-columns:
-      repeat(2,
-        minmax(0, 1fr));
-  }
-
-  .gallery {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-
-  .survey-rating {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-}
-
-/* =========================================================
-   DESKTOP MAIOR
-   ========================================================= */
-
-@media (min-width: 900px) {
-
-  .content {
-    max-width: 1050px;
-  }
-
-  .hero-description {
-    font-size: 1rem;
-  }
-
-  .death-card,
-  .card,
-  .story-block {
-    padding: 26px;
-  }
-
-  p {
-    font-size: .96rem;
-  }
-
-  /*
-   * Trailer acompanha o tamanho visual
-   * do conteúdo principal no desktop.
-   */
-
-  #trailer .content {
-    max-width: 1050px;
-  }
-
-  #trailer video {
-    max-width: 1050px;
-  }
-}
-
-/* =========================================================
-   CELULARES PEQUENOS
-   ========================================================= */
-
-@media (max-width: 380px) {
-
-  section {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .hero {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .accordion-toggle {
-    padding: 16px 14px;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-  }
-
-  .death-card,
-  .card,
-  .story-block {
-    padding: 18px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  #trailer video {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-/* =========================================================
+   =========================================================
    INEVITÁVEL ENGINE
    SISTEMA DE CONTAMINAÇÃO
-   Adicionar no FINAL deste arquivo
+   =========================================================
    ========================================================= */
 
 #inevitable-engine {
-  position: fixed;
-  inset: 0;
+    position: fixed;
 
-  width: 100%;
-  height: 100%;
+    inset: 0;
 
-  /*
-   * IMPORTANTE:
-   * Não captura mouse nem toque.
-   * O site continua totalmente interativo.
-   */
-  pointer-events: none;
+    width: 100vw;
+    height: 100vh;
 
-  overflow: hidden;
+    pointer-events: none;
 
-  /*
-   * Abaixo do header atual.
-   * Acima do conteúdo normal.
-   */
-  z-index: 900;
+    overflow: hidden;
 
-  /*
-   * Permite que a camada visual interaja
-   * com o que existe atrás dela sem
-   * bloquear o Dark Engine.
-   */
-  isolation: isolate;
+    z-index: 900;
+
+    opacity: 1;
+
+    isolation: isolate;
 }
-
 
 /* =========================================================
    CAMADAS
@@ -1134,603 +839,1005 @@ footer {
 #inevitable-stain-layer,
 #inevitable-glitch-layer,
 #inevitable-clean-layer {
+    position: absolute;
 
-  position: absolute;
+    inset: 0;
 
-  inset: 0;
+    width: 100%;
+    height: 100%;
 
-  width: 100%;
-  height: 100%;
+    pointer-events: none;
 
-  pointer-events: none;
+    transition:
+        opacity 700ms ease,
+        background 700ms ease,
+        filter 700ms ease,
+        transform 700ms ease;
 }
 
-
 /* =========================================================
-   SANGUE
+   BLOOD LAYER
    ========================================================= */
 
 #inevitable-blood-layer {
+    z-index: 1;
 
-  background:
+    opacity:
+        calc(
+            var(--engine-progress) * 0.72
+        );
 
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(139, 0, 0, .95),
-      transparent 24%
-    ),
+    background:
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(255, 0, 0, 0.72),
+            rgba(150, 0, 0, 0.28) 35%,
+            rgba(70, 0, 0, 0.12) 65%,
+            transparent 100%
+        );
 
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(120, 0, 0, .95),
-      transparent 30%
-    ),
+    mix-blend-mode: normal;
 
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(100, 0, 0, .85),
-      transparent 35%
-    );
-
-  opacity: 0;
-
-  /*
-   * MULTIPLY é importante para o Dark Engine.
-   *
-   * Áreas pretas continuam essencialmente pretas,
-   * enquanto as áreas claras começam a receber
-   * a contaminação vermelha.
-   */
-  mix-blend-mode: multiply;
-
-  transition:
-    opacity 1.2s ease,
-    background 1.2s ease;
+    transform:
+        scale(
+            calc(
+                1 +
+                var(--engine-progress) * 0.035
+            )
+        );
 }
 
-
 /* =========================================================
-   MANCHAS
+   STAIN LAYER
    ========================================================= */
 
 #inevitable-stain-layer {
+    z-index: 2;
 
-  opacity: 0;
+    opacity:
+        calc(
+            var(--engine-progress) * 0.65
+        );
 
-  background:
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 0, 0, 0.20),
+            transparent 28%
+        ),
 
-    radial-gradient(
-      ellipse at 15% 25%,
-      rgba(100, 0, 0, .95) 0%,
-      rgba(100, 0, 0, .55) 10%,
-      transparent 32%
-    ),
+        radial-gradient(
+            circle at 90% 25%,
+            rgba(180, 0, 0, 0.16),
+            transparent 30%
+        ),
 
-    radial-gradient(
-      ellipse at 80% 20%,
-      rgba(120, 0, 0, .9) 0%,
-      rgba(120, 0, 0, .45) 12%,
-      transparent 30%
-    ),
+        radial-gradient(
+            circle at 30% 90%,
+            rgba(255, 0, 0, 0.18),
+            transparent 32%
+        ),
 
-    radial-gradient(
-      ellipse at 70% 75%,
-      rgba(100, 0, 0, .95) 0%,
-      rgba(100, 0, 0, .5) 15%,
-      transparent 35%
-    ),
+        radial-gradient(
+            circle at 80% 85%,
+            rgba(120, 0, 0, 0.20),
+            transparent 30%
+        );
 
-    radial-gradient(
-      ellipse at 25% 85%,
-      rgba(80, 0, 0, .9) 0%,
-      rgba(80, 0, 0, .4) 12%,
-      transparent 32%
-    );
-
-  filter: blur(18px);
-
-  mix-blend-mode: multiply;
-
-  transition:
-    opacity 1s ease,
-    filter 1s ease;
+    filter:
+        blur(
+            calc(
+                2px +
+                var(--engine-progress) * 8px
+            )
+        );
 }
 
-
 /* =========================================================
-   GLITCH
+   GLITCH LAYER
    ========================================================= */
 
 #inevitable-glitch-layer {
+    z-index: 3;
 
-  opacity: 0;
+    opacity:
+        calc(
+            var(--engine-glitch) * 0.85
+        );
 
-  background:
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 3px,
+            rgba(255, 0, 0, 0.06) 3px,
+            rgba(255, 0, 0, 0.06) 4px
+        );
 
-    repeating-linear-gradient(
-      to bottom,
+    mix-blend-mode: screen;
 
-      transparent 0,
-      transparent 3px,
-
-      rgba(255, 0, 0, .08) 4px,
-
-      transparent 5px
-    );
-
-  mix-blend-mode: screen;
-
-  transition:
-    opacity .4s ease;
+    transform:
+        translateX(
+            calc(
+                var(--engine-glitch) * 4px
+            )
+        );
 }
 
-
 /* =========================================================
-   LIMPEZA
+   CLEAN LAYER
    ========================================================= */
 
 #inevitable-clean-layer {
+    z-index: 4;
 
-  opacity: 0;
+    opacity: 0;
 
-  background:
-
-    radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, .08),
-      transparent 60%
-    );
-
-  transition:
-    opacity 2s ease;
+    background:
+        rgba(0, 0, 0, 0.92);
 }
-
 
 /* =========================================================
-   ESTÁGIO 1
-   Primeira manifestação
+   ENGINE BASE STATE
    ========================================================= */
 
-body.inevitable-stage-1
-#inevitable-blood-layer {
-
-  opacity: .10;
+body {
+    --engine-progress: 0;
+    --engine-glitch: 0;
 }
-
 
 /* =========================================================
-   ESTÁGIO 2
-   Primeiras manchas
+   STAGE 1
    ========================================================= */
 
-body.inevitable-stage-2
-#inevitable-blood-layer {
+body.inevitable-stage-1 {
+    --engine-progress: 0.08;
+    --engine-glitch: 0.04;
 
-  opacity: .16;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(80, 0, 0, 0.08),
+            #050505 70%
+        );
 }
 
-body.inevitable-stage-2
-#inevitable-stain-layer {
-
-  opacity: .25;
+body.inevitable-stage-1 .hero h1 {
+    text-shadow:
+        0 0 12px rgba(255, 0, 0, 0.15);
 }
-
 
 /* =========================================================
-   ESTÁGIO 3
-   Contaminação perceptível
+   STAGE 2
    ========================================================= */
 
-body.inevitable-stage-3
-#inevitable-blood-layer {
+body.inevitable-stage-2 {
+    --engine-progress: 0.18;
+    --engine-glitch: 0.08;
 
-  opacity: .25;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100, 0, 0, 0.12),
+            #050505 70%
+        );
 }
 
-body.inevitable-stage-3
-#inevitable-stain-layer {
-
-  opacity: .42;
+body.inevitable-stage-2 .card,
+body.inevitable-stage-2 .death-card {
+    border-color:
+        rgba(255, 0, 0, 0.16);
 }
-
 
 /* =========================================================
-   ESTÁGIO 4
-   Vermelho começa a dominar
+   STAGE 3
    ========================================================= */
 
-body.inevitable-stage-4
-#inevitable-blood-layer {
+body.inevitable-stage-3 {
+    --engine-progress: 0.30;
+    --engine-glitch: 0.14;
 
-  opacity: .38;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120, 0, 0, 0.18),
+            #050505 70%
+        );
 }
 
-body.inevitable-stage-4
-#inevitable-stain-layer {
+body.inevitable-stage-3 header {
+    border-bottom-color:
+        rgba(255, 0, 0, 0.3);
 
-  opacity: .60;
+    box-shadow:
+        0 5px 30px rgba(100, 0, 0, 0.12);
 }
 
+body.inevitable-stage-3 .hero h1 {
+    color: #f2dede;
+
+    text-shadow:
+        3px 0 rgba(255, 0, 0, 0.3),
+        -3px 0 rgba(100, 0, 0, 0.3),
+        0 0 20px rgba(255, 0, 0, 0.2);
+}
 
 /* =========================================================
-   ESTÁGIO 5
-   Interface contaminada
+   STAGE 4
    ========================================================= */
 
-body.inevitable-stage-5
-#inevitable-blood-layer {
+body.inevitable-stage-4 {
+    --engine-progress: 0.44;
+    --engine-glitch: 0.22;
 
-  opacity: .50;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(140, 0, 0, 0.22),
+            #050505 65%
+        );
 }
 
-body.inevitable-stage-5
-#inevitable-stain-layer {
-
-  opacity: .78;
+body.inevitable-stage-4 section {
+    transition:
+        background 700ms ease;
 }
 
+body.inevitable-stage-4 .card,
+body.inevitable-stage-4 .death-card {
+    border-color:
+        rgba(255, 0, 0, 0.24);
+
+    box-shadow:
+        inset 0 0 35px rgba(100, 0, 0, 0.04);
+}
+
+body.inevitable-stage-4 nav a {
+    color: #c5a0a0;
+}
 
 /* =========================================================
-   ESTÁGIO 6
-   Quase tomada
+   STAGE 5
    ========================================================= */
 
-body.inevitable-stage-6
-#inevitable-blood-layer {
+body.inevitable-stage-5 {
+    --engine-progress: 0.58;
+    --engine-glitch: 0.34;
 
-  opacity: .65;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(170, 0, 0, 0.27),
+            #050505 62%
+        );
 }
 
-body.inevitable-stage-6
-#inevitable-stain-layer {
+body.inevitable-stage-5::before {
+    opacity: 0.5;
 
-  opacity: .95;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 0, 0, 0.035) 0,
+            rgba(255, 0, 0, 0.035) 1px,
+            transparent 1px,
+            transparent 4px
+        );
 }
 
+body.inevitable-stage-5 .hero h1 {
+    color: #ffdada;
+
+    text-shadow:
+        4px 0 rgba(255, 0, 0, 0.5),
+        -4px 0 rgba(90, 0, 0, 0.5),
+        0 0 30px rgba(255, 0, 0, 0.25);
+}
+
+body.inevitable-stage-5 .section-title h2 {
+    text-shadow:
+        0 0 18px rgba(255, 0, 0, 0.18);
+}
 
 /* =========================================================
-   ESTÁGIO 7
-   Colapso visual
+   STAGE 6
    ========================================================= */
 
-body.inevitable-stage-7
-#inevitable-blood-layer {
+body.inevitable-stage-6 {
+    --engine-progress: 0.70;
+    --engine-glitch: 0.48;
 
-  opacity: .80;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(190, 0, 0, 0.32),
+            #050505 58%
+        );
 }
 
-body.inevitable-stage-7
-#inevitable-stain-layer {
+body.inevitable-stage-6 header {
+    background:
+        rgba(25, 0, 0, 0.9);
 
-  opacity: 1;
+    border-bottom-color:
+        rgba(255, 0, 0, 0.5);
 
-  filter: blur(12px);
+    box-shadow:
+        0 5px 40px rgba(255, 0, 0, 0.08);
 }
 
-body.inevitable-stage-7
-#inevitable-glitch-layer {
+body.inevitable-stage-6 .btn {
+    border-color:
+        rgba(255, 0, 0, 0.65);
 
-  opacity: .30;
-
-  animation:
-    inevitable-glitch-scan .12s infinite;
+    background:
+        rgba(70, 0, 0, 0.3);
 }
 
+body.inevitable-stage-6 .card,
+body.inevitable-stage-6 .death-card {
+    background:
+        rgba(55, 0, 0, 0.18);
+
+    border-color:
+        rgba(255, 0, 0, 0.32);
+}
 
 /* =========================================================
-   ESTÁGIO 8
-   TOMADA
+   STAGE 7
    ========================================================= */
 
-body.inevitable-stage-8
-#inevitable-blood-layer {
+body.inevitable-stage-7 {
+    --engine-progress: 0.84;
+    --engine-glitch: 0.66;
 
-  opacity: .92;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(220, 0, 0, 0.38),
+            #050505 52%
+        );
+
+    animation:
+        inevitableHeartbeat 1.8s infinite;
 }
 
-body.inevitable-stage-8
-#inevitable-stain-layer {
+body.inevitable-stage-7 .hero h1 {
+    color: #fff;
 
-  opacity: 1;
-
-  filter: blur(8px);
+    animation:
+        inevitableTextGlitch 1.1s infinite;
 }
 
-body.inevitable-stage-8
-#inevitable-glitch-layer {
+body.inevitable-stage-7 .card,
+body.inevitable-stage-7 .death-card {
+    border-color:
+        rgba(255, 0, 0, 0.48);
 
-  opacity: .55;
-
-  animation:
-    inevitable-glitch-scan .08s infinite;
+    box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.06);
 }
 
+/* =========================================================
+   STAGE 8
+   ========================================================= */
+
+body.inevitable-stage-8 {
+    --engine-progress: 1;
+    --engine-glitch: 0.92;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 0, 0, 0.48),
+            #080000 45%,
+            #000 100%
+        );
+}
+
+body.inevitable-stage-8 header {
+    background:
+        rgba(45, 0, 0, 0.94);
+
+    border-bottom-color:
+        rgba(255, 0, 0, 0.8);
+}
+
+body.inevitable-stage-8 .hero h1 {
+    color: #fff;
+
+    text-shadow:
+        5px 0 #ff0000,
+        -5px 0 #500000,
+        0 0 40px rgba(255, 0, 0, 0.6);
+}
+
+body.inevitable-stage-8 .section-title h2 {
+    color: #fff;
+
+    text-shadow:
+        0 0 30px rgba(255, 0, 0, 0.4);
+}
+
+body.inevitable-stage-8 .card,
+body.inevitable-stage-8 .death-card {
+    background:
+        rgba(80, 0, 0, 0.24);
+
+    border-color:
+        rgba(255, 0, 0, 0.6);
+}
+
+/* =========================================================
+   IMPACTO DO CLIQUE
+   ========================================================= */
+
+body.inevitable-impact #inevitable-blood-layer {
+    animation:
+        inevitableBloodImpact 500ms ease;
+}
+
+body.inevitable-impact #inevitable-stain-layer {
+    animation:
+        inevitableStainImpact 650ms ease;
+}
+
+body.inevitable-impact #inevitable-glitch-layer {
+    animation:
+        inevitableGlitchImpact 350ms steps(2);
+}
+
+@keyframes inevitableBloodImpact {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    35% {
+        transform: scale(1.08);
+        filter: brightness(1.8);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+@keyframes inevitableStainImpact {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes inevitableGlitchImpact {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-7px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* =========================================================
+   TEXTO CORROMPIDO
+   ========================================================= */
+
+body.inevitable-corrupted .hero h1,
+body.inevitable-corrupted .section-title h2 {
+    animation:
+        inevitableTextGlitch 700ms steps(2) infinite;
+}
+
+@keyframes inevitableTextGlitch {
+    0% {
+        transform: translate(0);
+        text-shadow:
+            0 0 transparent;
+    }
+
+    20% {
+        transform: translate(-2px, 1px);
+
+        text-shadow:
+            3px 0 #ff0000,
+            -3px 0 #330000;
+    }
+
+    40% {
+        transform: translate(2px, -1px);
+
+        text-shadow:
+            -4px 0 #ff0000,
+            4px 0 #300000;
+    }
+
+    60% {
+        transform: translate(0);
+
+        text-shadow:
+            0 0 20px rgba(255, 0, 0, 0.4);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* =========================================================
+   HEARTBEAT
+   ========================================================= */
+
+@keyframes inevitableHeartbeat {
+    0%,
+    100% {
+        filter:
+            brightness(1)
+            saturate(1);
+    }
+
+    50% {
+        filter:
+            brightness(1.04)
+            saturate(1.15);
+    }
+}
 
 /* =========================================================
    ESTADO FINAL
    ========================================================= */
 
-body.inevitable-final
-#inevitable-blood-layer {
+body.inevitable-final {
+    --engine-progress: 1;
+    --engine-glitch: 1;
 
-  opacity: 1;
+    background:
+        #000;
 
-  /*
-   * Aqui o vermelho deixa de ser apenas
-   * uma mancha e vira o estado final.
-   */
-  background:
-
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(170, 0, 0, .95),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(110, 0, 0, .95),
-      transparent 35%
-    ),
-
-    #8b0000;
+    color: #fff;
 }
 
-body.inevitable-final
-#inevitable-stain-layer {
+body.inevitable-final #inevitable-blood-layer {
+    opacity: 0.9;
 
-  opacity: 1;
-
-  filter: blur(6px);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 0, 0, 0.8),
+            rgba(100, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.85) 100%
+        );
 }
 
-body.inevitable-final
-#inevitable-glitch-layer {
+body.inevitable-final #inevitable-stain-layer {
+    opacity: 0.95;
 
-  opacity: .65;
-
-  animation:
-    inevitable-glitch-scan .07s infinite;
+    filter:
+        blur(12px)
+        contrast(1.2);
 }
 
+body.inevitable-final #inevitable-glitch-layer {
+    opacity: 0.7;
+
+    animation:
+        inevitableFinalGlitch 900ms infinite steps(2);
+}
+
+body.inevitable-final .hero h1 {
+    color: #fff;
+
+    text-shadow:
+        6px 0 #ff0000,
+        -6px 0 #3b0000,
+        0 0 50px rgba(255, 0, 0, 0.7);
+}
+
+body.inevitable-final .btn {
+    background: #300000;
+
+    border-color: #ff0000;
+
+    box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.3);
+}
+
+body.inevitable-final .card,
+body.inevitable-final .death-card {
+    background:
+        rgba(50, 0, 0, 0.35);
+
+    border-color:
+        rgba(255, 0, 0, 0.65);
+}
+
+@keyframes inevitableFinalGlitch {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+
+    20% {
+        transform: translate(-5px, 2px);
+        opacity: 0.8;
+    }
+
+    40% {
+        transform: translate(4px, -2px);
+        opacity: 0.5;
+    }
+
+    60% {
+        transform: translate(-2px, 1px);
+        opacity: 0.9;
+    }
+
+    80% {
+        transform: translate(3px, 0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+}
 
 /* =========================================================
-   TEXTO NO ESTADO FINAL
-   =========================================================
-
-   Aqui começamos a inverter a interface.
-
-   Não usamos filter: invert(), porque isso
-   também inverteria imagens, vídeos e elementos
-   que não queremos alterar.
+   FINAL TEXT
    ========================================================= */
 
-body.inevitable-final
-section,
-body.inevitable-final
-.content,
-body.inevitable-final
-h1,
-body.inevitable-final
-h2,
-body.inevitable-final
-h3,
-body.inevitable-final
-p,
-body.inevitable-final
-span,
-body.inevitable-final
-label {
+.inevitable-final-message {
+    position: relative;
 
-  color: #fff;
+    z-index: 10;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 900ms ease,
+        transform 900ms ease;
 }
 
+body.inevitable-final .inevitable-final-message {
+    opacity: 1;
 
-/* Elementos que normalmente possuem
-   tons cinza */
-
-body.inevitable-final
-p,
-body.inevitable-final
-.section-label,
-body.inevitable-final
-.hero-description,
-body.inevitable-final
-.number,
-body.inevitable-final
-.card-number {
-
-  color: #fff;
+    transform: translateY(0);
 }
 
+.inevitable-final-message h2 {
+    color: #fff;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+
+    text-shadow:
+        0 0 25px rgba(255, 0, 0, 0.6);
+}
+
+.inevitable-final-message p {
+    color: #c9c9c9;
+}
 
 /* =========================================================
-   BOTÕES NO ESTADO FINAL
+   CLEANING / RESET
    ========================================================= */
 
-body.inevitable-final
-.button,
-body.inevitable-final
-.accordion-toggle {
+body.inevitable-cleaning #inevitable-blood-layer {
+    opacity: 0 !important;
 
-  color: #fff;
-
-  border-color: rgba(255, 255, 255, .7);
-
-  background: transparent;
+    transition:
+        opacity 1200ms ease;
 }
 
+body.inevitable-cleaning #inevitable-stain-layer {
+    opacity: 0 !important;
+
+    transition:
+        opacity 1400ms ease;
+}
+
+body.inevitable-cleaning #inevitable-glitch-layer {
+    opacity: 0 !important;
+
+    transition:
+        opacity 500ms ease;
+}
+
+body.inevitable-cleaning {
+    --engine-progress: 0;
+
+    background:
+        var(--black);
+
+    filter:
+        none;
+}
 
 /* =========================================================
-   HEADER
+   ENGINE PULSE
    ========================================================= */
 
-body.inevitable-final
-header {
-
-  background: rgba(90, 0, 0, .90);
-
-  border-color:
-    rgba(255, 255, 255, .18);
+.inevitable-pulse {
+    animation:
+        inevitablePulse 500ms ease;
 }
 
+@keyframes inevitablePulse {
+    0% {
+        filter: brightness(1);
+    }
+
+    40% {
+        filter:
+            brightness(1.25)
+            saturate(1.4);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
 
 /* =========================================================
-   CARDS
+   BLOOD VIGNETTE
    ========================================================= */
 
-body.inevitable-final
-.death-card,
-body.inevitable-final
-.card,
-body.inevitable-final
-.story-block,
-body.inevitable-final
-.gallery-item,
-body.inevitable-final
-.survey-option {
+body.inevitable-stage-4::after,
+body.inevitable-stage-5::after,
+body.inevitable-stage-6::after,
+body.inevitable-stage-7::after,
+body.inevitable-stage-8::after,
+body.inevitable-final::after {
+    content: "";
 
-  background: rgba(70, 0, 0, .35);
+    position: fixed;
 
-  border-color:
-    rgba(255, 255, 255, .15);
-}
+    inset: 0;
 
-
-/* =========================================================
-   ANIMAÇÃO DE GLITCH
-   ========================================================= */
-
-@keyframes inevitable-glitch-scan {
-
-  0% {
-    transform:
-      translate(0, 0);
-  }
-
-  20% {
-    transform:
-      translate(-2px, 1px);
-  }
-
-  40% {
-    transform:
-      translate(2px, -1px);
-  }
-
-  60% {
-    transform:
-      translate(-1px, 2px);
-  }
-
-  80% {
-    transform:
-      translate(1px, -2px);
-  }
-
-  100% {
-    transform:
-      translate(0, 0);
-  }
-}
-
-
-/* =========================================================
-   LIMPEZA
-   ========================================================= */
-
-body.inevitable-cleaning
-#inevitable-blood-layer,
-
-body.inevitable-cleaning
-#inevitable-stain-layer,
-
-body.inevitable-cleaning
-#inevitable-glitch-layer {
-
-  opacity: 0;
-
-  transition:
-    opacity 2.5s ease;
-}
-
-
-body.inevitable-cleaning
-#inevitable-clean-layer {
-
-  opacity: .08;
-}
-
-
-/* =========================================================
-   CELULAR
-   ========================================================= */
-
-@media (max-width: 699px) {
-
-  #inevitable-engine {
-
-    /*
-     * Mantém o sistema fora da área
-     * de interação.
-     */
     pointer-events: none;
-  }
 
+    z-index: 899;
 
-  #inevitable-stain-layer {
+    border:
+        calc(
+            2px +
+            var(--engine-progress) * 14px
+        )
+        solid
+        rgba(
+            255,
+            0,
+            0,
+            calc(
+                var(--engine-progress) * 0.45
+            )
+        );
 
-    filter: blur(12px);
-  }
-
-
-  body.inevitable-stage-7
-  #inevitable-stain-layer {
-
-    filter: blur(9px);
-  }
-
-
-  body.inevitable-stage-8
-  #inevitable-stain-layer {
-
-    filter: blur(7px);
-  }
-
-
-  body.inevitable-stage-7
-  #inevitable-glitch-layer {
-
-    animation-duration: .15s;
-  }
-
-
-  body.inevitable-stage-8
-  #inevitable-glitch-layer {
-
-    animation-duration: .12s;
-  }
+    box-shadow:
+        inset
+        0 0
+        calc(
+            20px +
+            var(--engine-progress) * 70px
+        )
+        rgba(
+            255,
+            0,
+            0,
+            calc(
+                var(--engine-progress) * 0.18
+            )
+        );
 }
 
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .header-inner {
+        min-height: 64px;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+    }
+
+    .hero {
+        min-height: 80vh;
+
+        padding: 80px 0;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    .survey-options {
+        grid-template-columns: 1fr;
+    }
+
+    .dark-engine-mobile-canvas {
+        display: block;
+
+        width: 100%;
+        min-height: 300px;
+    }
+
+    body.inevitable-stage-7 .hero h1 {
+        animation-duration: 1.4s;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .header-inner {
+        min-height: 58px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: 75vh;
+
+        padding: 70px 0;
+    }
+
+    .hero h1 {
+        font-size: clamp(3rem, 18vw, 5.5rem);
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    section {
+        padding: 65px 0;
+    }
+
+    .section-title {
+        margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+        font-size: 2.2rem;
+    }
+
+    .cards,
+    .death-cards,
+    .gallery,
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card,
+    .death-card {
+        padding: 22px;
+    }
+
+    #inevitable-blood-layer {
+        opacity:
+            calc(
+                var(--engine-progress) * 0.55
+            );
+    }
+
+    #inevitable-stain-layer {
+        opacity:
+            calc(
+                var(--engine-progress) * 0.45
+            );
+    }
+
+    #inevitable-glitch-layer {
+        opacity:
+            calc(
+                var(--engine-glitch) * 0.6
+            );
+    }
+
+    body.inevitable-stage-8 .hero h1,
+    body.inevitable-final .hero h1 {
+        text-shadow:
+            3px 0 #ff0000,
+            -3px 0 #3b0000,
+            0 0 25px rgba(255, 0, 0, 0.5);
+    }
+
+    body.inevitable-stage-7::after,
+    body.inevitable-stage-8::after,
+    body.inevitable-final::after {
+        border-width:
+            calc(
+                1px +
+                var(--engine-progress) * 7px
+            );
+    }
+}
 
 /* =========================================================
    ACESSIBILIDADE
    ========================================================= */
 
+:focus-visible {
+    outline:
+        2px solid #ff0000;
+
+    outline-offset: 4px;
+}
+
+::selection {
+    background: #ff0000;
+
+    color: #fff;
+}
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
 
-  #inevitable-blood-layer,
-  #inevitable-stain-layer,
-  #inevitable-glitch-layer,
-  #inevitable-clean-layer {
+    html {
+        scroll-behavior: auto;
+    }
 
-    transition:
-      opacity .4s ease;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 
+    body.inevitable-stage-7,
+    body.inevitable-stage-8 {
+        animation: none;
+    }
 
-  #inevitable-glitch-layer {
-
-    animation: none !important;
-  }
+    body.inevitable-stage-7 .hero h1,
+    body.inevitable-stage-8 .hero h1,
+    body.inevitable-final .hero h1 {
+        animation: none;
+    }
 }
