@@ -1,1843 +1,925 @@
-/* =========================================================
-   INEVITÁVEL
-   CSS RESPONSIVO + DARK ENGINE + CONTAMINAÇÃO
-   ========================================================= */
-
-:root {
-    --blood: #7a0000;
-    --blood-dark: #260000;
-    --blood-light: #ff1a1a;
-
-    --black: #050505;
-    --black-soft: #0b0b0b;
-    --gray-dark: #141414;
-    --gray: #242424;
-    --gray-light: #888;
-    --white: #f2f2f2;
-
-    --danger: #ff0000;
-    --clean: #f2f2f2;
-
-    --engine-progress: 0;
-    --engine-opacity: 0;
-    --engine-glitch: 0;
-
-    --transition-fast: 180ms ease;
-    --transition-normal: 400ms ease;
-    --transition-slow: 900ms ease;
-}
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    background: var(--black);
-}
-
-body {
-    min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(100, 0, 0, 0.08),
-            transparent 45%
-        ),
-        var(--black);
-
-    color: var(--white);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    overflow-x: hidden;
-
-    transition:
-        background 900ms ease,
-        color 600ms ease,
-        filter 600ms ease;
-}
-
-body::before {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0.015) 0,
-            rgba(255, 255, 255, 0.015) 1px,
-            transparent 1px,
-            transparent 3px
-        );
-
-    opacity: 0.25;
-}
-
-/* =========================================================
-   TIPOGRAFIA
-   ========================================================= */
-
-h1,
-h2,
-h3,
-h4 {
-    line-height: 1.1;
-}
-
-p {
-    line-height: 1.7;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-textarea,
-select {
-    font: inherit;
-}
-
-/* =========================================================
-   CONTAINER
-   ========================================================= */
-
-.container {
-    width: min(1200px, 92%);
-    margin: 0 auto;
-}
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-header {
-    position: sticky;
-    top: 0;
-
-    z-index: 1000;
-
-    width: 100%;
-
-    background: rgba(5, 5, 5, 0.88);
-
-    border-bottom: 1px solid rgba(255, 0, 0, 0.15);
-
-    backdrop-filter: blur(14px);
-
-    transition:
-        background var(--transition-normal),
-        border-color var(--transition-normal),
-        box-shadow var(--transition-normal);
-}
-
-.header-inner {
-    min-height: 72px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 24px;
-}
-
-.logo {
-    font-size: 1.2rem;
-    font-weight: 900;
-
-    letter-spacing: 0.12em;
-
-    color: #fff;
-
-    transition: var(--transition-normal);
-}
-
-.logo:hover {
-    color: var(--blood-light);
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-nav a {
-    position: relative;
-
-    color: #aaa;
-
-    font-size: 0.85rem;
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    transition:
-        color var(--transition-fast),
-        text-shadow var(--transition-fast);
-}
-
-nav a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -8px;
-
-    width: 0;
-    height: 1px;
-
-    background: var(--blood-light);
-
-    transition: width var(--transition-fast);
-}
-
-nav a:hover {
-    color: #fff;
-
-    text-shadow:
-        0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-    position: relative;
-
-    min-height: 90vh;
-
-    display: flex;
-    align-items: center;
-
-    padding: 100px 0;
-
-    overflow: hidden;
-}
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.18),
-            transparent 55%
-        );
-
-    pointer-events: none;
-}
-
-.hero-content {
-    position: relative;
-
-    z-index: 5;
-
-    max-width: 850px;
-}
-
-.hero h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
-
-    font-weight: 900;
-
-    letter-spacing: -0.06em;
-
-    text-transform: uppercase;
-
-    text-shadow:
-        0 0 20px rgba(255, 0, 0, 0.05);
-
-    transition:
-        color var(--transition-normal),
-        text-shadow var(--transition-normal),
-        transform var(--transition-normal);
-}
-
-.hero p {
-    max-width: 700px;
-
-    margin-top: 28px;
-
-    color: #aaa;
-
-    font-size: clamp(1rem, 2vw, 1.25rem);
-}
-
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
-.btn {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 48px;
-
-    padding: 12px 22px;
-
-    border: 1px solid rgba(255, 0, 0, 0.45);
-
-    background: #0c0c0c;
-
-    color: #fff;
-
-    cursor: pointer;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.05em;
-
-    transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        color var(--transition-fast);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-
-    background: #260000;
-
-    border-color: #ff0000;
-
-    box-shadow:
-        0 0 25px rgba(255, 0, 0, 0.25);
-}
-
-.btn:active {
-    transform: scale(0.97);
-}
-
-/* =========================================================
-   SEÇÕES
-   ========================================================= */
-
-section {
-    position: relative;
-
-    padding: 100px 0;
-
-    z-index: 5;
-}
-
-.section-title {
-    margin-bottom: 50px;
-}
-
-.section-title h2 {
-    font-size: clamp(2rem, 5vw, 4rem);
-
-    font-weight: 900;
-
-    text-transform: uppercase;
-
-    letter-spacing: -0.04em;
-}
-
-.section-title p {
-    max-width: 700px;
-
-    margin-top: 14px;
-
-    color: #888;
-}
-
-/* =========================================================
-   DARK ENGINE ZONE
-   ========================================================= */
-
-.dark-engine-zone {
-    position: relative;
-
-    overflow: hidden;
-
-    min-height: 500px;
-
-    background: #030303;
-}
-
-.dark-engine-zone::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(120, 0, 0, 0.12),
-            transparent 60%
-        );
-
-    pointer-events: none;
-}
-
-.dark-engine-mobile-canvas {
-    display: none;
-}
-
-/* =========================================================
-   CARDS
-   ========================================================= */
-
-.cards,
-.death-cards,
-.gallery,
-.social-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(240px, 1fr)
-        );
-
-    gap: 20px;
-}
-
-.card,
-.death-card {
-    position: relative;
-
-    padding: 28px;
-
-    min-height: 180px;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.035),
-            rgba(255, 255, 255, 0.01)
-        );
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    transition:
-        transform var(--transition-normal),
-        border-color var(--transition-normal),
-        background var(--transition-normal),
-        box-shadow var(--transition-normal);
-}
-
-.card::before,
-.death-card::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255, 0, 0, 0.08),
-            transparent
-        );
-
-    transform: translateX(-100%);
-
-    transition: transform 700ms ease;
-}
-
-.card:hover,
-.death-card:hover {
-    transform: translateY(-5px);
-
-    border-color:
-        rgba(255, 0, 0, 0.35);
-
-    background:
-        rgba(60, 0, 0, 0.15);
-
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.35),
-        0 0 25px rgba(255, 0, 0, 0.05);
-}
-
-.card:hover::before,
-.death-card:hover::before {
-    transform: translateX(100%);
-}
-
-/* =========================================================
-   TRAILER
-   ========================================================= */
-
-.trailer {
-    position: relative;
-
-    width: 100%;
-
-    overflow: hidden;
-
-    background: #000;
-
-    border: 1px solid rgba(255, 0, 0, 0.18);
-}
-
-.trailer video {
-    display: block;
-
-    width: 100%;
-    height: auto;
-}
-
-/* =========================================================
-   ERROR BLEEDING
-   ========================================================= */
-
-.error-bleeding {
-    position: relative;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(255, 0, 0, 0.2);
-
-    background: #080000;
-}
-
-.error-bleeding::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 8px,
-            rgba(255, 0, 0, 0.04) 8px,
-            rgba(255, 0, 0, 0.04) 10px
-        );
-
-    animation: errorScan 5s linear infinite;
-
-    pointer-events: none;
-}
-
-@keyframes errorScan {
-    from {
-        transform: translateX(-10%);
-    }
-
-    to {
-        transform: translateX(10%);
-    }
-}
-
-/* =========================================================
-   ACCORDION
-   ========================================================= */
-
-.accordion {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.accordion-header {
-    width: 100%;
-
-    padding: 22px 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: transparent;
-
-    border: 0;
-
-    color: #fff;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    font-weight: 800;
-}
-
-.accordion-content {
-    max-height: 0;
-
-    overflow: hidden;
-
-    color: #888;
-
-    transition:
-        max-height 400ms ease,
-        padding 400ms ease;
-}
-
-.accordion-item.active .accordion-content {
-    max-height: 500px;
-
-    padding-bottom: 22px;
-}
-
-/* =========================================================
-   UNIVERSO
-   ========================================================= */
-
-.universe {
-    position: relative;
-
-    background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(120, 0, 0, 0.08),
-            transparent 40%
-        ),
-        #050505;
-}
-
-/* =========================================================
-   GALLERY
-   ========================================================= */
-
-.gallery-item {
-    position: relative;
-
-    aspect-ratio: 16 / 10;
-
-    overflow: hidden;
-
-    background: #0b0b0b;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transition:
-        transform 700ms ease,
-        filter 700ms ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-
-    filter:
-        saturate(1.3)
-        contrast(1.1);
-}
-
-/* =========================================================
-   SURVEY
-   ========================================================= */
-
-.survey {
-    max-width: 800px;
-
-    margin: 0 auto;
-}
-
-.survey-options {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 12px;
-
-    margin: 25px 0;
-}
-
-.survey-option {
-    min-height: 52px;
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-    background: #0b0b0b;
-
-    color: #aaa;
-
-    cursor: pointer;
-
-    font-weight: 700;
-
-    transition:
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        color var(--transition-fast),
-        transform var(--transition-fast);
-}
-
-.survey-option:hover {
-    transform: translateY(-2px);
-
-    border-color: rgba(255, 0, 0, 0.45);
-
-    color: #fff;
-}
-
-.survey-option.active {
-    background: #320000;
-
-    border-color: #ff0000;
-
-    color: #fff;
-
-    box-shadow:
-        0 0 20px rgba(255, 0, 0, 0.15);
-}
-
-textarea,
-input {
-    width: 100%;
-
-    padding: 15px;
-
-    background: #080808;
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    color: #fff;
-
-    outline: none;
-
-    transition:
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast);
-}
-
-textarea:focus,
-input:focus {
-    border-color: #800000;
-
-    box-shadow:
-        0 0 20px rgba(255, 0, 0, 0.08);
-}
-
-textarea {
-    min-height: 140px;
-
-    resize: vertical;
-}
-
-/* =========================================================
-   SOCIAL / FOOTER
-   ========================================================= */
-
-footer {
-    position: relative;
-
-    padding: 60px 0;
-
-    background: #020202;
-
-    border-top:
-        1px solid rgba(255, 0, 0, 0.1);
-}
-
-.social-grid {
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(150px, 1fr)
-        );
-}
-
-.social-link {
-    padding: 20px;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    color: #888;
-
-    text-align: center;
-
-    transition:
-        color var(--transition-fast),
-        border-color var(--transition-fast),
-        background var(--transition-fast);
-}
-
-.social-link:hover {
-    color: #fff;
-
-    border-color: rgba(255, 0, 0, 0.4);
-
-    background: rgba(100, 0, 0, 0.08);
-}
-
-/* =========================================================
-   =========================================================
-   INEVITÁVEL ENGINE
-   SISTEMA DE CONTAMINAÇÃO
-   =========================================================
-   ========================================================= */
-
-#inevitable-engine {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 900;
-
-    opacity: 1;
-
-    isolation: isolate;
-}
-
-/* =========================================================
-   CAMADAS
-   ========================================================= */
-
-#inevitable-blood-layer,
-#inevitable-stain-layer,
-#inevitable-glitch-layer,
-#inevitable-clean-layer {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    pointer-events: none;
-
-    transition:
-        opacity 700ms ease,
-        background 700ms ease,
-        filter 700ms ease,
-        transform 700ms ease;
-}
-
-/* =========================================================
-   BLOOD LAYER
-   ========================================================= */
-
-#inevitable-blood-layer {
-    z-index: 1;
-
-    opacity:
-        calc(
-            var(--engine-progress) * 0.72
-        );
-
-    background:
-        radial-gradient(
-            ellipse at 50% 100%,
-            rgba(255, 0, 0, 0.72),
-            rgba(150, 0, 0, 0.28) 35%,
-            rgba(70, 0, 0, 0.12) 65%,
-            transparent 100%
-        );
-
-    mix-blend-mode: normal;
-
-    transform:
-        scale(
-            calc(
-                1 +
-                var(--engine-progress) * 0.035
-            )
-        );
-}
-
-/* =========================================================
-   STAIN LAYER
-   ========================================================= */
-
-#inevitable-stain-layer {
-    z-index: 2;
-
-    opacity:
-        calc(
-            var(--engine-progress) * 0.65
-        );
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(255, 0, 0, 0.20),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 90% 25%,
-            rgba(180, 0, 0, 0.16),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 30% 90%,
-            rgba(255, 0, 0, 0.18),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 80% 85%,
-            rgba(120, 0, 0, 0.20),
-            transparent 30%
-        );
-
-    filter:
-        blur(
-            calc(
-                2px +
-                var(--engine-progress) * 8px
-            )
-        );
-}
-
-/* =========================================================
-   GLITCH LAYER
-   ========================================================= */
-
-#inevitable-glitch-layer {
-    z-index: 3;
-
-    opacity:
-        calc(
-            var(--engine-glitch) * 0.85
-        );
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0,
-            transparent 3px,
-            rgba(255, 0, 0, 0.06) 3px,
-            rgba(255, 0, 0, 0.06) 4px
-        );
-
-    mix-blend-mode: screen;
-
-    transform:
-        translateX(
-            calc(
-                var(--engine-glitch) * 4px
-            )
-        );
-}
-
-/* =========================================================
-   CLEAN LAYER
-   ========================================================= */
-
-#inevitable-clean-layer {
-    z-index: 4;
-
-    opacity: 0;
-
-    background:
-        rgba(0, 0, 0, 0.92);
-}
-
-/* =========================================================
-   ENGINE BASE STATE
-   ========================================================= */
-
-body {
-    --engine-progress: 0;
-    --engine-glitch: 0;
-}
-
-/* =========================================================
-   STAGE 1
-   ========================================================= */
-
-body.inevitable-stage-1 {
-    --engine-progress: 0.08;
-    --engine-glitch: 0.04;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(80, 0, 0, 0.08),
-            #050505 70%
-        );
-}
-
-body.inevitable-stage-1 .hero h1 {
-    text-shadow:
-        0 0 12px rgba(255, 0, 0, 0.15);
-}
-
-/* =========================================================
-   STAGE 2
-   ========================================================= */
-
-body.inevitable-stage-2 {
-    --engine-progress: 0.18;
-    --engine-glitch: 0.08;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.12),
-            #050505 70%
-        );
-}
-
-body.inevitable-stage-2 .card,
-body.inevitable-stage-2 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.16);
-}
-
-/* =========================================================
-   STAGE 3
-   ========================================================= */
-
-body.inevitable-stage-3 {
-    --engine-progress: 0.30;
-    --engine-glitch: 0.14;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(120, 0, 0, 0.18),
-            #050505 70%
-        );
-}
-
-body.inevitable-stage-3 header {
-    border-bottom-color:
-        rgba(255, 0, 0, 0.3);
-
-    box-shadow:
-        0 5px 30px rgba(100, 0, 0, 0.12);
-}
-
-body.inevitable-stage-3 .hero h1 {
-    color: #f2dede;
-
-    text-shadow:
-        3px 0 rgba(255, 0, 0, 0.3),
-        -3px 0 rgba(100, 0, 0, 0.3),
-        0 0 20px rgba(255, 0, 0, 0.2);
-}
-
-/* =========================================================
-   STAGE 4
-   ========================================================= */
-
-body.inevitable-stage-4 {
-    --engine-progress: 0.44;
-    --engine-glitch: 0.22;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(140, 0, 0, 0.22),
-            #050505 65%
-        );
-}
-
-body.inevitable-stage-4 section {
-    transition:
-        background 700ms ease;
-}
-
-body.inevitable-stage-4 .card,
-body.inevitable-stage-4 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.24);
-
-    box-shadow:
-        inset 0 0 35px rgba(100, 0, 0, 0.04);
-}
-
-body.inevitable-stage-4 nav a {
-    color: #c5a0a0;
-}
-
-/* =========================================================
-   STAGE 5
-   ========================================================= */
-
-body.inevitable-stage-5 {
-    --engine-progress: 0.58;
-    --engine-glitch: 0.34;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(170, 0, 0, 0.27),
-            #050505 62%
-        );
-}
-
-body.inevitable-stage-5::before {
-    opacity: 0.5;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 0, 0, 0.035) 0,
-            rgba(255, 0, 0, 0.035) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-}
-
-body.inevitable-stage-5 .hero h1 {
-    color: #ffdada;
-
-    text-shadow:
-        4px 0 rgba(255, 0, 0, 0.5),
-        -4px 0 rgba(90, 0, 0, 0.5),
-        0 0 30px rgba(255, 0, 0, 0.25);
-}
-
-body.inevitable-stage-5 .section-title h2 {
-    text-shadow:
-        0 0 18px rgba(255, 0, 0, 0.18);
-}
-
-/* =========================================================
-   STAGE 6
-   ========================================================= */
-
-body.inevitable-stage-6 {
-    --engine-progress: 0.70;
-    --engine-glitch: 0.48;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(190, 0, 0, 0.32),
-            #050505 58%
-        );
-}
-
-body.inevitable-stage-6 header {
-    background:
-        rgba(25, 0, 0, 0.9);
-
-    border-bottom-color:
-        rgba(255, 0, 0, 0.5);
-
-    box-shadow:
-        0 5px 40px rgba(255, 0, 0, 0.08);
-}
-
-body.inevitable-stage-6 .btn {
-    border-color:
-        rgba(255, 0, 0, 0.65);
-
-    background:
-        rgba(70, 0, 0, 0.3);
-}
-
-body.inevitable-stage-6 .card,
-body.inevitable-stage-6 .death-card {
-    background:
-        rgba(55, 0, 0, 0.18);
-
-    border-color:
-        rgba(255, 0, 0, 0.32);
-}
-
-/* =========================================================
-   STAGE 7
-   ========================================================= */
-
-body.inevitable-stage-7 {
-    --engine-progress: 0.84;
-    --engine-glitch: 0.66;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(220, 0, 0, 0.38),
-            #050505 52%
-        );
-
-    animation:
-        inevitableHeartbeat 1.8s infinite;
-}
-
-body.inevitable-stage-7 .hero h1 {
-    color: #fff;
-
-    animation:
-        inevitableTextGlitch 1.1s infinite;
-}
-
-body.inevitable-stage-7 .card,
-body.inevitable-stage-7 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.48);
-
-    box-shadow:
-        0 0 30px rgba(255, 0, 0, 0.06);
-}
-
-/* =========================================================
-   STAGE 8
-   ========================================================= */
-
-body.inevitable-stage-8 {
-    --engine-progress: 1;
-    --engine-glitch: 0.92;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255, 0, 0, 0.48),
-            #080000 45%,
-            #000 100%
-        );
-}
-
-body.inevitable-stage-8 header {
-    background:
-        rgba(45, 0, 0, 0.94);
-
-    border-bottom-color:
-        rgba(255, 0, 0, 0.8);
-}
-
-body.inevitable-stage-8 .hero h1 {
-    color: #fff;
-
-    text-shadow:
-        5px 0 #ff0000,
-        -5px 0 #500000,
-        0 0 40px rgba(255, 0, 0, 0.6);
-}
-
-body.inevitable-stage-8 .section-title h2 {
-    color: #fff;
-
-    text-shadow:
-        0 0 30px rgba(255, 0, 0, 0.4);
-}
-
-body.inevitable-stage-8 .card,
-body.inevitable-stage-8 .death-card {
-    background:
-        rgba(80, 0, 0, 0.24);
-
-    border-color:
-        rgba(255, 0, 0, 0.6);
-}
-
-/* =========================================================
-   IMPACTO DO CLIQUE
-   ========================================================= */
-
-body.inevitable-impact #inevitable-blood-layer {
-    animation:
-        inevitableBloodImpact 500ms ease;
-}
-
-body.inevitable-impact #inevitable-stain-layer {
-    animation:
-        inevitableStainImpact 650ms ease;
-}
-
-body.inevitable-impact #inevitable-glitch-layer {
-    animation:
-        inevitableGlitchImpact 350ms steps(2);
-}
-
-@keyframes inevitableBloodImpact {
-    0% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-
-    35% {
-        transform: scale(1.08);
-        filter: brightness(1.8);
-    }
-
-    100% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-}
-
-@keyframes inevitableStainImpact {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.15);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes inevitableGlitchImpact {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-7px);
-    }
-
-    50% {
-        transform: translateX(8px);
-    }
-
-    75% {
-        transform: translateX(-4px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-/* =========================================================
-   TEXTO CORROMPIDO
-   ========================================================= */
-
-body.inevitable-corrupted .hero h1,
-body.inevitable-corrupted .section-title h2 {
-    animation:
-        inevitableTextGlitch 700ms steps(2) infinite;
-}
-
-@keyframes inevitableTextGlitch {
-    0% {
-        transform: translate(0);
-        text-shadow:
-            0 0 transparent;
-    }
-
-    20% {
-        transform: translate(-2px, 1px);
-
-        text-shadow:
-            3px 0 #ff0000,
-            -3px 0 #330000;
-    }
-
-    40% {
-        transform: translate(2px, -1px);
-
-        text-shadow:
-            -4px 0 #ff0000,
-            4px 0 #300000;
-    }
-
-    60% {
-        transform: translate(0);
-
-        text-shadow:
-            0 0 20px rgba(255, 0, 0, 0.4);
-    }
-
-    100% {
-        transform: translate(0);
-    }
-}
-
-/* =========================================================
-   HEARTBEAT
-   ========================================================= */
-
-@keyframes inevitableHeartbeat {
-    0%,
-    100% {
-        filter:
-            brightness(1)
-            saturate(1);
-    }
-
-    50% {
-        filter:
-            brightness(1.04)
-            saturate(1.15);
-    }
-}
-
-/* =========================================================
-   ESTADO FINAL
-   ========================================================= */
-
-body.inevitable-final {
-    --engine-progress: 1;
-    --engine-glitch: 1;
-
-    background:
-        #000;
-
-    color: #fff;
-}
-
-body.inevitable-final #inevitable-blood-layer {
-    opacity: 0.9;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255, 0, 0, 0.8),
-            rgba(100, 0, 0, 0.5) 40%,
-            rgba(0, 0, 0, 0.85) 100%
-        );
-}
-
-body.inevitable-final #inevitable-stain-layer {
-    opacity: 0.95;
-
-    filter:
-        blur(12px)
-        contrast(1.2);
-}
-
-body.inevitable-final #inevitable-glitch-layer {
-    opacity: 0.7;
-
-    animation:
-        inevitableFinalGlitch 900ms infinite steps(2);
-}
-
-body.inevitable-final .hero h1 {
-    color: #fff;
-
-    text-shadow:
-        6px 0 #ff0000,
-        -6px 0 #3b0000,
-        0 0 50px rgba(255, 0, 0, 0.7);
-}
-
-body.inevitable-final .btn {
-    background: #300000;
-
-    border-color: #ff0000;
-
-    box-shadow:
-        0 0 30px rgba(255, 0, 0, 0.3);
-}
-
-body.inevitable-final .card,
-body.inevitable-final .death-card {
-    background:
-        rgba(50, 0, 0, 0.35);
-
-    border-color:
-        rgba(255, 0, 0, 0.65);
-}
-
-@keyframes inevitableFinalGlitch {
-    0% {
-        transform: translate(0, 0);
-        opacity: 0.4;
-    }
-
-    20% {
-        transform: translate(-5px, 2px);
-        opacity: 0.8;
-    }
-
-    40% {
-        transform: translate(4px, -2px);
-        opacity: 0.5;
-    }
-
-    60% {
-        transform: translate(-2px, 1px);
-        opacity: 0.9;
-    }
-
-    80% {
-        transform: translate(3px, 0);
-        opacity: 0.6;
-    }
-
-    100% {
-        transform: translate(0, 0);
-        opacity: 0.4;
-    }
-}
-
-/* =========================================================
-   FINAL TEXT
-   ========================================================= */
-
-.inevitable-final-message {
-    position: relative;
-
-    z-index: 10;
-
-    opacity: 0;
-
-    transform: translateY(20px);
-
-    transition:
-        opacity 900ms ease,
-        transform 900ms ease;
-}
-
-body.inevitable-final .inevitable-final-message {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.inevitable-final-message h2 {
-    color: #fff;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.08em;
-
-    text-shadow:
-        0 0 25px rgba(255, 0, 0, 0.6);
-}
-
-.inevitable-final-message p {
-    color: #c9c9c9;
-}
-
-/* =========================================================
-   CLEANING / RESET
-   ========================================================= */
-
-body.inevitable-cleaning #inevitable-blood-layer {
-    opacity: 0 !important;
-
-    transition:
-        opacity 1200ms ease;
-}
-
-body.inevitable-cleaning #inevitable-stain-layer {
-    opacity: 0 !important;
-
-    transition:
-        opacity 1400ms ease;
-}
-
-body.inevitable-cleaning #inevitable-glitch-layer {
-    opacity: 0 !important;
-
-    transition:
-        opacity 500ms ease;
-}
-
-body.inevitable-cleaning {
-    --engine-progress: 0;
-
-    background:
-        var(--black);
-
-    filter:
-        none;
-}
-
-/* =========================================================
-   ENGINE PULSE
-   ========================================================= */
-
-.inevitable-pulse {
-    animation:
-        inevitablePulse 500ms ease;
-}
-
-@keyframes inevitablePulse {
-    0% {
-        filter: brightness(1);
-    }
-
-    40% {
-        filter:
-            brightness(1.25)
-            saturate(1.4);
-    }
-
-    100% {
-        filter: brightness(1);
-    }
-}
-
-/* =========================================================
-   BLOOD VIGNETTE
-   ========================================================= */
-
-body.inevitable-stage-4::after,
-body.inevitable-stage-5::after,
-body.inevitable-stage-6::after,
-body.inevitable-stage-7::after,
-body.inevitable-stage-8::after,
-body.inevitable-final::after {
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 899;
-
-    border:
-        calc(
-            2px +
-            var(--engine-progress) * 14px
-        )
-        solid
-        rgba(
-            255,
-            0,
-            0,
-            calc(
-                var(--engine-progress) * 0.45
-            )
-        );
-
-    box-shadow:
-        inset
-        0 0
-        calc(
-            20px +
-            var(--engine-progress) * 70px
-        )
-        rgba(
-            255,
-            0,
-            0,
-            calc(
-                var(--engine-progress) * 0.18
-            )
-        );
-}
-
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .header-inner {
-        min-height: 64px;
-    }
-
-    nav {
-        gap: 14px;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-    }
-
-    .hero {
-        min-height: 80vh;
-
-        padding: 80px 0;
-    }
-
-    section {
-        padding: 80px 0;
-    }
-
-    .survey-options {
-        grid-template-columns: 1fr;
-    }
-
-    .dark-engine-mobile-canvas {
-        display: block;
-
-        width: 100%;
-        min-height: 300px;
-    }
-
-    body.inevitable-stage-7 .hero h1 {
-        animation-duration: 1.4s;
-    }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .container {
-        width: 90%;
-    }
-
-    .header-inner {
-        min-height: 58px;
-    }
-
-    nav {
-        display: none;
-    }
-
-    .hero {
-        min-height: 75vh;
-
-        padding: 70px 0;
-    }
-
-    .hero h1 {
-        font-size: clamp(3rem, 18vw, 5.5rem);
-    }
-
-    .hero p {
-        font-size: 0.95rem;
-    }
-
-    section {
-        padding: 65px 0;
-    }
-
-    .section-title {
-        margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-        font-size: 2.2rem;
-    }
-
-    .cards,
-    .death-cards,
-    .gallery,
-    .social-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .card,
-    .death-card {
-        padding: 22px;
-    }
-
-    #inevitable-blood-layer {
-        opacity:
-            calc(
-                var(--engine-progress) * 0.55
+```javascript
+(() => {
+    "use strict";
+
+    /* =========================================================
+       INEVITÁVEL
+       MAIN.JS
+       ENGINE DE CONTAMINAÇÃO
+
+       Responsabilidades:
+       - controlar estágio
+       - adicionar/remover classes
+       - reagir a cliques
+       - controlar Dark Engine
+       - criar manifestações visuais
+       - controlar estado final
+       - permitir reset
+    ========================================================= */
+
+    const Inevitable = {
+
+        version: "2.0.0",
+
+        state: {
+            stage: 0,
+            maxStage: 8,
+            final: false,
+            cleaning: false
+        },
+
+        elements: {},
+
+        /* =====================================================
+           INIT
+        ===================================================== */
+
+        init() {
+
+            console.log(
+                `%c[INEVITÁVEL] Engine ${this.version} iniciando...`,
+                "color:#8b0000;font-weight:bold;"
             );
-    }
 
-    #inevitable-stain-layer {
-        opacity:
-            calc(
-                var(--engine-progress) * 0.45
+            this.cacheElements();
+
+            this.createEngine();
+
+            this.bindEvents();
+
+            this.diagnostics();
+
+            this.applyStage();
+
+            console.log(
+                "[INEVITÁVEL] Engine carregada."
             );
-    }
+        },
 
-    #inevitable-glitch-layer {
-        opacity:
-            calc(
-                var(--engine-glitch) * 0.6
+
+        /* =====================================================
+           ELEMENTOS
+        ===================================================== */
+
+        cacheElements() {
+
+            this.elements = {
+
+                body: document.body,
+
+                menuButton:
+                    document.getElementById("menuButton"),
+
+                menu:
+                    document.getElementById("menu"),
+
+                darkEngineZones:
+                    document.querySelectorAll(
+                        ".dark-engine-zone"
+                    ),
+
+                inevitableTexts:
+                    document.querySelectorAll(
+                        ".inevitable-text"
+                    ),
+
+                inevitableClickables:
+                    document.querySelectorAll(
+                        ".inevitable-clickable"
+                    ),
+
+                accordionButtons:
+                    document.querySelectorAll(
+                        ".accordion-toggle"
+                    ),
+
+                buttons:
+                    document.querySelectorAll(
+                        ".button"
+                    )
+            };
+        },
+
+
+        /* =====================================================
+           ENGINE VISUAL
+        ===================================================== */
+
+        createEngine() {
+
+            /*
+             * Evita criar duas engines.
+             */
+
+            if (
+                document.getElementById(
+                    "inevitable-engine"
+                )
+            ) {
+
+                console.log(
+                    "[INEVITÁVEL] Engine visual já existe."
+                );
+
+                return;
+            }
+
+
+            const engine =
+                document.createElement("div");
+
+            engine.id =
+                "inevitable-engine";
+
+
+            engine.innerHTML = `
+
+                <div
+                    id="inevitable-blood-layer">
+                </div>
+
+                <div
+                    id="inevitable-stain-layer">
+                </div>
+
+                <div
+                    id="inevitable-glitch-layer">
+                </div>
+
+                <div
+                    id="inevitable-clean-layer">
+                </div>
+
+            `;
+
+
+            document.body.appendChild(engine);
+
+
+            console.log(
+                "[INEVITÁVEL] Camadas visuais criadas."
             );
-    }
+        },
 
-    body.inevitable-stage-8 .hero h1,
-    body.inevitable-final .hero h1 {
-        text-shadow:
-            3px 0 #ff0000,
-            -3px 0 #3b0000,
-            0 0 25px rgba(255, 0, 0, 0.5);
-    }
 
-    body.inevitable-stage-7::after,
-    body.inevitable-stage-8::after,
-    body.inevitable-final::after {
-        border-width:
-            calc(
-                1px +
-                var(--engine-progress) * 7px
+        /* =====================================================
+           EVENTOS
+        ===================================================== */
+
+        bindEvents() {
+
+            /*
+             * Qualquer elemento com:
+             *
+             * .inevitable-clickable
+             *
+             * pode avançar a contaminação.
+             */
+
+            this.elements.inevitableClickables
+                .forEach(element => {
+
+                    element.addEventListener(
+                        "click",
+                        () => {
+
+                            this.advance(
+                                "clickable"
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            /*
+             * Botões principais.
+             */
+
+            this.elements.buttons
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            /*
+                             * Evita interferir
+                             * em links/botões especiais.
+                             */
+
+                            if (
+                                button.closest(
+                                    ".survey-content"
+                                )
+                            ) {
+
+                                return;
+                            }
+
+
+                            this.advance(
+                                "button"
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            /*
+             * Dark Engine.
+             */
+
+            this.elements.darkEngineZones
+                .forEach(zone => {
+
+                    zone.addEventListener(
+                        "click",
+                        event => {
+
+                            this.handleDarkEngineClick(
+                                zone,
+                                event
+                            );
+
+                        }
+                    );
+
+
+                    zone.addEventListener(
+                        "mousemove",
+                        event => {
+
+                            this.updateDarkPosition(
+                                zone,
+                                event
+                            );
+
+                        }
+                    );
+
+
+                    zone.addEventListener(
+                        "touchmove",
+                        event => {
+
+                            if (
+                                !event.touches.length
+                            ) {
+                                return;
+                            }
+
+                            this.updateDarkPosition(
+                                zone,
+                                event.touches[0]
+                            );
+
+                        },
+                        {
+                            passive: true
+                        }
+                    );
+
+                });
+
+
+            /*
+             * Menu mobile.
+             */
+
+            if (
+                this.elements.menuButton &&
+                this.elements.menu
+            ) {
+
+                this.elements.menuButton
+                    .addEventListener(
+                        "click",
+                        () => {
+
+                            this.elements.menu
+                                .classList
+                                .toggle("active");
+
+                        }
+                    );
+
+            }
+
+
+            /*
+             * Tecla ENTER / ESPAÇO
+             *
+             * Útil para testar sem mouse.
+             */
+
+            document.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        /*
+                         * Não interfere em inputs.
+                         */
+
+                        if (
+                            event.target.tagName ===
+                                "INPUT" ||
+                            event.target.tagName ===
+                                "TEXTAREA" ||
+                            event.target.tagName ===
+                                "BUTTON"
+                        ) {
+
+                            return;
+                        }
+
+
+                        this.advance(
+                            "keyboard"
+                        );
+
+                    }
+
+                }
             );
+        },
+
+
+        /* =====================================================
+           AVANÇAR ESTÁGIO
+        ===================================================== */
+
+        advance(source = "unknown") {
+
+            /*
+             * Se já chegou ao final,
+             * o próximo clique limpa.
+             */
+
+            if (
+                this.state.final
+            ) {
+
+                this.clean();
+
+                return;
+            }
+
+
+            /*
+             * Não ultrapassar estágio máximo.
+             */
+
+            if (
+                this.state.stage >=
+                this.state.maxStage
+            ) {
+
+                return;
+            }
+
+
+            this.state.stage++;
+
+
+            console.log(
+                `[INEVITÁVEL] Estágio ${this.state.stage} ativado por ${source}.`
+            );
+
+
+            this.applyStage();
+
+
+            /*
+             * Manifestação visual
+             */
+
+            this.spawnError();
+
+
+            /*
+             * Glitch físico nos estágios avançados.
+             */
+
+            if (
+                this.state.stage >= 5
+            ) {
+
+                this.triggerGlitch();
+
+            }
+
+
+            /*
+             * Estado final.
+             */
+
+            if (
+                this.state.stage ===
+                this.state.maxStage
+            ) {
+
+                this.enterFinalState();
+
+            }
+        },
+
+
+        /* =====================================================
+           APLICAR ESTÁGIO
+        ===================================================== */
+
+        applyStage() {
+
+            const body =
+                this.elements.body;
+
+
+            /*
+             * Remove estágios antigos.
+             */
+
+            for (
+                let i = 1;
+                i <= this.state.maxStage;
+                i++
+            ) {
+
+                body.classList.remove(
+                    `inevitable-stage-${i}`
+                );
+
+            }
+
+
+            /*
+             * Adiciona estágio atual.
+             */
+
+            if (
+                this.state.stage > 0
+            ) {
+
+                body.classList.add(
+                    `inevitable-stage-${this.state.stage}`
+                );
+
+            }
+
+
+            /*
+             * Variável CSS útil para
+             * outras partes do site.
+             */
+
+            document.documentElement
+                .style
+                .setProperty(
+                    "--inevitable-stage",
+                    this.state.stage
+                );
+
+
+            /*
+             * Intensidade normalizada.
+             */
+
+            const intensity =
+                this.state.stage /
+                this.state.maxStage;
+
+
+            document.documentElement
+                .style
+                .setProperty(
+                    "--inevitable-intensity",
+                    intensity
+                );
+        },
+
+
+        /* =====================================================
+           DARK ENGINE
+        ===================================================== */
+
+        handleDarkEngineClick(
+            zone,
+            event
+        ) {
+
+            /*
+             * Ativa a máscara.
+             */
+
+            zone.classList.add(
+                "dark-engine-active"
+            );
+
+
+            this.updateDarkPosition(
+                zone,
+                event
+            );
+
+
+            /*
+             * Cada interação com
+             * o Dark Engine também
+             * alimenta a contaminação.
+             */
+
+            this.advance(
+                "dark-engine"
+            );
+
+
+            /*
+             * Mantém a área ativa
+             * durante alguns segundos.
+             */
+
+            clearTimeout(
+                zone._inevitableTimer
+            );
+
+
+            zone._inevitableTimer =
+                setTimeout(
+                    () => {
+
+                        zone.classList.remove(
+                            "dark-engine-active"
+                        );
+
+                    },
+                    3500
+                );
+        },
+
+
+        updateDarkPosition(
+            zone,
+            event
+        ) {
+
+            const rect =
+                zone.getBoundingClientRect();
+
+
+            const x =
+                ((event.clientX - rect.left) /
+                    rect.width) *
+                100;
+
+
+            const y =
+                ((event.clientY - rect.top) /
+                    rect.height) *
+                100;
+
+
+            zone.style.setProperty(
+                "--dark-x",
+                `${x}%`
+            );
+
+
+            zone.style.setProperty(
+                "--dark-y",
+                `${y}%`
+            );
+        },
+
+
+        /* =====================================================
+           GLITCH
+        ===================================================== */
+
+        triggerGlitch() {
+
+            const targets = [
+
+                document.querySelector(
+                    ".hero h1"
+                ),
+
+                document.querySelector(
+                    ".hero .tagline"
+                ),
+
+                document.querySelector(
+                    "h2"
+                )
+
+            ];
+
+
+            targets.forEach(
+                target => {
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    target.classList
+                        .remove("inevitable-glitch");
+
+
+                    void target.offsetWidth;
+
+
+                    target.classList
+                        .add("inevitable-glitch");
+
+
+                    setTimeout(
+                        () => {
+
+                            target.classList
+                                .remove(
+                                    "inevitable-glitch"
+                                );
+
+                        },
+                        300
+                    );
+
+                }
+            );
+        },
+
+
+        /* =====================================================
+           ERRO SANGRANDO
+        ===================================================== */
+
+        spawnError() {
+
+            const engine =
+                document.getElementById(
+                    "inevitable-engine"
+                );
+
+
+            if (!engine) {
+                return;
+            }
+
+
+            const errors = [
+
+                "ERROR",
+                "0x000",
+                "VOID",
+                "SYSTEM FAILURE",
+                "DEATH",
+                "INEVITÁVEL",
+                "SIGNAL LOST",
+                "CORRUPTED",
+                "YOU ARE HERE"
+
+            ];
+
+
+            const error =
+                document.createElement("div");
+
+
+            error.className =
+                "inevitable-error";
+
+
+            error.textContent =
+                errors[
+                    Math.floor(
+                        Math.random() *
+                        errors.length
+                    )
+                ];
+
+
+            /*
+             * Posição aleatória.
+             */
+
+            error.style.left =
+                `${10 + Math.random() * 80}%`;
+
+
+            error.style.top =
+                `${10 + Math.random() * 80}%`;
+
+
+            engine.appendChild(
+                error
+            );
+
+
+            /*
+             * Remove depois da animação.
+             */
+
+            setTimeout(
+                () => {
+
+                    error.remove();
+
+                },
+                1000
+            );
+        },
+
+
+        /* =====================================================
+           ESTADO FINAL
+        ===================================================== */
+
+        enterFinalState() {
+
+            this.state.final =
+                true;
+
+
+            this.elements.body
+                .classList
+                .add(
+                    "inevitable-final"
+                );
+
+
+            /*
+             * Pequena pausa antes
+             * do glitch final.
+             */
+
+            setTimeout(
+                () => {
+
+                    this.triggerGlitch();
+
+                },
+                300
+            );
+
+
+            console.log(
+                "%c[INEVITÁVEL] ESTADO FINAL ATINGIDO.",
+                "color:#ff0000;font-size:18px;font-weight:bold;"
+            );
+        },
+
+
+        /* =====================================================
+           LIMPEZA / RESET
+        ===================================================== */
+
+        clean() {
+
+            console.log(
+                "[INEVITÁVEL] Iniciando limpeza..."
+            );
+
+
+            this.state.cleaning =
+                true;
+
+
+            this.elements.body
+                .classList
+                .add(
+                    "inevitable-cleaning"
+                );
+
+
+            setTimeout(
+                () => {
+
+                    this.state.stage =
+                        0;
+
+                    this.state.final =
+                        false;
+
+                    this.state.cleaning =
+                        false;
+
+
+                    this.elements.body
+                        .classList
+                        .remove(
+                            "inevitable-final",
+                            "inevitable-cleaning"
+                        );
+
+
+                    this.applyStage();
+
+
+                    /*
+                     * Remove erros restantes.
+                     */
+
+                    document
+                        .querySelectorAll(
+                            ".inevitable-error"
+                        )
+                        .forEach(
+                            element =>
+                                element.remove()
+                        );
+
+
+                    console.log(
+                        "[INEVITÁVEL] Sistema restaurado."
+                    );
+
+                },
+                2600
+            );
+        },
+
+
+        /* =====================================================
+           DIAGNÓSTICO
+        ===================================================== */
+
+        diagnostics() {
+
+            const e =
+                this.elements;
+
+
+            const checks = {
+
+                engine:
+                    !!document.getElementById(
+                        "inevitable-engine"
+                    ),
+
+                darkEngineZones:
+                    e.darkEngineZones.length,
+
+                clickableElements:
+                    e.inevitableClickables.length,
+
+                buttons:
+                    e.buttons.length,
+
+                accordionButtons:
+                    e.accordionButtons.length,
+
+                menuButton:
+                    !!e.menuButton,
+
+                menu:
+                    !!e.menu
+
+            };
+
+
+            console.table(
+                checks
+            );
+
+
+            console.log(
+                "[INEVITÁVEL] Diagnóstico concluído."
+            );
+        }
+    };
+
+
+    /* =========================================================
+       INICIALIZAÇÃO
+    ========================================================= */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => Inevitable.init(),
+            {
+                once: true
+            }
+        );
+
+    } else {
+
+        Inevitable.init();
+
     }
-}
 
-/* =========================================================
-   ACESSIBILIDADE
-   ========================================================= */
-
-:focus-visible {
-    outline:
-        2px solid #ff0000;
-
-    outline-offset: 4px;
-}
-
-::selection {
-    background: #ff0000;
-
-    color: #fff;
-}
-
-/* =========================================================
-   REDUCE MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    body.inevitable-stage-7,
-    body.inevitable-stage-8 {
-        animation: none;
-    }
-
-    body.inevitable-stage-7 .hero h1,
-    body.inevitable-stage-8 .hero h1,
-    body.inevitable-final .hero h1 {
-        animation: none;
-    }
-}
+})();
+```
