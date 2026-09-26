@@ -1,2220 +1,1134 @@
 /* =========================================================
    INEVITÁVEL
-   CSS RESPONSIVO
-   DARK ENGINE
-   CSS RESPONSIVO + DARK ENGINE + CONTAMINAÇÃO
-   ========================================================= */
+   STYLE BASE
+   Preto • Vermelho • Glitch • Dark Engine
+========================================================= */
 
 :root {
-    --blood: #7a0000;
-    --blood-dark: #260000;
-    --blood-light: #ff1a1a;
+    --bg: #050505;
+    --bg-soft: #0b0b0b;
+    --panel: #101010;
 
-    --black: #050505;
-    --black-soft: #0b0b0b;
-    --gray-dark: #141414;
-    --gray: #242424;
-    --gray-light: #888;
-    --white: #f2f2f2;
+    --red: #8b0000;
+    --red-light: #c40000;
+    --red-dark: #3d0000;
 
-    --danger: #ff0000;
-    --clean: #f2f2f2;
+    --text: #f2f2f2;
+    --muted: #999;
 
-    --engine-progress: 0;
-    --engine-opacity: 0;
-    --engine-glitch: 0;
+    --border: rgba(255,255,255,.14);
 
-    --transition-fast: 180ms ease;
-    --transition-normal: 400ms ease;
-    --transition-slow: 900ms ease;
+    --dark-x: 50%;
+    --dark-y: 50%;
 }
 
-/* =========================================================
-   RESET
-   ========================================================= */
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 75px;
-  background: #050505;
     scroll-behavior: smooth;
-    background: var(--black);
+    background: var(--bg);
 }
 
 body {
-  min-width: 0;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  background: #050505;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
     min-height: 100vh;
+
     background:
         radial-gradient(
-            circle at 50% 20%,
-            rgba(100, 0, 0, 0.08),
-            transparent 45%
-        ),
-        var(--black);
+            circle at center,
+            #170000 0%,
+            #080000 35%,
+            #000 75%
+        );
 
-    color: var(--white);
+    color: var(--text);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
+    line-height: 1.6;
+
     overflow-x: hidden;
-
-    transition:
-        background 900ms ease,
-        color 600ms ease,
-        filter 600ms ease;
-}
-
-img,
-video {
-  max-width: 100%;
-  display: block;
-body::before {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0.015) 0,
-            rgba(255, 255, 255, 0.015) 1px,
-            transparent 1px,
-            transparent 3px
-        );
-
-    opacity: 0.25;
 }
 
 /* =========================================================
-   TIPOGRAFIA
-   ========================================================= */
+   ESTRUTURA
+========================================================= */
+
+main {
+    width: 100%;
+}
+
+section {
+    position: relative;
+
+    min-height: 70vh;
+
+    padding:
+        100px 20px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+    overflow: hidden;
+}
+
+.content,
+.social-content {
+    width: min(1000px, 92%);
+    margin: 0 auto;
+}
 
 h1,
 h2,
-h3,
-h4 {
-    line-height: 1.1;
+h3 {
+    line-height: 1.05;
+}
+
+h1,
+h2 {
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #fff;
 }
 
 p {
-    line-height: 1.7;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-textarea,
-select {
-    font: inherit;
-}
-
-button {
-  font-family: inherit;
-/* =========================================================
-   CONTAINER
-   ========================================================= */
-
-.container {
-    width: min(1200px, 92%);
-    margin: 0 auto;
+    color: #c7c7c7;
 }
 
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 14px;
-  z-index: 1000;
-  background: rgba(5, 5, 5, .92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #1d1d1d;
     position: sticky;
     top: 0;
 
-    z-index: 1000;
+    z-index: 100;
 
-    width: 100%;
+    background:
+        rgba(0,0,0,.92);
 
-    background: rgba(5, 5, 5, 0.88);
+    border-bottom:
+        1px solid rgba(139,0,0,.35);
 
-    border-bottom: 1px solid rgba(255, 0, 0, 0.15);
-
-    backdrop-filter: blur(14px);
-
-    transition:
-        background var(--transition-normal),
-        border-color var(--transition-normal),
-        box-shadow var(--transition-normal);
+    backdrop-filter: blur(10px);
 }
 
 .header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 0;
-.header-inner {
-    min-height: 72px;
+    width: min(1200px, 94%);
+    min-height: 70px;
+
+    margin: 0 auto;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    gap: 24px;
 }
 
 .logo {
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-    font-size: 1.2rem;
     font-weight: 900;
 
-    letter-spacing: 0.12em;
+    letter-spacing: .25em;
+
+    color: #fff;
+}
 
 .menu-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 38px;
-  background: transparent;
-  color: #fff;
-  border: 1px solid #292929;
-  font-size: 20px;
-  cursor: pointer;
-  flex-shrink: 0;
+    display: none;
+
+    background: transparent;
+
+    border: 1px solid #555;
+
     color: #fff;
 
-    transition: var(--transition-normal);
+    padding: 8px 12px;
+
+    cursor: pointer;
 }
 
 nav {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  overflow: hidden;
-  margin-top: 10px;
-.logo:hover {
-    color: var(--blood-light);
-}
+    width: min(1200px, 94%);
+    margin: 0 auto;
 
-nav.active {
-  display: flex;
-nav {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    padding-bottom: 12px;
 }
 
 nav a {
-  display: block;
-  padding: 10px;
-  border: 1px solid #292929;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-align: center;
-  transition:
-    background .2s ease,
-    color .2s ease;
-}
-    position: relative;
-
-nav a:hover {
-  background: #fff;
-  color: #000;
-}
     color: #aaa;
 
-/* =========================================================
-   GERAL
-   ========================================================= */
-    font-size: 0.85rem;
-    font-weight: 700;
+    text-decoration: none;
 
-section {
-  min-height: auto;
-  padding: 90px 18px;
-  border-top: 1px solid #151515;
-}
-    text-transform: uppercase;
+    font-size: .72rem;
 
-.content {
-  width: 100%;
-  max-width: 950px;
-  margin: auto;
-  min-width: 0;
+    letter-spacing: .12em;
+
+    padding: 6px 8px;
+
     transition:
-        color var(--transition-fast),
-        text-shadow var(--transition-fast);
+        color .25s ease,
+        text-shadow .25s ease;
 }
 
-.section-label {
-  margin-bottom: 12px;
-  color: #777;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-nav a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -8px;
-
-h2 {
-  font-size: clamp(2rem, 9vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-    width: 0;
-    height: 1px;
-
-    background: var(--blood-light);
-
-    transition: width var(--transition-fast);
-}
-
-h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
 nav a:hover {
     color: #fff;
 
     text-shadow:
-        0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-p {
-  color: #bdbdbd;
-  font-size: .95rem;
-  line-height: 1.75;
-nav a:hover::after {
-    width: 100%;
+        0 0 8px var(--red-light);
 }
 
 /* =========================================================
    HERO
-   ========================================================= */
+========================================================= */
 
 .hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 130px 18px 70px;
-  overflow: hidden;
-}
-
-.dark-engine-content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-    position: relative;
-
-.hero h1 {
-  font-size: clamp(2.5rem, 14vw, 8rem);
-  font-weight: 900;
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 20px;
-  white-space: nowrap;
-}
     min-height: 90vh;
 
-.tagline {
-  font-size: clamp(.8rem, 3vw, 1.3rem);
-  letter-spacing: 3px;
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120,0,0,.22),
+            transparent 60%
+        );
+}
+
+.hero h1 {
+    font-size: clamp(4rem, 14vw, 10rem);
+
+    letter-spacing: .18em;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 25px rgba(139,0,0,.35);
+}
 
 .hero-description {
-  width: 100%;
-  max-width: 600px;
-  color: #bcbcbc;
-  font-size: .95rem;
-  line-height: 1.7;
-  margin: 0 auto 30px;
-  text-align: center;
-    padding: 100px 0;
+    max-width: 700px;
 
-    overflow: hidden;
+    margin:
+        30px auto 40px;
+
+    color: #aaa;
+}
+
+.tagline {
+    font-size: clamp(.9rem, 2vw, 1.3rem);
+
+    letter-spacing: .28em;
+
+    color: #ccc;
 }
 
 /* =========================================================
    BOTÕES
-   ========================================================= */
-.hero::before {
-    content: "";
+========================================================= */
 
 .buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
 }
-    position: absolute;
-    inset: 0;
 
 .button {
-  display: inline-block;
-  padding: 12px 18px;
-  z-index: 2;
-  border: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition:
-    background .2s ease,
-    color .2s ease,
-    transform .2s ease;
+    display: inline-block;
+
+    border: 1px solid #aaa;
+
+    background: transparent;
+
+    color: #fff;
+
+    padding: 14px 26px;
+
+    text-decoration: none;
+
+    letter-spacing: .15em;
+
+    font-size: .75rem;
+
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        border-color .3s ease,
+        transform .2s ease;
 }
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.18),
-            transparent 55%
-        );
 
 .button:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-2px);
-    pointer-events: none;
+    background: #fff;
+
+    color: #000;
+
+    border-color: #fff;
+
+    transform: scale(1.04);
+}
+
+.button:active {
+    transform: scale(.97);
+}
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+.section-label {
+    margin-bottom: 20px;
+
+    color: var(--red-light);
+
+    font-size: .7rem;
+
+    font-weight: 700;
+
+    letter-spacing: .35em;
 }
 
 /* =========================================================
    DARK ENGINE
-   DESKTOP
-   ========================================================= */
+========================================================= */
 
 .dark-engine-zone {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-.hero-content {
     position: relative;
 
-  --dark-x: 50%;
-  --dark-y: 50%;
-    z-index: 5;
+    overflow: hidden;
 
-  -webkit-user-select: none;
-  user-select: none;
-    max-width: 850px;
+    margin-top: 40px;
+
+    background: #000;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    min-height: 300px;
 }
 
 .dark-engine-area {
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-}
-.hero h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
+    position: relative;
 
-.dark-engine-zone::before,
-.dark-engine-zone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-    font-weight: 900;
+    z-index: 2;
 
-.dark-engine-zone::before {
-  background: rgba(0, 0, 0, .96);
-  opacity: 1;
-  transition: opacity .18s ease;
-}
-    letter-spacing: -0.06em;
-
-.dark-engine-zone::after {
-  background: radial-gradient(
-    circle 115px at var(--dark-x) var(--dark-y),
-    transparent 0%,
-    transparent 28%,
-    rgba(0, 0, 0, .10) 38%,
-    rgba(0, 0, 0, .34) 52%,
-    rgba(0, 0, 0, .72) 70%,
-    rgba(0, 0, 0, .96) 100%
-  );
-    text-transform: uppercase;
-
-  opacity: 0;
-    text-shadow:
-        0 0 20px rgba(255, 0, 0, 0.05);
-
-  transition:
-    opacity .18s ease;
-    transition:
-        color var(--transition-normal),
-        text-shadow var(--transition-normal),
-        transform var(--transition-normal);
+    padding: 40px;
 }
 
-.dark-engine-zone.dark-engine-active::before {
-  opacity: 0;
+/*
+   Luz do cursor
+*/
+
+.dark-engine-zone.dark-engine-active {
+    background:
+        radial-gradient(
+            circle 180px at var(--dark-x) var(--dark-y),
+            rgba(255,255,255,.09),
+            rgba(0,0,0,.97) 75%
+        );
 }
-.hero p {
-    max-width: 700px;
-
-    margin-top: 28px;
-
-.dark-engine-zone.dark-engine-active::after {
-  opacity: 1;
-    color: #aaa;
-
-    font-size: clamp(1rem, 2vw, 1.25rem);
-}
-
-/* =========================================================
-   ELEMENTOS FORA DA MÁSCARA
-   BOTÕES
-   ========================================================= */
-
-.dark-engine-exempt {
-  position: relative;
-  z-index: 3;
-}
-.btn {
-    display: inline-flex;
-
-.dark-engine-zone .accordion-toggle,
-.dark-engine-zone .accordion-content {
-  -webkit-user-select: none;
-  user-select: none;
-}
-    align-items: center;
-    justify-content: center;
-
-/* =========================================================
-   CANVAS MOBILE
-   ========================================================= */
-    min-height: 48px;
 
 .dark-engine-mobile-canvas {
-  display: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  z-index: 2;
-  pointer-events: none;
+    z-index: 1;
 }
-    padding: 12px 22px;
 
 /* =========================================================
-   MORTE
-   ========================================================= */
-    border: 1px solid rgba(255, 0, 0, 0.45);
+   ACCORDION
+========================================================= */
 
-#morte {
-  background:
-    linear-gradient(
-      rgba(5, 5, 5, .94),
-      rgba(5, 5, 5, .98)
-    );
-}
-    background: #0c0c0c;
+.accordion-toggle {
+    width: 100%;
 
-.death-intro {
-  max-width: 700px;
-  margin-bottom: 30px;
-}
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,.65);
+
+    border: 1px solid var(--border);
+
     color: #fff;
 
-.death-grid,
-.cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
     cursor: pointer;
+
+    font-size: .8rem;
+
+    letter-spacing: .15em;
+
+    text-align: left;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease;
+}
+
+.accordion-toggle:hover,
+.accordion-toggle.active {
+    background: rgba(139,0,0,.18);
+
+    border-color:
+        rgba(139,0,0,.7);
+}
+
+.accordion-icon {
+    font-size: 1.4rem;
+
+    transition:
+        transform .3s ease;
+}
+
+.accordion-toggle.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    display: none;
+
+    padding-top: 25px;
+}
+
+.accordion-content.active {
+    display: block;
+
+    animation:
+        inevitable-accordion .4s ease;
+}
+
+@keyframes inevitable-accordion {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.death-grid,
+.cards,
+.universe-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.universe-grid {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
 
 .death-card,
 .card,
-.story-block {
-  padding: 22px;
-  border: 1px solid #202020;
-  background: #090909;
-  min-width: 0;
-    font-weight: 800;
+.story-block,
+.gallery-item {
+    background:
+        linear-gradient(
+            145deg,
+            #121212,
+            #070707
+        );
 
-    text-transform: uppercase;
+    border:
+        1px solid rgba(255,255,255,.08);
 
-    letter-spacing: 0.05em;
+    padding: 28px;
 
     transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        color var(--transition-fast);
+        transform .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+}
+
+.death-card:hover,
+.card:hover,
+.story-block:hover,
+.gallery-item:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(139,0,0,.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b0808,
+            #080000
+        );
 }
 
 .number,
 .card-number {
-  display: block;
-  color: #666;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
-.btn:hover {
-    transform: translateY(-2px);
-
-    background: #260000;
-
-    border-color: #ff0000;
-
-    box-shadow:
-        0 0 25px rgba(255, 0, 0, 0.25);
-}
-
-.card-number {
-  margin-bottom: 20px;
-.btn:active {
-    transform: scale(0.97);
-}
-
-/* =========================================================
-   TRAILER
-   SEÇÕES
-   ========================================================= */
-
-#trailer {
-  text-align: center;
-}
-section {
-    position: relative;
-
-    padding: 100px 0;
-
-#trailer .content {
-  width: 100%;
-  max-width: 1050px;
-  margin: 0 auto;
-    z-index: 5;
-}
-
-.trailer-text {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 30px;
-.section-title {
-    margin-bottom: 50px;
-}
-
-/*
- * PLAYER REAL DO TRAILER
- *
- * Mantém o formato 16:9,
- * acompanha a largura do conteúdo
- * e não força uma altura artificial.
- */
-.section-title h2 {
-    font-size: clamp(2rem, 5vw, 4rem);
-
-#trailer video {
-  display: block;
-  width: 100%;
-  max-width: 1050px;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  margin: 0 auto;
-  background: #000;
-  border: 1px solid #222;
-}
-    font-weight: 900;
-
-/*
- * Compatibilidade com versões antigas
- * que utilizavam trailer-box.
- */
-    text-transform: uppercase;
-
-.trailer-box {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #090909;
-  border: 1px solid #222;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-    letter-spacing: -0.04em;
-}
-
-.trailer-placeholder {
-  padding: 20px;
-  color: #777;
-  font-size: 11px;
-  letter-spacing: 3px;
-  line-height: 1.7;
-}
-.section-title p {
-    max-width: 700px;
-
-.trailer-placeholder small {
-  font-size: 9px;
-  letter-spacing: 1px;
-    margin-top: 14px;
-
-    color: #888;
-}
-
-/* =========================================================
-   ERROR SANGRANDO
-   DARK ENGINE ZONE
-   ========================================================= */
-
-.inevitable-error {
-  position: absolute;
-  font-family: monospace;
-  font-weight: 900;
-  font-size: clamp(14px, 2vw, 24px);
-  color: #8b0000;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 21;
-.dark-engine-zone {
-    position: relative;
-
-  animation:
-    inevitable-error-pop .8s forwards,
-    inevitable-error-bleed .8s ease-in forwards;
-}
-    overflow: hidden;
-
-.inevitable-error::before,
-.inevitable-error::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  background: #8b0000;
-  border-radius: 0 0 50% 50%;
-  transform-origin: top;
-    min-height: 500px;
-
-    background: #030303;
-}
-
-/* Filete principal */
-.dark-engine-zone::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-.inevitable-error::before {
-  left: 25%;
-  top: 70%;
-  width: 3px;
-  height: 0;
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(120, 0, 0, 0.12),
-            transparent 60%
-        );
-
-  animation:
-    inevitable-blood-drip .8s ease-in forwards;
-    pointer-events: none;
-}
-
-/* Gota */
-.dark-engine-mobile-canvas {
-    display: none;
-}
-
-.inevitable-error::after {
-  left: 60%;
-  top: 75%;
-  width: 5px;
-  height: 5px;
-/* =========================================================
-   CARDS
-   ========================================================= */
-
-.cards,
-.death-cards,
-.gallery,
-.social-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(240px, 1fr)
-        );
-
-  animation:
-    inevitable-blood-drop .8s ease-in forwards;
-    gap: 20px;
-}
-
-@keyframes inevitable-error-bleed {
-.card,
-.death-card {
-    position: relative;
-
-    padding: 28px;
-
-    min-height: 180px;
-
-  0% {
-    transform: scaleY(1);
-  }
-    overflow: hidden;
-
-  45% {
-    transform: scaleY(1.04);
-  }
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.035),
-            rgba(255, 255, 255, 0.01)
-        );
-
-  100% {
-    transform: scaleY(1);
-  }
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    transition:
-        transform var(--transition-normal),
-        border-color var(--transition-normal),
-        background var(--transition-normal),
-        box-shadow var(--transition-normal);
-}
-
-@keyframes inevitable-blood-drip {
-.card::before,
-.death-card::before {
-    content: "";
-
-  0% {
-    height: 0;
-    opacity: 0;
-  }
-    position: absolute;
-
-  20% {
-    opacity: 1;
-  }
-    inset: 0;
-
-  100% {
-    height: 28px;
-    opacity: 0;
-  }
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255, 0, 0, 0.08),
-            transparent
-        );
-
-    transform: translateX(-100%);
-
-    transition: transform 700ms ease;
-}
-
-@keyframes inevitable-blood-drop {
-.card:hover,
-.death-card:hover {
-    transform: translateY(-5px);
-
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(.5);
-  }
-    border-color:
-        rgba(255, 0, 0, 0.35);
-
-  25% {
-    opacity: 1;
-  }
-    background:
-        rgba(60, 0, 0, 0.15);
-
-  100% {
-    opacity: 0;
-    transform: translateY(25px) scale(1.2);
-  }
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.35),
-        0 0 25px rgba(255, 0, 0, 0.05);
-}
-
-.card:hover::before,
-.death-card:hover::before {
-    transform: translateX(100%);
-}
-
-/* =========================================================
-   ACCORDION
-   TRAILER
-   ========================================================= */
-
-.accordion-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 30px;
-  padding: 17px 18px;
-  background: #090909;
-  color: #fff;
-  border: 1px solid #202020;
-  text-align: left;
-  font-size: 11px;
-  letter-spacing: 2px;
-  cursor: pointer;
-
-  transition:
-    background .2s ease,
-    border-color .2s ease;
-}
-.trailer {
-    position: relative;
-
-.accordion-toggle:hover {
-  background: #0d0d0d;
-  border-color: #333;
-}
-    width: 100%;
-
-.accordion-toggle.active {
-  border-color: #333;
-}
-    overflow: hidden;
-
-.accordion-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  font-size: 18px;
-  line-height: 1;
-    background: #000;
-
-  transition:
-    transform .25s ease;
-    border: 1px solid rgba(255, 0, 0, 0.18);
-}
-
-.accordion-toggle.active .accordion-icon {
-  transform: rotate(45deg);
-}
-.trailer video {
     display: block;
 
-.accordion-content {
-  width: 100%;
-  min-width: 0;
-    width: 100%;
-    height: auto;
+    color: var(--red-light);
+
+    font-size: .75rem;
+
+    letter-spacing: .2em;
+
+    margin-bottom: 15px;
+}
+
+.death-card h3,
+.card h3,
+.story-block h3 {
+    margin-bottom: 15px;
+
+    font-size: 1rem;
+
+    letter-spacing: .12em;
+}
+
+.death-card p,
+.card p,
+.story-block p {
+    color: #999;
+
+    font-size: .9rem;
 }
 
 /* =========================================================
-   UNIVERSO
-   ERROR BLEEDING
-   ========================================================= */
+   MANIFESTO / INTERAÇÕES
+========================================================= */
 
-.universe-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 10px;
+.inevitable-clickable {
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        color .3s ease,
+        text-shadow .3s ease;
 }
-.error-bleeding {
+
+.inevitable-clickable:hover {
+    color: #fff;
+
+    text-shadow:
+        0 0 12px rgba(139,0,0,.8);
+}
+
+.inevitable-text {
     position: relative;
-
-.origin {
-  max-width: 750px;
 }
+
+/* =========================================================
+   GLITCH
+========================================================= */
+
+.inevitable-text.glitching {
+    animation:
+        inevitable-glitch .12s infinite;
+}
+
+.inevitable-text.glitching::before,
+.inevitable-text.glitching::after {
+    content: attr(data-text);
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .8;
+}
+
+.inevitable-text.glitching::before {
+    animation:
+        inevitable-glitch-before .18s infinite;
+}
+
+.inevitable-text.glitching::after {
+    animation:
+        inevitable-glitch-after .14s infinite;
+}
+
+@keyframes inevitable-glitch {
+
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 1px);
+    }
+
+    40% {
+        transform: translate(2px, -1px);
+    }
+
+    60% {
+        transform: translate(-1px, 2px);
+    }
+
+    80% {
+        transform: translate(1px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+
+}
+
+@keyframes inevitable-glitch-before {
+
+    0% {
+        clip-path: inset(0 0 80% 0);
+        transform: translate(-3px);
+    }
+
+    50% {
+        clip-path: inset(40% 0 20% 0);
+        transform: translate(3px);
+    }
+
+    100% {
+        clip-path: inset(70% 0 0 0);
+        transform: translate(-2px);
+    }
+
+}
+
+@keyframes inevitable-glitch-after {
+
+    0% {
+        clip-path: inset(70% 0 0 0);
+        transform: translate(3px);
+    }
+
+    50% {
+        clip-path: inset(10% 0 50% 0);
+        transform: translate(-3px);
+    }
+
+    100% {
+        clip-path: inset(0 0 75% 0);
+        transform: translate(2px);
+    }
+
+}
+
+/* =========================================================
+   ERROR / CONFETE
+========================================================= */
+
+.inevitable-error-container {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
     overflow: hidden;
 
-.origin strong {
-  color: #fff;
-}
-    border: 1px solid rgba(255, 0, 0, 0.2);
-
-.origin p + p,
-.development p + p {
-  margin-top: 15px;
-    background: #080000;
+    z-index: 20;
 }
 
-.development {
-  max-width: 700px;
+.inevitable-error {
+    position: absolute;
+
+    font-family: monospace;
+
+    font-weight: 900;
+
+    font-size: clamp(14px, 2vw, 24px);
+
+    color: #ff0000;
+
+    opacity: 0;
+
+    animation:
+        inevitable-error-pop .8s forwards;
 }
-.error-bleeding::before {
-    content: "";
+
+@keyframes inevitable-error-pop {
+
+    0% {
+        opacity: 0;
+        transform:
+            scale(.3)
+            rotate(0deg);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            scale(1.2)
+            rotate(var(--rotation));
+    }
+
+}
+
+.inevitable-confetti {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    background: var(--red-light);
+
+    pointer-events: none;
+
+    z-index: 30;
+
+    animation:
+        inevitable-confetti .9s forwards;
+}
+
+@keyframes inevitable-confetti {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(0,0)
+            rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(var(--x),var(--y))
+            rotate(var(--rotation));
+    }
+
+}
+
+/* =========================================================
+   RESTABILIZAÇÃO
+========================================================= */
+
+.inevitable-restabilizing {
+    animation:
+        inevitable-restabilize .7s;
+}
+
+@keyframes inevitable-restabilize {
+
+    0% {
+        filter: contrast(3);
+        transform: skewX(8deg);
+    }
+
+    25% {
+        filter: contrast(.5);
+        transform: skewX(-5deg);
+    }
+
+    50% {
+        filter: contrast(2);
+        transform: skewX(3deg);
+    }
+
+    100% {
+        filter: none;
+        transform: none;
+    }
+
+}
+
+/* =========================================================
+   TRAILER
+========================================================= */
+
+video {
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background: #000;
+
+    margin-top: 30px;
+}
+
+/* =========================================================
+   ORIGEM / DESENVOLVIMENTO
+========================================================= */
+
+.origin,
+.development,
+.game-content {
+    max-width: 800px;
+}
+
+.origin p,
+.development p,
+.game-content p {
+    max-width: 750px;
+
+    margin-bottom: 20px;
+
+    color: #aaa;
+}
 
 /* =========================================================
    GALERIA
-   ========================================================= */
-    position: absolute;
-    inset: 0;
+========================================================= */
 
 .gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 10px;
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 8px,
-            rgba(255, 0, 0, 0.04) 8px,
-            rgba(255, 0, 0, 0.04) 10px
-        );
+    display: grid;
 
-    animation: errorScan 5s linear infinite;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    pointer-events: none;
+    gap: 15px;
 }
 
 .gallery-item {
-  aspect-ratio: 16 / 10;
-  background: #0a0a0a;
-  border: 1px solid #202020;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #555;
-  font-size: 10px;
-  letter-spacing: 2px;
-  min-width: 0;
-@keyframes errorScan {
-    from {
-        transform: translateX(-10%);
-    }
+    min-height: 180px;
 
-    to {
-        transform: translateX(10%);
-    }
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #555;
+
+    font-size: .7rem;
+
+    letter-spacing: .15em;
 }
 
 /* =========================================================
    PESQUISA
-   ACCORDION
-   ========================================================= */
-
-#pesquisa {
-  text-align: center;
-.accordion {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+========================================================= */
 
 .survey-content {
-  max-width: 700px;
-.accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 800px;
 }
 
 .survey-rating {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin: 30px 0;
+    display: grid;
+
+    gap: 12px;
+
+    margin: 30px 0;
 }
-.accordion-header {
-    width: 100%;
 
 .survey-option {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid #202020;
-  background: #090909;
-  color: #bdbdbd;
-  cursor: pointer;
-  text-align: left;
-    padding: 22px 0;
-
-  transition:
-    border-color .2s ease,
-    background .2s ease;
-}
     display: flex;
+
     align-items: center;
-    justify-content: space-between;
 
-.survey-option:hover {
-  border-color: #444;
-  background: #0c0c0c;
-}
-    background: transparent;
+    gap: 12px;
 
-.survey-option input {
-  accent-color: #fff;
-}
-    border: 0;
+    padding: 15px;
 
-.survey-stars {
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
-    color: #fff;
+    border:
+        1px solid rgba(255,255,255,.1);
 
-.survey-comment,
-.survey-permission {
-  margin-top: 25px;
-  text-align: left;
-}
     cursor: pointer;
 
-.survey-comment > label,
-.survey-permission > p {
-  display: block;
-  color: #fff;
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+    transition:
+        background .25s ease,
+        border-color .25s ease;
 }
-    text-align: left;
+
+.survey-option:hover {
+    background:
+        rgba(139,0,0,.12);
+
+    border-color:
+        rgba(139,0,0,.5);
+}
+
+.survey-option input {
+    accent-color: var(--red-light);
+}
+
+.survey-stars {
+    letter-spacing: .1em;
+}
+
+.survey-comment {
+    margin: 30px 0;
+}
+
+.survey-comment label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 700;
+}
 
 .survey-comment p {
-  font-size: .85rem;
-  margin-bottom: 12px;
-    font-weight: 800;
+    margin-bottom: 15px;
+
+    font-size: .85rem;
 }
 
 textarea {
-  width: 100%;
-  min-height: 130px;
-  resize: vertical;
-  padding: 14px;
-  background: #090909;
-  color: #fff;
-  border: 1px solid #202020;
-  outline: none;
-  font: inherit;
+    width: 100%;
+
+    min-height: 130px;
+
+    padding: 15px;
+
+    resize: vertical;
+
+    background: #080808;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    color: #fff;
+
+    font: inherit;
+
+    outline: none;
 }
-.accordion-content {
-    max-height: 0;
 
 textarea:focus {
-  border-color: #555;
+    border-color: var(--red-light);
+
+    box-shadow:
+        0 0 15px rgba(139,0,0,.2);
 }
-    overflow: hidden;
 
 .survey-permission {
-  display: grid;
-  gap: 10px;
+    display: grid;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
 }
-    color: #888;
+
+.survey-permission p {
+    margin-bottom: 10px;
+}
 
 .survey-permission label {
-  color: #bdbdbd;
-  font-size: .9rem;
-    transition:
-        max-height 400ms ease,
-        padding 400ms ease;
+    color: #aaa;
+
+    cursor: pointer;
 }
 
 .survey-permission input {
-  margin-right: 8px;
-  accent-color: #fff;
-}
-.accordion-item.active .accordion-content {
-    max-height: 500px;
-
-.survey-content .button {
-  margin-top: 25px;
-    padding-bottom: 22px;
+    accent-color: var(--red-light);
 }
 
 .survey-feedback {
-  min-height: 24px;
-  margin-top: 20px;
-  color: #aaa;
-  font-size: .85rem;
-  opacity: 0;
-/* =========================================================
-   UNIVERSO
-   ========================================================= */
+    margin-top: 25px;
 
-  transition:
-    opacity .2s ease;
+    padding: 15px;
+
+    border-left:
+        3px solid var(--red-light);
+
+    background:
+        rgba(139,0,0,.1);
+
+    opacity: 0;
+
+    transition:
+        opacity .4s ease;
 }
-.universe {
-    position: relative;
 
 .survey-feedback.visible {
-  opacity: 1;
-    background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(120, 0, 0, 0.08),
-            transparent 40%
-        ),
-        #050505;
+    opacity: 1;
 }
 
 /* =========================================================
    REDES
-   GALLERY
-   ========================================================= */
+========================================================= */
 
 #redes {
-  text-align: center;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
+    min-height: 50vh;
+
+    display: flex;
+    align-items: center;
+
+    text-align: center;
 }
-.gallery-item {
-    position: relative;
 
 .social-content {
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
+    max-width: 700px;
 }
-    aspect-ratio: 16 / 10;
 
-.social-content p {
-  margin-bottom: 25px;
-}
-    overflow: hidden;
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer {
-  padding: 30px 20px;
-  border-top: 1px solid #151515;
-  text-align: center;
-  color: #555;
-    background: #0b0b0b;
+    padding: 50px 20px;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-
-@media (max-width: 699px) {
-    object-fit: cover;
-
-  header {
-    padding: 8px 10px;
-  }
-    transition:
-        transform 700ms ease,
-        filter 700ms ease;
-}
-
-  .hero {
-    padding: 140px 16px 70px;
-  }
-.gallery-item:hover img {
-    transform: scale(1.05);
-
-  .hero h1 {
-    font-size: clamp(2rem, 11vw, 4rem);
-  }
-    filter:
-        saturate(1.3)
-        contrast(1.1);
-}
-
-  .tagline {
-    font-size: .8rem;
-    letter-spacing: 2px;
-  }
-/* =========================================================
-   SURVEY
-   ========================================================= */
-
-  .hero-description {
-    font-size: .9rem;
-    line-height: 1.7;
-  }
-.survey {
-    max-width: 800px;
-
-  .buttons {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-    margin: 0 auto;
-}
-
-  .button {
-    width: 100%;
     text-align: center;
-  }
-.survey-options {
-    display: grid;
 
-  section {
-    padding: 75px 16px;
-  }
-    grid-template-columns:
-        repeat(3, 1fr);
+    color: #555;
 
-  h2 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
-  }
-    gap: 12px;
+    font-size: .7rem;
 
-  p {
-    font-size: .93rem;
-  }
-    margin: 25px 0;
-}
+    letter-spacing: .2em;
 
-  .accordion-content {
-    display: none;
-  }
-.survey-option {
-    min-height: 52px;
-
-  .accordion-content.active {
-    display: block;
-  }
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-  .death-card,
-  .card,
-  .story-block {
-    padding: 20px;
-  }
-    background: #0b0b0b;
-
-  /* ==========================================
-     DARK ENGINE MOBILE
-     ========================================== */
-    color: #aaa;
-
-  .dark-engine-zone {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    cursor: pointer;
-
-    touch-action: pan-y;
-    font-weight: 700;
-
-    -webkit-user-select: none;
-    user-select: none;
-  }
-    transition:
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        color var(--transition-fast),
-        transform var(--transition-fast);
-}
-
-  .dark-engine-zone::before,
-  .dark-engine-zone::after {
-    display: none;
-  }
-.survey-option:hover {
-    transform: translateY(-2px);
-
-  .dark-engine-mobile-canvas {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    z-index: 2;
-    pointer-events: none;
-    border-color: rgba(255, 0, 0, 0.45);
-
-    -webkit-user-select: none;
-    user-select: none;
-  }
-    color: #fff;
-}
-
-  .dark-engine-area {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-    width: 100%;
-  }
-.survey-option.active {
-    background: #320000;
-
-  /* ==========================================
-     TRAILER MOBILE
-     ========================================== */
-    border-color: #ff0000;
-
-  #trailer .content {
-    width: 100%;
-    max-width: 100%;
-  }
-    color: #fff;
-
-  #trailer video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-  }
-    box-shadow:
-        0 0 20px rgba(255, 0, 0, 0.15);
-}
-
-/* =========================================================
-   DESKTOP
-   ========================================================= */
-textarea,
-input {
-    width: 100%;
-
-@media (min-width: 700px) {
-    padding: 15px;
-
-  header {
-    padding: 14px 30px;
-  }
-    background: #080808;
-
-  .header-content {
-    justify-content: flex-end;
-  }
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-  .logo,
-  .menu-button {
-    display: none;
-  }
-    color: #fff;
-
-  nav {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-
-  nav a {
-    padding: 8px 10px;
-    font-size: 10px;
-  }
-
-  section {
-    padding: 120px 40px;
-  }
-
-  .hero {
-    padding: 120px 40px 80px;
-  }
-
-  .hero h1 {
-    letter-spacing: 6px;
-  }
-
-  .accordion-toggle {
-    display: none;
-  }
-    outline: none;
-
-  .accordion-content {
-    display: block;
-  }
-    transition:
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast);
-}
-
-  .death-grid,
-  .cards {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-textarea:focus,
-input:focus {
-    border-color: #800000;
-
-  .universe-grid {
-    grid-template-columns:
-      repeat(2,
-        minmax(0, 1fr));
-  }
-    box-shadow:
-        0 0 20px rgba(255, 0, 0, 0.08);
-}
-
-  .gallery {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-textarea {
-    min-height: 140px;
-
-  .survey-rating {
-    grid-template-columns:
-      repeat(3,
-        minmax(0, 1fr));
-  }
-    resize: vertical;
-}
-
-/* =========================================================
-   DESKTOP MAIOR
-   SOCIAL / FOOTER
-   ========================================================= */
-
-@media (min-width: 900px) {
-
-  .content {
-    max-width: 1050px;
-  }
-
-  .hero-description {
-    font-size: 1rem;
-  }
-
-  .death-card,
-  .card,
-  .story-block {
-    padding: 26px;
-  }
-footer {
-    position: relative;
-
-  p {
-    font-size: .96rem;
-  }
-    padding: 60px 0;
-
-  /*
-   * Trailer acompanha o tamanho visual
-   * do conteúdo principal no desktop.
-   */
-    background: #020202;
-
-  #trailer .content {
-    max-width: 1050px;
-  }
     border-top:
-        1px solid rgba(255, 0, 0, 0.1);
-}
-
-  #trailer video {
-    max-width: 1050px;
-  }
-.social-grid {
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(150px, 1fr)
-        );
+        1px solid rgba(255,255,255,.06);
 }
 
 /* =========================================================
-   CELULARES PEQUENOS
-   ========================================================= */
-.social-link {
-    padding: 20px;
+   BLOOD STATE
+   Base para a nova camada modular
+========================================================= */
 
-@media (max-width: 380px) {
-    border: 1px solid rgba(255, 255, 255, 0.08);
+#blood-state {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(80,0,0,.16),
+            transparent 65%
+        );
+}
 
-  section {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-    color: #888;
+.blood-state-interface {
+    position: relative;
 
-  .hero {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
+    padding: 80px 20px;
+
     text-align: center;
 
-  .accordion-toggle {
-    padding: 16px 14px;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-  }
-    transition:
-        color var(--transition-fast),
-        border-color var(--transition-fast),
-        background var(--transition-fast);
-}
-
-  .death-card,
-  .card,
-  .story-block {
-    padding: 18px;
-  }
-.social-link:hover {
-    color: #fff;
-
-  h2 {
-    font-size: 1.8rem;
-  }
-    border-color: rgba(255, 0, 0, 0.4);
-
-  #trailer video {
-    width: 100%;
-    max-width: 100%;
-  }
-    background: rgba(100, 0, 0, 0.08);
-}
-
-/* =========================================================
-   =========================================================
-   INEVITÁVEL ENGINE
-   SISTEMA DE CONTAMINAÇÃO
-   Adicionar no FINAL deste arquivo
-   =========================================================
-   ========================================================= */
-
-#inevitable-engine {
-  position: fixed;
-  inset: 0;
-    position: fixed;
-
-    inset: 0;
-
-  width: 100%;
-  height: 100%;
-    width: 100vw;
-    height: 100vh;
-
-  /*
-   * IMPORTANTE:
-   * Não captura mouse nem toque.
-   * O site continua totalmente interativo.
-   */
-  pointer-events: none;
-    pointer-events: none;
-
-  overflow: hidden;
     overflow: hidden;
-
-  /*
-   * Abaixo do header atual.
-   * Acima do conteúdo normal.
-   */
-  z-index: 900;
-    z-index: 900;
-
-  /*
-   * Permite que a camada visual interaja
-   * com o que existe atrás dela sem
-   * bloquear o Dark Engine.
-   */
-  isolation: isolate;
-}
-    opacity: 1;
-
-    isolation: isolate;
 }
 
-/* =========================================================
-   CAMADAS
-@@ -1134,603 +839,1005 @@ footer {
-#inevitable-stain-layer,
-#inevitable-glitch-layer,
-#inevitable-clean-layer {
-    position: absolute;
-
-  position: absolute;
-    inset: 0;
-
-  inset: 0;
-    width: 100%;
-    height: 100%;
-
-  width: 100%;
-  height: 100%;
-    pointer-events: none;
-
-  pointer-events: none;
-    transition:
-        opacity 700ms ease,
-        background 700ms ease,
-        filter 700ms ease,
-        transform 700ms ease;
+.blood-state-interface h2 {
+    margin-bottom: 20px;
 }
 
-
-/* =========================================================
-   SANGUE
-   BLOOD LAYER
-   ========================================================= */
-
-#inevitable-blood-layer {
-    z-index: 1;
-
-  background:
-
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(139, 0, 0, .95),
-      transparent 24%
-    ),
-
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(120, 0, 0, .95),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(100, 0, 0, .85),
-      transparent 35%
-    );
-    opacity:
-        calc(
-            var(--engine-progress) * 0.72
-        );
-
-  opacity: 0;
-    background:
-        radial-gradient(
-            ellipse at 50% 100%,
-            rgba(255, 0, 0, 0.72),
-            rgba(150, 0, 0, 0.28) 35%,
-            rgba(70, 0, 0, 0.12) 65%,
-            transparent 100%
-        );
-
-  /*
-   * MULTIPLY é importante para o Dark Engine.
-   *
-   * Áreas pretas continuam essencialmente pretas,
-   * enquanto as áreas claras começam a receber
-   * a contaminação vermelha.
-   */
-  mix-blend-mode: multiply;
-    mix-blend-mode: normal;
-
-  transition:
-    opacity 1.2s ease,
-    background 1.2s ease;
-    transform:
-        scale(
-            calc(
-                1 +
-                var(--engine-progress) * 0.035
-            )
-        );
+.blood-state-interface p {
+    margin-bottom: 35px;
 }
 
+.blood-state-interface [data-blood-counter] {
+    margin-top: 25px;
 
-/* =========================================================
-   MANCHAS
-   STAIN LAYER
-   ========================================================= */
+    font-size: .7rem;
 
-#inevitable-stain-layer {
-    z-index: 2;
+    letter-spacing: .3em;
 
-  opacity: 0;
-
-  background:
-
-    radial-gradient(
-      ellipse at 15% 25%,
-      rgba(100, 0, 0, .95) 0%,
-      rgba(100, 0, 0, .55) 10%,
-      transparent 32%
-    ),
-
-    radial-gradient(
-      ellipse at 80% 20%,
-      rgba(120, 0, 0, .9) 0%,
-      rgba(120, 0, 0, .45) 12%,
-      transparent 30%
-    ),
-
-    radial-gradient(
-      ellipse at 70% 75%,
-      rgba(100, 0, 0, .95) 0%,
-      rgba(100, 0, 0, .5) 15%,
-      transparent 35%
-    ),
-
-    radial-gradient(
-      ellipse at 25% 85%,
-      rgba(80, 0, 0, .9) 0%,
-      rgba(80, 0, 0, .4) 12%,
-      transparent 32%
-    );
-
-  filter: blur(18px);
-
-  mix-blend-mode: multiply;
-
-  transition:
-    opacity 1s ease,
-    filter 1s ease;
-    opacity:
-        calc(
-            var(--engine-progress) * 0.65
-        );
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(255, 0, 0, 0.20),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 90% 25%,
-            rgba(180, 0, 0, 0.16),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 30% 90%,
-            rgba(255, 0, 0, 0.18),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 80% 85%,
-            rgba(120, 0, 0, 0.20),
-            transparent 30%
-        );
-
-    filter:
-        blur(
-            calc(
-                2px +
-                var(--engine-progress) * 8px
-            )
-        );
-}
-
-
-/* =========================================================
-   GLITCH
-   GLITCH LAYER
-   ========================================================= */
-
-#inevitable-glitch-layer {
-    z-index: 3;
-
-  opacity: 0;
-    opacity:
-        calc(
-            var(--engine-glitch) * 0.85
-        );
-
-  background:
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0,
-            transparent 3px,
-            rgba(255, 0, 0, 0.06) 3px,
-            rgba(255, 0, 0, 0.06) 4px
-        );
-
-    repeating-linear-gradient(
-      to bottom,
-    mix-blend-mode: screen;
-
-      transparent 0,
-      transparent 3px,
-    transform:
-        translateX(
-            calc(
-                var(--engine-glitch) * 4px
-            )
-        );
-}
-
-      rgba(255, 0, 0, .08) 4px,
-/* =========================================================
-   CLEAN LAYER
-   ========================================================= */
-
-      transparent 5px
-    );
-#inevitable-clean-layer {
-    z-index: 4;
-
-  mix-blend-mode: screen;
-    opacity: 0;
-
-  transition:
-    opacity .4s ease;
-    background:
-        rgba(0, 0, 0, 0.92);
-}
-
-
-/* =========================================================
-   LIMPEZA
-   ENGINE BASE STATE
-   ========================================================= */
-
-#inevitable-clean-layer {
-
-  opacity: 0;
-body {
-    --engine-progress: 0;
-    --engine-glitch: 0;
-}
-
-  background:
-/* =========================================================
-   STAGE 1
-   ========================================================= */
-
-    radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, .08),
-      transparent 60%
-    );
-body.inevitable-stage-1 {
-    --engine-progress: 0.08;
-    --engine-glitch: 0.04;
-
-  transition:
-    opacity 2s ease;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(80, 0, 0, 0.08),
-            #050505 70%
-        );
-}
-
-body.inevitable-stage-1 .hero h1 {
-    text-shadow:
-        0 0 12px rgba(255, 0, 0, 0.15);
+    color: #777;
 }
 
 /* =========================================================
-   ESTÁGIO 1
-   Primeira manifestação
-   STAGE 2
-   ========================================================= */
+   RESPONSIVIDADE
+========================================================= */
 
-body.inevitable-stage-1
-#inevitable-blood-layer {
-body.inevitable-stage-2 {
-    --engine-progress: 0.18;
-    --engine-glitch: 0.08;
+@media (max-width: 800px) {
 
-  opacity: .10;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100, 0, 0, 0.12),
-            #050505 70%
-        );
+    .menu-button {
+        display: block;
+    }
+
+    nav {
+        display: none;
+
+        flex-direction: column;
+
+        padding: 15px;
+
+        background: #050505;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        padding: 12px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.06);
+    }
+
+    section {
+        padding:
+            80px 15px;
+    }
+
+    .death-grid,
+    .cards,
+    .universe-grid,
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .dark-engine-area {
+        padding: 25px 18px;
+    }
+
+    .hero h1 {
+        letter-spacing: .08em;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button {
+        text-align: center;
+    }
+
 }
 
-body.inevitable-stage-2 .card,
-body.inevitable-stage-2 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.16);
-}
+@media (prefers-reduced-motion: reduce) {
 
-/* =========================================================
-   ESTÁGIO 2
-   Primeiras manchas
-   STAGE 3
-   ========================================================= */
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
 
-body.inevitable-stage-2
-#inevitable-blood-layer {
-body.inevitable-stage-3 {
-    --engine-progress: 0.30;
-    --engine-glitch: 0.14;
-
-  opacity: .16;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(120, 0, 0, 0.18),
-            #050505 70%
-        );
-}
-
-body.inevitable-stage-2
-#inevitable-stain-layer {
-body.inevitable-stage-3 header {
-    border-bottom-color:
-        rgba(255, 0, 0, 0.3);
-
-  opacity: .25;
-    box-shadow:
-        0 5px 30px rgba(100, 0, 0, 0.12);
-}
-
-body.inevitable-stage-3 .hero h1 {
-    color: #f2dede;
-
-    text-shadow:
-        3px 0 rgba(255, 0, 0, 0.3),
-        -3px 0 rgba(100, 0, 0, 0.3),
-        0 0 20px rgba(255, 0, 0, 0.2);
-}
-
-/* =========================================================
-   ESTÁGIO 3
-   Contaminação perceptível
-   STAGE 4
-   ========================================================= */
-
-body.inevitable-stage-3
-#inevitable-blood-layer {
-body.inevitable-stage-4 {
-    --engine-progress: 0.44;
-    --engine-glitch: 0.22;
-
-  opacity: .25;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(140, 0, 0, 0.22),
-            #050505 65%
-        );
-}
-
-body.inevitable-stage-3
-#inevitable-stain-layer {
-body.inevitable-stage-4 section {
-    transition:
-        background 700ms ease;
-}
-
-  opacity: .42;
-body.inevitable-stage-4 .card,
-body.inevitable-stage-4 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.24);
-
-    box-shadow:
-        inset 0 0 35px rgba(100, 0, 0, 0.04);
-}
-
-body.inevitable-stage-4 nav a {
-    color: #c5a0a0;
-}
-
-/* =========================================================
-   ESTÁGIO 4
-   Vermelho começa a dominar
-   STAGE 5
-   ========================================================= */
-
-body.inevitable-stage-4
-#inevitable-blood-layer {
-body.inevitable-stage-5 {
-    --engine-progress: 0.58;
-    --engine-glitch: 0.34;
-
-  opacity: .38;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(170, 0, 0, 0.27),
-            #050505 62%
-        );
-}
-
-body.inevitable-stage-4
-#inevitable-stain-layer {
-body.inevitable-stage-5::before {
-    opacity: 0.5;
-
-  opacity: .60;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 0, 0, 0.035) 0,
-            rgba(255, 0, 0, 0.035) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-}
-
-body.inevitable-stage-5 .hero h1 {
-    color: #ffdada;
-
-    text-shadow:
-        4px 0 rgba(255, 0, 0, 0.5),
-        -4px 0 rgba(90, 0, 0, 0.5),
-        0 0 30px rgba(255, 0, 0, 0.25);
-}
-
-body.inevitable-stage-5 .section-title h2 {
-    text-shadow:
-        0 0 18px rgba(255, 0, 0, 0.18);
-}
-
-/* =========================================================
-   ESTÁGIO 5
-   Interface contaminada
-   STAGE 6
-   ========================================================= */
-
-body.inevitable-stage-5
-#inevitable-blood-layer {
-body.inevitable-stage-6 {
-    --engine-progress: 0.70;
-    --engine-glitch: 0.48;
-
-  opacity: .50;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(190, 0, 0, 0.32),
-            #050505 58%
-        );
-}
-
-body.inevitable-stage-5
-#inevitable-stain-layer {
-body.inevitable-stage-6 header {
-    background:
-        rgba(25, 0, 0, 0.9);
-
-    border-bottom-color:
-        rgba(255, 0, 0, 0.5);
-
-    box-shadow:
-        0 5px 40px rgba(255, 0, 0, 0.08);
-}
-
-  opacity: .78;
-body.inevitable-stage-6 .btn {
-    border-color:
-        rgba(255, 0, 0, 0.65);
-
-    background:
-        rgba(70, 0, 0, 0.3);
-}
-
-body.inevitable-stage-6 .card,
-body.inevitable-stage-6 .death-card {
-    background:
-        rgba(55, 0, 0, 0.18);
-
-    border-color:
-        rgba(255, 0, 0, 0.32);
-}
-
-/* =========================================================
-   ESTÁGIO 6
-   Quase tomada
-   STAGE 7
-   ========================================================= */
-
-body.inevitable-stage-6
-#inevitable-blood-layer {
-body.inevitable-stage-7 {
-    --engine-progress: 0.84;
-    --engine-glitch: 0.66;
-
-  opacity: .65;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(220, 0, 0, 0.38),
-            #050505 52%
-        );
-
-    animation:
-        inevitableHeartbeat 1.8s infinite;
-}
-
-body.inevitable-stage-6
-#inevitable-stain-layer {
-body.inevitable-stage-7 .hero h1 {
-    color: #fff;
-
-  opacity: .95;
-    animation:
-        inevitableTextGlitch 1.1s infinite;
-}
-
-body.inevitable-stage-7 .card,
-body.inevitable-stage-7 .death-card {
-    border-color:
-        rgba(255, 0, 0, 0.48);
-
-    box-shadow:
-        0 0 30px rgba(255, 0, 0, 0.06);
 }
