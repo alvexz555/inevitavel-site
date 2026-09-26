@@ -11,7 +11,7 @@
 
     const BloodState = {
 
-        version: "1.0.1",
+        version: "1.0.0",
 
         state: 0,
         maxState: 7,
@@ -92,36 +92,16 @@
 
         /* =====================================================
            ELEMENTOS
-
-           CORREÇÃO:
-           O gatilho de clique e o texto "CONTINUAR/RECOMEÇAR"
-           devem ser o <button> real (data-blood-button),
-           e não o container (data-blood-state).
-
-           O container [data-blood-state] continua existindo e
-           pode ser usado no futuro para escopar seletores, mas
-           não é mais usado como "botão".
         ===================================================== */
 
         cacheElements() {
 
-            const root =
-                document.querySelector(
-                    "[data-blood-state]"
-                );
-
             this.elements = {
 
-                root,
-
                 button:
-                    root
-                        ? root.querySelector(
-                            "[data-blood-button]"
-                        )
-                        : document.querySelector(
-                            "[data-blood-button]"
-                        ),
+                    document.querySelector(
+                        "[data-blood-state]"
+                    ),
 
                 title:
                     document.querySelector(
@@ -272,43 +252,27 @@
 
             /*
              * Estado final
-
-             * CORREÇÃO:
-             * Antes este trecho fazia
-             * this.elements.button.textContent = "..."
-             * usando uma referência que, por causa do bug
-             * de seleção acima, apontava para o container
-             * inteiro (com título, mensagem e contador
-             * dentro). Isso apagava o card inteiro no
-             * estado final.
-             *
-             * Agora elements.button é o <button> real,
-             * então apenas o texto do próprio botão muda,
-             * preservando o restante da interface.
-             *
-             * Ainda assim, para não depender de a estrutura
-             * interna do botão ser só texto (ele tem um
-             * <span> dentro), atualizamos apenas o <span>
-             * quando ele existir.
              */
 
-            if (this.elements.button) {
+            if (this.state === this.maxState) {
 
-                const label =
-                    this.elements.button.querySelector("span");
+                document.body.classList.add(
+                    "blood-state-final"
+                );
 
-                const text =
-                    this.state === this.maxState
-                        ? "RECOMEÇAR"
-                        : "CONTINUAR";
+                if (this.elements.button) {
 
-                if (label) {
+                    this.elements.button.textContent =
+                        "RECOMEÇAR";
 
-                    label.textContent = text;
+                }
 
-                } else {
+            } else {
 
-                    this.elements.button.textContent = text;
+                if (this.elements.button) {
+
+                    this.elements.button.textContent =
+                        "CONTINUAR";
 
                 }
 
@@ -671,42 +635,6 @@
 
     window.InevitableBloodState =
         BloodState;
-
-
-    /* =========================================================
-       INICIALIZAÇÃO
-
-       CORREÇÃO CRÍTICA:
-       Esta chamada não existia. O módulo era definido e
-       exposto em window.InevitableBloodState, mas nunca era
-       inicializado. Por isso o estado global nunca mudava:
-       nenhum listener era anexado ao botão e nenhuma variável
-       CSS ou classe era aplicada.
-
-       O <script src="js/main.js"> é carregado no fim do
-       <body>, então o DOM já deveria estar pronto, mas o
-       guard abaixo evita depender dessa ordem.
-    ========================================================= */
-
-    const startBloodState = () => {
-
-        window.InevitableBloodState.init();
-
-    };
-
-
-    if (document.readyState === "loading") {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            startBloodState
-        );
-
-    } else {
-
-        startBloodState();
-
-    }
 
 
 })();
